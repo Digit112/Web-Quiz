@@ -38,6 +38,9 @@ class QuestionGroup {
 		// The parent QuestionGroup
 		this.parent_group = null
 		
+		// True if a child question was asked last.
+		this.was_asked_last = false
+		
 		// The checkbox associated with this group.
 		// Set by generate_HTML()
 		this.check_elem = null
@@ -334,7 +337,7 @@ class QuestionGroup {
 	reset_all_descendents() {
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].check_elem.checked = this.children[i].get_enabled()
+				this.children[i].check_elem.checked = this.children[i].get_enabled() // TODO: this and the other get_enabled() call are both unnecessary.
 				this.children[i].reset_all_descendents()
 			}
 		}
@@ -345,16 +348,17 @@ class QuestionGroup {
 		}
 	}
 	
+	// Sets was_asked_last to true for self and all ancestors.
+	set_was_asked_last() {
+		this.was_asked_last = true
+		this.parent_group.set_was_asked_last()
+	}
+	
 	// Recursively sets was_asked_last to false for all questions.
 	reset_was_asked_last() {
-		if (this.children_are_groups) {
-			for (let i = 0; i < this.children.length; i++) {
+		for (let i = 0; i < this.children.length; i++) {
+			if (this.children[i].was_asked_last) {
 				this.children[i].reset_was_asked_last()
-			}
-		}
-		else {
-			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].was_asked_last = false
 			}
 		}
 	}

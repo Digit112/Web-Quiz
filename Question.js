@@ -94,6 +94,16 @@ class Question {
 		this.windowed = false
 	}
 	
+	// Sets was_asked_last to true for self and all ancestors.
+	set_was_asked_last() {
+		this.was_asked_last = true
+		this.parent_group.set_was_asked_last()
+	}
+	
+	reset_was_asked_last() {
+		this.was_asked_last = false
+	}
+	
 	// Called when the parent QuestionGroup chooses this question for retrieval.
 	// The parameter is included so that this function matches the signature of QuestionGroup.get_random, it is unused.
 	get_random(_am_adaptive, _am_windowed) {

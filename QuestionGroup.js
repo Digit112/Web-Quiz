@@ -232,11 +232,13 @@ class QuestionGroup {
 			let check_node = document.createElement("input")
 			check_node.setAttribute("type", "checkbox")
 			check_node.setAttribute("class", "collapsible_check")
+			check_node.addEventListener("click", check_event)
 			check_node.question_group = this // The checkbox elements know which groups they control.
 			
 			let button_node = document.createElement("button")
 			button_node.setAttribute("type", "button")
 			button_node.setAttribute("class", "collapsible")
+			button_node.addEventListener("click", collapsible_event)
 			button_node.innerHTML = "+"
 			
 			let text_node = document.createElement("text")
@@ -275,6 +277,22 @@ class QuestionGroup {
 		}
 	}
 	
+	// Enables this element and then checks the corresponding HTML.
+	// Causes an error if the HTML does not exist.
+	// Triggers check_event callback
+	disable_and_uncheck() {
+		this.is_enabled = true
+		this.check_elem.checked = true
+	}
+	
+	// Disables this element and then unchecks the corresponding HTML.
+	// Causes an error if the HTML does not exist.
+	// Triggers check_event callback
+	enable_and_check() {
+		this.is_enabled = false
+		this.check_elem.checked = false
+	}
+	
 	// Called by the checkbox event listener to recursively enable all child checkboxes.
 	check_all_descendents() {
 		if (this.children_are_groups) {
@@ -283,6 +301,32 @@ class QuestionGroup {
 				this.children[i].check_all_descendents()
 			}
 		}
+	}
+	
+	// Called when a question which has not been checked, but is checked because one of its parents is checked, gets unchecked.
+	// All overiding parents must be disabled and siblings enabled.
+	// Returns the same thing that get_enabled() would return, which is helpful for the recursive calls but likely useless to the initial caller.
+	// TODO: Fairly complicated recursive function. PLEASE do not forget to test!
+	propogate_and_disable() {
+		let was_enabled = this.is_enabled
+		
+		if (this.parent_group != null) {
+			was_enabled = was_enabled || this.parent_group.propogate_and_disable()
+		}
+		
+		if (was_enabled) {
+			// Enable all children (propogate enabled-ness)
+			for (let child : this.children) {
+				child.enable_and_check()
+			}
+			
+			// Disable self
+			this.disable_and_uncheck() //
+		}
+		
+		
+		
+		return was_enabled
 	}
 	
 	// Called by the checkbox event listener to recursively disable all child checkboxes.

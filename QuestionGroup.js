@@ -26,7 +26,7 @@ class QuestionGroup {
 		// but are adjusted to cause a preference for question that are often answered incorrectly.
 		this.adaptive_weight = 0
 		
-		// The estimated probability that the user will answer a question randomly chosen from this group.
+		// The estimated probability that the user will incorrectly answer a question randomly chosen from this group.
 		// This is the difficulty of each child, times the probability of that child being chosen, summed over all children.
 		this.difficulty = 0
 		
@@ -132,19 +132,17 @@ class QuestionGroup {
 	// Adds a child to this object.
 	// The passed child must be either a QuestionGroup or a Question, depending on the value of children_are_groups.
 	add_child(new_child) {
-		if (this.children_are_groups && new_child instanceof QuestionGroup) {
+		if (
+			(this.children_are_groups && new_child instanceof QuestionGroup) ||
+			(!this.children_are_groups && new_child instanceof Question) 
+		) {
 			this.children.push(new_child)
-		}
-		else if (!this.children_are_groups && new_child instanceof Question) {
-			this.children.push(new_child)
+			new_child.parent_group = this
+			return new_child
 		}
 		else {
 			throw new TypeError("Failed to add child. Parameter must be Question or QuestionGroup, depending on the value of children_are_groups.")
 		}
-		
-		new_child.parent_group = this
-		
-		return new_child
 	}
 	
 	// Returns true if this group is enabled or if any of its ancestors are enabled.
@@ -224,7 +222,7 @@ class QuestionGroup {
 	// Create HTML that represents this QuestionGroup so that users can interact with the objects.
 	// This function is recursive and only needs to be called once on the root.
 	// Generated HTML is automatically appended to the node that is passed.
-	generate_HTML(doc_parent) {
+	generate_HTML(doc_parent, for_editing = false) {
 		// If this has child collapsibles
 		if (this.children_are_groups) {
 			// Build collapsible header.

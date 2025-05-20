@@ -148,6 +148,66 @@ class QuestionGroup {
 		}
 	}
 	
+	// Adds questions from a dictionary.
+	// If a value is a string or array of strings, it is interpreted as a question-answer pair with one or more answers.
+	// If a value is an object, is is interpreted as a valid definition for a question_group.
+	add_children_from_dict(new_questions) {
+		// First, we leave the children_are_groups variable in flux until we begin to examine the children.
+		this.children_are_groups = null
+		
+		for (const key in new_questions) {
+			try {
+				const value = new_questions[key]
+			}
+			catch (e) {
+				throw new Error("While attempting to enumerate the Questions or Question Groups to add to '" + this.get_ancestors_as_string() + "', failed to index an object. Each element must be a valid definition of either a Question or Question Group.")
+			}
+			
+			if (Array.isArray(value)) {
+				// Set children_are_groups exactly once.
+				if (this.children_are_groups == null) this.children_are_groups = false
+				
+				// If children_are_groups was previously set to "true", then there is an error.
+				if (this.children_are_groups === true) {
+					throw new Error("While adding question '" + key + "' to QuestionGroup '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+				}
+				
+				// Check that the array elements are all strings.
+				for (const answer in value) {
+					if (typeof answer != "string") {
+						throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', found an answer '" + answer + "' which is not a string. All answers must be strings.")
+					}
+				}
+				
+				this.add_child(new Question(key, value))
+			}
+			else if (typeof value == "string") {
+				// Set children_are_groups exactly once.
+				if (this.children_are_groups == null) this.children_are_groups = false
+				
+				// If children_are_groups was previously set to "true", then there is an error.
+				if (this.children_are_groups === true) {
+					throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+				}
+				
+				this.add_child(new Question(key, value))
+			}
+			else if (typeof value == "object") {
+				// Set children_are_groups exactly once.
+				if (this.children_are_groups == null) this.children_are_groups = true
+				
+				// If children_are_groups was previously set to "false", then there is an error.
+				if (this.children_are_groups === false) {
+					throw new Error("While adding Question Group '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+				}
+				
+				const new_child = this.add_child(new QuestionGroup(key))
+				new_child.add_children_from_dict(value)
+			}
+		}
+	}
+				
+	
 	// Returns true if this group is enabled or if any of its ancestors are enabled.
 	// Returns false otherwise.
 	get_enabled() {
@@ -327,8 +387,6 @@ class QuestionGroup {
 			this.disable_and_uncheck() //
 		}
 		
-		
-		
 		return was_enabled
 	}
 	
@@ -356,6 +414,7 @@ class QuestionGroup {
 	
 	// Recursively sets was_asked_last to false for all questions.
 	reset_was_asked_last() {
+		this.was_asked_last = false
 		for (let i = 0; i < this.children.length; i++) {
 			if (this.children[i].was_asked_last) {
 				this.children[i].reset_was_asked_last()
@@ -381,6 +440,17 @@ class QuestionGroup {
 				this.children[i].was_asked_last = false
 				this.children[i].mastery_level = 0.5
 			}
+		}
+	}
+	
+	// Returns a string representation of the ancestors of this node.
+	// Returns th labeels of all ancestors, separated by arrows.
+	get_ancestors_as_string() {
+		if (this.parent_group != null) {
+			return this.parent_group.get_ancestors_as_string() + " -> " + this.label
+		}
+		else {
+			return this.label
 		}
 	}
 	

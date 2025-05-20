@@ -204,6 +204,9 @@ class QuestionGroup {
 				const new_child = this.add_child(new QuestionGroup(key))
 				new_child.add_children_from_dict(value)
 			}
+			else {
+				throw new Error("While attempting to add elements to '" + this.get_ancestors_as_string() + "', found invalid element '" + value + "'. All values must be string, lists of strings, or nested Question Group definitions.")
+			}
 		}
 	}
 				

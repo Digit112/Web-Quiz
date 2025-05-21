@@ -1,37 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Evelyn's Portfolio</title>
+		<title>Web-Quiz</title>
 		<meta charset="UTF-8">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		
 		<link rel="stylesheet" href="index.css">
-		<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-		<script src="../bg.js"></script>
-		
-		<!-- MathJax
-		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-		-->
 	</head>
 	<body>
-		<div class="step_bu_div">
-			<button type="button" onclick="next_bg('../')">Step</button>
-		</div>
 		<article>
-			<i><a href="../index.html">Home</a> / <a href="../javascript.html">JavaScript</a></i>
 			<span style="float: right;">
-				<i><a href="https://github.com/digit112/Learn-Japanese">On Github</a></i>
+				<i><a href="https://github.com/digit112/Web-Quiz">On Github</a></i>
 			</span>
 			
-			<h1 class="portfolio_header"><i>Learn Japanese</i></h1>
-			<p><a href="help.html">Help</a> | <a href="writeup.html">Writeup</a></p>
+			<h1><i>Web Quiz</i></h1>
 			
 			<p>Select from the many kinds of questions below to start learning Japanese! All changes will take effect immediately. The quiz tracks your progress and may change somewhat over time. This information can be reset by clicking "Reset Progress". Click "Next Question" when you are ready to begin.</p>
-			
-			<p>If you know nothing at all about the Japanese language, you can read the <a href="help.html">Help</a> page for a quick starter. To be clear, you are expected to guess randomly at first. You'll pick it up pretty fast. I recommend selecting All Questions -> Hiragana -> Basic Hiragana (in the menu below) to start, and leaving the settings at their defaults.</p>
-			
-			<p><b>Note:</b> This is a work in progress! It requires minor tuning and probably some bugfixing, but more than anything it requires more questions. I have made this site live before it was finished only so that I could use it while I'm away from home.</p>
 			
 			<div id="collapsibles_root"></div>
 			
@@ -60,12 +44,6 @@
 			<p id="correct_answer">The Correct Answer Was: N/A</p>
 		</article>
 		
-		<script src="japanese.js"></script>
-		<script src="question_dicts.js"></script>
-		<script src="construct_questions.js"></script>
-		
-		<!-- Code Snippets
-		<script src="../prism.js"></script>
-		-->
+		<script type="module" src="Web-Quiz.js"></script>
 	</body>
 </html>

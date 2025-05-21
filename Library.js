@@ -65,3 +65,5 @@ class Library {
 		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
 	}
 }
+
+export {Library}

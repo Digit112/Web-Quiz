@@ -1,3 +1,7 @@
+function lerp(a, b, t) {
+	return (b - a) * t + a
+}
+
 class Question {
 	constructor(q, a) {
 		// The question and answer.
@@ -120,3 +124,5 @@ class Question {
 		return this
 	}
 }
+
+export {Question}

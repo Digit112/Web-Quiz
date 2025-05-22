@@ -1,4 +1,5 @@
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.
+// ETag chane
 class Library {
 	constructor(
 		ADAPTATION_RATE = 0.15,
@@ -27,10 +28,10 @@ class Library {
 
 		// The number of consecutive incorrect answers to go from b to t is:
 		// (log(t) - log(b)) / log(1-ADAPTATION_RATE)
-		const this.ADAPTATION_RATE = ADAPTATION_RATE
+		this.ADAPTATION_RATE = ADAPTATION_RATE
 
 		// The mastery level of a question which has not been answered.
-		const this.STARTING_MASTERY = STARTING_MASTERY
+		this.STARTING_MASTERY = STARTING_MASTERY
 
 		// The "remainder" of a question is 1 minus the current mastery level.
 
@@ -38,16 +39,16 @@ class Library {
 		// An ADAPTIVE_WEIGHT_BIAS of 0 is the same as having adaptive mode off.
 		// As ADAPTIVE_WEIGHT_BIAS approaches 1, mastered questions become increasingly rare.
 		// Anything above 0.5 is already pretty close to having adaptive mode off (at this level, a totally unmastered question is twice as likely to appear as a totally mastered one.)
-		const this.ADAPTIVE_WEIGHT_BIAS = ADAPTIVE_WEIGHT_BIAS
+		this.ADAPTIVE_WEIGHT_BIAS = ADAPTIVE_WEIGHT_BIAS
 
 		// The overall difficulty is the sum of the remainders of all available questions, each multiplied by their respective probability of being chosen.
 		// Since the remainder is an approximate likelihood that the user will answer a question incorrectly,
 		// overall difficulty is an approximate measure of the likelihood that the user will get the next question wrong (whatever it happens to be)
 		// The question windowing attempts to keep the overall difficulty approximately constant throughout the session.
 		// So, IDEAL_OVERALL_DIFFICULTY basically controls how challenging the questions are.
-		const this.IDEAL_OVERALL_DIFFICULTY = IDEAL_OVERALL_DIFFICULTY
+		this.IDEAL_OVERALL_DIFFICULTY = IDEAL_OVERALL_DIFFICULTY
 		
-		const this.root_q = new QuestionGroup("All Questions", true)
+		this.root_q = new QuestionGroup("All Questions", true)
 	}
 	
 	// Produces HTML corresponding to this library, which allows the selction of question groups or,

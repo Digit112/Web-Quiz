@@ -431,12 +431,12 @@ class QuestionGroup {
 		
 		if (was_enabled) {
 			// Enable all children (propogate enabled-ness)
-			for (let child : this.children) {
+			for (let child in this.children) {
 				child.enable_and_check()
 			}
 			
 			// Disable self
-			this.disable_and_uncheck() //
+			this.disable_and_uncheck()
 		}
 		
 		return was_enabled

@@ -16,6 +16,7 @@ function collapsible_event() {
 
 // Event Listener for checkboxes that select questions.
 function check_event() {
+	console.log("Check Event on '" + this.question_group.label + "'")
 	this.question_group.is_enabled = this.checked
 	
 	if (this.checked) {
@@ -23,6 +24,7 @@ function check_event() {
 		this.did_recurse_last = false
 	}
 	else {
+		console.log("Unchecked...")
 		this.question_group.reset_all_descendents()
 		
 		if (this.question_group.get_enabled()) {
@@ -49,7 +51,11 @@ function check_event() {
 
 // Each question group either contains other QuestionGroups or Questions as children.
 class QuestionGroup {
-	constructor(label, children_are_groups = true) {
+	constructor(label, parent_group, children_are_groups) {
+		if (!(parent_group instanceof QuestionGroup || parent_group instanceof Library)) {
+			throw new Error("A QuestionGroup must have a parent QuestionGroup or Library.")
+		}
+		
 		console.log("Constructing Group '" + label + "'")
 		// The label for this group that the user will see.
 		this.label = label
@@ -85,7 +91,7 @@ class QuestionGroup {
 		this.is_enabled = false
 		
 		// The parent QuestionGroup
-		this.parent_group = null
+		this.parent_group = parent_group
 		
 		// True if a child question was asked last.
 		this.was_asked_last = false
@@ -93,6 +99,16 @@ class QuestionGroup {
 		// The checkbox associated with this group.
 		// Set by generate_HTML()
 		this.check_elem = null
+	}
+	
+	// Returns the library that this QuestionGroup ultimately descends from.
+	get_library() {
+		if (this.parent_group instanceof Library) {
+			return this.parent_group
+		}
+		else {
+			return this.parent_group.get_library()
+		}
 	}
 	
 	// Returns the weight of this node for use in selecting a random question.
@@ -206,7 +222,7 @@ class QuestionGroup {
 		
 		for (const key in new_questions) {
 			try {
-				const value = new_questions[key]
+				var value = new_questions[key]
 			}
 			catch (e) {
 				throw new Error("While attempting to enumerate the Questions or Question Groups to add to '" + this.get_ancestors_as_string() + "', failed to index an object. Each element must be a valid definition of either a Question or Question Group.")
@@ -228,7 +244,7 @@ class QuestionGroup {
 					}
 				}
 				
-				this.add_child(new Question(key, value))
+				this.add_child(new Question(key, value, this))
 			}
 			else if (typeof value == "string") {
 				// Set children_are_groups exactly once.
@@ -239,7 +255,7 @@ class QuestionGroup {
 					throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
 				}
 				
-				this.add_child(new Question(key, value))
+				this.add_child(new Question(key, value, this))
 			}
 			else if (typeof value == "object") {
 				// Set children_are_groups exactly once.
@@ -250,7 +266,7 @@ class QuestionGroup {
 					throw new Error("While adding Question Group '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
 				}
 				
-				const new_child = this.add_child(new QuestionGroup(key))
+				const new_child = this.add_child(new QuestionGroup(key, this, true))
 				new_child.add_children_from_dict(value)
 			}
 			else {
@@ -258,12 +274,11 @@ class QuestionGroup {
 			}
 		}
 	}
-				
 	
 	// Returns true if this group is enabled or if any of its ancestors are enabled.
 	// Returns false otherwise.
 	get_enabled() {
-		if (this.parent_group == null) {
+		if (this.parent_group instanceof Library) {
 			return this.is_enabled
 		}
 		else {
@@ -380,6 +395,7 @@ class QuestionGroup {
 			let check_node = document.createElement("input")
 			check_node.setAttribute("type", "checkbox")
 			check_node.setAttribute("class", "collapsible_check")
+			check_node.addEventListener("click", check_event)
 			check_node.question_group = this // The checkbox elements know which groups they control.
 			
 			let text_node = document.createElement("text")
@@ -392,20 +408,20 @@ class QuestionGroup {
 		}
 	}
 	
-	// Enables this element and then checks the corresponding HTML.
-	// Causes an error if the HTML does not exist.
-	// Triggers check_event callback
-	disable_and_uncheck() {
-		this.is_enabled = true
-		this.check_elem.checked = true
-	}
-	
 	// Disables this element and then unchecks the corresponding HTML.
 	// Causes an error if the HTML does not exist.
 	// Triggers check_event callback
-	enable_and_check() {
+	disable_and_uncheck() {
 		this.is_enabled = false
 		this.check_elem.checked = false
+	}
+	
+	// Enables this element and then checks the corresponding HTML.
+	// Causes an error if the HTML does not exist.
+	// Triggers check_event callback
+	enable_and_check() {
+		this.is_enabled = true
+		this.check_elem.checked = true
 	}
 	
 	// Called by the checkbox event listener to recursively enable all child checkboxes.
@@ -423,15 +439,16 @@ class QuestionGroup {
 	// Returns the same thing that get_enabled() would return, which is helpful for the recursive calls but likely useless to the initial caller.
 	// TODO: Fairly complicated recursive function. PLEASE do not forget to test!
 	propogate_and_disable() {
+		console.log("Propogating: " + this.label)
 		let was_enabled = this.is_enabled
 		
-		if (this.parent_group != null) {
-			was_enabled = was_enabled || this.parent_group.propogate_and_disable()
+		if (this.parent_group instanceof QuestionGroup) {
+			was_enabled = this.parent_group.propogate_and_disable() || was_enabled
 		}
 		
 		if (was_enabled) {
 			// Enable all children (propogate enabled-ness)
-			for (let child in this.children) {
+			for (let child of this.children) {
 				child.enable_and_check()
 			}
 			
@@ -498,7 +515,7 @@ class QuestionGroup {
 	// Returns a string representation of the ancestors of this node.
 	// Returns th labeels of all ancestors, separated by arrows.
 	get_ancestors_as_string() {
-		if (this.parent_group != null) {
+		if (!(this.parent_group instanceof Library)) {
 			return this.parent_group.get_ancestors_as_string() + " -> " + this.label
 		}
 		else {
@@ -524,5 +541,3 @@ class QuestionGroup {
 		}
 	}
 }
-
-export {QuestionGroup}

@@ -1,5 +1,4 @@
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.
-// ETag chane
 class Library {
 	constructor(
 		ADAPTATION_RATE = 0.15,
@@ -48,7 +47,7 @@ class Library {
 		// So, IDEAL_OVERALL_DIFFICULTY basically controls how challenging the questions are.
 		this.IDEAL_OVERALL_DIFFICULTY = IDEAL_OVERALL_DIFFICULTY
 		
-		this.root_q = new QuestionGroup("All Questions", true)
+		this.root_q = new QuestionGroup("All Questions", this, true)
 	}
 	
 	// Produces HTML corresponding to this library, which allows the selction of question groups or,
@@ -66,5 +65,3 @@ class Library {
 		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
 	}
 }
-
-export {Library}

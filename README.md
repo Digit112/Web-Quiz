@@ -3,6 +3,8 @@
 This project pulls its base of code from Learn-Japanese, which is a simple client-side JavaScript application that quizzes you on Hiragana and Katakana.
 I'd like for this project to grow into a platform for creating, using, and sharing simmple flash-card like quizzes.
 
+Questions consist of a question component, that is, a string to be presented to the user, and one or more answer strings. Any answer string constitutes a correct response to a quesiton. Questions may be inverted, with answers presented to the user who is expected to provide the question. To preserve the symmetry in this case, there may be multiple questions to an answer, and one question is called the primary question while one answers is called the primary answer. This relationship 
+
 ## Question Organization
 
 Questions are organized into a hierarchical fashion to allow a user to select which categories of questions they want to see. Such a hierarchy is called a "Library" and may be encoded into a JSON file and loaded.

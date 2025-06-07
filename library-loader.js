@@ -1,33 +1,13 @@
-// Read Questions from file.
-my_library = new Library()
-my_library.root_q.add_children_from_dict(
-{
-	"Hiragana": {
-		"Basic Hiragana": {
-			"あ": "a",  "い": "i",  "う":  "u",   "え": "e",  "お": "o",
-			"か": "ka", "き": "ki", "く":  "ku",  "け": "ke", "こ": "ko",
-			"さ": "sa", "し": "shi", "す": "su",  "せ": "se", "そ": "so",
-			"た": "ta", "ち": "chi", "つ": "tsu", "て": "te", "と": "to",
-			"な": "na", "に": "ni", "ぬ": "nu",  "ね": "ne", "の": "no",
-			"は": "ha", "ひ": "hi", "ふ": "fu",  "へ": "he", "ほ": "ho",
-			"ま": "ma", "み": "mi", "む": "mu",  "め": "me", "も": "mo",
-			"や": "ya",            "ゆ": "yu",              "よ": "yo",
-			"ら": "ra", "り": "ri", "る": "ru",  "れ": "re", "ろ": "ro",
-			"わ": "wa", "ゐ": "wi",             "ゑ": "we", "を": "wo",
-			"ん": "n"
-		},
-		"Hiragana with Diacritics": {
-			"が": "ga", "ぎ": "gi", "ぐ": "gu", "げ": "ge", "ご": "go",
-			"ざ": "za", "じ": "ji", "ず": "zu", "ぜ": "ze", "ぞ": "zo",
-			"だ": "da", "ぢ": "ji", "づ": "du", "で": "de", "ど": "do",
-			"ば": "ba", "び": "bi", "ぶ": "bu", "べ": "be", "ぼ": "bo",
-			"ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po"
-		}
-	}
-})
+// Explanations for the available settings.
+const random_gen_expl = "Every question has an equal chance of being picked. The same question cannot appear twice in a row."
+const adapt_gen_explanation_expl = "Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row."
+const quiz_gen_explanation_expl = "All questions will be presented to you one at a time. When all questions have been exhausted, the process repeats. If shuffle questions is not checked, the questions will be presented in a predefined order."
 
-// Generate collapsibles HTML
-my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
+const windowing_expl = "A small number of questions will be available to begin. As you master old questions, the pool of questions will increase in size. Makes no difference in quiz mode."
+const no_windowing_expl = "All questions will be available immediately."
+
+const shuffle_expl = "Questions will become available in a random order."
+const no_shuffle_expl = "Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately."
 
 // Add Event Listeners to question generation options
 let gen_explanation = document.getElementById("gen_explanation")
@@ -51,16 +31,19 @@ let last_question = document.getElementById("last_question")
 let your_response = document.getElementById("your_response")
 let correct_answer = document.getElementById("correct_answer")
 
+// Generate collapsibles HTML
+my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
+
 random_gen.addEventListener("input", function() {
-	gen_explanation.innerHTML = "Every question has an equal chance of being picked. The same question cannot appear twice in a row."
+	gen_explanation.innerHTML = random_gen_expl
 })
 
 adapt_gen.addEventListener("input", function() {
-	gen_explanation.innerHTML = "Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row."
+	gen_explanation.innerHTML = adapt_gen_expl
 })
 
 quiz_gen.addEventListener("input", function() {
-	gen_explanation.innerHTML = "All questions will be presented to you one at a time. When all questions have been exhausted, the process repeats. If shuffle questions is not checked, the questions will be presented in a predefined, rather predictable order."
+	gen_explanation.innerHTML = quiz_gen_expl
 	
 	my_library.root_q.deactivate_all()
 	my_library.root_q.cache_weights(adapt_gen.checked, use_window.checked)
@@ -68,19 +51,19 @@ quiz_gen.addEventListener("input", function() {
 
 use_window.addEventListener("input", function() {
 	if (this.checked) {
-		window_explanation.innerHTML = "A small number of questions will be available to begin. As you master old questions, the pool of questions will increase in size. Makes no difference in quiz mode."
+		window_explanation.innerHTML = windowing_expl
 	}
 	else {
-		window_explanation.innerHTML = "All questions will be available immediately."
+		window_explanation.innerHTML = no_windowing_expl
 	}
 })
 
 do_shuffle.addEventListener("input", function() {
 	if (this.checked) {
-		shuffle_explanation.innerHTML = "Questions will become available in a random order."
+		shuffle_explanation.innerHTML = shuffle_expl
 	}
 	else {
-		shuffle_explanation.innerHTML = "Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately."
+		shuffle_explanation.innerHTML = no_shuffle_expl
 		my_library.root_q.reset_was_asked_last()
 	}
 })

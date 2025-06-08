@@ -31,9 +31,6 @@ let last_question = document.getElementById("last_question")
 let your_response = document.getElementById("your_response")
 let correct_answer = document.getElementById("correct_answer")
 
-// Generate collapsibles HTML
-my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
-
 random_gen.addEventListener("input", function() {
 	gen_explanation.innerHTML = random_gen_expl
 })
@@ -82,6 +79,11 @@ answer_text.addEventListener("keydown", function(event) {
 		generate_next_question()
 	}
 })
+
+my_library = new Library(
+
+// Generate collapsibles HTML
+my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
 
 let last_active_question = null
 let active_question = null

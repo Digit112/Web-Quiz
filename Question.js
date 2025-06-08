@@ -94,7 +94,7 @@ class Question {
 	// Note that the actual weight will be this or the reciprical of the number of questions, whichever is higher.
 	get_adaptive_weight() {
 		let my_library = this.get_library()
-		return Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery() / this.get_remainder())
+		return 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery())
 	}
 	
 	get_weight(am_adaptive, am_windowed) {

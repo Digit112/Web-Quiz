@@ -1,6 +1,7 @@
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.
 class Library {
 	constructor(
+		library_data,
 		ADAPTATION_RATE = 0.15,
 		STARTING_MASTERY = 0.5,
 		ADAPTIVE_WEIGHT_BIAS = 0.65,
@@ -34,10 +35,10 @@ class Library {
 
 		// The "remainder" of a question is 1 minus the current mastery level.
 
-		// The weight used for a question in adaptive mode is max(ADAPTIVE_WEIGHT_BIAS ^ (mastery / remainder), 1 / num_active_questions)
-		// An ADAPTIVE_WEIGHT_BIAS of 0 is the same as having adaptive mode off.
-		// As ADAPTIVE_WEIGHT_BIAS approaches 1, mastered questions become increasingly rare.
-		// Anything above 0.5 is already pretty close to having adaptive mode off (at this level, a totally unmastered question is twice as likely to appear as a totally mastered one.)
+		// The weight used for a question in adaptive mode is max(1 / my_library.ADAPTIVE_WEIGHT_BIAS ^ mastery), 1 / num_active_questions)
+		// An ADAPTIVE_WEIGHT_BIAS of 1 is the same as having adaptive mode off.
+		// As ADAPTIVE_WEIGHT_BIAS increases, mastered questions become increasingly rare.
+		// Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.
 		this.ADAPTIVE_WEIGHT_BIAS = ADAPTIVE_WEIGHT_BIAS
 
 		// The overall difficulty is the sum of the remainders of all available questions, each multiplied by their respective probability of being chosen.
@@ -48,6 +49,7 @@ class Library {
 		this.IDEAL_OVERALL_DIFFICULTY = IDEAL_OVERALL_DIFFICULTY
 		
 		this.root_q = new QuestionGroup("All Questions", this, true)
+		this.root_q.add_children_from_dict(library_data)
 	}
 	
 	// Produces HTML corresponding to this library, which allows the selction of question groups or,

@@ -9,7 +9,11 @@ const no_windowing_expl = "All questions will be available immediately."
 const shuffle_expl = "Questions will become available in a random order."
 const no_shuffle_expl = "Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately."
 
-// Add Event Listeners to question generation options
+// Get elements and add event listeners
+let library_upload_div = document.getElementById("library-upload-div")
+let library_upload = document.getElementById("library-upload")
+let web_quiz_div = document.getElementById("web-quiz-div")
+
 let gen_explanation = document.getElementById("gen_explanation")
 let random_gen = document.getElementById("random_gen")
 let adapt_gen = document.getElementById("adapt_gen")
@@ -30,6 +34,44 @@ let correct_indicator = document.getElementById("correct_indicator")
 let last_question = document.getElementById("last_question")
 let your_response = document.getElementById("your_response")
 let correct_answer = document.getElementById("correct_answer")
+
+var my_library = null
+
+let last_active_question = null
+let active_question = null
+
+// Number of correctly answered questions since the last quiz cycle.
+let quiz_score = 0
+
+library_upload.addEventListener("change", function() {
+	const file = event.target.files[0]; // Get the first selected file
+	if (!file) {
+		return
+	}
+	
+	// File object is now available for further processing
+	console.log("File name:", file.name);
+	console.log("File size:", file.size);
+	console.log("File type:", file.type);
+
+	// You can read the file content using FileReader
+	const reader = new FileReader();
+	reader.onload = (e) => {
+		const library_data = JSON.parse(reader.result);
+		console.log("File content:", library_data);
+	
+		my_library = new Library(library_data)
+
+		// Generate collapsibles HTML
+		my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
+		last_active_question = null
+		active_question = null
+		quiz_score = 0
+		web_quiz_div.style.display = "block"
+	};
+	
+	reader.readAsText(file)
+})
 
 random_gen.addEventListener("input", function() {
 	gen_explanation.innerHTML = random_gen_expl
@@ -79,17 +121,6 @@ answer_text.addEventListener("keydown", function(event) {
 		generate_next_question()
 	}
 })
-
-my_library = new Library(
-
-// Generate collapsibles HTML
-my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
-
-let last_active_question = null
-let active_question = null
-
-// Number of correctly answered questions since the last quiz cycle.
-let quiz_score = 0
 
 // Generate a new question.
 function generate_next_question() {

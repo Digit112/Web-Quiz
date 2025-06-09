@@ -85,7 +85,7 @@
 		},
 		
 		"Alternate Forms of ja/ju/jo": {
-			"チャ": "ja", "チュ": "ju", "チョ": "jo",
+			"チャ": "ja", "チュ": "ju", "チョ": "jo"
 		}
 	},
 	
@@ -140,7 +140,7 @@
 			"だいがくせい": "college student",
 			"だいがくいんせい": "graduate student",
 			"りゅうがくせい": "international student",
-			"せんこう": "major",
+			"せんこう": "major"
 		},
 		
 		"Majors": {
@@ -152,7 +152,7 @@
 			"せいぢ": "politics",
 			"ぶんがく": "literature",
 			"れきし": "history",
-			"アジアけんきゅ": "asian studies",
+			"アジアけんきゅ": "asian studies"
 		},
 		
 		"Countries": {
@@ -168,14 +168,14 @@
 			"フイリピン": "philippines",
 			"カナダ": "canada",
 			"エジプト": "egypt",
-			"オーストラリア": "australia",
+			"オーストラリア": "australia"
 		},
 		
 		"Jobs": {
 			"いしゃ": "doctor",
 			"かいしゃいん": "office worker",
 			"かんごし": "nurse",
-			"べんごし": "lawyer",
+			"べんごし": "lawyer"
 		}
 	}
 }

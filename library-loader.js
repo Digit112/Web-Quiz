@@ -1,7 +1,7 @@
 // Explanations for the available settings.
 const random_gen_expl = "Every question has an equal chance of being picked. The same question cannot appear twice in a row."
-const adapt_gen_explanation_expl = "Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row."
-const quiz_gen_explanation_expl = "All questions will be presented to you one at a time. When all questions have been exhausted, the process repeats. If shuffle questions is not checked, the questions will be presented in a predefined order."
+const adapt_gen_expl = "Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row."
+const quiz_gen_expl = "All questions will be presented to you one at a time. When all questions have been exhausted, the process repeats. If shuffle questions is not checked, the questions will be presented in a predefined order."
 
 const windowing_expl = "A small number of questions will be available to begin. As you master old questions, the pool of questions will increase in size. Makes no difference in quiz mode."
 const no_windowing_expl = "All questions will be available immediately."

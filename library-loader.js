@@ -186,9 +186,9 @@ function generate_next_question() {
 		// Outside of quiz mode, consider expanding the window. This is done by activating questions until the preferred difficulty is reached.
 		// This is done even if windowing is not enabled. If it gets enabled down the line, then the questions should be appropriate.
 		for (let i = 0; i < 20; i++) {
-			let new_question_weight = get_new_question_weight(am_adaptive)
+			let new_question_weight = my_library.get_new_question_weight(am_adaptive)
 			let new_question_probability = new_question_weight / (new_question_weight + my_library.root_q.get_weight(am_adaptive, am_windowed))
-			let new_question_difficulty = 1 - STARTING_MASTERY
+			let new_question_difficulty = 1 - my_library.STARTING_MASTERY
 			
 			// Calculate what the difficulty would be if we added a new question.
 			let theoretical_difficulty = my_library.root_q.difficulty * (1 - new_question_probability) + new_question_difficulty * new_question_probability
@@ -196,8 +196,8 @@ function generate_next_question() {
 			console.log("New question's probability of being chosen: " + (new_question_probability * 100) + "%")
 			console.log("Current Difficulty: " + my_library.root_q.difficulty + ", Theoretical Difficulty: " + theoretical_difficulty)
 			
-			let difficulty_offset = Math.abs(IDEAL_OVERALL_DIFFICULTY - my_library.root_q.difficulty)
-			let theoretical_difficulty_offset = Math.abs(IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
+			let difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - my_library.root_q.difficulty)
+			let theoretical_difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
 			if (theoretical_difficulty > my_library.root_q.difficulty && theoretical_difficulty_offset < difficulty_offset) {

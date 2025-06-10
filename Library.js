@@ -52,17 +52,6 @@ class Library {
 		this.root_q.add_children_from_dict(library_data)
 	}
 	
-	// Produces HTML corresponding to this library, which allows the selction of question groups or,
-	// if "editing" is true, allows the modification of the underlying structure.
-	// Returns the root Element.
-	generate_HTML(for_editing = false) {
-		let root_element = document.createElement("div")
-		root_element.class = "ekobadd-quiz-hierarchy-container"
-		
-		this.root_q.generate_HTML(root_element, for_editing)
-		return root_element
-	}
-	
 	get_new_question_weight(am_adaptive) {
 		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
 	}

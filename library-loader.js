@@ -50,20 +50,17 @@ library_upload.addEventListener("change", function() {
 	}
 	
 	// File object is now available for further processing
-	console.log("File name:", file.name);
-	console.log("File size:", file.size);
-	console.log("File type:", file.type);
+	console.log("Loading '", file.name + "', (" + file.size + " Bytes, " + file.type + ")");
 
 	// You can read the file content using FileReader
 	const reader = new FileReader();
 	reader.onload = (e) => {
 		const library_data = JSON.parse(reader.result);
-		console.log("File content:", library_data);
 	
 		my_library = new Library(library_data)
 
 		// Generate collapsibles HTML
-		my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
+		my_library.root_q.generate_HTML( document.getElementById("collapsibles_root"), true)
 		last_active_question = null
 		active_question = null
 		quiz_score = 0

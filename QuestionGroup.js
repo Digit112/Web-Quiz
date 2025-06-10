@@ -352,60 +352,52 @@ class QuestionGroup {
 	// Create HTML that represents this QuestionGroup so that users can interact with the objects.
 	// This function is recursive and only needs to be called once on the root.
 	// Generated HTML is automatically appended to the node that is passed.
-	generate_HTML(doc_parent, for_editing = false) {
-		// If this has child collapsibles
+	// If editing_pane is not null, an option to edit the groups will be available and group properties will be added to the editing_pane element.
+	generate_HTML(doc_parent, editing_pane = null) {
+		// Build collapsible header.
+		let header = document.createElement("div")
+		header.setAttribute("class", "collapsible_header")
+			
+		let check_node = document.createElement("input")
+		check_node.setAttribute("type", "checkbox")
+		check_node.setAttribute("class", "collapsible_check")
+		check_node.addEventListener("click", check_event)
+		check_node.question_group = this // The checkbox elements know which groups they control.
+			
+		let text_node = document.createElement("text")
+		text_node.innerHTML = this.label
+		
+		// Generate child collapsibles.
 		if (this.children_are_groups) {
-			// Build collapsible header.
-			let header = document.createElement("div")
-			header.setAttribute("class", "collapsible_header")
+			var expand_node = document.createElement("button")
+			expand_node.setAttribute("type", "button")
+			expand_node.setAttribute("class", "collapsible")
+			expand_node.addEventListener("click", collapsible_event)
+			expand_node.innerHTML = "+"
 			
-			let check_node = document.createElement("input")
-			check_node.setAttribute("type", "checkbox")
-			check_node.setAttribute("class", "collapsible_check")
-			check_node.addEventListener("click", check_event)
-			check_node.question_group = this // The checkbox elements know which groups they control.
-			
-			let button_node = document.createElement("button")
-			button_node.setAttribute("type", "button")
-			button_node.setAttribute("class", "collapsible")
-			button_node.addEventListener("click", collapsible_event)
-			button_node.innerHTML = "+"
-			
-			let text_node = document.createElement("text")
-			text_node.innerHTML = this.label
-			
-			let content = document.createElement("div")
+			var content = document.createElement("div")
 			content.setAttribute("class", "collapsible_content")
 			
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].generate_HTML(content)
+				this.children[i].generate_HTML(content, editing_pane)
 			}
-			
-			doc_parent.appendChild(header)
-			doc_parent.appendChild(content)
-			
-			this.check_elem = header.appendChild(check_node)
-			header.appendChild(button_node)
-			header.appendChild(text_node)
 		}
-		else {
-			let header = document.createElement("div")
-			header.setAttribute("class", "collapsible_header")
-			
-			let check_node = document.createElement("input")
-			check_node.setAttribute("type", "checkbox")
-			check_node.setAttribute("class", "collapsible_check")
-			check_node.addEventListener("click", check_event)
-			check_node.question_group = this // The checkbox elements know which groups they control.
-			
-			let text_node = document.createElement("text")
-			text_node.innerHTML = this.label
-			
-			doc_parent.appendChild(header)
-			
-			this.check_elem = header.appendChild(check_node)
-			header.appendChild(text_node)
+		
+		// Generate editing controls
+		if (editing_pane) {
+			var edit_node = document.createElement("button")
+			edit_node.setAttribute("type", "button")
+			edit_node.setAttribute("class", "collapsible_edit")
+			edit_node.innerHTML = "edit"
 		}
+			
+		if (this.children_are_groups) { header.appendChild(expand_node) }
+		this.check_elem = header.appendChild(check_node)
+		header.appendChild(text_node)
+		if (editing_pane) { header.appendChild(edit_node) }
+		
+		doc_parent.appendChild(header)
+		if (this.children_are_groups) { doc_parent.appendChild(content) }
 	}
 	
 	// Disables this element and then unchecks the corresponding HTML.

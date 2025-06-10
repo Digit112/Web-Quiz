@@ -89,16 +89,6 @@
 		}
 	},
 	
-	"Polite Words and Phrases": {
-		"こんにちは": "hello",
-		"おはよう": "good morning",
-		"こんばんは": "good evening",
-		"おやすみ": ["good night (informal)", "good night"],
-		"おやすみなさい": ["good night (formal)", "good night"],
-		"ありがとう": ["thank you (informal)", "thank you"],
-		"ありがとうございます": ["thank you (formal)", "thank you"]
-	},
-	
 	"Nouns (Kana)": {
 		"Numbers": {
 			"0 - 9": {
@@ -177,5 +167,15 @@
 			"かんごし": "nurse",
 			"べんごし": "lawyer"
 		}
+	},
+	
+	"Polite Words and Phrases": {
+		"こんにちは": "hello",
+		"おはよう": "good morning",
+		"こんばんは": "good evening",
+		"おやすみ": ["good night (informal)", "good night"],
+		"おやすみなさい": ["good night (formal)", "good night"],
+		"ありがとう": ["thank you (informal)", "thank you"],
+		"ありがとうございます": ["thank you (formal)", "thank you"]
 	}
 }

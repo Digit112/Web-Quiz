@@ -1,12 +1,84 @@
+function import_event(e) {
+	const file = e.target.files[0]; // Get the first selected file
+	if (!file) { return }
+	
+	// File object is now available for further processing
+	console.log("Loading '", file.name + "', (" + file.size + " Bytes, " + file.type + ")");
+
+	// You can read the file content using FileReader
+	const reader = new FileReader();
+	reader.onload = (e) => {
+		const library_data = JSON.parse(reader.result);
+	
+		my_library = new Library(library_data)
+
+		// Generate collapsibles HTML
+		my_library.generate_HTML( document.getElementById("collapsibles_root"), true)
+		last_active_question = null
+		active_question = null
+		quiz_score = 0
+	};
+	
+	reader.readAsText(file)
+}
+
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.
 class Library {
 	constructor(
-		library_data,
+		library_data = null,
 		ADAPTATION_RATE = 0.15,
 		STARTING_MASTERY = 0.5,
 		ADAPTIVE_WEIGHT_BIAS = 0.65,
 		IDEAL_OVERALL_DIFFICULTY = 0.3
 	) {
+		this.root_q = null
+		this.ADAPTATION_RATE = 0.15
+		this.STARTING_MASTERY = 0.5
+		this.ADAPTIVE_WEIGHT_BIAS = 0.65
+		this.IDEAL_OVERALL_DIFFICULTY = 0.3
+		
+		if (library_data) { this.initialize(library_data) }
+	}
+	
+	// Produces HTML corresponding to this library, which allows the selction of question groups or,
+	// if "editing" is true, allows the modification of the underlying structure.
+	// Deletes all existing children of the passed elements before adding new content.
+	generate_HTML(doc_parent, editing_pane = null) {
+		doc_parent.replaceChildren()
+		
+		let library_header = document.createElement("div")
+		library_header.setAttribute("class", "library-header")
+		
+		// Create import button and associated invisible file selector.
+		// This is the only thing the user will see if the library is empty.
+		let import_file_selector = document.createElement("input")
+		import_file_selector.setAttribute("type", "file")
+		import_file_selector.setAttribute("id", "library-upload")
+		import_file_selector.style.display = "none"
+		import_file_selector.addEventListener("change", import_event)
+		
+		let import_button = document.createElement("input")
+		import_button.setAttribute("type", "button")
+		import_button.value = "Import"
+		import_button.addEventListener("click", () => import_file_selector.click())
+		
+		library_header.appendChild(import_button)
+		library_header.appendChild(import_file_selector)
+		
+		doc_parent.appendChild(library_header)
+		if (this.root_q) { this.root_q.generate_HTML(doc_parent, editing_pane) }
+	}
+	
+	get_new_question_weight(am_adaptive) {
+		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
+	}
+	
+	
+	// Called from the constructor if an initialization object is provided.
+	// Otherwise, may be called manually after construction.
+	// library_data should be the unmodified output of JSON.parse() called on a valid library object,
+	// such as that which would routinely be retrieved from a file or the library API.
+	initialize(library_data) {
 		// A Desmos graph showing some of the variables and their nature:
 		// https://www.desmos.com/calculator/l9vuo1di6l
 
@@ -28,10 +100,10 @@ class Library {
 
 		// The number of consecutive incorrect answers to go from b to t is:
 		// (log(t) - log(b)) / log(1-ADAPTATION_RATE)
-		this.ADAPTATION_RATE = ADAPTATION_RATE
+		this.ADAPTATION_RATE = 0.15 //ADAPTATION_RATE
 
 		// The mastery level of a question which has not been answered.
-		this.STARTING_MASTERY = STARTING_MASTERY
+		this.STARTING_MASTERY = 0.5 //STARTING_MASTERY
 
 		// The "remainder" of a question is 1 minus the current mastery level.
 
@@ -39,20 +111,16 @@ class Library {
 		// An ADAPTIVE_WEIGHT_BIAS of 1 is the same as having adaptive mode off.
 		// As ADAPTIVE_WEIGHT_BIAS increases, mastered questions become increasingly rare.
 		// Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.
-		this.ADAPTIVE_WEIGHT_BIAS = ADAPTIVE_WEIGHT_BIAS
+		this.ADAPTIVE_WEIGHT_BIAS = 4 //ADAPTIVE_WEIGHT_BIAS
 
 		// The overall difficulty is the sum of the remainders of all available questions, each multiplied by their respective probability of being chosen.
 		// Since the remainder is an approximate likelihood that the user will answer a question incorrectly,
 		// overall difficulty is an approximate measure of the likelihood that the user will get the next question wrong (whatever it happens to be)
 		// The question windowing attempts to keep the overall difficulty approximately constant throughout the session.
 		// So, IDEAL_OVERALL_DIFFICULTY basically controls how challenging the questions are.
-		this.IDEAL_OVERALL_DIFFICULTY = IDEAL_OVERALL_DIFFICULTY
+		this.IDEAL_OVERALL_DIFFICULTY = 0.3 //IDEAL_OVERALL_DIFFICULTY
 		
 		this.root_q = new QuestionGroup("All Questions", this, true)
 		this.root_q.add_children_from_dict(library_data)
-	}
-	
-	get_new_question_weight(am_adaptive) {
-		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
 	}
 }

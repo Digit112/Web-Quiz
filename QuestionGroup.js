@@ -389,12 +389,26 @@ class QuestionGroup {
 			edit_node.setAttribute("type", "button")
 			edit_node.setAttribute("class", "collapsible_edit")
 			edit_node.innerHTML = "edit"
+			
+			var move_up_node = document.createElement("button")
+			move_up_node.setAttribute("type", "button")
+			move_up_node.setAttribute("class", "collapsible_edit")
+			move_up_node.innerHTML = "move up"
+			
+			var move_down_node = document.createElement("button")
+			move_down_node.setAttribute("type", "button")
+			move_down_node.setAttribute("class", "collapsible_edit")
+			move_down_node.innerHTML = "move down"
 		}
 			
 		if (this.children_are_groups) { header.appendChild(expand_node) }
 		this.check_elem = header.appendChild(check_node)
 		header.appendChild(text_node)
-		if (editing_pane) { header.appendChild(edit_node) }
+		if (editing_pane) {
+			header.appendChild(edit_node)
+			header.appendChild(move_up_node)
+			header.appendChild(move_down_node)
+		}
 		
 		doc_parent.appendChild(header)
 		if (this.children_are_groups) { doc_parent.appendChild(content) }

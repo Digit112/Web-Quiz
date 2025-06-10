@@ -10,10 +10,6 @@ const shuffle_expl = "Questions will become available in a random order."
 const no_shuffle_expl = "Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately."
 
 // Get elements and add event listeners
-let library_upload_div = document.getElementById("library-upload-div")
-let library_upload = document.getElementById("library-upload")
-let web_quiz_div = document.getElementById("web-quiz-div")
-
 let gen_explanation = document.getElementById("gen_explanation")
 let random_gen = document.getElementById("random_gen")
 let adapt_gen = document.getElementById("adapt_gen")
@@ -35,40 +31,14 @@ let last_question = document.getElementById("last_question")
 let your_response = document.getElementById("your_response")
 let correct_answer = document.getElementById("correct_answer")
 
-var my_library = null
+var my_library = new Library()
+my_library.generate_HTML( document.getElementById("collapsibles_root"), true)
 
 let last_active_question = null
 let active_question = null
 
 // Number of correctly answered questions since the last quiz cycle.
 let quiz_score = 0
-
-library_upload.addEventListener("change", function() {
-	const file = event.target.files[0]; // Get the first selected file
-	if (!file) {
-		return
-	}
-	
-	// File object is now available for further processing
-	console.log("Loading '", file.name + "', (" + file.size + " Bytes, " + file.type + ")");
-
-	// You can read the file content using FileReader
-	const reader = new FileReader();
-	reader.onload = (e) => {
-		const library_data = JSON.parse(reader.result);
-	
-		my_library = new Library(library_data)
-
-		// Generate collapsibles HTML
-		my_library.root_q.generate_HTML( document.getElementById("collapsibles_root"), true)
-		last_active_question = null
-		active_question = null
-		quiz_score = 0
-		web_quiz_div.style.display = "block"
-	};
-	
-	reader.readAsText(file)
-})
 
 random_gen.addEventListener("input", function() {
 	gen_explanation.innerHTML = random_gen_expl
@@ -201,7 +171,7 @@ function generate_next_question() {
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
 			if (theoretical_difficulty > my_library.root_q.difficulty && theoretical_difficulty_offset < difficulty_offset) {
-				if (i == 19) console.log("WARNING: Added 20 questions to the window at once. This is probably a bug.")
+				if (i == 19) console.log("WARNING: Added 20 questions to the window at once. This may be a bug.")
 				
 				let new_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
 				

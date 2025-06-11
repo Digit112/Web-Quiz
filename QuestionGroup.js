@@ -1,7 +1,11 @@
 // Event Listener for buttons that control the collapsibles.
 function collapsible_event() {
 	this.classList.toggle("active");
+	this.question_group.is_expanded = this.classList.contains("active")
+	console.log(this.question_group.is_expanded)
+	
 	let content = this.parentElement.nextElementSibling
+	if (!content) throw new Error ("This header has no associated content. Can't expand it!")
 	
 	// Toggle display of following block.
 	if (content.style.display === "block") {
@@ -96,9 +100,17 @@ class QuestionGroup {
 		// True if a child question was asked last.
 		this.was_asked_last = false
 		
-		// The checkbox associated with this group.
+		// The checkbox/expand button associated with this group and the containers for its HTML
 		// Set by generate_HTML()
 		this.check_elem = null
+		this.expand_elem = null
+		this.html_container = null
+		this.html_edit_container = null
+		this.html_content_root = null
+		this.html_header_root = null
+		
+		// Used by regenerate_HTML() to avoid collapsing regenerated sections of HTML.
+		this.is_expanded = false
 	}
 	
 	// Returns the library that this QuestionGroup ultimately descends from.
@@ -354,6 +366,10 @@ class QuestionGroup {
 	// Generated HTML is automatically appended to the node that is passed.
 	// If editing_pane is not null, an option to edit the groups will be available and group properties will be added to the editing_pane element.
 	generate_HTML(doc_parent, editing_pane = null) {
+		// Save the container so that this group can regenerate its own HTML when changes occur.
+		this.html_container = doc_parent
+		this.html_edit_container = editing_pane
+		
 		// Build collapsible header.
 		let header = document.createElement("div")
 		header.setAttribute("class", "collapsible_header")
@@ -369,14 +385,15 @@ class QuestionGroup {
 		
 		// Generate child collapsibles.
 		if (this.children_are_groups) {
+			var content = document.createElement("div")
+			content.setAttribute("class", "collapsible_content")
+			
 			var expand_node = document.createElement("button")
 			expand_node.setAttribute("type", "button")
 			expand_node.setAttribute("class", "collapsible")
-			expand_node.addEventListener("click", collapsible_event)
 			expand_node.innerHTML = "+"
-			
-			var content = document.createElement("div")
-			content.setAttribute("class", "collapsible_content")
+			expand_node.question_group = this
+			expand_node.addEventListener("click", collapsible_event)
 			
 			for (let i = 0; i < this.children.length; i++) {
 				this.children[i].generate_HTML(content, editing_pane)
@@ -389,19 +406,25 @@ class QuestionGroup {
 			edit_node.setAttribute("type", "button")
 			edit_node.setAttribute("class", "collapsible_edit")
 			edit_node.innerHTML = "edit"
+			edit_node.question_group = this
+			edit_node.addEventListener("click", () => this.generate_properties_html(editing_pane))
 			
 			var move_up_node = document.createElement("button")
 			move_up_node.setAttribute("type", "button")
 			move_up_node.setAttribute("class", "collapsible_edit")
 			move_up_node.innerHTML = "move up"
+			move_up_node.question_group = this
+			move_up_node.addEventListener("click", () => this.move_up())
 			
 			var move_down_node = document.createElement("button")
 			move_down_node.setAttribute("type", "button")
 			move_down_node.setAttribute("class", "collapsible_edit")
 			move_down_node.innerHTML = "move down"
+			move_down_node.question_group = this
+			move_down_node.addEventListener("click", () => this.move_down())
 		}
 			
-		if (this.children_are_groups) { header.appendChild(expand_node) }
+		if (this.children_are_groups) { this.expand_elem = header.appendChild(expand_node) }
 		this.check_elem = header.appendChild(check_node)
 		header.appendChild(text_node)
 		if (editing_pane) {
@@ -410,8 +433,106 @@ class QuestionGroup {
 			header.appendChild(move_down_node)
 		}
 		
-		doc_parent.appendChild(header)
-		if (this.children_are_groups) { doc_parent.appendChild(content) }
+		this.html_header_root = doc_parent.appendChild(header)
+		if (this.children_are_groups) { this.html_content_root = doc_parent.appendChild(content) }
+		else { this.html_content_root = null }
+	}
+	
+	// Regenerates the HTML representing this object.
+	regenerate_HTML() {
+		if (!this.html_container) throw new Error("Cannot regenerate HTML if it has not yet already been generated!")
+		console.log("Regenerating HTML for '" + this.get_ancestors_as_string() + "' and all children.")
+		
+		//this.html_edit_container.replaceChildren()
+		
+		// Save references to current elements which will be overwritten by generate_HTML
+		let old_content = this.html_content_root
+		let old_header = this.html_header_root
+		
+		// Generate HTML onto a temporary element. Children are extracted and replace existing content/header roots.
+		// NOTE: This replaces this.html_content_root and html_header_root with new, presently invisible values.
+		let temporary_div = document.createElement("div")
+		this.generate_HTML(temporary_div, this.html_edit_container) // New references overwrite old ones.
+		
+		// Replace header and
+		old_header.replaceWith(this.html_header_root)
+		
+		// Replace OR delete content pane. Deletion might occur if regenerating after changing children from QuestionGroups to Questions.
+		if (old_content) {
+			if (this.html_content_root) {
+				console.log("Replacing...")
+				old_content.replaceWith(this.html_content_root)
+			}
+			else {
+				console.log("Removing...")
+				old_content.remove()
+			}
+		}
+		this.reset_expansion()
+	}
+	
+	// Used to expand or collapse the HTML associated with this object and all children
+	// in order to make it match the value of this.is_expanded.
+	// These can desync when regenerating HTML.
+	reset_expansion() {
+		if (this.children_are_groups) {
+			if (this.expand_elem.classList.contains("active") != this.is_expanded) {
+				this.expand_elem.click()
+			}
+			
+			for (let child of this.children) {
+				child.reset_expansion()
+			}
+		}
+	}
+	
+	// Generates HTML which can be used to edit this QuestionGroup.
+	// Elements are added to the passed HTML element.
+	generate_properties_html(editing_pane) {
+		console.log("Generating edit HTML onto '" + editing_pane + "'")
+	}
+	
+	// Swaps this group with its predecessor in the parent's child list & regenerates HTML.
+	// If this is the first child, does nothing.
+	move_up() {
+		if (this.parent_group instanceof Library) return
+		
+		for (let i = 0; i < this.parent_group.children.length; i++) {
+			let child = this.parent_group.children[i]
+			
+			if (child === this) {
+				if (i == 0) return // Cannot move up any further
+				
+				// Swap with predecessor
+				let temp = this.parent_group.children[i-1]
+				this.parent_group.children[i-1] = this.parent_group.children[i]
+				this.parent_group.children[i] = temp
+				
+				this.parent_group.regenerate_HTML()
+				return
+			}
+		}
+	}
+	
+	// Swaps this group with its successor in the parent's child list & regenerates HTML.
+	move_down() {
+		if (this.parent_group instanceof Library) return
+		
+		for (let i = 0; i < this.parent_group.children.length; i++) {
+			let child = this.parent_group.children[i]
+			
+			if (child === this) {
+				if (i == this.parent_group.children.length - 1) return // Cannot move up any furthers
+				
+				// Swap with successor
+				let temp = this.parent_group.children[i+1]
+				this.parent_group.children[i+1] = this.parent_group.children[i]
+				this.parent_group.children[i] = temp
+				
+				this.parent_group.regenerate_HTML()
+				return
+			}
+		}
 	}
 	
 	// Disables this element and then unchecks the corresponding HTML.

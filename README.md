@@ -99,16 +99,19 @@ Explicit:
 ```
 [
 	{"question": "q1", "answer": "a1"},
-	{"question": "q2", "answer": ["a2", "a22"]"}
+	{"question": "q2", "answer": ["a2", "a22"]}
 ]
 ```
 
 Implicit:
-`{"q1": "a1", "q2": ["a2", "a22"]}
+`{"q1": "a1", "q2": ["a2", "a22"]}`
 
-Anywhere a list a QuestionGroups is expected, An object may be substituted. If it is, the key/value pairs of the object are interpreted as QuestionGroups or Questions.
+Mixed Explicit and Implicit:
+`{"q1": "a1", "q2": {"answer": ["a2", "a22"]}}`
 
-If possible, the keys will be interpreted as the QuestionGroup labels and the values as QuestionGroup children. If this is not possible, the keys will be interpreted as question statements and the values as answers or lists of answers. The system will deduce whether the children are Questions or QuestionGroups. These are referred to as explicit vs. implicit QuestionGroups and explicit vs. implicit Questions.
+By the same token, anywhere a list of QuestionGroup is expected, an object may be substituted. If it is, the key/value pairs of the object are interpreted as the QuestionGroup's children, with the system deducing whether they are QuestionGroups or Questions. Thus, an implicit QuestionGroup is interpreted as either a list of QuestionGroups or Questions.
+
+If possible, the keys will be interpreted as the QuestionGroup labels and the values as QuestionGroup children. If this is not possible, the object will be interpreted as a list of questions. The system will deduce whether the children are Questions or QuestionGroups. These are referred to as explicit vs. implicit QuestionGroups and explicit vs. implicit Questions.
 
 The following constructs all constitute equivalent lists containing a single QuestionGroup with one question:
 

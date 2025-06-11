@@ -47,26 +47,87 @@ When a question is shown in multiple choice mode, the generator to be used will
 
 Libraries are saved as plain JSON. The root node is a Library object.
 
-#### A Library has the following properties:
+### Library
+
+The Library object is the root JSON object. It has the following properties:
+
 - `version`: Should always be `1`.
 - `adaptation-rate` (optional; default 0.15): The amount that the mastery level of a question changes to reflect recent answers to a given question. A higher value makes the mastery level more responsive to user progress, but reduces its accuracy as a measure of user comprehension. Ranges from 0 to 1. Note that the mastery level is used to control windowing.
 - `starting-mastery` (optional; default 0.5): The starting mastery level of new questions which the user has not answered. Ranges from 0 - 1.
-- `adaptive-weight-bias` (optional; default 5): The degree to which unmastered questions are preferred over mastered ones during random question generation with adaptivity enabled. Ranges from 1 to infinity, with 1 being equivalent to having no adaptivity at all. Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.
+- `adaptive-weight-bias` (optional; default 4.5): The degree to which unmastered questions are preferred over mastered ones during random question generation with adaptivity enabled. Ranges from 1 to infinity, with 1 being equivalent to having no adaptivity at all. Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.
 - `ideal-overall-difficulty` (optional; default 0.3): The difficulty that the system will attempt to keep the quiz at, ranges from 0 to 1. The value is the fraction of the time that the user should answer incorrectly. If the system estimates that the user will answer correctly too often, it will add additional questions to the question window to increase difficulty. At 0, the system will never add questions to the window because the quiz will never be easy enough to satisfy the system. Note that switching from adaptive to uniform quesiton generation reduces the probability of difficult questions being chosen and therefore causes the difficulty to drop significantly. As a result, the system might decide to add many questions to the window at once. Questions will not be removed from the window unless the user clicks "reset progress".
 - `question-root`: The root QuestionGroup object. This is the root of a tree whose leaves are Question objects. The tree forms the hierarchy which facilitates the efficient grouping of questions. When presented to the user, the groups whose children are not leaf nodes will appear as expandable/collapsible nodes. If one is selected, all of its children will automatically be enabled as well.
 - `progress-root` (optional): The root QuestionGroupProgress object. This tree stores variables which track the user's mastery over individual questions. Its structure must precisely match the structure of the tree rooted at `question-root`.
 
-#### A QuestionGroup has the following properties:
+### QuestionGroup
+
+A QuestionGroup object represents either a collection of questions OR of other QuestionGroups.
+
+A QuestionGroup has the following properties:
 
 - `label`: The name of this group which will be visible to users.
 - `questions` OR `groups` (never both): The children of this QuestionGroup, either a list of Question objects or QuestionnGroup objects. The two may not be mixed together.
 - `incorrect-answer-source` (optional): An IncorrectAnswerGenerator object which allows the generation of the incorrect choices in multiple-choice mode. Most often it uses the `other-question` source to retrieve the wrong answers from other questions descending from the group which has the generator. If a question and it's parent do not have a generator, it's parent's parent is checked, and so on potentiaally all the way to the root node. If the root is not assigned an IncorrectAnswerGenerator, it is default-assigned a generator with only the `other-question` source.
 
-#### A Question has the following properties:
+### A Question has the following properties:
 
-- `question`: A list of questions. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
-- `answer`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled.
+- `question`: A list of question statetments which the user can see. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
+- `answer`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
 - `case-sensitive` (optional; default `false`): Whether a response with the same text but wrong letter casing counts as correct.
+
+### Question & QuestionGroup Substitution
+
+A list of Question objects can be replaced with an object. The keys are interpreted  as question statements and the values as an answer or array of answers if the value is an array. Such a construct is called an implicit Quesiton. If the value is an object, it is interpreted as a question object, and if the `question` key is provided in that object, the provided questions are appended to the key to form the question list.
+
+**The following constructs all constitute equivalent definitions of a list containing a single question:**
+
+Explicit within array, with string answer:
+`[{"question": "q", "answer": "a"}]`
+
+Explicit within array, with array of one answer:
+`[{"question": "q", "answer": ["a"]}]`
+
+Implicit with string answer:
+`{"q": "a"}`
+
+Implicit with array of one answer:
+`{"q": ["a"]}`
+
+**The following constructs all constitute equivalent definitions of a list containing two questions:**
+
+Explicit:
+```
+[
+	{"question": "q1", "answer": "a1"},
+	{"question": "q2", "answer": ["a2", "a22"]"}
+]
+```
+
+Implicit:
+`{"q1": "a1", "q2": ["a2", "a22"]}
+
+Anywhere a list a QuestionGroups is expected, An object may be substituted. If it is, the key/value pairs of the object are interpreted as QuestionGroups or Questions.
+
+If possible, the keys will be interpreted as the QuestionGroup labels and the values as QuestionGroup children. If this is not possible, the keys will be interpreted as question statements and the values as answers or lists of answers. The system will deduce whether the children are Questions or QuestionGroups. These are referred to as explicit vs. implicit QuestionGroups and explicit vs. implicit Questions.
+
+The following constructs all constitute equivalent lists containing a single QuestionGroup with one question:
+
+Explicit QuestionGroup containing explicit Question: 
+`[{"label": "group-name", "questions": [{"question": "q", "answer": "a"}]}]`
+
+Explicit QuestionGroup containing implicit Question:
+`[{"label": "group-name", "questions": {"q": "a"}}]`
+
+Implicit QuestionGroup containing explicit Question:
+`{"group-name": [{"question": "q", "answer": "a"}]}`
+
+Implicit QuestionGroup containing Implicit Question:
+`{"group-name": {"q": "a"}}`
+
+Same as above but with an array of length one. Additional answers can be added to the array.
+`{"group-name": {"q": ["a"]}}`
+
+Unless generators or properties must be assigned to Questions and QuestionGroups, implicit mode is 
 
 #### A QuestionGroupProgress has the following properties:
 

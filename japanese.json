@@ -1,181 +1,190 @@
 {
-	"Hiragana": {
-		"Basic Hiragana": {
-			"あ": "a",  "い": "i",  "う":  "u",   "え": "e",  "お": "o",
-			"か": "ka", "き": "ki", "く":  "ku",  "け": "ke", "こ": "ko",
-			"さ": "sa", "し": "shi", "す": "su",  "せ": "se", "そ": "so",
-			"た": "ta", "ち": "chi", "つ": "tsu", "て": "te", "と": "to",
-			"な": "na", "に": "ni", "ぬ": "nu",  "ね": "ne", "の": "no",
-			"は": "ha", "ひ": "hi", "ふ": "fu",  "へ": "he", "ほ": "ho",
-			"ま": "ma", "み": "mi", "む": "mu",  "め": "me", "も": "mo",
-			"や": "ya",            "ゆ": "yu",              "よ": "yo",
-			"ら": "ra", "り": "ri", "る": "ru",  "れ": "re", "ろ": "ro",
-			"わ": "wa", "ゐ": "wi",             "ゑ": "we", "を": "wo",
-			"ん": "n"
-		},
-		
-		"Hiragana with Diacritics": {
-			"が": "ga", "ぎ": "gi", "ぐ": "gu", "げ": "ge", "ご": "go",
-			"ざ": "za", "じ": "ji", "ず": "zu", "ぜ": "ze", "ぞ": "zo",
-			"だ": "da", "ぢ": "ji", "づ": "du", "で": "de", "ど": "do",
-			"ば": "ba", "び": "bi", "ぶ": "bu", "べ": "be", "ぼ": "bo",
-			"ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po"
-		},
-		
-		"Hiragana Digrams": {
-			"きゃ": "kya", "きゅ": "kyu", "きょ": "kyo",
-			"しゃ": "sha", "しゅ": "shu", "しょ": "sho",
-			"ちゃ": "cha", "ちゅ": "chu", "ちょ": "cho",
-			"にゃ": "nya", "にゅ": "nyu", "にょ": "nyo",
-			"ひゃ": "hya", "ひゅ": "hyu", "ひょ": "hyo",
-			"みゃ": "mya", "みゅ": "myu", "みょ": "myo",
-			"りゃ": "rya", "りゅ": "ryu", "りょ": "ryo"
-		},
-		
-		"Hiragana Digrams with Diacritics": {
-			"ぎゃ": "gya", "ぎゅ": "gyu", "ぎょ": "gyo",
-			"じゃ": "ja",  "じゅ": "ju",  "じょ": "jo",
-			"びゃ": "bya", "びゅ": "byu", "びょ": "byo",
-			"ぴゃ": "pya", "ぴゅ": "pyu", "ぴょ": "pyo"
-		},
-		
-		"Alternate Forms of ja/ju/jo": {
-			"ぢゃ": "ja", "ぢゅ": "ju", "ぢょ": "jo"
-		}
-	},
+	"version": 1,
 	
-	"Katakana": {
-		"Basic Katakana": {
-			"ア": "a",  "イ": "i",   "ウ": "u",   "エ": "e",  "オ": "o",
-			"カ": "ka", "キ": "ki",  "ク": "ku",  "ケ": "ke", "コ": "ko",
-			"サ": "sa", "シ": "shi", "ス": "su",  "セ": "se", "ソ": "so",
-			"タ": "ta", "チ": "chi", "ツ": "tsu", "テ": "te", "ト": "to",
-			"ナ": "na", "ニ": "ni",  "ヌ": "nu",  "ネ": "ne", "ノ": "no",
-			"ハ": "ha", "ヒ": "hi",  "フ": "fu",  "ヘ": "he", "ホ": "ho",
-			"マ": "ma", "ミ": "mi",  "ム": "mu",  "メ": "me", "モ": "mo",
-			"ヤ": "ya",             "ユ": "yu",             "ヨ": "yo",
-			"ラ": "ra", "リ": "ri",  "ル": "ru",  "レ": "re", "ロ": "ro",
-			"ワ": "wa", "ヰ": "wi",              "ヱ": "we", "ヲ": "wo",
-			"ン": "n"
-		},
-		
-		"Katakana with Diacritics": {
-			"ガ": "ga", "ギ": "gi", "グ": "gu", "ゲ": "ge", "ゴ": "go",
-			"ザ": "za", "ジ": "ji", "ズ": "zu", "ゼ": "ze", "ゾ": "zo",
-			"ダ": "da", "ヂ": "di", "ヅ": "du", "デ": "de", "ド": "do",
-			"バ": "ba", "ビ": "bi", "ブ": "bu", "ベ": "be", "ボ": "bo",
-			"パ": "pa", "ピ": "pi", "プ": "pu", "ペ": "pe", "ポ": "po"
-		},
-		
-		"Katakana Digrams": {
-			"キャ": "kya", "キュ": "kyu", "キョ": "kyo",
-			"シャ": "sha", "シュ": "shu", "ショ": "sho",
-			"チャ": "cha", "チュ": "chu", "チョ": "cho",
-			"ニャ": "nya", "ニュ": "nyu", "ニョ": "nyo",
-			"ヒャ": "hya", "ヒュ": "hyu", "ヒョ": "hyo",
-			"ミャ": "mya", "ミュ": "myu", "ミョ": "myo",
-			"リャ": "rya", "リュ": "ryu", "リョ": "ryo"
-		},
-		
-		"Katakana Digrams with Diacritics": {
-			"ギャ": "gya", "ギュ": "gyu", "ギョ": "gyo",
-			"ジャ": "ja",  "ジュ": "ju",  "ジョ": "jo",
-			"ビャ": "bya", "ビュ": "byu", "ビョ": "byo",
-			"ピャ": "pya", "ピュ": "pyu", "ピョ": "pyo"
-		},
-		
-		"Alternate Forms of ja/ju/jo": {
-			"チャ": "ja", "チュ": "ju", "チョ": "jo",
-		}
-	},
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 4.5,
+	"ideal-overall-difficulty": 0.3,
 	
-	"Polite Words and Phrases": {
-		"こんにちは": "hello",
-		"おはよう": "good morning",
-		"こんばんは": "good evening",
-		"おやすみ": ["good night (informal)", "good night"],
-		"おやすみなさい": ["good night (formal)", "good night"],
-		"ありがとう": ["thank you (informal)", "thank you"],
-		"ありがとうございます": ["thank you (formal)", "thank you"]
-	},
-	
-	"Nouns (Kana)": {
-		"Numbers": {
-			"0 - 9": {
-				"Common Forms": {
-					"ぜろ": ["zero", "0"],
-					"いち": ["one", "1"],
-					"に": ["two", "2"],
-					"さん": ["three", "3"],
-					"よん": ["four", "4"],
-					"ご": ["five", "5"],
-					"ろく": ["six", "6"],
-					"なな": ["seven", "7"],
-					"はち": ["eight", "8"],
-					"きゅう": ["nine", "9"]
-				},
-				
-				"Alternate Forms of 0/4/7/9": {
-					"れい": ["zero", "0"],
-					"し": ["four", "4"],
-					"よ": ["four", "4"],
-					"しち": ["seven", "7"],
-					"く": ["nine", "9"]
-				}
+	"question-root": {
+		"Hiragana": {
+			"Basic Hiragana": {
+				"あ": "a",  "い": "i",  "う":  "u",   "え": "e",  "お": "o",
+				"か": "ka", "き": "ki", "く":  "ku",  "け": "ke", "こ": "ko",
+				"さ": "sa", "し": "shi", "す": "su",  "せ": "se", "そ": "so",
+				"た": "ta", "ち": "chi", "つ": "tsu", "て": "te", "と": "to",
+				"な": "na", "に": "ni", "ぬ": "nu",  "ね": "ne", "の": "no",
+				"は": "ha", "ひ": "hi", "ふ": "fu",  "へ": "he", "ほ": "ho",
+				"ま": "ma", "み": "mi", "む": "mu",  "め": "me", "も": "mo",
+				"や": "ya",            "ゆ": "yu",              "よ": "yo",
+				"ら": "ra", "り": "ri", "る": "ru",  "れ": "re", "ろ": "ro",
+				"わ": "wa", "ゐ": "wi",             "ゑ": "we", "を": "wo",
+				"ん": "n"
 			},
 			
-			"10, 100, 1000, 10000": {
-				"じゅう": "10",
-				"ひゃく": "100",
-				"せん": "1000",
-				"いちまん": "10000"
+			"Hiragana with Diacritics": {
+				"が": "ga", "ぎ": "gi", "ぐ": "gu", "げ": "ge", "ご": "go",
+				"ざ": "za", "じ": "ji", "ず": "zu", "ぜ": "ze", "ぞ": "zo",
+				"だ": "da", "ぢ": "ji", "づ": "du", "で": "de", "ど": "do",
+				"ば": "ba", "び": "bi", "ぶ": "bu", "べ": "be", "ぼ": "bo",
+				"ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po"
+			},
+			
+			"Hiragana Digrams": {
+				"きゃ": "kya", "きゅ": "kyu", "きょ": "kyo",
+				"しゃ": "sha", "しゅ": "shu", "しょ": "sho",
+				"ちゃ": "cha", "ちゅ": "chu", "ちょ": "cho",
+				"にゃ": "nya", "にゅ": "nyu", "にょ": "nyo",
+				"ひゃ": "hya", "ひゅ": "hyu", "ひょ": "hyo",
+				"みゃ": "mya", "みゅ": "myu", "みょ": "myo",
+				"りゃ": "rya", "りゅ": "ryu", "りょ": "ryo"
+			},
+			
+			"Hiragana Digrams with Diacritics": {
+				"ぎゃ": "gya", "ぎゅ": "gyu", "ぎょ": "gyo",
+				"じゃ": "ja",  "じゅ": "ju",  "じょ": "jo",
+				"びゃ": "bya", "びゅ": "byu", "びょ": "byo",
+				"ぴゃ": "pya", "ぴゅ": "pyu", "ぴょ": "pyo"
+			},
+			
+			"Alternate Forms of ja/ju/jo": {
+				"ぢゃ": "ja", "ぢゅ": "ju", "ぢょ": "jo"
 			}
 		},
 		
-		"School Vocabulary": {
-			"だいがく": ["college", "university"],
-			"こうこう": "high school",
-			"がくせい": "student",
-			"こうこうせい": "high school student",
-			"だいがくせい": "college student",
-			"だいがくいんせい": "graduate student",
-			"りゅうがくせい": "international student",
-			"せんこう": "major",
+		"Katakana": {
+			"Basic Katakana": {
+				"ア": "a",  "イ": "i",   "ウ": "u",   "エ": "e",  "オ": "o",
+				"カ": "ka", "キ": "ki",  "ク": "ku",  "ケ": "ke", "コ": "ko",
+				"サ": "sa", "シ": "shi", "ス": "su",  "セ": "se", "ソ": "so",
+				"タ": "ta", "チ": "chi", "ツ": "tsu", "テ": "te", "ト": "to",
+				"ナ": "na", "ニ": "ni",  "ヌ": "nu",  "ネ": "ne", "ノ": "no",
+				"ハ": "ha", "ヒ": "hi",  "フ": "fu",  "ヘ": "he", "ホ": "ho",
+				"マ": "ma", "ミ": "mi",  "ム": "mu",  "メ": "me", "モ": "mo",
+				"ヤ": "ya",             "ユ": "yu",             "ヨ": "yo",
+				"ラ": "ra", "リ": "ri",  "ル": "ru",  "レ": "re", "ロ": "ro",
+				"ワ": "wa", "ヰ": "wi",              "ヱ": "we", "ヲ": "wo",
+				"ン": "n"
+			},
+			
+			"Katakana with Diacritics": {
+				"ガ": "ga", "ギ": "gi", "グ": "gu", "ゲ": "ge", "ゴ": "go",
+				"ザ": "za", "ジ": "ji", "ズ": "zu", "ゼ": "ze", "ゾ": "zo",
+				"ダ": "da", "ヂ": "di", "ヅ": "du", "デ": "de", "ド": "do",
+				"バ": "ba", "ビ": "bi", "ブ": "bu", "ベ": "be", "ボ": "bo",
+				"パ": "pa", "ピ": "pi", "プ": "pu", "ペ": "pe", "ポ": "po"
+			},
+			
+			"Katakana Digrams": {
+				"キャ": "kya", "キュ": "kyu", "キョ": "kyo",
+				"シャ": "sha", "シュ": "shu", "ショ": "sho",
+				"チャ": "cha", "チュ": "chu", "チョ": "cho",
+				"ニャ": "nya", "ニュ": "nyu", "ニョ": "nyo",
+				"ヒャ": "hya", "ヒュ": "hyu", "ヒョ": "hyo",
+				"ミャ": "mya", "ミュ": "myu", "ミョ": "myo",
+				"リャ": "rya", "リュ": "ryu", "リョ": "ryo"
+			},
+			
+			"Katakana Digrams with Diacritics": {
+				"ギャ": "gya", "ギュ": "gyu", "ギョ": "gyo",
+				"ジャ": "ja",  "ジュ": "ju",  "ジョ": "jo",
+				"ビャ": "bya", "ビュ": "byu", "ビョ": "byo",
+				"ピャ": "pya", "ピュ": "pyu", "ピョ": "pyo"
+			},
+			
+			"Alternate Forms of ja/ju/jo": {
+				"チャ": "ja", "チュ": "ju", "チョ": "jo",
+			}
 		},
 		
-		"Majors": {
-			"コンピューター": "computer",
-			"せいぶつがく": "biology",
-			"こうがく": "engineering",
-			"けいざい": "economics",
-			"ビジネス": "business",
-			"せいぢ": "politics",
-			"ぶんがく": "literature",
-			"れきし": "history",
-			"アジアけんきゅ": "asian studies",
+		"Polite Words and Phrases": {
+			"こんにちは": "hello",
+			"おはよう": "good morning",
+			"こんばんは": "good evening",
+			"おやすみ": ["good night (informal)", "good night"],
+			"おやすみなさい": ["good night (formal)", "good night"],
+			"ありがとう": ["thank you (informal)", "thank you"],
+			"ありがとうございます": ["thank you (formal)", "thank you"]
 		},
 		
-		"Countries": {
-			"にほん": "japan",
-			"かんこく": "korea",
-			"ちゅうごく": "china",
-			"アメリカ": ["america", "usa"],
-			"メキシコ": "mexico",
-			"イギリス": ["england", "britain"],
-			"ロシア": "russia",
-			"インドネシア": "indonesia",
-			"インド": "india",
-			"フイリピン": "philippines",
-			"カナダ": "canada",
-			"エジプト": "egypt",
-			"オーストラリア": "australia",
-		},
-		
-		"Jobs": {
-			"いしゃ": "doctor",
-			"かいしゃいん": "office worker",
-			"かんごし": "nurse",
-			"べんごし": "lawyer",
+		"Nouns (Kana)": {
+			"Numbers": {
+				"0 - 9": {
+					"Common Forms": {
+						"ぜろ": ["zero", "0"],
+						"いち": ["one", "1"],
+						"に": ["two", "2"],
+						"さん": ["three", "3"],
+						"よん": ["four", "4"],
+						"ご": ["five", "5"],
+						"ろく": ["six", "6"],
+						"なな": ["seven", "7"],
+						"はち": ["eight", "8"],
+						"きゅう": ["nine", "9"]
+					},
+					
+					"Alternate Forms of 0/4/7/9": {
+						"れい": ["zero", "0"],
+						"し": ["four", "4"],
+						"よ": ["four", "4"],
+						"しち": ["seven", "7"],
+						"く": ["nine", "9"]
+					}
+				},
+				
+				"10, 100, 1000, 10000": {
+					"じゅう": "10",
+					"ひゃく": "100",
+					"せん": "1000",
+					"いちまん": "10000"
+				}
+			},
+			
+			"School Vocabulary": {
+				"だいがく": ["college", "university"],
+				"こうこう": "high school",
+				"がくせい": "student",
+				"こうこうせい": "high school student",
+				"だいがくせい": "college student",
+				"だいがくいんせい": "graduate student",
+				"りゅうがくせい": "international student",
+				"せんこう": "major",
+			},
+			
+			"Majors": {
+				"コンピューター": "computer",
+				"せいぶつがく": "biology",
+				"こうがく": "engineering",
+				"けいざい": "economics",
+				"ビジネス": "business",
+				"せいぢ": "politics",
+				"ぶんがく": "literature",
+				"れきし": "history",
+				"アジアけんきゅ": "asian studies",
+			},
+			
+			"Countries": {
+				"にほん": "japan",
+				"かんこく": "korea",
+				"ちゅうごく": "china",
+				"アメリカ": ["america", "usa"],
+				"メキシコ": "mexico",
+				"イギリス": ["england", "britain"],
+				"ロシア": "russia",
+				"インドネシア": "indonesia",
+				"インド": "india",
+				"フイリピン": "philippines",
+				"カナダ": "canada",
+				"エジプト": "egypt",
+				"オーストラリア": "australia",
+			},
+			
+			"Jobs": {
+				"いしゃ": "doctor",
+				"かいしゃいん": "office worker",
+				"かんごし": "nurse",
+				"べんごし": "lawyer",
+			}
 		}
 	}
 }

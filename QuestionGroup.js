@@ -409,19 +409,21 @@ class QuestionGroup {
 			edit_node.question_group = this
 			edit_node.addEventListener("click", () => this.generate_properties_html(editing_pane))
 			
-			var move_up_node = document.createElement("button")
-			move_up_node.setAttribute("type", "button")
-			move_up_node.setAttribute("class", "collapsible_edit")
-			move_up_node.innerHTML = "move up"
-			move_up_node.question_group = this
-			move_up_node.addEventListener("click", () => this.move_up())
-			
-			var move_down_node = document.createElement("button")
-			move_down_node.setAttribute("type", "button")
-			move_down_node.setAttribute("class", "collapsible_edit")
-			move_down_node.innerHTML = "move down"
-			move_down_node.question_group = this
-			move_down_node.addEventListener("click", () => this.move_down())
+			if (!(this.parent_group instanceof Library)) {
+				var move_up_node = document.createElement("button")
+				move_up_node.setAttribute("type", "button")
+				move_up_node.setAttribute("class", "collapsible_edit")
+				move_up_node.innerHTML = "move up"
+				move_up_node.question_group = this
+				move_up_node.addEventListener("click", () => this.move_up())
+				
+				var move_down_node = document.createElement("button")
+				move_down_node.setAttribute("type", "button")
+				move_down_node.setAttribute("class", "collapsible_edit")
+				move_down_node.innerHTML = "move down"
+				move_down_node.question_group = this
+				move_down_node.addEventListener("click", () => this.move_down())
+			}
 		}
 			
 		if (this.children_are_groups) { this.expand_elem = header.appendChild(expand_node) }
@@ -429,8 +431,10 @@ class QuestionGroup {
 		header.appendChild(text_node)
 		if (editing_pane) {
 			header.appendChild(edit_node)
-			header.appendChild(move_up_node)
-			header.appendChild(move_down_node)
+			if (!(this.parent_group instanceof Library)) {
+				header.appendChild(move_up_node)
+				header.appendChild(move_down_node)
+			}
 		}
 		
 		this.html_header_root = doc_parent.appendChild(header)
@@ -442,8 +446,6 @@ class QuestionGroup {
 	regenerate_HTML() {
 		if (!this.html_container) throw new Error("Cannot regenerate HTML if it has not yet already been generated!")
 		console.log("Regenerating HTML for '" + this.get_ancestors_as_string() + "' and all children.")
-		
-		//this.html_edit_container.replaceChildren()
 		
 		// Save references to current elements which will be overwritten by generate_HTML
 		let old_content = this.html_content_root

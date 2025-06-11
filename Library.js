@@ -57,13 +57,23 @@ class Library {
 		import_file_selector.style.display = "none"
 		import_file_selector.addEventListener("change", import_event)
 		
-		let import_button = document.createElement("input")
-		import_button.setAttribute("type", "button")
-		import_button.value = "Import"
+		let import_button = document.createElement("button")
+		import_button.setAttribute("class", "library-header-control")
+		import_button.textContent = "Import"
 		import_button.addEventListener("click", () => import_file_selector.click())
+		
+		if (this.root_q) {
+			var export_button = document.createElement("button")
+			export_button.setAttribute("class", "library-header-control")
+			export_button.textContent = "Export"
+		}
 		
 		library_header.appendChild(import_button)
 		library_header.appendChild(import_file_selector)
+		
+		if (this.root_q) {
+			library_header.appendChild(export_button)
+		}
 		
 		doc_parent.appendChild(library_header)
 		if (this.root_q) { this.root_q.generate_HTML(doc_parent, editing_pane) }

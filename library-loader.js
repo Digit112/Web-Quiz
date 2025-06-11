@@ -10,6 +10,7 @@ const shuffle_expl = "Questions will become available in a random order."
 const no_shuffle_expl = "Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately."
 
 // Get elements and add event listeners
+let editing_pane = document.getElementById("editing-pane")
 let gen_explanation = document.getElementById("gen_explanation")
 let random_gen = document.getElementById("random_gen")
 let adapt_gen = document.getElementById("adapt_gen")
@@ -32,7 +33,7 @@ let your_response = document.getElementById("your_response")
 let correct_answer = document.getElementById("correct_answer")
 
 var my_library = new Library()
-my_library.generate_HTML( document.getElementById("collapsibles_root"), true)
+my_library.generate_HTML( document.getElementById("collapsibles_root"), editing_pane )
 
 let last_active_question = null
 let active_question = null

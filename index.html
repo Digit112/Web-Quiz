@@ -15,24 +15,29 @@
 			</span>
 			<h1><i>Web Quiz</i></h1>
 			<hr> <!-- Begin Options -->
-			
-			<h2><i>Library Options</i></h2>
-			<p>Select from the questions below. All changes will take effect immediately. The quiz tracks your progress and can be enabled to adapt as you go. Tracked progress can be reset by clicking "Reset Progress". Click "Next Question" when you are ready to begin.</p>
-			
-			<div id="collapsibles_root"></div>
-			
-			<input id="random_gen" type="radio" name="generation"><text>Random</text>
-			<input id="adapt_gen" type="radio" name="generation", checked="true"><text>Adaptive</text>
-			<input id="quiz_gen" type="radio" name="generation"><text>Quiz</text>
-			<p id="gen_explanation" style="margin-top: 2px">Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row.</p>
-			
-			<input id="use_window" type="checkbox", checked="true"><text>Use Question Window</text>
-			<p id="window_explanation" style="margin-top: 2px">A small number of questions will be available to begin. As you master old questions, the pool of questions will increase in size.</p>
-			
-			<input id="do_shuffle" type="checkbox"><text>Shuffle Questions</text>
-			<p id="shuffle_explanation" style="margin-top: 2px">Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately.</p>
-			
-			<button id="reset_progress" type="button">Reset Progress</button>
+			<div class="library-options">
+				<div>
+					<h2><i>Library Options</i></h2>
+					<p>Select from the questions below. All changes will take effect immediately. The quiz tracks your progress and can be enabled to adapt as you go. Tracked progress can be reset by clicking "Reset Progress". Click "Next Question" when you are ready to begin.</p>
+					
+					<div id="collapsibles_root"></div>
+					
+					<input id="random_gen" type="radio" name="generation"><text>Random</text>
+					<input id="adapt_gen" type="radio" name="generation", checked="true"><text>Adaptive</text>
+					<input id="quiz_gen" type="radio" name="generation"><text>Quiz</text>
+					<p id="gen_explanation" style="margin-top: 2px">Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row.</p>
+					
+					<input id="use_window" type="checkbox", checked="true"><text>Use Question Window</text>
+					<p id="window_explanation" style="margin-top: 2px">A small number of questions will be available to begin. As you master old questions, the pool of questions will increase in size.</p>
+					
+					<input id="do_shuffle" type="checkbox"><text>Shuffle Questions</text>
+					<p id="shuffle_explanation" style="margin-top: 2px">Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately.</p>
+					
+					<button id="reset_progress" type="button">Reset Progress</button>
+				</div>
+				<div id="editing-pane">
+				</div>
+			</div>
 			
 			<hr> <!-- Begin Question Area -->
 			

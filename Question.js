@@ -131,6 +131,9 @@ class Question {
 		return this
 	}
 	
+	// Called by the parent QuestionGroup while recursively resetting expansion on many groups.
+	reset_expansion() {}
+	
 	// Called by parent QuestionGroup while it is attempting to enable itself.
 	enable_and_check() {}
 	

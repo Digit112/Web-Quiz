@@ -1,7 +1,7 @@
 // Explanations for the available settings.
 const random_gen_expl = "Every question has an equal chance of being picked. The same question cannot appear twice in a row."
-const adapt_gen_explanation_expl = "Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row."
-const quiz_gen_explanation_expl = "All questions will be presented to you one at a time. When all questions have been exhausted, the process repeats. If shuffle questions is not checked, the questions will be presented in a predefined order."
+const adapt_gen_expl = "Questions that you frequently answer incorrectly will appear more often. The same question cannot appear twice in a row."
+const quiz_gen_expl = "All questions will be presented to you one at a time. When all questions have been exhausted, the process repeats. If shuffle questions is not checked, the questions will be presented in a predefined order."
 
 const windowing_expl = "A small number of questions will be available to begin. As you master old questions, the pool of questions will increase in size. Makes no difference in quiz mode."
 const no_windowing_expl = "All questions will be available immediately."
@@ -9,7 +9,7 @@ const no_windowing_expl = "All questions will be available immediately."
 const shuffle_expl = "Questions will become available in a random order."
 const no_shuffle_expl = "Questions will become available in a predefined order. Only works if the question window is enabled, otherwise all questions become available immediately."
 
-// Add Event Listeners to question generation options
+// Get elements and add event listeners
 let gen_explanation = document.getElementById("gen_explanation")
 let random_gen = document.getElementById("random_gen")
 let adapt_gen = document.getElementById("adapt_gen")
@@ -30,6 +30,15 @@ let correct_indicator = document.getElementById("correct_indicator")
 let last_question = document.getElementById("last_question")
 let your_response = document.getElementById("your_response")
 let correct_answer = document.getElementById("correct_answer")
+
+var my_library = new Library()
+my_library.generate_HTML( document.getElementById("collapsibles_root"), true)
+
+let last_active_question = null
+let active_question = null
+
+// Number of correctly answered questions since the last quiz cycle.
+let quiz_score = 0
 
 random_gen.addEventListener("input", function() {
 	gen_explanation.innerHTML = random_gen_expl
@@ -79,17 +88,6 @@ answer_text.addEventListener("keydown", function(event) {
 		generate_next_question()
 	}
 })
-
-my_library = new Library(
-
-// Generate collapsibles HTML
-my_library.root_q.generate_HTML( document.getElementById("collapsibles_root") )
-
-let last_active_question = null
-let active_question = null
-
-// Number of correctly answered questions since the last quiz cycle.
-let quiz_score = 0
 
 // Generate a new question.
 function generate_next_question() {
@@ -158,9 +156,9 @@ function generate_next_question() {
 		// Outside of quiz mode, consider expanding the window. This is done by activating questions until the preferred difficulty is reached.
 		// This is done even if windowing is not enabled. If it gets enabled down the line, then the questions should be appropriate.
 		for (let i = 0; i < 20; i++) {
-			let new_question_weight = get_new_question_weight(am_adaptive)
+			let new_question_weight = my_library.get_new_question_weight(am_adaptive)
 			let new_question_probability = new_question_weight / (new_question_weight + my_library.root_q.get_weight(am_adaptive, am_windowed))
-			let new_question_difficulty = 1 - STARTING_MASTERY
+			let new_question_difficulty = 1 - my_library.STARTING_MASTERY
 			
 			// Calculate what the difficulty would be if we added a new question.
 			let theoretical_difficulty = my_library.root_q.difficulty * (1 - new_question_probability) + new_question_difficulty * new_question_probability
@@ -168,12 +166,12 @@ function generate_next_question() {
 			console.log("New question's probability of being chosen: " + (new_question_probability * 100) + "%")
 			console.log("Current Difficulty: " + my_library.root_q.difficulty + ", Theoretical Difficulty: " + theoretical_difficulty)
 			
-			let difficulty_offset = Math.abs(IDEAL_OVERALL_DIFFICULTY - my_library.root_q.difficulty)
-			let theoretical_difficulty_offset = Math.abs(IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
+			let difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - my_library.root_q.difficulty)
+			let theoretical_difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
 			if (theoretical_difficulty > my_library.root_q.difficulty && theoretical_difficulty_offset < difficulty_offset) {
-				if (i == 19) console.log("WARNING: Added 20 questions to the window at once. This is probably a bug.")
+				if (i == 19) console.log("WARNING: Added 20 questions to the window at once. This may be a bug.")
 				
 				let new_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
 				

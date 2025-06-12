@@ -31,6 +31,10 @@ class Library {
 		ADAPTIVE_WEIGHT_BIAS = 0.65,
 		IDEAL_OVERALL_DIFFICULTY = 0.3
 	) {
+		this.author = null
+		this.title = null
+		this.version = null
+		
 		this.root_q = null
 		this.ADAPTATION_RATE = 0.15
 		this.STARTING_MASTERY = 0.5
@@ -138,6 +142,13 @@ class Library {
 	// library_data should be the unmodified output of JSON.parse() called on a valid library object,
 	// such as that which would routinely be retrieved from a file or the library API.
 	initialize(library_data) {
+		this.version = library_data["version"]
+		if (this.version == null) throw new Error("While interpreting Library object; required parameter 'version' is missing.")
+		if (this.version != 1) throw new Error("While interpreting Library object; unsupported version '" + this.version + "'")
+		
+		this.author = library_data["author"]
+		this.title = library_data["title"]
+		
 		// A Desmos graph showing some of the variables and their nature:
 		// https://www.desmos.com/calculator/l9vuo1di6l
 
@@ -159,10 +170,12 @@ class Library {
 
 		// The number of consecutive incorrect answers to go from b to t is:
 		// (log(t) - log(b)) / log(1-ADAPTATION_RATE)
-		this.ADAPTATION_RATE = 0.15 //ADAPTATION_RATE
+		this.ADAPTATION_RATE = library_data["adaptation-rate"]
+		if (!this.ADAPTATION_RATE) this.ADAPTATION_RATE = 0.15
 
 		// The mastery level of a question which has not been answered.
-		this.STARTING_MASTERY = 0.5 //STARTING_MASTERY
+		this.STARTING_MASTERY = library_data["starting-mastery"]
+		if (!this.STARTING_MASTERY) this.STARTING_MASTERY = 0.5
 
 		// The "remainder" of a question is 1 minus the current mastery level.
 
@@ -170,16 +183,21 @@ class Library {
 		// An ADAPTIVE_WEIGHT_BIAS of 1 is the same as having adaptive mode off.
 		// As ADAPTIVE_WEIGHT_BIAS increases, mastered questions become increasingly rare.
 		// Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.
-		this.ADAPTIVE_WEIGHT_BIAS = 4 //ADAPTIVE_WEIGHT_BIAS
+		this.ADAPTIVE_WEIGHT_BIAS = library_data["adaptive-weight-bias"]
+		if (!this.ADAPTIVE_WEIGHT_BIAS) this.ADAPTIVE_WEIGHT_BIAS = 4
 
 		// The overall difficulty is the sum of the remainders of all available questions, each multiplied by their respective probability of being chosen.
 		// Since the remainder is an approximate likelihood that the user will answer a question incorrectly,
 		// overall difficulty is an approximate measure of the likelihood that the user will get the next question wrong (whatever it happens to be)
 		// The question windowing attempts to keep the overall difficulty approximately constant throughout the session.
 		// So, IDEAL_OVERALL_DIFFICULTY basically controls how challenging the questions are.
-		this.IDEAL_OVERALL_DIFFICULTY = 0.3 //IDEAL_OVERALL_DIFFICULTY
+		this.IDEAL_OVERALL_DIFFICULTY = library_data["adaptive-weight-bias"]
+		if (!this.IDEAL_OVERALL_DIFFICULTY) this.IDEAL_OVERALL_DIFFICULTY = 0.3
+		
+		let root_q_data = library_data["question-root"]
+		if (!root_q_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")
 		
 		this.root_q = new QuestionGroup("All Questions", this, true)
-		this.root_q.add_children_from_dict(library_data)
+		this.root_q.add_children_from_dict(root_q_data)
 	}
 }

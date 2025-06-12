@@ -2,7 +2,6 @@
 function collapsible_event() {
 	this.classList.toggle("active");
 	this.question_group.is_expanded = this.classList.contains("active")
-	console.log(this.question_group.is_expanded)
 	
 	let content = this.parentElement.nextElementSibling
 	if (!content) throw new Error ("This header has no associated content. Can't expand it!")
@@ -20,7 +19,6 @@ function collapsible_event() {
 
 // Event Listener for checkboxes that select questions.
 function check_event() {
-	console.log("Check Event on '" + this.question_group.label + "'")
 	this.question_group.is_enabled = this.checked
 	
 	if (this.checked) {
@@ -28,7 +26,6 @@ function check_event() {
 		this.did_recurse_last = false
 	}
 	else {
-		console.log("Unchecked...")
 		this.question_group.reset_all_descendents()
 		
 		if (this.question_group.get_enabled()) {

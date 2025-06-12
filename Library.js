@@ -37,13 +37,34 @@ class Library {
 		this.ADAPTIVE_WEIGHT_BIAS = 0.65
 		this.IDEAL_OVERALL_DIFFICULTY = 0.3
 		
+		// Used during HTML regeneration.
+		this.doc_parent = null
+		this.editing_pane = null
+		this.currently_editing = false
+		
 		if (library_data) { this.initialize(library_data) }
 	}
 	
 	// Produces HTML corresponding to this library, which allows the selction of question groups or,
 	// if "editing" is true, allows the modification of the underlying structure.
 	// Deletes all existing children of the passed elements before adding new content.
-	generate_HTML(doc_parent, editing_pane = null) {
+	// If an editing pane is supplied, and currently_editing is true, then editing options will be displayed.
+	// If currently_editing is false, however, the user will merely be shown a button that allows editing and the editing pane will be hidden until they click it.
+	// If editing_pane is null, currently_editing is ignored. A button to edit is not generated.
+	generate_HTML(doc_parent, editing_pane = null, currently_editing = false) {
+		// Delete HTML on existing elements if we are generating onto a new element.
+		if (this.doc_parent && this.doc_parent != doc_parent) {
+			this.doc_parent.replaceChildren()
+		}
+		if (this.editing_pane && this.editing_pane != editing_pane) {
+			this.editing_pane.replaceChildren()
+		}
+		
+		// Retain information necessary for regeneration.
+		this.doc_parent = doc_parent
+		this.editing_pane = editing_pane
+		this.currently_editing = currently_editing
+		
 		doc_parent.replaceChildren()
 		
 		let library_header = document.createElement("div")
@@ -66,6 +87,15 @@ class Library {
 			var export_button = document.createElement("button")
 			export_button.setAttribute("class", "library-header-control")
 			export_button.textContent = "Export"
+			
+			if (editing_pane) {
+				var editing_controls_toggle = document.createElement("button")
+				editing_controls_toggle.setAttribute("class", "library-header-control")
+				editing_controls_toggle.textContent = currently_editing ? "Disable Editing" : "Enable Editing"
+				editing_controls_toggle.addEventListener("click",
+					currently_editing ? () => this.remove_editing_controls() : () => {this.generate_editing_controls()}
+				)
+			}
 		}
 		
 		library_header.appendChild(import_button)
@@ -73,16 +103,35 @@ class Library {
 		
 		if (this.root_q) {
 			library_header.appendChild(export_button)
+			
+			if (editing_pane) {
+				library_header.appendChild(editing_controls_toggle)
+			}
 		}
-		
+			
 		doc_parent.appendChild(library_header)
-		if (this.root_q) { this.root_q.generate_HTML(doc_parent, editing_pane) }
+		if (this.root_q) { this.root_q.generate_HTML(doc_parent, editing_pane, currently_editing) }
+	}
+	
+	regenerate_HTML() {
+		if (!this.doc_parent) throw new Error("Cannot regenerate HTML, HTML has not yet been generated.")
+		this.generate_HTML(this.doc_parent, this.editing_pane, this.currently_editing)
+		this.root_q.reset_expansion()
+	}
+	
+	generate_editing_controls() {
+		this.currently_editing = true
+		this.regenerate_HTML()
+	}
+	
+	remove_editing_controls() {
+		this.currently_editing = false
+		this.regenerate_HTML()
 	}
 	
 	get_new_question_weight(am_adaptive) {
 		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
 	}
-	
 	
 	// Called from the constructor if an initialization object is provided.
 	// Otherwise, may be called manually after construction.

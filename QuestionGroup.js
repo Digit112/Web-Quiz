@@ -109,8 +109,9 @@ class QuestionGroup {
 		this.html_content_root = null
 		this.html_header_root = null
 		
-		// Used by regenerate_HTML() to avoid collapsing regenerated sections of HTML.
+		// Used by regenerate_HTML() to regenerate in the same state as usual.
 		this.is_expanded = false
+		this.currently_editing = false
 	}
 	
 	// Returns the library that this QuestionGroup ultimately descends from.
@@ -364,11 +365,12 @@ class QuestionGroup {
 	// Create HTML that represents this QuestionGroup so that users can interact with the objects.
 	// This function is recursive and only needs to be called once on the root.
 	// Generated HTML is automatically appended to the node that is passed.
-	// If editing_pane is not null, an option to edit the groups will be available and group properties will be added to the editing_pane element.
-	generate_HTML(doc_parent, editing_pane = null) {
+	// If editing_pane is not null, the user will be able to toggle editing with a button. If they toggle it on, editing controls will be added which retain references to the pane.
+	generate_HTML(doc_parent, editing_pane = null, currently_editing = false) {
 		// Save the container so that this group can regenerate its own HTML when changes occur.
 		this.html_container = doc_parent
 		this.html_edit_container = editing_pane
+		this.currently_editing = currently_editing
 		
 		// Build collapsible header.
 		let header = document.createElement("div")
@@ -396,12 +398,12 @@ class QuestionGroup {
 			expand_node.addEventListener("click", collapsible_event)
 			
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].generate_HTML(content, editing_pane)
+				this.children[i].generate_HTML(content, editing_pane, currently_editing)
 			}
 		}
 		
 		// Generate editing controls
-		if (editing_pane) {
+		if (editing_pane && currently_editing) {
 			var edit_node = document.createElement("button")
 			edit_node.setAttribute("type", "button")
 			edit_node.setAttribute("class", "collapsible_edit")
@@ -429,7 +431,7 @@ class QuestionGroup {
 		if (this.children_are_groups) { this.expand_elem = header.appendChild(expand_node) }
 		this.check_elem = header.appendChild(check_node)
 		header.appendChild(text_node)
-		if (editing_pane) {
+		if (editing_pane && currently_editing) {
 			header.appendChild(edit_node)
 			if (!(this.parent_group instanceof Library)) {
 				header.appendChild(move_up_node)
@@ -443,9 +445,11 @@ class QuestionGroup {
 	}
 	
 	// Regenerates the HTML representing this object.
-	regenerate_HTML() {
+	regenerate_HTML(currently_editing) {
 		if (!this.html_container) throw new Error("Cannot regenerate HTML if it has not yet already been generated!")
 		console.log("Regenerating HTML for '" + this.get_ancestors_as_string() + "' and all children.")
+	
+		this.currently_editing = currently_editing
 		
 		// Save references to current elements which will be overwritten by generate_HTML
 		let old_content = this.html_content_root
@@ -454,9 +458,8 @@ class QuestionGroup {
 		// Generate HTML onto a temporary element. Children are extracted and replace existing content/header roots.
 		// NOTE: This replaces this.html_content_root and html_header_root with new, presently invisible values.
 		let temporary_div = document.createElement("div")
-		this.generate_HTML(temporary_div, this.html_edit_container) // New references overwrite old ones.
+		this.generate_HTML(temporary_div, this.html_edit_container, currently_editing) // New references overwrite old ones.
 		
-		// Replace header and
 		old_header.replaceWith(this.html_header_root)
 		
 		// Replace OR delete content pane. Deletion might occur if regenerating after changing children from QuestionGroups to Questions.
@@ -468,6 +471,10 @@ class QuestionGroup {
 			else {
 				console.log("Removing...")
 				old_content.remove()
+			}
+		} else {
+			if (this.html_content_root) {
+				// TODO: Add content if changed from Question to QuestionGroup
 			}
 		}
 		this.reset_expansion()
@@ -510,7 +517,7 @@ class QuestionGroup {
 				this.parent_group.children[i-1] = this.parent_group.children[i]
 				this.parent_group.children[i] = temp
 				
-				this.parent_group.regenerate_HTML()
+				this.parent_group.regenerate_HTML(this.currently_editing)
 				return
 			}
 		}
@@ -524,14 +531,14 @@ class QuestionGroup {
 			let child = this.parent_group.children[i]
 			
 			if (child === this) {
-				if (i == this.parent_group.children.length - 1) return // Cannot move up any furthers
+				if (i == this.parent_group.children.length - 1) return // Cannot move down any furthers
 				
 				// Swap with successor
 				let temp = this.parent_group.children[i+1]
 				this.parent_group.children[i+1] = this.parent_group.children[i]
 				this.parent_group.children[i] = temp
 				
-				this.parent_group.regenerate_HTML()
+				this.parent_group.regenerate_HTML(this.currently_editing)
 				return
 			}
 		}

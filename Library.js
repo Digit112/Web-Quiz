@@ -194,10 +194,9 @@ class Library {
 		this.IDEAL_OVERALL_DIFFICULTY = library_data["adaptive-weight-bias"]
 		if (!this.IDEAL_OVERALL_DIFFICULTY) this.IDEAL_OVERALL_DIFFICULTY = 0.3
 		
-		let root_q_data = library_data["question-root"]
-		if (!root_q_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")
+		let root_qg_data = library_data["question-root"]
+		if (!root_qg_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")
 		
-		this.root_q = new QuestionGroup("All Questions", this, true)
-		this.root_q.add_children_from_dict(root_q_data)
+		this.root_q = new QuestionGroup(root_qg_data, this.title ? this.title : "All Questions", this)
 	}
 }

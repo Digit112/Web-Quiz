@@ -52,17 +52,28 @@ function check_event() {
 
 // Each question group either contains other QuestionGroups or Questions as children.
 class QuestionGroup {
-	constructor(label, parent_group, children_are_groups) {
+	constructor(qg_data, label, parent_group) {
 		if (!(parent_group instanceof QuestionGroup || parent_group instanceof Library)) {
 			throw new Error("A QuestionGroup must have a parent QuestionGroup or Library.")
 		}
 		
-		console.log("Constructing Group '" + label + "'")
+		if (!(qg_data instanceof Object) || Array.isArray(qg_data)) {
+			throw new Error("While interpreting '" + String(qg_data) + "' as Questiongroup; QuestionGroup must be non-Array object.")
+		}
+		
 		// The label for this group that the user will see.
-		this.label = label
+		if (label) {
+			this.label = label
+		}
+		else {
+			this.label = qg_data["label"]
+			if (!this.label) throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; required parameter 'label' is missing.")
+		}
+	
+		console.log("Constructing Group '" + this.label + "'")
 		
 		// Whether this is a collection of other QuestionGroups or of Questions.
-		this.children_are_groups = children_are_groups
+		this.children_are_groups = null
 		
 		// All children are either QuestionGroups (if children_are_groups is true)
 		// or Questions (if children_are_groups is false)
@@ -109,6 +120,18 @@ class QuestionGroup {
 		// Used by regenerate_HTML() to regenerate in the same state as usual.
 		this.is_expanded = false
 		this.currently_editing = false
+		
+		// Interpret data as a QuestionGroup
+		let children = qg_data["questions"]
+		
+		// Attempt to interpret as an explicit QuestionGroup.
+		if (qg_data["questions"]) {
+			if (!(qg_data["questions"] instanceof Object)) throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'questions' must be an array or object.")
+			this.children_are_groups = false
+		
+			
+			for (child of qg_data["questions"]) {
+				
 	}
 	
 	// Returns the library that this QuestionGroup ultimately descends from.
@@ -223,64 +246,76 @@ class QuestionGroup {
 		}
 	}
 	
-	// Adds questions from a dictionary.
-	// If a value is a string or array of strings, it is interpreted as a question-answer pair with one or more answers.
-	// If a value is an object, is is interpreted as a valid definition for a question_group.
-	add_children_from_dict(new_questions) {
-		// First, we leave the children_are_groups variable in flux until we begin to examine the children.
-		this.children_are_groups = null
+	// Adds questions in bulk.
+	// If passed am object, it is interpreted as a list of implicit questions in the form of key-value pairs.
+	// In that case, if the value is a string or array of strings, it is interpreted as the answer or set of answers, respectively.
+	// If the value is an object, it is interpreted as an explicit question object. Regardless, the key is interpreted as the primary question.
+	//
+	// If passed an array, it is interpreted as a list of explicit questions.
+	add_questions(new_questions) {
+		if (this.children_are_groups === true) throw new Error("Cannot add questions to this group. This group has only other groups as children.")
+		this.children_are_groups = false
 		
-		for (const key in new_questions) {
-			try {
-				var value = new_questions[key]
+		if (Array.isArray(new_questions)) {
+			// Interpret as list of question objects.
+			for (let question of new_questions) {
+				this.add_child(new Question(question))
 			}
-			catch (e) {
-				throw new Error("While attempting to enumerate the Questions or Question Groups to add to '" + this.get_ancestors_as_string() + "', failed to index an object. Each element must be a valid definition of either a Question or Question Group.")
-			}
-			
-			if (Array.isArray(value)) {
-				// Set children_are_groups exactly once.
-				if (this.children_are_groups == null) this.children_are_groups = false
-				
-				// If children_are_groups was previously set to "true", then there is an error.
-				if (this.children_are_groups === true) {
-					throw new Error("While adding question '" + key + "' to QuestionGroup '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+		}
+		else if (new_questions instanceof Object) {
+			// Interpret key/value pairs as implicit questions.
+			for (const key in new_questions) {
+				try {
+					var value = new_questions[key]
+				}
+				catch (e) {
+					throw new Error("While attempting to enumerate the Questions or Question Groups to add to '" + this.get_ancestors_as_string() + "', failed to index an object. Each element must be a valid Question definition")
 				}
 				
-				// Check that the array elements are all strings.
-				for (const answer in value) {
-					if (typeof answer != "string") {
-						throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', found an answer '" + answer + "' which is not a string. All answers must be strings.")
+				if (Array.isArray(value)) {
+					// Set children_are_groups exactly once.
+					if (this.children_are_groups == null) this.children_are_groups = false
+					
+					// If children_are_groups was previously set to "true", then there is an error.
+					if (this.children_are_groups === true) {
+						throw new Error("While adding question '" + key + "' to QuestionGroup '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
 					}
+					
+					// Check that the array elements are all strings.
+					for (const answer in value) {
+						if (typeof answer != "string") {
+							throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', found an answer '" + answer + "' which is not a string. All answers must be strings.")
+						}
+					}
+					
+					this.add_child(new Question(key, value, this))
 				}
-				
-				this.add_child(new Question(key, value, this))
-			}
-			else if (typeof value == "string") {
-				// Set children_are_groups exactly once.
-				if (this.children_are_groups == null) this.children_are_groups = false
-				
-				// If children_are_groups was previously set to "true", then there is an error.
-				if (this.children_are_groups === true) {
-					throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+				else if (typeof value == "string") {
+					// Set children_are_groups exactly once.
+					if (this.children_are_groups == null) this.children_are_groups = false
+					
+					// If children_are_groups was previously set to "true", then there is an error.
+					if (this.children_are_groups === true) {
+						throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+					}
+					
+					this.add_child(new Question(key, value, this))
 				}
-				
-				this.add_child(new Question(key, value, this))
-			}
-			else if (typeof value == "object") {
-				// Set children_are_groups exactly once.
-				if (this.children_are_groups == null) this.children_are_groups = true
-				
-				// If children_are_groups was previously set to "false", then there is an error.
-				if (this.children_are_groups === false) {
-					throw new Error("While adding Question Group '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+				else if (typeof value == "object") {
+					// Set children_are_groups exactly once.
+					if (this.children_are_groups == null) this.children_are_groups = true
+					
+					// If children_are_groups was previously set to "false", then there is an error.
+					if (this.children_are_groups === false) {
+						throw new Error("While adding Question Group '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
+					}
+					
+					const new_child = this.add_child(new QuestionGroup(key, this, true))
+					new_child.add_children_from_dict(value)
 				}
-				
-				const new_child = this.add_child(new QuestionGroup(key, this, true))
-				new_child.add_children_from_dict(value)
-			}
-			else {
-				throw new Error("While attempting to add elements to '" + this.get_ancestors_as_string() + "', found invalid element '" + value + "'. All values must be string, lists of strings, or nested Question Group definitions.")
+				else {
+					throw new Error("While attempting to add elements to '" + this.get_ancestors_as_string() + "', found invalid element '" + value + "'. All values must be string, lists of strings, or nested Question Group definitions.")
+				}
 			}
 		}
 	}

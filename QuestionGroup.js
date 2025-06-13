@@ -131,7 +131,7 @@ class QuestionGroup {
 		
 			
 			for (child of qg_data["questions"]) {
-				
+				this.add_child(Quesiton(child, null this))
 	}
 	
 	// Returns the library that this QuestionGroup ultimately descends from.
@@ -683,11 +683,11 @@ class QuestionGroup {
 	// Returns a string representation of the ancestors of this node.
 	// Returns th labeels of all ancestors, separated by arrows.
 	get_ancestors_as_string() {
-		if (!(this.parent_group instanceof Library)) {
-			return this.parent_group.get_ancestors_as_string() + " -> " + this.label
+		if (this.parent_group instanceof Library) {
+			return this.label
 		}
 		else {
-			return this.label
+			return this.parent_group.get_ancestors_as_string() + " -> " + this.label
 		}
 	}
 	

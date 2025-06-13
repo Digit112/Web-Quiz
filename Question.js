@@ -3,22 +3,53 @@ function lerp(a, b, t) {
 }
 
 class Question {
-	constructor(q, a, parent_group) {
-		if (!parent_group instanceof QuestionGroup) {
+	constructor(q_data, q, parent_group) {
+		if (!(parent_group instanceof QuestionGroup)) {
 			throw new Error("A Question must have a parent QuestionGroup.")
 		}
 		
 		let my_library = parent_group.get_library()
 		
-		// The question and answer.
-		// The answer can either be a single item or an array of multiple items, all of which are considered acceptable.
-		this.q = q
-		if (Array.isArray(a)) {
-			this.a = a
-		}
-		else {
-			this.a = [a]
-		}
+		// The parent QuestionGroup
+		this.parent_group = parent_group
+		
+		// Interpret as explicit question.
+		if (q_data instanceof Object) {
+			// The question and answer.
+			// The answer can either be a single item or an array of multiple items, all of which are considered acceptable.
+			if (q_data["question"]) {
+				if (typeof q_data["question"] == "string") {
+					this.q = [q_data["question"]]
+				}
+				else if (Array.isArray(q_data["question"])) {
+					let q_name = q ? "'" + q + "' " : ""
+					if (q_data["question"].length == 0) throw new Error(
+						"While interpreting child " + q_name + "Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must have at least one element."
+					)
+					this.q = q_data["question"]
+				}
+				else {
+					let q_name = q ? "'" + q + "' " : ""
+					throw new Error("While interpreting child " + q_name + "Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must be either string or array.")
+				}
+				
+				// Note that if this question's question statement is provided by the key obtained by the caller (and subsequently passed to this function)
+				// then it becomes the primary question, and anything specified by the 'question' parameter becomes additional info used only for question inversion.
+				if (q) this.q.unshift(q)
+			}
+			else {
+				if (q) this.q = [q]
+				else throw new Error("While interpreting child Quesstion of '" + this.parent_group.get_ancestors_as_string() + "'; required parameter 'question' is missing.")
+			}
+			
+			if (!q_data["answer"]) throw new Error("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' required parameter 'andwer' is missing.");
+			
+			if (Array.isArray(a)) {
+				this.a = a
+			}
+			else {
+				this.a = [a]
+			}
 		
 		// Approximate measure of user's mastery of this question.
 		// It is considered mastered when this is above MASTERY_THRESHHOLD
@@ -26,9 +57,6 @@ class Question {
 		
 		// This is true if this was the last question asked.
 		this.was_asked_last = false
-		
-		// The parent QuestionGroup
-		this.parent_group = parent_group
 		
 		// The number of times attempt() has been called on this question
 		this.num_attempts = 0
@@ -125,6 +153,22 @@ class Question {
 		this.was_asked_last = false
 	}
 	
+	get_ancestors_as_string() {
+		return this.parent_group.get_ancestors_as_string() + " -> " + this.q[0]
+	}
+	
+	// Called when the parent QuestionGroup has chosen this question for activation.
+	// The parameters are included so that this function matches the signature of QuestionGroup.activate_question, they are unused.
+	activate_question(_am_ordered, _am_adaptive) {
+		console.log("Activating " + this.q.toString() + ": " + this.a.toString())
+		
+		if (this.windowed) throw new Error("Cannot activate a windowed question.")
+		this.windowed = true
+		return this
+	}
+	
+	/* ---- Do-nothing functions called by recursive QuestionGroup functions ---- */
+	
 	// Called when the parent QuestionGroup chooses this question for retrieval.
 	// The parameter is included so that this function matches the signature of QuestionGroup.get_random, it is unused.
 	get_random(_am_adaptive, _am_windowed) {
@@ -136,14 +180,4 @@ class Question {
 	
 	// Called by parent QuestionGroup while it is attempting to enable itself.
 	enable_and_check() {}
-	
-	// Called when the parent QuestionGroup has chosen this question for activation.
-	// The parameters are included so that this function matches the signature of QuestionGroup.activate_question, they are unused.
-	activate_question(_am_ordered, _am_adaptive) {
-		console.log("Activating " + this.q + ": " + this.a.toString())
-		
-		if (this.windowed) throw new Error("Cannot activate a windowed question.")
-		this.windowed = true
-		return this
-	}
 }

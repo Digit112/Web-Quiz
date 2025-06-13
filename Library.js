@@ -1,3 +1,10 @@
+class LibraryLoadingError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "LibraryLoadingError";
+  }
+}
+
 function import_event(e) {
 	const file = e.target.files[0]; // Get the first selected file
 	if (!file) { return }

@@ -126,12 +126,74 @@ class QuestionGroup {
 		
 		// Attempt to interpret as an explicit QuestionGroup.
 		if (qg_data["questions"]) {
-			if (!(qg_data["questions"] instanceof Object)) throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'questions' must be an array or object.")
+			if (qg_data["groups"]) throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'questions' and 'groups' parameters must never appear together.")
 			this.children_are_groups = false
-		
 			
-			for (child of qg_data["questions"]) {
-				this.add_child(Quesiton(child, null this))
+			if (Array.isArray(qg_data["questions"])) {
+				// Interpret questions parameter as list of explicit question definitions.
+				for (child of qg_data["questions"]) {
+					this.add_child(new Question(child, null, this))
+				}
+			}
+			else if (qg_data["questions"] instanceof Object) {
+				// Interpret questions parameter as list of implicit or embedded-explicit question definitions.
+				for (let key in qg_data["questions"]) {
+					let val = qg_data["questions"][key]
+					this.add_child(new Question(val, key, this))
+				}
+			}
+			else {
+				throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'questions' must be an array or object.")
+			}
+		}
+		else if (qg_data["groups"]) {
+			if (Array.isArray(qg_data["groups"])) {
+				// Interpret groups parameter as list of explicit QuestionGroup definitions.
+				for (let child of qg_data["groups"]) {
+					this.add_child(new QuestionGroup(child, null, this))
+				}
+			}
+			else if (qg_data["groups"] instanceof Object) {
+				// Interpret groups parameter as list of implicit or embedded-explicit QuestionGroup definitions.
+				for (let key in qg_data["groups"]) {
+					let val = qg_data["groups"][key]
+					this.add_child(new QuestionGroup(val, key, this))
+				}
+			}
+			else {
+				throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'groups' must be an array or object.")
+			}
+		}
+		// Interpret as implicit QuestionGroup.
+		else {
+			// Attempt interpretation as list of implicit and embedded-explicit questions.
+			let q_error = null
+			try {
+				for (let key in qg_data) {
+					let val = qg_data[key]
+					this.add_child(new Question(val, key, this))
+				}
+			}
+			catch (e) {
+				this.children = []
+				q_error = e.toString()
+			}
+			
+			// If previous interpretation failed, attempt interpretation as list of implicit and embedded-explicit QuestionGroups.
+			if (q_error) {
+				try {
+					for (let key in qg_data) {
+						let val = qg_data[key]
+						this.add_child(new QuestionGroup(val, key, this))
+					}
+				}
+				catch (e) {
+					let qg_error = e.toString()
+					
+					throw new Error("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error)
+				}
+			}
+		}
 	}
 	
 	// Returns the library that this QuestionGroup ultimately descends from.
@@ -257,20 +319,15 @@ class QuestionGroup {
 		this.children_are_groups = false
 		
 		if (Array.isArray(new_questions)) {
-			// Interpret as list of question objects.
+			// Interpret as list of explicit question objects.
 			for (let question of new_questions) {
-				this.add_child(new Question(question))
+				this.add_child(new Question(question, null, this))
 			}
 		}
 		else if (new_questions instanceof Object) {
 			// Interpret key/value pairs as implicit questions.
 			for (const key in new_questions) {
-				try {
-					var value = new_questions[key]
-				}
-				catch (e) {
-					throw new Error("While attempting to enumerate the Questions or Question Groups to add to '" + this.get_ancestors_as_string() + "', failed to index an object. Each element must be a valid Question definition")
-				}
+				var value = new_questions[key]
 				
 				if (Array.isArray(value)) {
 					// Set children_are_groups exactly once.

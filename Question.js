@@ -22,6 +22,7 @@ class Question {
 					this.q = [q_data["question"]]
 				}
 				else if (Array.isArray(q_data["question"])) {
+					// TODO: Check that questions in array are all strings.
 					let q_name = q ? "'" + q + "' " : ""
 					if (q_data["question"].length == 0) throw new Error(
 						"While interpreting child " + q_name + "Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must have at least one element."
@@ -42,14 +43,36 @@ class Question {
 				else throw new Error("While interpreting child Quesstion of '" + this.parent_group.get_ancestors_as_string() + "'; required parameter 'question' is missing.")
 			}
 			
-			if (!q_data["answer"]) throw new Error("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' required parameter 'andwer' is missing.");
+			if (!q_data["answer"]) throw new Error("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' required parameter 'answer' is missing.");
 			
-			if (Array.isArray(a)) {
-				this.a = a
+			if (typeof q_data["answer"] == "string") {
+				this.a = [q_data["answer"]]
+			}
+			else if (Array.isArray(q_data["answer"])) {
+				// TODO: Check that answers in array are all strings.
+				this.a = q_data["answer"]
 			}
 			else {
-				this.a = [a]
+				throw new Error("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' parameter 'answer' must be object or string."
 			}
+		}
+		// Interpret as implicit question.
+		else {
+			if (!q) throw new Error("While interpreting child Quesstion of '" + this.parent_group.get_ancestors_as_string() + "'; explicit question must be an object.")
+			
+			this.q = [q]
+			
+			if (typeof q_data == "string") {
+				this.a = [q_data]
+			}
+			else if (Array.isArray(q_data)) {
+				// TODO: Check that answers in array are all strings.
+				this.a = q_data
+			}
+			else {
+				throw new Error("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' value must be string, array of strings, or valid Question object.")
+			}
+		}
 		
 		// Approximate measure of user's mastery of this question.
 		// It is considered mastered when this is above MASTERY_THRESHHOLD

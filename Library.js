@@ -1,5 +1,5 @@
 class LibraryLoadingError extends Error {
-  constructor(message) {
+  constructor(message, allow_recurse = true) {
     super(message);
     this.name = "LibraryLoadingError";
   }

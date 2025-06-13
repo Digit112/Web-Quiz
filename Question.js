@@ -57,6 +57,8 @@ class Question {
 				else throw new LibraryLoadingError("While interpreting child Quesstion of '" + this.parent_group.get_ancestors_as_string() + "'; required parameter 'question' is missing.")
 			}
 			
+			if (!this.q) throw new Error("Failed to obtain question statement(s)")
+			
 			if (!q_data["answer"]) throw new LibraryLoadingError("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' required parameter 'answer' is missing.");
 			
 			if (typeof q_data["answer"] == "string") {

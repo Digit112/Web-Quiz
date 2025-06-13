@@ -199,10 +199,10 @@ class QuestionGroup {
 					this.children = []
 					this.children_are_groups = null
 					
-					if (e instanceof LibraryLoadingError) {
+					if (e instanceof LibraryLoadingError && e.allow_recurse) {
 						let qg_error = e.toString()
 						
-						throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error)
+						throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error, false)
 					}
 					else throw e
 				}

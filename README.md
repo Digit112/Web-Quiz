@@ -107,14 +107,14 @@ A QuestionGroupList may take the form of an array of explicit QuestionGroups or 
 
 #### A Note on Implicit QuestionGroup child type deduction.
 
-When interpreting an Implicit QuestionGroup, then parser must deduce whether the entity is a QuestionList or QuestionGroupList. However, some entities (such as the one below) constitute **both** a valid Question and QuestionGroup. In fact, all valid Question objects constitute a valid QuestionGroup.
+When interpreting an Implicit QuestionGroup, the parser must deduce whether the entity is a QuestionList or QuestionGroupList. However, some entities (such as the one below) constitute **both** a valid Question and QuestionGroup. In fact, all valid Question objects constitute a valid QuestionGroup.
 
 `"q": {"answer": "a"}`
 
 While the above looks like a simple Question in embedded-explicit form, it is also a valid QuestionGroup in implicit form because the value is a valid QuestionList containing a Question in implicit form. Written as a QuestionGroup in explicit form:
 
 ```
-{"label": "q", "questions": {"question": "answer", "answer": "a"}}
+{"label": "q", "questions": [{"question": "answer", "answer": "a"}]}
 ```
 
 Or, equivalently:
@@ -124,7 +124,7 @@ Or, equivalently:
 
 Therefore, when interpreting an implicit QuestionGroup, which must either be a QuestionList or QuestionGroupList, if the construct is a valid QuestionList and all questions are in embedded-explicit form, **it is also a valid QuestionGroupList** because **All of the embedded-explicit Question objects are also valid implicit QuestionGroup objects**. Therefore it is ambiguous whether the outermost QuestionGroup has questions or groups for children... Of course, such constructs are always interpreted as QuestionList objects.
 
-Therefore, if a QuestionGroup is being written in implicit form, which has QuestionGroup(s) for children, but which has no children which are not also valid Question objects, then at least one child must be written in explicit or embedded-explicit form. Here is a minimal example:
+Therefore, if a QuestionGroup is being written in implicit form, which has QuestionGroup(s) for children, but which has no children which are not also valid Question objects, then the group itself or at least one child must be written in explicit or embedded-explicit form. Here is a minimal example:
 ```
 {"my_label": {
 	"innerkey": {"answer": "a"}
@@ -163,7 +163,14 @@ Note that whether the QuestionGroup "my_label" has *groups* or *questions* for c
 }}
 ```
 
-Put another way, a QuestionGroup whose children are all Questions with the primary question statement "answer" and whose member values are all strings and arrays of strings must not be written in implicit form.
+Or the question itself could be written in embedded-explicit form:
+```
+{"my_label": {
+	"innerkey": {"answer": {"answer": "a"}}
+}}
+```
+
+Put another way, a QuestionGroup whose children are all Questions with the primary question statement "answer" and who are themselves written in implicit form, must not be written in implicit form.
 
 **The following constructs all constitute equivalent lists containing a single QuestionGroup with one question:**
 

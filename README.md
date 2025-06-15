@@ -75,45 +75,97 @@ A QuestionGroup has the following properties:
 - `answer`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
 - `case-sensitive` (optional; default `false`): Whether a response with the same text but wrong letter casing counts as correct.
 
-### Question & QuestionGroup Substitution
+### QuestionList
 
-A list of Question objects can be replaced with an object. The keys are interpreted  as question statements and the values as an answer or array of answers if the value is an array. Such a construct is called an implicit Quesiton. If the value is an object, it is interpreted as a question object, and if the `question` key is provided in that object, the provided questions are appended to the key to form the question list.
+A QuestionList can take the form of an array of Question objects. In this case, the Questions are said to be in explicit form. Alternatively, a QuestionList can take the form of an object with key/value pairs. The key is taken to be the primary question statement. If the value is a string or array of strings, it is taken to be the primary answer or list of answers respectively. In this case, the Question is said to be in implicit form. If the value is an object, it is presumed to be a valid Question object (although the required `question` parameter may be omitted in this case, since it is provided by the key). Such a construct is said to be in embedded-explicit form.
 
-**The following constructs all constitute equivalent definitions of a list containing a single question:**
+**The following constructs all constitute equivalent definitions of a QuestionList containing a single Question:**
 
-Explicit within array, with string answer:
+Explicit:
 `[{"question": "q", "answer": "a"}]`
 
-Explicit within array, with array of one answer:
-`[{"question": "q", "answer": ["a"]}]`
+Embedded-Explicit:
+`{"q": {"answer": "a"}}`
 
-Implicit with string answer:
+Implicit:
 `{"q": "a"}`
 
-Implicit with array of one answer:
-`{"q": ["a"]}`
-
-**The following constructs all constitute equivalent definitions of a list containing two questions:**
+**The following constructs both represent equivalent definitions of a QuestionList containing two questions. Note that the second question cannot be written in implicit form because it contains multiple questrion statements:**
 
 Explicit:
 ```
-[
-	{"question": "q1", "answer": "a1"},
-	{"question": "q2", "answer": ["a2", "a22"]}
-]
+[{"question": "q1", "answer": "a1"},
+ {"question": ["q2", "q22"], "answer": ["a2", "a22"]}]
 ```
 
-Implicit:
-`{"q1": "a1", "q2": ["a2", "a22"]}`
+Implicit and Embedded-Explicit:
+`{"q1": "a1", "q2": {"question": ["q22"], "answer": ["a2", "a22"]}}`
 
-Mixed Explicit and Implicit:
-`{"q1": "a1", "q2": {"answer": ["a2", "a22"]}}`
+### QuestionGroupList
 
-By the same token, anywhere a list of QuestionGroup is expected, an object may be substituted. If it is, the key/value pairs of the object are interpreted as the QuestionGroup's children, with the system deducing whether they are QuestionGroups or Questions. Thus, an implicit QuestionGroup is interpreted as either a list of QuestionGroups or Questions.
+A QuestionGroupList may take the form of an array of explicit QuestionGroups or it may take the form of an object. In the latter case, the keys are taken to be the QuestionGroup label which will be shown to the user and the values will be either a valid QuestionGroup object (and therefore it will be in embedded-explicit form) or it may be a QuestionGroupList or QuestionList. In either case the listed objects are taken to be the child group's children. In that case, the group is in implicit form.
 
-If possible, the keys will be interpreted as the QuestionGroup labels and the values as QuestionGroup children. If this is not possible, the object will be interpreted as a list of questions. The system will deduce whether the children are Questions or QuestionGroups. These are referred to as explicit vs. implicit QuestionGroups and explicit vs. implicit Questions.
+#### A Note on Implicit QuestionGroup child type deduction.
 
-The following constructs all constitute equivalent lists containing a single QuestionGroup with one question:
+When interpreting an Implicit QuestionGroup, then parser must deduce whether the entity is a QuestionList or QuestionGroupList. However, some entities (such as the one below) constitute **both** a valid Question and QuestionGroup. In fact, all valid Question objects constitute a valid QuestionGroup.
+
+`"q": {"answer": "a"}`
+
+While the above looks like a simple Question in embedded-explicit form, it is also a valid QuestionGroup in implicit form because the value is a valid QuestionList containing a Question in implicit form. Written as a QuestionGroup in explicit form:
+
+```
+{"label": "q", "questions": {"question": "answer", "answer": "a"}}
+```
+
+Or, equivalently:
+```
+{"label": "q", "questions": {"answer": "a"}}
+```
+
+Therefore, when interpreting an implicit QuestionGroup, which must either be a QuestionList or QuestionGroupList, if the construct is a valid QuestionList and all questions are in embedded-explicit form, **it is also a valid QuestionGroupList** because **All of the embedded-explicit Question objects are also valid implicit QuestionGroup objects**. Therefore it is ambiguous whether the outermost QuestionGroup has questions or groups for children... Of course, such constructs are always interpreted as QuestionList objects.
+
+Therefore, if a QuestionGroup is being written in implicit form, which has QuestionGroup(s) for children, but which has no children which are not also valid Question objects, then at least one child must be written in explicit or embedded-explicit form. Here is a minimal example:
+```
+{"my_label": {
+	"innerkey": {"answer": "a"}
+}}
+```
+
+The above is a QuestionGroup called "my_label" in implicit form. Its child may be a QuestionGroup "innerkey" which contains a single Question in implicit form, or its child may be a question in embedded-explicit form. Below are the two possible interpretations, written in fully explicit form:
+
+Containing implicit QuestionGroup called "innerkey":
+```
+{
+	"label": "my_label",
+	"groups": {
+		"label": "innerkey",
+		"questions": [
+			{"question": "answer", "answer": "a"}
+		]
+	}
+}
+```
+
+Containing embedded-explicit Question with question statement "innerkey":
+```
+{
+	"label": "my_label",
+	"questions": [
+		{"question": "innerkey", "answer": "a"}
+	]
+}
+```
+
+Note that whether the QuestionGroup "my_label" has *groups* or *questions* for children is the crux of the ambiguity. The latter interpretation is always preferred. If the former were intended, the inner QuestionGroup would have to be written in embedded-explicit form:
+```
+{"my_label": {
+	"innerkey": {"groups": {"answer": "a"}}
+}}
+```
+
+Put another way, a QuestionGroup whose children are all Questions with the primary question statement "answer" and whose member values are all strings and arrays of strings must not be written in implicit form.
+
+**The following constructs all constitute equivalent lists containing a single QuestionGroup with one question:**
 
 Explicit QuestionGroup containing explicit Question: 
 `[{"label": "group-name", "questions": [{"question": "q", "answer": "a"}]}]`

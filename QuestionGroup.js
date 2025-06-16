@@ -502,7 +502,7 @@ class QuestionGroup {
 			
 			var expand_node = document.createElement("button")
 			expand_node.setAttribute("type", "button")
-			expand_node.setAttribute("class", "collapsible")
+			expand_node.setAttribute("class", "collapsible-button")
 			expand_node.innerHTML = "+"
 			expand_node.question_group = this
 			expand_node.addEventListener("click", collapsible_event)
@@ -516,7 +516,7 @@ class QuestionGroup {
 		if (editing_pane && currently_editing) {
 			var edit_node = document.createElement("button")
 			edit_node.setAttribute("type", "button")
-			edit_node.setAttribute("class", "collapsible_edit")
+			edit_node.setAttribute("class", "collapsible-button")
 			edit_node.innerHTML = "edit"
 			edit_node.question_group = this
 			edit_node.addEventListener("click", () => this.generate_properties_html(editing_pane))
@@ -524,7 +524,7 @@ class QuestionGroup {
 			if (!(this.parent_group instanceof Library)) {
 				var move_up_node = document.createElement("button")
 				move_up_node.setAttribute("type", "button")
-				move_up_node.setAttribute("class", "collapsible_edit")
+				move_up_node.setAttribute("class", "collapsible-button")
 				move_up_node.setAttribute("style", "font-style: normal;")
 				move_up_node.innerHTML = "⯅"
 				move_up_node.question_group = this
@@ -532,11 +532,20 @@ class QuestionGroup {
 				
 				var move_down_node = document.createElement("button")
 				move_down_node.setAttribute("type", "button")
-				move_down_node.setAttribute("class", "collapsible_edit")
+				move_down_node.setAttribute("class", "collapsible-button")
 				move_down_node.setAttribute("style", "font-style: normal;")
 				move_down_node.innerHTML = "⯆"
 				move_down_node.question_group = this
 				move_down_node.addEventListener("click", () => this.move_down())
+			}
+			
+			if (this.children_are_groups) {
+				var new_group_node = document.createElement("button")
+				new_group_node.setAttribute("type", "button")
+				new_group_node.setAttribute("class", "collapsible-button collapsible-new-group")
+				new_group_node.innerHTML = "+"
+				new_group_node.question_group = this
+				//new_group_node.addEventListener("click", collapsible_event)
 			}
 		}
 			
@@ -549,6 +558,7 @@ class QuestionGroup {
 				header.appendChild(move_up_node)
 				header.appendChild(move_down_node)
 			}
+			if (this.children_are_groups) { header.appendChild(new_group_node) }
 		}
 		
 		this.html_header_root = doc_parent.appendChild(header)

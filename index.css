@@ -23,34 +23,32 @@ body {
 	.collapsible_header {
 		padding: 0.5em;
 		display: flex;
-	}
-
-	/* For the button that toggles collapsing */
-	.collapsible {
-		margin-top: 0;
-		margin-bottom: 0;
 		
-		background-color: #eee;
-		color: #444;
-		text-align: center;
-		float: left;
-		border: 1px solid black;
+		button.collapsible-button {
+			margin: 0 0.3em;
+			padding: 0.1em 0.5em;
+			font-style: italic;
+			text-align: center;
+			
+			background-color: #eee;
+			border-radius: 0%;
+			border: 1px solid black;
+		}
+		
+		button.active, button.collapsible-button:hover {
+			background-color: #ccc;
+			cursor: pointer;
+		}
+		
+		button.collapsible-new-group {
+			background-color: #5D7;
+		}
 	}
 
 	/* For the buttons, on hover*/
-	.active, .collapsible:hover, .collapsible_edit:hover, .library-header-control:hover {
+	.active, .library-header-control:hover {
 		background-color: #ccc;
 		cursor: pointer;
-	}
-	
-	button.collapsible_edit {
-		margin: 0 0.3em;
-		padding: 0.1em 0.5em;
-		font-style: italic;
-		
-		background-color: #eee;
-		border-radius: 0%;
-		border: 1px solid black;
 	}
 
 	/* For the checkboxes in collapsibles */

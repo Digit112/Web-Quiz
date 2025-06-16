@@ -69,6 +69,7 @@ function group_move_down() {
 
 function group_new_child() {
 	this.question_group.add_child( new QuestionGroup({}, "New Group", this.question_group) )
+	this.question_group.is_expanded = true // Force expand the group if it is collapsed.
 	this.question_group.regenerate_HTML()
 }
 
@@ -509,7 +510,7 @@ class QuestionGroup {
 		check_node.question_group = this // The checkbox elements know which groups they control.
 			
 		let text_node = document.createElement("text")
-		text_node.innerHTML = this.label
+		text_node.textContent = this.label
 		
 		// Generate child collapsibles.
 		if (this.children_are_groups) {
@@ -519,7 +520,7 @@ class QuestionGroup {
 			var expand_node = document.createElement("button")
 			expand_node.setAttribute("type", "button")
 			expand_node.setAttribute("class", "collapsible-button")
-			expand_node.innerHTML = "+"
+			expand_node.textContent = "+"
 			expand_node.question_group = this
 			expand_node.addEventListener("click", collapsible_event)
 			
@@ -533,7 +534,7 @@ class QuestionGroup {
 			var edit_node = document.createElement("button")
 			edit_node.setAttribute("type", "button")
 			edit_node.setAttribute("class", "collapsible-button")
-			edit_node.innerHTML = "edit"
+			edit_node.textContent = "edit"
 			edit_node.question_group = this
 			edit_node.addEventListener("click", () => this.generate_properties_html(editing_pane))
 			
@@ -542,7 +543,7 @@ class QuestionGroup {
 				move_up_node.setAttribute("type", "button")
 				move_up_node.setAttribute("class", "collapsible-button")
 				move_up_node.setAttribute("style", "font-style: normal;")
-				move_up_node.innerHTML = "⯅"
+				move_up_node.textContent = "⯅"
 				move_up_node.question_group = this
 				move_up_node.addEventListener("click", group_move_up)
 				
@@ -550,7 +551,7 @@ class QuestionGroup {
 				move_down_node.setAttribute("type", "button")
 				move_down_node.setAttribute("class", "collapsible-button")
 				move_down_node.setAttribute("style", "font-style: normal;")
-				move_down_node.innerHTML = "⯆"
+				move_down_node.textContent = "⯆"
 				move_down_node.question_group = this
 				move_down_node.addEventListener("click", group_move_down)
 			}
@@ -559,7 +560,7 @@ class QuestionGroup {
 				var new_group_node = document.createElement("button")
 				new_group_node.setAttribute("type", "button")
 				new_group_node.setAttribute("class", "collapsible-button collapsible-new-group")
-				new_group_node.innerHTML = "+"
+				new_group_node.textContent = "+"
 				new_group_node.question_group = this
 				new_group_node.addEventListener("click", group_new_child)
 			}
@@ -662,10 +663,17 @@ class QuestionGroup {
 		name_edit.setAttribute("id", "edit-group-name")
 		name_edit.question_group = this
 		name_edit.addEventListener("change", group_name_update)
+		
+		let group_delete_button = document.createElement("button")
+		group_delete_button.setAttribute("class", "edit-group-delete")
+		group_delete_button.textContent = "Delete"
+		group_delete_button.question_group = this
+		//group_delete_button.addEventListener("click", group_delete)
 			
 		if (!(this.parent_group instanceof Library)) this.html_edit_container.appendChild(hierarchy_node)
 		this.html_edit_container.appendChild(name_edit_label)
 		this.html_edit_container.appendChild(name_edit)
+		this.html_edit_container.appendChild(group_delete_button)
 	}
 	
 	// Swaps this group with its predecessor in the parent's child list & regenerates HTML.

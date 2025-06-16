@@ -56,6 +56,21 @@ function group_name_update() {
 	this.question_group.html_label_element.textContent = this.value
 }
 
+function group_move_up() {
+	this.question_group.move_up()
+	this.question_group.parent_group.regenerate_HTML()
+}
+
+function group_move_down() {
+	this.question_group.move_down()
+	this.question_group.parent_group.regenerate_HTML()
+}
+
+function group_new_child() {
+	this.question_group.add_child( new QuestionGroup({}, "New Group", this.question_group) )
+	this.question_group.regenerate_HTML()
+}
+
 // Each question group either contains other QuestionGroups or Questions as children.
 class QuestionGroup {
 	constructor(qg_data, label, parent_group) {
@@ -528,7 +543,7 @@ class QuestionGroup {
 				move_up_node.setAttribute("style", "font-style: normal;")
 				move_up_node.innerHTML = "⯅"
 				move_up_node.question_group = this
-				move_up_node.addEventListener("click", () => this.move_up())
+				move_up_node.addEventListener("click", group_move_up)
 				
 				var move_down_node = document.createElement("button")
 				move_down_node.setAttribute("type", "button")
@@ -536,7 +551,7 @@ class QuestionGroup {
 				move_down_node.setAttribute("style", "font-style: normal;")
 				move_down_node.innerHTML = "⯆"
 				move_down_node.question_group = this
-				move_down_node.addEventListener("click", () => this.move_down())
+				move_down_node.addEventListener("click", group_move_down)
 			}
 			
 			if (this.children_are_groups) {
@@ -545,7 +560,7 @@ class QuestionGroup {
 				new_group_node.setAttribute("class", "collapsible-button collapsible-new-group")
 				new_group_node.innerHTML = "+"
 				new_group_node.question_group = this
-				//new_group_node.addEventListener("click", collapsible_event)
+				new_group_node.addEventListener("click", group_new_child)
 			}
 		}
 			
@@ -567,10 +582,11 @@ class QuestionGroup {
 	}
 	
 	// Regenerates the HTML representing this object.
-	regenerate_HTML(currently_editing) {
+	regenerate_HTML(currently_editing = null) {
 		if (!this.html_container) throw new Error("Cannot regenerate HTML if it has not yet already been generated!")
 		console.log("Regenerating HTML for '" + this.get_ancestors_as_string() + "' and all children.")
 	
+		if (!currently_editing) currently_editing = this.currently_editing
 		this.currently_editing = currently_editing
 		
 		// Save references to current elements which will be overwritten by generate_HTML
@@ -663,8 +679,6 @@ class QuestionGroup {
 				let temp = this.parent_group.children[i-1]
 				this.parent_group.children[i-1] = this.parent_group.children[i]
 				this.parent_group.children[i] = temp
-				
-				this.parent_group.regenerate_HTML(this.currently_editing)
 				return
 			}
 		}
@@ -684,8 +698,6 @@ class QuestionGroup {
 				let temp = this.parent_group.children[i+1]
 				this.parent_group.children[i+1] = this.parent_group.children[i]
 				this.parent_group.children[i] = temp
-				
-				this.parent_group.regenerate_HTML(this.currently_editing)
 				return
 			}
 		}

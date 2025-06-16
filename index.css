@@ -43,6 +43,10 @@ body {
 		button.collapsible-new-group {
 			background-color: #5D7;
 		}
+		
+		button.collapsible-new-group:hover {
+			background-color: #3B5;
+		}
 	}
 
 	/* For the buttons, on hover*/

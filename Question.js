@@ -39,13 +39,13 @@ class Question {
 					// TODO: Check that questions in array are all strings.
 					let q_name = q ? "'" + q + "' " : ""
 					if (q_data["question"].length == 0) throw new LibraryLoadingError(
-						"While interpreting child " + q_name + "Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must have at least one element."
+						"While interpreting child '" + q_name + "' Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must have at least one element."
 					)
 					this.q = q_data["question"]
 				}
 				else {
 					let q_name = q ? "'" + q + "' " : ""
-					throw new LibraryLoadingError("While interpreting child " + q_name + "Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must be either string or array.")
+					throw new LibraryLoadingError("While interpreting child '" + q_name + "' Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must be either string or array.")
 				}
 				
 				// Note that if this question's question statement is provided by the key obtained by the caller (and subsequently passed to this function)
@@ -54,12 +54,12 @@ class Question {
 			}
 			else {
 				if (q) this.q = [q]
-				else throw new LibraryLoadingError("While interpreting child Quesstion of '" + this.parent_group.get_ancestors_as_string() + "'; required parameter 'question' is missing.")
+				else throw new LibraryLoadingError("While interpreting child Question of '" + this.parent_group.get_ancestors_as_string() + "'; required parameter 'question' is missing.")
 			}
 			
 			if (!this.q) throw new Error("Failed to obtain question statement(s)")
 			
-			if (!q_data["answer"]) throw new LibraryLoadingError("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' required parameter 'answer' is missing.");
+			if (!q_data["answer"]) throw new LibraryLoadingError("While interpreting Question '" + this.get_ancestors_as_string() + "' required parameter 'answer' is missing.");
 			
 			if (typeof q_data["answer"] == "string") {
 				this.a = [q_data["answer"]]
@@ -69,11 +69,12 @@ class Question {
 				this.a = q_data["answer"]
 			}
 			else {
-				throw new LibraryLoadingError("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' parameter 'answer' must be object or string.")
+				throw new LibraryLoadingError("While interpreting Question '" + this.get_ancestors_as_string() + "' parameter 'answer' must be object or string.")
 			}
 		}
 		else {
-			throw new LibraryLoadingError("While interpreting Quesstion '" + this.get_ancestors_as_string() + "' value must be string, array of strings, or valid Question object.")
+			let q_name = q ? "'" + q + "' " : ""
+			throw new LibraryLoadingError("While interpreting child '" + q_name + "' Question '" + this.parent_group.get_ancestors_as_string() + "'; value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
 		}
 		
 		// Approximate measure of user's mastery of this question.

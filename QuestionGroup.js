@@ -58,7 +58,7 @@ class QuestionGroup {
 		}
 		
 		if (!(qg_data instanceof Object) || Array.isArray(qg_data)) {
-			throw new LibraryLoadingError("While interpreting '" + String(qg_data) + "' as Questiongroup; QuestionGroup must be non-Array object.")
+			throw new LibraryLoadingError("While interpreting '" + qg_data.toString() + "' as Questiongroup; QuestionGroup must be non-Array object.")
 		}
 		
 		// The label for this group that the user will see.
@@ -602,6 +602,26 @@ class QuestionGroup {
 	// Elements are added to the passed HTML element.
 	generate_properties_html(editing_pane) {
 		console.log("Generating edit HTML onto '" + editing_pane + "'")
+		
+		if (!this.html_edit_container) throw new Error("Cannot generate editing HTML. No editing pane.")
+		
+		this.html_edit_container.replaceChildren()
+		
+		if (!(this.parent_group instanceof Library)) {
+			var hierarchy_node = document.createElement("p")
+			hierarchy_node.textContent = this.parent_group.get_ancestors_as_string()
+		}
+		
+		let name_edit_label = document.createElement("label")
+		name_edit_label.setAttribute("for", "group-name")
+		
+		let name_edit = document.createElement("input")
+		name_edit.setAttribute("type", "text")
+		name_edit.setAttribute("value", this.label)
+			
+		if (!(this.parent_group instanceof Library)) this.html_edit_container.appendChild(hierarchy_node)
+		this.html_edit_container.appendChild(name_edit_label)
+		this.html_edit_container.appendChild(name_edit)
 	}
 	
 	// Swaps this group with its predecessor in the parent's child list & regenerates HTML.

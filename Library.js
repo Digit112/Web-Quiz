@@ -21,7 +21,7 @@ function import_event(e) {
 		my_library = new Library(library_data)
 
 		// Generate collapsibles HTML
-		my_library.generate_HTML( document.getElementById("collapsibles_root"), true)
+		my_library.generate_HTML( document.getElementById("collapsibles_root"), document.getElementById("editing-pane"))
 		last_active_question = null
 		active_question = null
 		quiz_score = 0

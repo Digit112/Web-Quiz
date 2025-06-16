@@ -613,11 +613,13 @@ class QuestionGroup {
 		}
 		
 		let name_edit_label = document.createElement("label")
-		name_edit_label.setAttribute("for", "group-name")
+		name_edit_label.textContent = "Name: "
+		name_edit_label.setAttribute("for", "edit-group-name")
 		
 		let name_edit = document.createElement("input")
 		name_edit.setAttribute("type", "text")
 		name_edit.setAttribute("value", this.label)
+		name_edit.setAttribute("id", "edit-group-name")
 			
 		if (!(this.parent_group instanceof Library)) this.html_edit_container.appendChild(hierarchy_node)
 		this.html_edit_container.appendChild(name_edit_label)

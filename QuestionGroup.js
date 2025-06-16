@@ -50,6 +50,12 @@ function check_event() {
 	}
 }
 
+// Event Listener for text input used to change a group's name.
+function group_name_update() {
+	this.question_group.label = this.value
+	this.question_group.html_label_element.textContent = this.value
+}
+
 // Each question group either contains other QuestionGroups or Questions as children.
 class QuestionGroup {
 	constructor(qg_data, label, parent_group) {
@@ -116,6 +122,7 @@ class QuestionGroup {
 		this.html_edit_container = null
 		this.html_content_root = null
 		this.html_header_root = null
+		this.html_label_element = null
 		
 		// Used by regenerate_HTML() to regenerate in the same state as usual.
 		this.is_expanded = false
@@ -533,7 +540,7 @@ class QuestionGroup {
 			
 		if (this.children_are_groups) { this.expand_elem = header.appendChild(expand_node) }
 		this.check_elem = header.appendChild(check_node)
-		header.appendChild(text_node)
+		this.html_label_element = header.appendChild(text_node)
 		if (editing_pane && currently_editing) {
 			header.appendChild(edit_node)
 			if (!(this.parent_group instanceof Library)) {
@@ -609,6 +616,7 @@ class QuestionGroup {
 		
 		if (!(this.parent_group instanceof Library)) {
 			var hierarchy_node = document.createElement("p")
+			hierarchy_node.setAttribute("class", "editing-pane-header-subtitle")
 			hierarchy_node.textContent = this.parent_group.get_ancestors_as_string()
 		}
 		
@@ -620,6 +628,8 @@ class QuestionGroup {
 		name_edit.setAttribute("type", "text")
 		name_edit.setAttribute("value", this.label)
 		name_edit.setAttribute("id", "edit-group-name")
+		name_edit.question_group = this
+		name_edit.addEventListener("change", group_name_update)
 			
 		if (!(this.parent_group instanceof Library)) this.html_edit_container.appendChild(hierarchy_node)
 		this.html_edit_container.appendChild(name_edit_label)

@@ -73,6 +73,12 @@ body {
 		display: none;
 		overflow: hidden;
 	}
+	
+	.editing-pane-header-subtitle {
+		margin: 0.4em 0em;
+		font-size: 0.8em;
+		color: #666;
+	}
 
 	/* td, th { */
 		/* padding-left: 12px; */

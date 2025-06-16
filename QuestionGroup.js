@@ -525,14 +525,16 @@ class QuestionGroup {
 				var move_up_node = document.createElement("button")
 				move_up_node.setAttribute("type", "button")
 				move_up_node.setAttribute("class", "collapsible_edit")
-				move_up_node.innerHTML = "move up"
+				move_up_node.setAttribute("style", "font-style: normal;")
+				move_up_node.innerHTML = "⯅"
 				move_up_node.question_group = this
 				move_up_node.addEventListener("click", () => this.move_up())
 				
 				var move_down_node = document.createElement("button")
 				move_down_node.setAttribute("type", "button")
 				move_down_node.setAttribute("class", "collapsible_edit")
-				move_down_node.innerHTML = "move down"
+				move_down_node.setAttribute("style", "font-style: normal;")
+				move_down_node.innerHTML = "⯆"
 				move_down_node.question_group = this
 				move_down_node.addEventListener("click", () => this.move_down())
 			}

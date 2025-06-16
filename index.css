@@ -22,13 +22,19 @@ body {
 	/* For the div containing a collapsible button & checkbox */
 	.collapsible_header {
 		padding: 0.5em;
+		min-height: 1.5em;
 		display: flex;
+		
+		text {
+			white-space: nowrap;
+		}
 		
 		button.collapsible-button {
 			margin: 0 0.3em;
 			padding: 0.1em 0.5em;
 			font-style: italic;
 			text-align: center;
+			min-width: 2.5em;
 			
 			background-color: #eee;
 			border-radius: 0%;
@@ -46,6 +52,14 @@ body {
 		
 		button.collapsible-new-group:hover {
 			background-color: #3B5;
+		}
+		
+		button.collapsible-delete-group {
+			background-color: #D57;
+		}
+		
+		button.collapsible-delete-group:hover {
+			background-color: #B35;
 		}
 	}
 

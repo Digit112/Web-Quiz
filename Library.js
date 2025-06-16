@@ -128,7 +128,10 @@ class Library {
 	regenerate_HTML() {
 		if (!this.doc_parent) throw new Error("Cannot regenerate HTML, HTML has not yet been generated.")
 		this.generate_HTML(this.doc_parent, this.editing_pane, this.currently_editing)
+	
 		this.root_q.reset_expansion()
+		this.root_q.check_elem.checked = this.root_q.get_enabled()
+		this.root_q.reset_all_descendents()
 	}
 	
 	generate_editing_controls() {

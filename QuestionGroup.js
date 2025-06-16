@@ -56,6 +56,7 @@ function group_name_update() {
 	this.question_group.html_label_element.textContent = this.value
 }
 
+// Event Listeners for editing buttons.
 function group_move_up() {
 	this.question_group.move_up()
 	this.question_group.parent_group.regenerate_HTML()
@@ -615,7 +616,10 @@ class QuestionGroup {
 				// TODO: Add content if changed from Question to QuestionGroup
 			}
 		}
+		
+		// Ensure children are expanded & checked as they were prior to regeneration.
 		this.reset_expansion()
+		this.reset_all_descendents()
 	}
 	
 	// Used to expand or collapse the HTML associated with this object and all children

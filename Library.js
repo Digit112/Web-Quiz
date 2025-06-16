@@ -202,8 +202,14 @@ class Library {
 		// overall difficulty is an approximate measure of the likelihood that the user will get the next question wrong (whatever it happens to be)
 		// The question windowing attempts to keep the overall difficulty approximately constant throughout the session.
 		// So, IDEAL_OVERALL_DIFFICULTY basically controls how challenging the questions are.
-		this.IDEAL_OVERALL_DIFFICULTY = library_data["adaptive-weight-bias"]
+		this.IDEAL_OVERALL_DIFFICULTY = library_data["ideal-overall-difficulty"]
 		if (!this.IDEAL_OVERALL_DIFFICULTY) this.IDEAL_OVERALL_DIFFICULTY = 0.3
+		
+		console.log("Initializing Library...")
+		console.log("Adaptation Rate: " + this.ADAPTATION_RATE.toString())
+		console.log("Starting Mastery: " + this.STARTING_MASTERY.toString())
+		console.log("Adaptive Weight Bias: " + this.ADAPTIVE_WEIGHT_BIAS.toString())
+		console.log("Ideal Overall Difficulty: " + this.IDEAL_OVERALL_DIFFICULTY.toString())
 		
 		let root_qg_data = library_data["question-root"]
 		if (!root_qg_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")

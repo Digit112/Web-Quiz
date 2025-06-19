@@ -62,6 +62,20 @@ body {
 			background-color: #B35;
 		}
 	}
+	
+	button.edit-group-delete {
+		border-radius: 0;
+		border: 1px solid black;
+		margin: 0.5em;
+	}
+	
+	button.edit-group-delete {
+		background-color: #D57;
+	}
+	
+	button.edit-group-delete:hover {
+		background-color: #B35;
+	}
 
 	/* For the buttons, on hover*/
 	.active, .library-header-control:hover {

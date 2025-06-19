@@ -73,6 +73,14 @@ function group_new_child() {
 	this.question_group.regenerate_HTML()
 }
 
+function group_delete() {
+	let current_parent = this.question_group.parent_group
+	current_parent.remove_child(this.question_group)
+	
+	this.question_group.html_edit_container.replaceChildren()
+	current_parent.regenerate_HTML()
+}
+
 // Each question group either contains other QuestionGroups or Questions as children.
 class QuestionGroup {
 	constructor(qg_data, label, parent_group) {
@@ -344,6 +352,18 @@ class QuestionGroup {
 		else {
 			throw new TypeError("Failed to add child. Parameter must be Question or QuestionGroup, depending on the value of children_are_groups.")
 		}
+	}
+	
+	// Removes the passed child from this group. Returns true on success, false otherwise.
+	remove_child(child_to_remove) {
+		for (let child_i in this.children) {
+			if (this.children[child_i] == child_to_remove) {
+				this.children.splice(child_i, 1)
+				return true
+			}
+		}
+		
+		return false
 	}
 	
 	// Adds questions in bulk.
@@ -668,7 +688,7 @@ class QuestionGroup {
 		group_delete_button.setAttribute("class", "edit-group-delete")
 		group_delete_button.textContent = "Delete"
 		group_delete_button.question_group = this
-		//group_delete_button.addEventListener("click", group_delete)
+		group_delete_button.addEventListener("click", group_delete)
 			
 		if (!(this.parent_group instanceof Library)) this.html_edit_container.appendChild(hierarchy_node)
 		this.html_edit_container.appendChild(name_edit_label)

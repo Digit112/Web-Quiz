@@ -89,7 +89,7 @@ class QuestionGroup {
 		}
 		
 		if (!(qg_data instanceof Object) || Array.isArray(qg_data)) {
-			throw new LibraryLoadingError("While interpreting '" + qg_data.toString() + "' as Questiongroup; QuestionGroup must be non-Array object.")
+			throw new LibraryLoadingError(false, label, parent_group, "QuestionGroup must be non-Array object.")
 		}
 		
 		// The label for this group that the user will see.
@@ -98,7 +98,7 @@ class QuestionGroup {
 		}
 		else {
 			this.label = qg_data["label"]
-			if (!this.label) throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; required parameter 'label' is missing.")
+			if (!this.label) throw new LibraryLoadingError(false, label, parent_group, "required parameter 'label' is missing.")
 		}
 	
 		console.log("Constructing Group '" + this.label + "'")
@@ -158,7 +158,7 @@ class QuestionGroup {
 		
 		// Attempt to interpret as an explicit QuestionGroup.
 		if (qg_data["questions"]) {
-			if (qg_data["groups"]) throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'questions' and 'groups' parameters must never appear together.")
+			if (qg_data["groups"]) throw new LibraryLoadingError(false, this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
 			this.children_are_groups = false
 			
 			if (Array.isArray(qg_data["questions"])) {
@@ -175,7 +175,7 @@ class QuestionGroup {
 				}
 			}
 			else {
-				throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'questions' must be an array or object.")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'questions' must be an array or object.")
 			}
 		}
 		else if (qg_data["groups"]) {
@@ -195,7 +195,7 @@ class QuestionGroup {
 				}
 			}
 			else {
-				throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; 'groups' must be an array or object.")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'groups' must be an array or object.")
 			}
 		}
 		// Interpret as implicit QuestionGroup.
@@ -234,7 +234,7 @@ class QuestionGroup {
 					if (e instanceof LibraryLoadingError && e.allow_recurse) {
 						let qg_error = e.toString()
 						
-						throw new LibraryLoadingError("While interpreting QuestionGroup '" + this.get_ancestors_as_string() + "'; failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error, false)
+						throw new LibraryLoadingError(false, this.label, parent_group, "failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error, false)
 					}
 					else throw e
 				}

@@ -1,6 +1,16 @@
 class LibraryLoadingError extends Error {
-  constructor(message, allow_recurse = true) {
-    super(message);
+  constructor(is_group, label, parent_group, message, allow_recurse = true) {
+	let identifier = "null identifier"
+	
+	if (parent_group) {
+		identifier = parent_group.get_ancestors_as_string()
+		if (label) identifier += " -> " + label
+	}
+	else if (label) {
+		identifier = label
+	}
+	
+    super("While interpreting " + (is_group ? "QuestionGroup" : "Question") + " '" + identifier + "'; " + message);
 	this.allow_recurse = allow_recurse
     this.name = "LibraryLoadingError";
   }

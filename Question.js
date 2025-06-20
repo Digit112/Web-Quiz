@@ -4,9 +4,7 @@ function lerp(a, b, t) {
 
 class Question {
 	constructor(q_data, q, parent_group) {
-		if (!(parent_group instanceof QuestionGroup)) {
-			throw new LibraryLoadingError("A Question must have a parent QuestionGroup.")
-		}
+		if (!(parent_group instanceof QuestionGroup)) throw new Error("A Question must have a parent QuestionGroup.")
 		
 		let my_library = parent_group.get_library()
 		
@@ -15,7 +13,7 @@ class Question {
 		
 		// Interpret as implicit question.
 		if (typeof q_data == "string" || Array.isArray(q_data)) {
-			if (!q) throw new LibraryLoadingError("While interpreting child Question of '" + this.parent_group.get_ancestors_as_string() + "'; explicit question must be an object.")
+			if (!q) throw new LibraryLoadingError(true, q, parent_group, "explicit question must be an object.")
 			
 			this.q = [q]
 			
@@ -27,7 +25,7 @@ class Question {
 				this.a = q_data
 			}
 		}
-		// Interpret as explicit question.
+		// Interpret as explicit or embedded-explicit question.
 		else if (q_data instanceof Object) {
 			// The question and answer.
 			// The answer can either be a single item or an array of multiple items, all of which are considered acceptable.
@@ -38,14 +36,12 @@ class Question {
 				else if (Array.isArray(q_data["question"])) {
 					// TODO: Check that questions in array are all strings.
 					let q_name = q ? "'" + q + "' " : ""
-					if (q_data["question"].length == 0) throw new LibraryLoadingError(
-						"While interpreting child '" + q_name + "' Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must have at least one element."
-					)
+					if (q_data["question"].length == 0) throw new LibraryLoadingError(true, q, parent_group, "parameter 'question' must have at least one element.")
 					this.q = q_data["question"]
 				}
 				else {
 					let q_name = q ? "'" + q + "' " : ""
-					throw new LibraryLoadingError("While interpreting child '" + q_name + "' Question of '" + this.parent_group.get_ancestors_as_string() + "'; parameter 'question' must be either string or array.")
+					throw new LibraryLoadingError(true, q, parent_group, "parameter 'question' must be either string or array.")
 				}
 				
 				// Note that if this question's question statement is provided by the key obtained by the caller (and subsequently passed to this function)
@@ -54,12 +50,12 @@ class Question {
 			}
 			else {
 				if (q) this.q = [q]
-				else throw new LibraryLoadingError("While interpreting child Question of '" + this.parent_group.get_ancestors_as_string() + "'; required parameter 'question' is missing.")
+				else throw new LibraryLoadingError(true, q, parent_group, "required parameter 'question' is missing.")
 			}
 			
 			if (!this.q) throw new Error("Failed to obtain question statement(s)")
 			
-			if (!q_data["answer"]) throw new LibraryLoadingError("While interpreting Question '" + this.get_ancestors_as_string() + "' required parameter 'answer' is missing.");
+			if (!q_data["answer"]) throw new LibraryLoadingError(true, this.q[0], parent_group, "required parameter 'answer' is missing.");
 			
 			if (typeof q_data["answer"] == "string") {
 				this.a = [q_data["answer"]]
@@ -69,12 +65,19 @@ class Question {
 				this.a = q_data["answer"]
 			}
 			else {
-				throw new LibraryLoadingError("While interpreting Question '" + this.get_ancestors_as_string() + "' parameter 'answer' must be object or string.")
+				throw new LibraryLoadingError(true, this.q[0], parent_group, "parameter 'answer' must be object or string.")
+			}
+			
+			if (q_data["case-sensitive"]) {
+				if (typeof q_data["case-sensitive"] != "boolean") LibraryLoadingError(true, this.q[0], parent_group, "parameter 'case-sensitive' must be boolean.")
+				this.case_sensitive = q_data["case-sensitive"]
+			}
+			else {
+				this.case_sensitive  = false
 			}
 		}
 		else {
-			let q_name = q ? "'" + q + "' " : ""
-			throw new LibraryLoadingError("While interpreting child '" + q_name + "' Question '" + this.parent_group.get_ancestors_as_string() + "'; value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
+			throw new LibraryLoadingError(true, this.q[0], parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
 		}
 		
 		// Approximate measure of user's mastery of this question.
@@ -123,15 +126,30 @@ class Question {
 	// Updates responses and recalculates the response_score.
 	attempt(response) {
 		let my_library = this.get_library()
-		let correct = this.a.includes(response)
+		
+		// Determine whether the answer is correct.
+		if (this.case_sensitive) {
+			var correct = this.a.includes(response)
+		}
+		else {
+			var correct = false
+			response = response.toLowerString()
+			for (let answer of this.a) {
+				if (answer.toLowerString() == response) {
+					correct = true
+					break
+				}
+			}
+		}
 		
 		// Causes the earlier attempts to have much higher weight than later attempts.
 		// Because of this, the actual adaptation rate will always be slightly above the specified constant.
 		let altered_adaptation_rate = lerp(my_library.ADAPTATION_RATE, 1, 0.7 * Math.pow(0.7, this.num_attempts))
 		this.mastery_level = this.mastery_level * (1 - altered_adaptation_rate) + correct * altered_adaptation_rate
-		console.log(this.mastery_level)
-		this.was_asked_last = true
 		
+//		console.log(this.mastery_level)
+
+		this.was_asked_last = true
 		this.num_attempts++
 		return correct
 	}

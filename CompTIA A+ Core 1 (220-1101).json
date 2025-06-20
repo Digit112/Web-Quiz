@@ -11,22 +11,22 @@
 	"question-root": {
 		"protocols": {
 			"acronyms": {
-				"IP": "Internet Protocol",
-				"TCP": "Transmission Control Protocol",
-				"UDP": "User Datagram Protocol",
-				"HTTP": "HyperText Transfer Protocol",
-				"SMTP": "Simple Mail Transfer Protocol",
-				"POP3": ["Post Office Protocol", "Post Office Protocol 3"],
-				"IMAP": "Internet Message Access Protocol",
-				"FTP": "File Transfer Protocol",
-				"SSH": "Secure SHell",
-				"DHCP": "Dynamic Host Configuration Protocol",
-				"DNS": "Domain Name System",
-				"LDAP": "Lightweight Directory Access Protocol",
-				"RDP": "Remote Fesktop Protocol",
-				"SMB": "Server Message Block",
-				"SNMP": "Simple Network Management Protocol",
-				"Telnet": "Telecommunication Network"
+				"What does 'IP' stand for?": "Internet Protocol",
+				"What does 'TCP' stand for?": "Transmission Control Protocol",
+				"What does 'UDP' stand for?": "User Datagram Protocol",
+				"What does 'HTTP' stand for?": "HyperText Transfer Protocol",
+				"What does 'SMTP' stand for?": "Simple Mail Transfer Protocol",
+				"What does 'POP3' stand for?": ["Post Office Protocol", "Post Office Protocol 3"],
+				"What does 'IMAP' stand for?": "Internet Message Access Protocol",
+				"What does 'FTP' stand for?": "File Transfer Protocol",
+				"What does 'SSH' stand for?": "Secure SHell",
+				"What does 'DHCP' stand for?": "Dynamic Host Configuration Protocol",
+				"What does 'DN' stand for?S": "Domain Name System",
+				"What does 'LDAP' stand for?": "Lightweight Directory Access Protocol",
+				"What does 'RDP' stand for?": "Remote Fesktop Protocol",
+				"What does 'SMB' stand for?": "Server Message Block",
+				"What does 'SNMP' stand for?": "Simple Network Management Protocol",
+				"What does 'Telnet' stand for?": "Telecommunication Network"
 			},
 			"ports": {
 				"plain": {
@@ -54,16 +54,90 @@
 					"What is a newer, secure port number typically used by FTP?": {"answer": ["989", "990"], "correct-answer-source": "random"},
 					"What is the newer, secure port number typically used by LDAP?": "636",
 				}
-			}
+			},
 			"descriptions": {
-				"incorrect-answers": ["HTTP", "SMTP", "POP3", "IMAP", "FTP", "SSH", "DHCP", "DNS", "LDAP", "DRP", "SMB"],
-				"questions": {
-					"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
-					"What protocol is typically used to transmit emails to a mail server?": "SMTP",
-					"What protocol is typically used to retrieve directory listings and transfer files?": "FTP",
-					"What protocol is typically use to remotely control computers via a command line?": "SSH",
+				"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
+				"What protocol is typically used to transmit emails to a mail server?": "SMTP",
+				"What protocol is typically used to retrieve directory listings and transfer files?": "FTP",
+				"What protocol is typically use to remotely control computers via a command line?": "SSH"
+			}
+		},
+		"802.11 Wi-Fi Versions": {
+			"Maximum Data Rate": {
+				"What is the maximum data rate for 802.11a?": "54Mbps",
+				"What is the maximum data rate for 802.11b?": "11Mbps",
+				"What is the maximum data rate for 802.11g?": "54Mbps",
+				"What is the maximum data rate for 802.11n (Wi-Fi 4)?": "600Mbps",
+				"What is the maximum data rate for 802.11ac (Wi-Fi 5)?": "3.5Gbps",
+				"What is the maximum data rate for 802.11ax (Wi-Fi 6)?": "9.6Gbps"
+			},
+			"Frequencies": {
+				"Does the 802.11a standard use 2.4GHz, 5GHz, or both?": "5GHz",
+				"Does the 802.11b standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
+				"Does the 802.11g standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
+				"Does the 802.11n (Wi-Fi 4) standard use 2.4GHz, 5GHz, or both?": "Both",
+				"Does the 802.11ac (Wi-Fi 5) standard use 2.4GHz, 5GHz, or both?": "5GHz",
+				"Does the 802.11ax (Wi-Fi 6) standard use 2.4GHz, 5GHz, or both?": "Both"
+			}
+		},
+		"Network Hardware": {
+			"Networking Devices": {
+				"What device is used to filter network traffic by port number?": "Firewall",
+				"What device provide equal distribution of IP traffic to multiple servers?": "Load Balancer"
+			},
+			"Networking Tools": {
+				"What is used to cut cable into segments?": ["Cable Cutter", "Cable Snips"],
+				"What is used to remove the plastic jacket from a cable to expose the wires?": "Cable Stripper",
+				"What is used to terminate wires into a patch panel?": "Punchdown Tool",
+				"What is used to ensure the correct operation of every wire in a cable?": ["Cable Tester", "Continuity Tester", "Cable Certifier"],
+				"What is used to determine which of many cables corresponded to particular jack or plug?": ["Toner Probe", "Tone Generator", "Toner/Probe"],
+				"What is used to attach the wires of a cable to a plug?": "Crimper",
+				"What is used to verify the correct functioning of a patch cable?": "Patch tester",
+				"What is used to capture network traffic for later analysis?": "Network Tap",
+				"What is used to analyze nearby Wi-Fi traffic?": ["Wi-Fi Analyzer", "WiFi Analyzer"]
+			},
+			"Cables & Connectors": {
+				"Acronyms": {
+					"What does 'UTP' (the cable) stand for?": "Unshielded Twisted Pair",
+					"What does 'STP' (the cable) stand for?": "Shielded Twisted Pair"
+				},
+				"Twisted Pair Categories": {
+					"What is the maximum network speed rating of Cat5 cable?": "100Mbps",
+					"What is the maximum network speed rating of Cat5e cable?": ["1000Mbps", "1Gbps"],
+					"What is the maximum network speed rating of Cat6 cable?": "10Gbps",
+					"What is the maximum network speed rating of Cat6a cable?": "10Gbps",
+					"What is the maximum network speed rating of Cat7 cable?": "10Gbps",
+					"What is the maximum network speed rating of Cat8 cable?": "40Gbps"
+				},
+				"RJ45 vs RJ11": {
+					"How many pins does an RJ45 plug contain?": "8",
+					"How many pins does an RJ11 plug contain?": "6"
+				},
+				"Optical Cable": {
+					"Acronyms": {
+						"What does 'ST' (the cable) stand for?": "Straight Tip",
+						"What does 'SC' (the cable) stand for?": "Subscriber Connector",
+						"What does 'LC' (the cable) stand for?": "Lucent Connector"
+					}
 				}
 			}
+		},
+		"Transport-layer Knowledge": {
+			"How many bytes are in an IPv4 address?": "4",
+			"Between TCP and UDP, which guarantees eventual delivery of transmitted data?": "TCP",
+			"Between TCP and UDP, which does NOT retransmit data which failed to reach the intended recipient?": "UDP",
+			"What does an APIPA-assigned address start with?": "169.254",
+			"What is used by a computer to determine which portion of its IP address constitutes a subnet identifier?": "Subnet Mask",
+			"What is the subnet mask of a class-A network?": "255.0.0.0",
+			"What is the subnet mask of a class-B network?": "255.255.0.0",
+			"What is the subnet mask of a class-C network?": "255.255.255.0",
+		},
+		"Introductory Cybersecurity Concepts": {
+			"In cybersecurity, what does 'AAA' stand for?": "Authentication, Authorization, Accounting",
+			"In cybersecurity, what does 'IDS' stand for?": "Intrusion Detection System",
+			"In cybersecurity, what does 'IPS' stand for?": "Intrusiong Prevention System",
+			"Which of the following can alert an admin to a potential security incident, but takes no action to prevent it: 'IDS' or 'IPS'?": "IDS",
+			"Which of the following can detect and take action to mitigate a potential security incident: 'IDS' or 'IPS'?": "IPS"
 		}
 	}
 }

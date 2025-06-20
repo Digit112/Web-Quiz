@@ -66,12 +66,18 @@ A QuestionGroup has the following properties:
 - `descendants-give-incorrect-answers` (optional; default `true`): If true, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice.
 - `incorrect-answers` (optional): A list of incorrect answers which can be used by all children in addition to their own `incorrect-answers` lists and the lists on any intermediate groups.
 
+- `case-sensitive` (optional): Specify on a group to allow its descendants to inherit the value. May be overidden by descendants.
+- `mode-of-presentation` (optional): Specify on a group to allow its descendants to inherit the value. May be overidden by descendants.
+- `max-choice-options` (optional): Specify on a group to allow its descendants to inherit the value. May be overidden by descendants.
+
 ### A Question has the following properties:
 
 - `question`: A list of question statetments which the user can see. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
 - `answer`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
 - `incorrect-answers` (optional): A list of incorrect answers which may be displayed to the user as options in multiple-choice presentation.
-- `case-sensitive` (optional; default `false`): Whether a response with the same text but wrong letter casing counts as correct.
+- `case-sensitive` (optional; inherits by default): Whether a response with the same text but wrong letter casing counts as correct. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `false`.
+- `mode-of-presentation` (optional; inherits by default): Whether this question requires a `verbatim` response from the user, or a `multiple-choice` selection. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `verbatim`.
+- `max-choice-options` (optional; inherits by default): How many options should be shown to the user by default in `multiple-choice` presentation. Fewer options may be displayed if an insufficient number of incorrect answers can be found by the system. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `4`.
 
 ### Common parameters for both Groups and Questions
 

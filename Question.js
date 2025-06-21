@@ -133,9 +133,9 @@ class Question {
 		}
 		else {
 			var correct = false
-			response = response.toLowerString()
+			response = response.toLowerCase()
 			for (let answer of this.a) {
-				if (answer.toLowerString() == response) {
+				if (answer.toLowerCase() == response) {
 					correct = true
 					break
 				}

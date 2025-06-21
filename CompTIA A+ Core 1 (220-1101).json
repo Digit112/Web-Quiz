@@ -1,16 +1,16 @@
 {
 	"version": 1,
 	"author": "ekobadd",
-	"title": "Japanese",
+	"title": "CompTIA A+ Certification 220-1101 (Core 1)",
 	
 	"adaptation-rate": 0.15,
 	"starting-mastery": 0.5,
-	"adaptive-weight-bias": 4.5,
-	"ideal-overall-difficulty": 0.3,
+	"adaptive-weight-bias": 8,
+	"ideal-overall-difficulty": 0.27,
 	
 	"question-root": {
-		"protocols": {
-			"acronyms": {
+		"Protocols": {
+			"Acronyms": {
 				"What does 'IP' stand for?": "Internet Protocol",
 				"What does 'TCP' stand for?": "Transmission Control Protocol",
 				"What does 'UDP' stand for?": "User Datagram Protocol",
@@ -28,8 +28,8 @@
 				"What does 'SNMP' stand for?": "Simple Network Management Protocol",
 				"What does 'Telnet' stand for?": "Telecommunication Network"
 			},
-			"ports": {
-				"plain": {
+			"Ports": {
+				"Plain Ports": {
 					"What is the original, plain port number typically used by HTTP?": "80",
 					"What is the original, plain port number typically used by SMTP?": "25",
 					"What is the original, plain port number typically used by POP3?": "110",
@@ -46,16 +46,16 @@
 					"What is the original, plain port number typically used by SNMPTRAP?": "162",
 					"What is the original, plain port number typically used by Telnet?": "23"
 				},
-				"secure": {
+				"Secure Ports": {
 					"What is the newer, secure port number typically used by HTTP?": "443",
 					"What is a newer, secure port number typically used by SMTP?": {"answer": ["465", "587"], "correct-answer-source": "random"},
 					"What is the newer, secure port number typically used by POP3?": "995",
 					"What is the newer, secure port number typically used by IMAP?": "993",
 					"What is a newer, secure port number typically used by FTP?": {"answer": ["989", "990"], "correct-answer-source": "random"},
-					"What is the newer, secure port number typically used by LDAP?": "636",
+					"What is the newer, secure port number typically used by LDAP?": "636"
 				}
 			},
-			"descriptions": {
+			"Descriptions": {
 				"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
 				"What protocol is typically used to transmit emails to a mail server?": "SMTP",
 				"What protocol is typically used to retrieve directory listings and transfer files?": "FTP",
@@ -130,7 +130,7 @@
 			"What is used by a computer to determine which portion of its IP address constitutes a subnet identifier?": "Subnet Mask",
 			"What is the subnet mask of a class-A network?": "255.0.0.0",
 			"What is the subnet mask of a class-B network?": "255.255.0.0",
-			"What is the subnet mask of a class-C network?": "255.255.255.0",
+			"What is the subnet mask of a class-C network?": "255.255.255.0"
 		},
 		"Introductory Cybersecurity Concepts": {
 			"In cybersecurity, what does 'AAA' stand for?": "Authentication, Authorization, Accounting",
@@ -138,6 +138,57 @@
 			"In cybersecurity, what does 'IPS' stand for?": "Intrusiong Prevention System",
 			"Which of the following can alert an admin to a potential security incident, but takes no action to prevent it: 'IDS' or 'IPS'?": "IDS",
 			"Which of the following can detect and take action to mitigate a potential security incident: 'IDS' or 'IPS'?": "IPS"
+		},
+		"Display Technology": {
+			"Acronyms": {
+				"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
+				"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
+				"What does 'IPS' (the display technology) stand for?": "In-Plane Switching",
+				"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
+				"What does 'LED' (the display technology) stand for?": "Light-Emitting Diode",
+				"What does 'OLED' (the display technology) stand for?": "Organic Light-Emitting Diode",
+				"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
+			},
+			"Backlight & Inverter": {
+				"What component of a mobile device powers the backlight?": "Inverter",
+				"What convnerts a laptop's DC power to AC?": "Inverter",
+				"What LCD display technology has the best viewing angle?": "IPS",
+				"Between LED and LCD, which display technology requires a backlight?": "LCD",
+				"What kind of backlight requies an inverter?": "CCFL"
+			}
+		},
+		"Motherboard Card Standards": {
+			"How many screws are used to affix an M.2 card?": "1",
+			"How many screws are used to affix a Mini PCIe card?": "2",
+			"How many pins does an M.2 card have?": "67"
+		},
+		"Cellular Standards": {
+			"Acronyms": {
+				"What does 'GSM' (The cellular standard) stand for?": "Global System for Mobile Communications",
+				"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
+				"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM",
+				"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",
+				"What does 'IMT' (The cellular standard) stand for?": "International Mobile Telecommunications",
+				"What does 'CDMA' (The cellular standard) stand for?": "Code Division Multiple Access",
+				"What does 'PRL' (The concept relevant to CDMA) stand for?": "Preferred Roaming List",
+				"What does 'IMEI' (The mobile device ID technology) stand for?": "International Mobile Equipment Identity",
+				"What does 'IMSI' (The mobile device ID technology) stand for?": "International Mobile Subscriber Identity",
+				"What does 'SIM' (The concept relevant to IMSI) stand for?": "Subscriber Identity Module",
+				"What does '3GPP' (Pertaining to cellular standards) stand for?": "Third Generation Partnership Project"
+			},
+			"Cellular Standard Generations": {
+				"What generation of cellular standards includes GSM and GPRS?": "2G",
+				"What generation of cellular standards includes UMTS?": "3G",
+				"What generation of cellular standards includes IMT-Advanced and LTE?": "4G",
+				"What generation of cellular standards includes ITU IMT-2020?": "5G",
+				"What is the maximum data transfer rate of 5G?": "20Gbps",
+				"What is the colloaboritive cellular standardization effort resulting in the GSM, UMTS, LTE, and 5G network standards?": "3GPP"
+			},
+			"Cellular Standard Concepts": {
+				"With a provider using CDMA, what can be updated to potentially get better coverage?": ["PRL", "PRL Database"],
+				"What mobile device identification technology uniquely identifies a device on 3GPP-based networks?": "IMEI",
+				"What mobile device identification technology uniquely identifies a device's user on 3GPP-based networks?": "IMSI"
+			}
 		}
 	}
 }

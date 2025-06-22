@@ -54,6 +54,7 @@ quiz_gen.addEventListener("input", function() {
 	
 	my_library.root_q.deactivate_all()
 	my_library.root_q.cache_weights(adapt_gen.checked, use_window.checked)
+	quiz_score = 0
 })
 
 use_window.addEventListener("input", function() {

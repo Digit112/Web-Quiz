@@ -21,7 +21,7 @@
 				"What does 'FTP' stand for?": "File Transfer Protocol",
 				"What does 'SSH' stand for?": "Secure SHell",
 				"What does 'DHCP' stand for?": "Dynamic Host Configuration Protocol",
-				"What does 'DN' stand for?S": "Domain Name System",
+				"What does 'DN' stand for?": "Domain Name System",
 				"What does 'LDAP' stand for?": "Lightweight Directory Access Protocol",
 				"What does 'RDP' stand for?": "Remote Fesktop Protocol",
 				"What does 'SMB' stand for?": "Server Message Block",
@@ -57,9 +57,12 @@
 			},
 			"Descriptions": {
 				"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
-				"What protocol is typically used to transmit emails to a mail server?": "SMTP",
-				"What protocol is typically used to retrieve directory listings and transfer files?": "FTP",
-				"What protocol is typically use to remotely control computers via a command line?": "SSH"
+				"What protocol is used to transmit emails to a mail server?": "SMTP",
+				"What protocol is used to retrieve directory listings and transfer files?": "FTP",
+				"What protocol is used to remotely control computers via a command line?": "SSH",
+				"What protocol dynamically assigns IP addresses to the hosts on a network?": "DHCP",
+				"What protocol allows the translation of domain names into IP addresses?": "DNS",
+				"What protocol allows a user to remotely view and control another host's desktop?": "RDP"
 			}
 		},
 		"802.11 Wi-Fi Versions": {
@@ -81,7 +84,12 @@
 			}
 		},
 		"Network Hardware": {
-			"Networking Devices": {
+			"Networking Devices & Concepts": {
+				"What device connects many devices by broadcasting all information it receives?": "Hub",
+				"What device connects many devices by forwarding received information to its intended recipient?": "Switch",
+				"What sort of switch allows an administrator to configure it, often via HTTP or SSH?": ["Managed", "Managed Switch"],
+				"What sort of switch does not allow an administrator to configure it?": ["Unmanaged", "Unmanaged Switch"],
+				"What device connects two or more networks into an internetwork?": "Router",
 				"What device is used to filter network traffic by port number?": "Firewall",
 				"What device provide equal distribution of IP traffic to multiple servers?": "Load Balancer"
 			},
@@ -143,9 +151,9 @@
 			"Acronyms": {
 				"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
 				"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
-				"What does 'IPS' (the display technology) stand for?": "In-Plane Switching",
+				"What does 'IPS' (the display technology) stand for?": {"answer": "In-Plane Switching", "hidden-answer": "In Plane Switching"},
 				"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
-				"What does 'LED' (the display technology) stand for?": "Light-Emitting Diode",
+				"What does 'LED' (the display technology) stand for?": {"answer": "Light-Emitting Diode", "hidden-answer": "Light Emitting Diode"},
 				"What does 'OLED' (the display technology) stand for?": "Organic Light-Emitting Diode",
 				"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
 			},
@@ -164,7 +172,7 @@
 		},
 		"Cellular Standards": {
 			"Acronyms": {
-				"What does 'GSM' (The cellular standard) stand for?": "Global System for Mobile Communications",
+				"What does 'GSM' (The cellular standard) stand for?": {"answer": "Global System for Mobile Communications", "hidden-answer": "Global System for Mobile Communication"},
 				"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
 				"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM",
 				"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",

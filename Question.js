@@ -11,6 +11,11 @@ class Question {
 		// The parent QuestionGroup
 		this.parent_group = parent_group
 		
+		this.q = null
+		this.a = null
+		this.hidden_a = []
+		this.case_sensitive = false
+		
 		// Interpret as implicit question.
 		if (typeof q_data == "string" || Array.isArray(q_data)) {
 			if (!q) throw new LibraryLoadingError(true, q, parent_group, "explicit question must be an object.")
@@ -56,6 +61,14 @@ class Question {
 			if (!this.q) throw new Error("Failed to obtain question statement(s)")
 			
 			if (!q_data["answer"]) throw new LibraryLoadingError(true, this.q[0], parent_group, "required parameter 'answer' is missing.");
+			
+			if (!q_data["hidden-answer"]) this.hidden_a = []
+			else if (typeof q_data["hidden-answer"] == "string") this.hidden_a = [q_data["hidden-answer"]]
+			else if (Array.isArray(q_data["hidden-answer"])) {
+				// TODO: Validate that q_data["hidden-answer"] is array of strings.
+				this.hidden_a = q_data["hidden-answer"]
+			}
+			else throw new LibraryLoadingError(true, q, parent_group, "parameter 'hidden-answer' must be either string or array of strings.")
 			
 			if (typeof q_data["answer"] == "string") {
 				this.a = [q_data["answer"]]
@@ -129,7 +142,7 @@ class Question {
 		
 		// Determine whether the answer is correct.
 		if (this.case_sensitive) {
-			var correct = this.a.includes(response)
+			var correct = this.a.includes(response) || this.hidden_a.includes(response)
 		}
 		else {
 			var correct = false
@@ -138,6 +151,15 @@ class Question {
 				if (answer.toLowerCase() == response) {
 					correct = true
 					break
+				}
+			}
+			
+			if (!correct) {
+				for (let answer of this.hidden_a) {
+					if (answer.toLowerCase() == response) {
+						correct = true
+						break
+					}
 				}
 			}
 		}

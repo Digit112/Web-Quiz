@@ -9,101 +9,185 @@
 	"ideal-overall-difficulty": 0.27,
 	
 	"question-root": {
-		"Protocols": {
-			"Acronyms": {
-				"What does 'IP' stand for?": "Internet Protocol",
-				"What does 'TCP' stand for?": "Transmission Control Protocol",
-				"What does 'UDP' stand for?": "User Datagram Protocol",
-				"What does 'HTTP' stand for?": "HyperText Transfer Protocol",
-				"What does 'SMTP' stand for?": "Simple Mail Transfer Protocol",
-				"What does 'POP3' stand for?": ["Post Office Protocol", "Post Office Protocol 3"],
-				"What does 'IMAP' stand for?": "Internet Message Access Protocol",
-				"What does 'FTP' stand for?": "File Transfer Protocol",
-				"What does 'SSH' stand for?": "Secure SHell",
-				"What does 'DHCP' stand for?": "Dynamic Host Configuration Protocol",
-				"What does 'DN' stand for?": "Domain Name System",
-				"What does 'LDAP' stand for?": "Lightweight Directory Access Protocol",
-				"What does 'RDP' stand for?": "Remote Fesktop Protocol",
-				"What does 'SMB' stand for?": "Server Message Block",
-				"What does 'SNMP' stand for?": "Simple Network Management Protocol",
-				"What does 'Telnet' stand for?": "Telecommunication Network"
-			},
-			"Ports": {
-				"Plain Ports": {
-					"What is the original, plain port number typically used by HTTP?": "80",
-					"What is the original, plain port number typically used by SMTP?": "25",
-					"What is the original, plain port number typically used by POP3?": "110",
-					"What is the original, plain port number typically used by IMAP?": "143",
-					"What is the original, plain port number typically used by FTP?": "21",
-					"What is the port number typically used by SSH?": "22",
-					"What is the original, plain port number typically used by a DHCP client?": "68",
-					"What is the original, plain port number typically used by a DHCP server?": "67",
-					"What is the original, plain port number typically used by DNS?": "53",
-					"What is the original, plain port number typically used by LDAP?": "389",
-					"What is the original, plain port number typically used by RDP?": "3389",
-					"What is the original, plain port number typically used by SMB?": "445",
-					"What is the original, plain port number typically used by SNMP?": "161",
-					"What is the original, plain port number typically used by SNMPTRAP?": "162",
-					"What is the original, plain port number typically used by Telnet?": "23"
+		"Domain 1: Mobile Devices": {
+			"Display Technology": {
+				"Acronyms": {
+					"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
+					"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
+					"What does 'IPS' (the display technology) stand for?": {"answer": "In-Plane Switching", "hidden-answer": "In Plane Switching"},
+					"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
+					"What does 'LED' (the display technology) stand for?": {"answer": "Light-Emitting Diode", "hidden-answer": "Light Emitting Diode"},
+					"What does 'OLED' (the display technology) stand for?": {"answer": ["Organic Light-Emitting Diode", "Organic LED"], "hidden-answer": "Organic Light Emitting Diode"},
+					"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
 				},
-				"Secure Ports": {
-					"What is the newer, secure port number typically used by HTTP?": "443",
-					"What is a newer, secure port number typically used by SMTP?": {"answer": ["465", "587"], "correct-answer-source": "random"},
-					"What is the newer, secure port number typically used by POP3?": "995",
-					"What is the newer, secure port number typically used by IMAP?": "993",
-					"What is a newer, secure port number typically used by FTP?": {"answer": ["989", "990"], "correct-answer-source": "random"},
-					"What is the newer, secure port number typically used by LDAP?": "636"
+				"Backlight & Inverter": {
+					"What component of a mobile device powers the backlight?": "Inverter",
+					"What convnerts a laptop's DC power to AC?": "Inverter",
+					"What LCD display technology has the best viewing angle?": "IPS",
+					"Between LED and LCD, which display technology requires a backlight?": "LCD",
+					"What kind of backlight requies an inverter?": "CCFL"
+				},
+				"Properties": {
+					"Which display technology is more common in modern laptops, LED or LCD?": "LCD",
+					"Which technology is more often used as a bakclight in modern laptops, CCFL or LED?": "LED",
+					"Is In-Plane Switching (IPS) characterized by relatively wider or narrower viewing angles?": "Wider",
+					"Is In-Plane Switching (IPS) characterized by relatively faster or slower response times?": "Slower",
+					"Is In-Plane Switching (IPS) characterized by relatively greater or lesser color quality?": "Greater",
+					"Is Twisted Nematic (TN) characterized by relatively wider or narrower viewing angles?": "Narrower",
+					"Is Twisted Nematic (TN) characterized by relatively faster or slower response times?": "Faster",
+					"Is Twisted Nematic (TN) characterized by relatively greater or lesser color quality?": "Lesser",
+					"Is Vertical Alignment (VA) characterized by relatively wider or narrower viewing angles?": "Wider",
+					"Is Vertical Alignment (VA) characterized by relatively higher or lower contrast ratios?": "Higher",
+					"Is Vertical Alignment (VA) characterized by relatively greater or lesser color quality?": "Greater",
+					"Is Organic LED (OLED) characterized by relatively brighter or darker displays than LCD?": "Darker",
+					"Is Organic LED (OLED) characterized by relatively higher or lower contrast ratios than LCD?": "Higher"
 				}
 			},
-			"Descriptions": {
-				"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
-				"What protocol is used to transmit emails to a mail server?": "SMTP",
-				"What protocol is used to retrieve directory listings and transfer files?": "FTP",
-				"What protocol is used to remotely control computers via a command line?": "SSH",
-				"What protocol dynamically assigns IP addresses to the hosts on a network?": "DHCP",
-				"What protocol allows the translation of domain names into IP addresses?": "DNS",
-				"What protocol allows a user to remotely view and control another host's desktop?": "RDP"
+			"Cellular Standards": {
+				"Acronyms": {
+					"What does 'GSM' (The cellular standard) stand for?": {"answer": "Global System for Mobile Communications", "hidden-answer": "Global System for Mobile Communication"},
+					"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
+					"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM Evolution",
+					"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",
+					"What does 'IMT' (The cellular standard) stand for?": {"answer": "International Mobile Telecommunications", "hidden-answer": "International Mobile Telecommunication"},
+					"What does 'CDMA' (The cellular standard) stand for?": "Code Division Multiple Access",
+					"What does 'PRL' (The concept relevant to CDMA) stand for?": "Preferred Roaming List",
+					"What does 'IMEI' (The mobile device ID technology) stand for?": "International Mobile Equipment Identity",
+					"What does 'IMSI' (The mobile device ID technology) stand for?": "International Mobile Subscriber Identity",
+					"What does 'SIM' (The concept relevant to IMSI) stand for?": "Subscriber Identity Module",
+					"What does '3GPP' (Pertaining to cellular standards) stand for?": "Third Generation Partnership Project"
+				},
+				"Cellular Standard Generations": {
+					"What generation of cellular standards includes GSM and GPRS?": "2G",
+					"What generation of cellular standards includes UMTS?": "3G",
+					"What generation of cellular standards includes IMT-Advanced and LTE?": "4G",
+					"What generation of cellular standards includes ITU IMT-2020?": "5G",
+					"What is the maximum data transfer rate of 5G?": "20Gbps",
+					"What is the collaborative cellular standardization effort resulting in the GSM, UMTS, LTE, and 5G network standards?": "3GPP"
+				},
+				"Cellular Standard Concepts": {
+					"With a provider using CDMA, what can be updated to potentially get better coverage?": ["PRL", "PRL Database"],
+					"What mobile device identification technology uniquely identifies a device on 3GPP-based networks?": "IMEI",
+					"What mobile device identification technology uniquely identifies a device's user on 3GPP-based networks?": "IMSI"
+				}
 			}
 		},
-		"802.11 Wi-Fi Versions": {
-			"Maximum Data Rate": {
-				"What is the maximum data rate for 802.11a?": "54Mbps",
-				"What is the maximum data rate for 802.11b?": "11Mbps",
-				"What is the maximum data rate for 802.11g?": "54Mbps",
-				"What is the maximum data rate for 802.11n (Wi-Fi 4)?": "600Mbps",
-				"What is the maximum data rate for 802.11ac (Wi-Fi 5)?": "3.5Gbps",
-				"What is the maximum data rate for 802.11ax (Wi-Fi 6)?": "9.6Gbps"
+		"Domain 2: Networking": {
+			"Protocols": {
+				"Acronyms": {
+					"What does 'IP' (the protocol) stand for?": "Internet Protocol",
+					"What does 'TCP' (the protocol) stand for?": "Transmission Control Protocol",
+					"What does 'UDP' (the protocol) stand for?": "User Datagram Protocol",
+					"What does 'HTTP' (the protocol) stand for?": "HyperText Transfer Protocol",
+					"What does 'SMTP' (the protocol) stand for?": "Simple Mail Transfer Protocol",
+					"What does 'POP3' (the protocol) stand for?": ["Post Office Protocol", "Post Office Protocol 3"],
+					"What does 'IMAP' (the protocol) stand for?": "Internet Message Access Protocol",
+					"What does 'FTP' (the protocol) stand for?": "File Transfer Protocol",
+					"What does 'SSH' (the protocol) stand for?": "Secure SHell",
+					"What does 'DHCP' (the protocol) stand for?": "Dynamic Host Configuration Protocol",
+					"What does 'DNS' (the protocol) stand for?": "Domain Name System",
+					"What does 'LDAP' (the protocol) stand for?": "Lightweight Directory Access Protocol",
+					"What does 'RDP' (the protocol) stand for?": "Remote Desktop Protocol",
+					"What does 'SMB' (the protocol) stand for?": "Server Message Block",
+					"What does 'SNMP' (the protocol) stand for?": "Simple Network Management Protocol",
+					"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network"
+				},
+				"Ports": {
+					"Plain Ports": {
+						"What is the original, plain port number typically used by HTTP?": "80",
+						"What is the original, plain port number typically used by SMTP?": "25",
+						"What is the original, plain port number typically used by POP3?": "110",
+						"What is the original, plain port number typically used by IMAP?": "143",
+						"What is the original, plain port number typically used by FTP?": "21",
+						"What is the port number typically used by SSH?": "22",
+						"What is the original, plain port number typically used by a DHCP client?": "68",
+						"What is the original, plain port number typically used by a DHCP server?": "67",
+						"What is the original, plain port number typically used by DNS?": "53",
+						"What is the original, plain port number typically used by LDAP?": "389",
+						"What is the original, plain port number typically used by RDP?": "3389",
+						"What is the original, plain port number typically used by SMB?": "445",
+						"What is the original, plain port number typically used by SNMP?": "161",
+						"What is the original, plain port number typically used by SNMPTRAP?": "162",
+						"What is the original, plain port number typically used by Telnet?": "23"
+					},
+					"Secure Ports": {
+						"What is the newer, secure port number typically used by HTTP?": "443",
+						"What is a newer, secure port number typically used by SMTP?": {"answer": ["465", "587"], "correct-answer-source": "random"},
+						"What is the newer, secure port number typically used by POP3?": "995",
+						"What is the newer, secure port number typically used by IMAP?": "993",
+						"What is a newer, secure port number typically used by FTP?": {"answer": ["989", "990"], "correct-answer-source": "random"},
+						"What is the newer, secure port number typically used by LDAP?": "636"
+					}
+				},
+				"Descriptions": {
+					"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
+					"What protocol is used to transmit emails to a mail server?": "SMTP",
+					"What protocol is used to retrieve directory listings and transfer files?": "FTP",
+					"What protocol is used to remotely control computers via a command line?": "SSH",
+					"What protocol dynamically assigns IP addresses to the hosts on a network?": "DHCP",
+					"What protocol allows the translation of domain names into IP addresses?": "DNS",
+					"What protocol allows a user to remotely view and control another host's desktop?": "RDP"
+				}
 			},
-			"Frequencies": {
-				"Does the 802.11a standard use 2.4GHz, 5GHz, or both?": "5GHz",
-				"Does the 802.11b standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
-				"Does the 802.11g standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
-				"Does the 802.11n (Wi-Fi 4) standard use 2.4GHz, 5GHz, or both?": "Both",
-				"Does the 802.11ac (Wi-Fi 5) standard use 2.4GHz, 5GHz, or both?": "5GHz",
-				"Does the 802.11ax (Wi-Fi 6) standard use 2.4GHz, 5GHz, or both?": "Both"
+			"Network Hardware": {
+				"Networking Devices & Concepts": {
+					"What device connects many devices by broadcasting all information it receives?": "Hub",
+					"What device connects many devices by forwarding received information to its intended recipient?": "Switch",
+					"What sort of switch allows an administrator to configure it, often via HTTP or SSH?": ["Managed", "Managed Switch"],
+					"What sort of switch does not allow an administrator to configure it?": ["Unmanaged", "Unmanaged Switch"],
+					"What device connects two or more networks into an internetwork?": "Router",
+					"What device is used to filter network traffic by port number?": "Firewall",
+					"What device provide equal distribution of IP traffic to multiple servers?": "Load Balancer"
+				},
+				"Networking Tools": {
+					"What is used to cut cable into segments?": {"answer": ["Cable Cutters", "Cable Snips"], "hidden-answer": "Cable Cutter"},
+					"What is used to remove the plastic jacket from a cable to expose the wires?": "Cable Stripper",
+					"What is used to terminate wires into a patch panel?": "Punchdown Tool",
+					"What is used to ensure the correct operation of every wire in a cable?": ["Cable Tester", "Continuity Tester", "Cable Certifier"],
+					"What is used to determine which of many cables corresponded to particular jack or plug?": ["Toner Probe", "Tone Generator", "Toner/Probe"],
+					"What is used to attach the wires of a cable to a plug?": "Crimper",
+					"What is used to verify the correct functioning of a patch cable?": "Patch tester",
+					"What is used to capture network traffic for later analysis?": "Network Tap",
+					"What is used to analyze nearby Wi-Fi traffic?": {"answer": "Wi-Fi Analyzer", "hidden-answer": "WiFi Analyzer"}
+				}
+			},
+			"802.11 Wi-Fi Versions": {
+				"Maximum Data Rate": {
+					"What is the maximum data rate for 802.11a?": "54Mbps",
+					"What is the maximum data rate for 802.11b?": "11Mbps",
+					"What is the maximum data rate for 802.11g?": "54Mbps",
+					"What is the maximum data rate for 802.11n (Wi-Fi 4)?": "600Mbps",
+					"What is the maximum data rate for 802.11ac (Wi-Fi 5)?": "3.5Gbps",
+					"What is the maximum data rate for 802.11ax (Wi-Fi 6)?": "9.6Gbps"
+				},
+				"Frequencies": {
+					"Does the 802.11a standard use 2.4GHz, 5GHz, or both?": "5GHz",
+					"Does the 802.11b standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
+					"Does the 802.11g standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
+					"Does the 802.11n (Wi-Fi 4) standard use 2.4GHz, 5GHz, or both?": "Both",
+					"Does the 802.11ac (Wi-Fi 5) standard use 2.4GHz, 5GHz, or both?": "5GHz",
+					"Does the 802.11ax (Wi-Fi 6) standard use 2.4GHz, 5GHz, or both?": "Both"
+				}
+			},
+			"Transport-layer Knowledge": {
+				"How many bytes are in an IPv4 address?": "4",
+				"Between TCP and UDP, which guarantees eventual delivery of transmitted data?": "TCP",
+				"Between TCP and UDP, which does NOT retransmit data which failed to reach the intended recipient?": "UDP",
+				"What does an APIPA-assigned address start with?": "169.254",
+				"What is used by a computer to determine which portion of its IP address constitutes a subnet identifier?": "Subnet Mask",
+				"What is the subnet mask of a class-A network?": "255.0.0.0",
+				"What is the subnet mask of a class-B network?": "255.255.0.0",
+				"What is the subnet mask of a class-C network?": "255.255.255.0"
+			},
+			"Introductory Cybersecurity Concepts": {
+				"In cybersecurity, what does 'AAA' stand for?": "Authentication, Authorization, Accounting",
+				"In cybersecurity, what does 'IDS' stand for?": "Intrusion Detection System",
+				"In cybersecurity, what does 'IPS' stand for?": "Intrusion Prevention System",
+				"Which of the following can alert an admin to a potential security incident, but takes no action to prevent it: 'IDS' or 'IPS'?": "IDS",
+				"Which of the following can detect and take action to mitigate a potential security incident: 'IDS' or 'IPS'?": "IPS"
 			}
 		},
-		"Network Hardware": {
-			"Networking Devices & Concepts": {
-				"What device connects many devices by broadcasting all information it receives?": "Hub",
-				"What device connects many devices by forwarding received information to its intended recipient?": "Switch",
-				"What sort of switch allows an administrator to configure it, often via HTTP or SSH?": ["Managed", "Managed Switch"],
-				"What sort of switch does not allow an administrator to configure it?": ["Unmanaged", "Unmanaged Switch"],
-				"What device connects two or more networks into an internetwork?": "Router",
-				"What device is used to filter network traffic by port number?": "Firewall",
-				"What device provide equal distribution of IP traffic to multiple servers?": "Load Balancer"
-			},
-			"Networking Tools": {
-				"What is used to cut cable into segments?": ["Cable Cutter", "Cable Snips"],
-				"What is used to remove the plastic jacket from a cable to expose the wires?": "Cable Stripper",
-				"What is used to terminate wires into a patch panel?": "Punchdown Tool",
-				"What is used to ensure the correct operation of every wire in a cable?": ["Cable Tester", "Continuity Tester", "Cable Certifier"],
-				"What is used to determine which of many cables corresponded to particular jack or plug?": ["Toner Probe", "Tone Generator", "Toner/Probe"],
-				"What is used to attach the wires of a cable to a plug?": "Crimper",
-				"What is used to verify the correct functioning of a patch cable?": "Patch tester",
-				"What is used to capture network traffic for later analysis?": "Network Tap",
-				"What is used to analyze nearby Wi-Fi traffic?": ["Wi-Fi Analyzer", "WiFi Analyzer"]
-			},
+		"Domain 3: Hardware": {
 			"Cables & Connectors": {
 				"Acronyms": {
 					"What does 'UTP' (the cable) stand for?": "Unshielded Twisted Pair",
@@ -117,86 +201,130 @@
 					"What is the maximum network speed rating of Cat7 cable?": "10Gbps",
 					"What is the maximum network speed rating of Cat8 cable?": "40Gbps"
 				},
+				"Coaxial, RG-6 Cable": {
+					"What sort of cable typically connects to a cable modem to provide access to an internet service?": ["RG-6", "Coaxial", "Coaxial Cable"],
+					"What sort of coaxial cable is most common?": "RG-6",
+					"What sort of connector is used to connect an RG-6 coaxial cable to a cable modem?": ["F-Connector", "Screw-on F-Connector"]
+				},
 				"RJ45 vs RJ11": {
 					"How many pins does an RJ45 plug contain?": "8",
 					"How many pins does an RJ11 plug contain?": "6"
 				},
 				"Optical Cable": {
 					"Acronyms": {
-						"What does 'ST' (the cable) stand for?": "Straight Tip",
-						"What does 'SC' (the cable) stand for?": "Subscriber Connector",
-						"What does 'LC' (the cable) stand for?": "Lucent Connector"
+						"What does 'ST' (the optical cable) stand for?": "Straight Tip",
+						"What does 'SC' (the optical cable) stand for?": "Subscriber Connector",
+						"What does 'LC' (the optical cable) stand for?": "Lucent Connector"
+					}
+				},
+				"USB": {
+					"What is the maximum data transfer rate of USB 2.0?": "480Mbps",
+					"What is the maximum data transfer rate of USB 3.0?": "5Gbps",
+					"What is the maximum data transfer rate of USB 3.1?": "10Gbps",
+					"What is the maximum data transfer rate of USB 3.2 (USB-C)?": "20Gbps"
+				},
+				"Thunderbolt": {
+					"What is the maximum data transfer rate of Thunderbolt Version 1?": "10Gbps",
+					"What is the maximum data transfer rate of Thunderbolt Version 2?": "20Gbps",
+					"What is the maximum data transfer rate of Thunderbolt Version 3?": "40Gbps",
+					"What Connector does Thunderbolt Version 1 use?": "Mini DisplayPort",
+					"What Connector does Thunderbolt Version 2 use?": "Mini DisplayPort",
+					"What Connector does Thunderbolt Version 3 use?": "USB-C"
+				},
+				"Video Cables": {
+					"Acronyms": {
+						"What does 'HDMI' (the video connector) stand for?": {"answer": "High-Definition Multimedia Interface", "hidden-answer": "High Definition Multimedia Interface"},
+						"What does 'DVI' (the video connector) stand for?": "Digital Visual Interface",
+						"What does 'VGA' (the video connector) stand for?": "Video Graphics Array"
+					},
+					"Features": {
+						"How many pins does a VGA connector have?": "15",
+						"What kind of video connector has a square grid of pins and single tab to one side?": "DVI"
+					},
+					"Capability": {
+						"Yes or no, can DisplayPort carry audio in addition to video signals?": "Yes",
+						"Yes or no, can HDMI carry audio in addition to video signals?": "Yes",
+						"Yes or no, can DVI carry audio in addition to video signals?": "No",
+						"Yes or no, can VGA carry audio in addition to video signals?": "No"
+					}
+				},
+				"Storage Connectors": {
+					"What storage drive cable has a 7-pin data connector and 15-pin power connector?": "SATA",
+					"What storage drive cable has a 40-pin ribbon cable for data and a 4-pin Molex connector for power?": "IDE"
+				}
+			},
+			"RAM Types": {
+				"DDR Features": {
+					"What kind of RAM has 240 pins?": "DDR3",
+					"How many pins does a DDR3 RAM module have?": "240",
+					"How many pins does a DDR4 RAM module have?": "288",
+					"How many pins does a DDR5 RAM module have?": "288",
+					"What kind of RAM has a common voltage of 1.2 or 1.5V?": "DDR3",
+					"What kind of RAM has a common voltage of 1.2 or 1.35V?": "DDR4",
+					"What kind of RAM has a common voltage of 1.1V?": "DDR5"
+				},
+				"Single- vs Multi-Channel": {
+					"What is the term for a motherboard which contains multiple data buses to separate RAM banks to increase throughput?": {"answer": "Multi-Channel", "hidden-answer": "Multi Channel"},
+					"What is the term for a motherboard which contains a single data bus shared by all RAM modules?": {"answer": "Single-Channel", "hidden-answer": "Single Channel"}
+				},
+				"Error Correction Code": {
+					"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": "Error Correcting Code"},
+					"What technology reduces the failure rate of RAM by detecting and correcting individual errors, but introduces additional access latency?": "ECC"
+				}
+			},
+			"Storage Drives": {
+				"SATA": {
+					"What voltages are received by a SATA drive?": {"answer": "3.3V, 5V, and 12V", "hidden-answer": ["3.3V 5V and 12V", "3.3V, 5V, 12V", "3.3V 5V 12V"]},
+					"What is the maximum data transfer rate of SATA Revision 3.0?": "600MBps",
+					"What is the maximum data transfer rate of SATA Revision 3.2?": "1969MBps"
+				},
+				"RAID Levels": {
+					"What is the common name for RAID 0?": "Striping",
+					"What is the common name for RAID 1?": "Mirroring",
+					"What is the common name for RAID 5?": "Striping with Parity",
+					"What is the common name for RAID 10?": ["Stripe of Mirrors", "Mirrored Striping"],
+					"What RAID level provides a potential performance increase but no fault tolerance?": ["RAID 0", "0"],
+					"What is the minimum number of disks used in a RAID 0 array?": "2",
+					"What is the minimum number of disks used in a RAID 1 array?": "2",
+					"What is the minimum number of disks used in a RAID 5 array?": "3",
+					"What is the minimum number of disks used in a RAID 10 array?": "4"
+				},
+				"Optical Drive & Devices": {
+					"What does 'CD' (The optical storage device) stand for?": "Compact Disc",
+					"What does 'DVD' (The optical storage device) stand for?": "Digital Versatile Disc",
+					"What optical storage technology uses blue light?": ["Blu-Ray Disc", "Blu-Ray"]
+				},
+				"Storage Drive Properties": {
+					"Between SSDs and Magnetic Drives, which is characterized by greater typical storage capacity?": {"answer": "Magnetic Drive", "hidden-answer": "Magnetic Drives"},
+					"Between SSDs and Magnetic Drives, which is characterized by greater typical performance?": {"answer": "SSD", "hidden-answer": "SSDs"},
+					"Between SSDs and Magnetic Drives, which is characterized by greater typical device cost?": {"answer": "SSD", "hidden-answer": "SSDs"}
+				}
+			},
+			"Motherboard Concepts": {
+				"Power": {
+					"What voltages are delivered by an ATX power connector?": {"answer": "3.3V, 5V, 12V, and -12V", "hidden-answer": ["3.3V 5V 12V and -12V", "3.3V, 5V, 12V, -12V", "3.3V 5V 12V -12V"]},
+					"How many pins does the ATX12V version 2 power connector have?": "24"
+				},
+				"Expansion Slots": {
+					"How many screws are used to affix an M.2 card?": "1",
+					"How many screws are used to affix a Mini PCIe card?": "2",
+					"How many pins does an M.2 card have?": "67",
+					"What does 'PCI' (the expansion card connector) stand for?": "Peripheral Component Interface",
+					"What does 'PCIe' (the expansion card connector) stand for?": ["Peripheral Component Interface Express", "PCI Express"]
+				}
+			},
+			"CPU Concepts": {
+				"Bus Speed & Clock Speed": {
+					"hidden": true,
+					"presentation": "multiple-choice",
+					"max-choices": 2,
+					"children-give-incorrect-answers": true,
+					"questions": {
+						"What does 'bus speed' refer to?": "The Motherboard's base clock speed.",
+						"What does 'clock speed' refer to?": "The CPU's base clock speed."
 					}
 				}
-			}
-		},
-		"Transport-layer Knowledge": {
-			"How many bytes are in an IPv4 address?": "4",
-			"Between TCP and UDP, which guarantees eventual delivery of transmitted data?": "TCP",
-			"Between TCP and UDP, which does NOT retransmit data which failed to reach the intended recipient?": "UDP",
-			"What does an APIPA-assigned address start with?": "169.254",
-			"What is used by a computer to determine which portion of its IP address constitutes a subnet identifier?": "Subnet Mask",
-			"What is the subnet mask of a class-A network?": "255.0.0.0",
-			"What is the subnet mask of a class-B network?": "255.255.0.0",
-			"What is the subnet mask of a class-C network?": "255.255.255.0"
-		},
-		"Introductory Cybersecurity Concepts": {
-			"In cybersecurity, what does 'AAA' stand for?": "Authentication, Authorization, Accounting",
-			"In cybersecurity, what does 'IDS' stand for?": "Intrusion Detection System",
-			"In cybersecurity, what does 'IPS' stand for?": "Intrusiong Prevention System",
-			"Which of the following can alert an admin to a potential security incident, but takes no action to prevent it: 'IDS' or 'IPS'?": "IDS",
-			"Which of the following can detect and take action to mitigate a potential security incident: 'IDS' or 'IPS'?": "IPS"
-		},
-		"Display Technology": {
-			"Acronyms": {
-				"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
-				"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
-				"What does 'IPS' (the display technology) stand for?": {"answer": "In-Plane Switching", "hidden-answer": "In Plane Switching"},
-				"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
-				"What does 'LED' (the display technology) stand for?": {"answer": "Light-Emitting Diode", "hidden-answer": "Light Emitting Diode"},
-				"What does 'OLED' (the display technology) stand for?": "Organic Light-Emitting Diode",
-				"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
-			},
-			"Backlight & Inverter": {
-				"What component of a mobile device powers the backlight?": "Inverter",
-				"What convnerts a laptop's DC power to AC?": "Inverter",
-				"What LCD display technology has the best viewing angle?": "IPS",
-				"Between LED and LCD, which display technology requires a backlight?": "LCD",
-				"What kind of backlight requies an inverter?": "CCFL"
-			}
-		},
-		"Motherboard Card Standards": {
-			"How many screws are used to affix an M.2 card?": "1",
-			"How many screws are used to affix a Mini PCIe card?": "2",
-			"How many pins does an M.2 card have?": "67"
-		},
-		"Cellular Standards": {
-			"Acronyms": {
-				"What does 'GSM' (The cellular standard) stand for?": {"answer": "Global System for Mobile Communications", "hidden-answer": "Global System for Mobile Communication"},
-				"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
-				"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM",
-				"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",
-				"What does 'IMT' (The cellular standard) stand for?": "International Mobile Telecommunications",
-				"What does 'CDMA' (The cellular standard) stand for?": "Code Division Multiple Access",
-				"What does 'PRL' (The concept relevant to CDMA) stand for?": "Preferred Roaming List",
-				"What does 'IMEI' (The mobile device ID technology) stand for?": "International Mobile Equipment Identity",
-				"What does 'IMSI' (The mobile device ID technology) stand for?": "International Mobile Subscriber Identity",
-				"What does 'SIM' (The concept relevant to IMSI) stand for?": "Subscriber Identity Module",
-				"What does '3GPP' (Pertaining to cellular standards) stand for?": "Third Generation Partnership Project"
-			},
-			"Cellular Standard Generations": {
-				"What generation of cellular standards includes GSM and GPRS?": "2G",
-				"What generation of cellular standards includes UMTS?": "3G",
-				"What generation of cellular standards includes IMT-Advanced and LTE?": "4G",
-				"What generation of cellular standards includes ITU IMT-2020?": "5G",
-				"What is the maximum data transfer rate of 5G?": "20Gbps",
-				"What is the colloaboritive cellular standardization effort resulting in the GSM, UMTS, LTE, and 5G network standards?": "3GPP"
-			},
-			"Cellular Standard Concepts": {
-				"With a provider using CDMA, what can be updated to potentially get better coverage?": ["PRL", "PRL Database"],
-				"What mobile device identification technology uniquely identifies a device on 3GPP-based networks?": "IMEI",
-				"What mobile device identification technology uniquely identifies a device's user on 3GPP-based networks?": "IMSI"
-			}
+			}	
 		}
 	}
 }

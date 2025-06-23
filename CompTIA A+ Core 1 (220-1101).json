@@ -5,7 +5,7 @@
 	
 	"adaptation-rate": 0.15,
 	"starting-mastery": 0.5,
-	"adaptive-weight-bias": 8,
+	"adaptive-weight-bias": 12,
 	"ideal-overall-difficulty": 0.27,
 	
 	"question-root": {
@@ -42,6 +42,13 @@
 					"Is Organic LED (OLED) characterized by relatively brighter or darker displays than LCD?": "Darker",
 					"Is Organic LED (OLED) characterized by relatively higher or lower contrast ratios than LCD?": "Higher"
 				}
+			},
+			"Mobile Device RAM": {
+				"What form-factor of DDR RAM is most often found in laptops?": {"answer": "SODIMM", "hidden-answer": ["SO-DIMM", "SODIMMs", "SO-DIMMs"]},
+				"What form-factor of DDR RAM is most often found in desktop computerd?": {"answer": "DIMM", "hidden-answer": "DIMMs"},
+				"How many pins does SODIMM DDR3 have?": "204",
+				"How many pins does SODIMM DDR4 have?": "260",
+				"How many pins does SODIMM DDR5 have?": "262"
 			},
 			"Cellular Standards": {
 				"Acronyms": {
@@ -175,7 +182,6 @@
 				"Between TCP and UDP, which does NOT retransmit data which failed to reach the intended recipient?": "UDP",
 				"What does an APIPA-assigned address start with?": "169.254",
 				"What is used by a computer to determine which portion of its IP address constitutes a subnet identifier?": "Subnet Mask",
-				"What is the subnet mask of a class-A network?": "255.0.0.0",
 				"What is the subnet mask of a class-B network?": "255.255.0.0",
 				"What is the subnet mask of a class-C network?": "255.255.255.0"
 			},
@@ -254,11 +260,17 @@
 				}
 			},
 			"RAM Types": {
+				"Acronyms": {
+					"What does 'RAM' (the computer component) stand for?": "Random Access Memory",
+					"What was 'DDR' (the RAM technology) stand for?": "Double Data Rate",
+					"What does 'DIMM' (the RAM form factor) stand for?": "Dual Inline Memory Module",
+					"What does 'SODIMM' (the RAM form factor) stand for?": {"answer": ["Small Outline DIMM", "Small Outline Dual Inline Memory Module"], "hidden-answer": ["Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
+				}
 				"DDR Features": {
 					"What kind of RAM has 240 pins?": "DDR3",
-					"How many pins does a DDR3 RAM module have?": "240",
-					"How many pins does a DDR4 RAM module have?": "288",
-					"How many pins does a DDR5 RAM module have?": "288",
+					"How many pins does a DIMM DDR3 RAM module have?": "240",
+					"How many pins does a DIMM DDR4 RAM module have?": "288",
+					"How many pins does a DIMM DDR5 RAM module have?": "288",
 					"What kind of RAM has a common voltage of 1.2 or 1.5V?": "DDR3",
 					"What kind of RAM has a common voltage of 1.2 or 1.35V?": "DDR4",
 					"What kind of RAM has a common voltage of 1.1V?": "DDR5"
@@ -268,7 +280,7 @@
 					"What is the term for a motherboard which contains a single data bus shared by all RAM modules?": {"answer": "Single-Channel", "hidden-answer": "Single Channel"}
 				},
 				"Error Correction Code": {
-					"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": "Error Correcting Code"},
+					"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},
 					"What technology reduces the failure rate of RAM by detecting and correcting individual errors, but introduces additional access latency?": "ECC"
 				}
 			},

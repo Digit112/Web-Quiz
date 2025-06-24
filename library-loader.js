@@ -78,9 +78,6 @@ do_shuffle.addEventListener("input", function() {
 
 reset_progress.addEventListener("click", function() {
 	my_library.root_q.reset_all()
-	
-	window_size = 5
-	my_library.root_q.reset_was_asked_last()
 })
 
 // Add Event Listener for the next question button.
@@ -101,14 +98,14 @@ function generate_next_question() {
 	
 	if (active_question != null) {
 		// Check the answer.
-		let answer = answer_text.value.trim().toLowerCase()
-		if (answer == "") {return} // Do nothing if no answer provided.
+		let answer = answer_text.value.trim()
+		if (answer == "") return // Do nothing if no answer provided.
 		
 		let correct = active_question.attempt(answer)
 		if (correct) {
 			correct_indicator.innerHTML = "Correct"
 			correct_indicator.style.color = "#070"
-			quiz_score++
+			if (am_quiz) quiz_score++
 		}
 		else {
 			correct_indicator.innerHTML = "Incorrect"
@@ -191,18 +188,12 @@ function generate_next_question() {
 	
 	// Get the next question. If in quiz mode, we already got it.
 	if (!am_quiz) {
+		// Get an active question. If no valid question exists, activate and return one.
 		active_question = my_library.root_q.get_random(am_adaptive, am_windowed)
-		if (active_question == null) { // If no valid question exists, activate and return one.
-			console.log("Failed to retreive questions.")
-			active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
-		}
-		
+		if (active_question == null) active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
 		if (active_question == null) throw new Error("Failed to get question in adaptive or random mode.")
 		
-		if (last_active_question != null) {
-			console.log(last_active_question.q + ": " + last_active_question.get_remainder())
-			last_active_question.was_asked_last = false
-		}
+		if (last_active_question != null) console.log("Last question '" + last_active_question.q + "' now has a remainder of " + last_active_question.get_remainder())
 		
 		last_active_question = active_question
 	}

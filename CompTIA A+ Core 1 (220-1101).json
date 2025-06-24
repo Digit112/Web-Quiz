@@ -265,7 +265,7 @@
 					"What was 'DDR' (the RAM technology) stand for?": "Double Data Rate",
 					"What does 'DIMM' (the RAM form factor) stand for?": "Dual Inline Memory Module",
 					"What does 'SODIMM' (the RAM form factor) stand for?": {"answer": ["Small Outline DIMM", "Small Outline Dual Inline Memory Module"], "hidden-answer": ["Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
-				}
+				},
 				"DDR Features": {
 					"What kind of RAM has 240 pins?": "DDR3",
 					"How many pins does a DIMM DDR3 RAM module have?": "240",

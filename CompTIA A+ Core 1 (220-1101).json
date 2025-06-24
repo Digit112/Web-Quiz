@@ -11,15 +11,6 @@
 	"question-root": {
 		"Domain 1: Mobile Devices": {
 			"Display Technology": {
-				"Acronyms": {
-					"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
-					"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
-					"What does 'IPS' (the display technology) stand for?": {"answer": "In-Plane Switching", "hidden-answer": "In Plane Switching"},
-					"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
-					"What does 'LED' (the display technology) stand for?": {"answer": "Light-Emitting Diode", "hidden-answer": "Light Emitting Diode"},
-					"What does 'OLED' (the display technology) stand for?": {"answer": ["Organic Light-Emitting Diode", "Organic LED"], "hidden-answer": "Organic Light Emitting Diode"},
-					"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
-				},
 				"Backlight & Inverter": {
 					"What component of a mobile device powers the backlight?": "Inverter",
 					"What convnerts a laptop's DC power to AC?": "Inverter",
@@ -51,19 +42,6 @@
 				"How many pins does SODIMM DDR5 have?": "262"
 			},
 			"Cellular Standards": {
-				"Acronyms": {
-					"What does 'GSM' (The cellular standard) stand for?": {"answer": "Global System for Mobile Communications", "hidden-answer": "Global System for Mobile Communication"},
-					"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
-					"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM Evolution",
-					"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",
-					"What does 'IMT' (The cellular standard) stand for?": {"answer": "International Mobile Telecommunications", "hidden-answer": "International Mobile Telecommunication"},
-					"What does 'CDMA' (The cellular standard) stand for?": "Code Division Multiple Access",
-					"What does 'PRL' (The concept relevant to CDMA) stand for?": "Preferred Roaming List",
-					"What does 'IMEI' (The mobile device ID technology) stand for?": "International Mobile Equipment Identity",
-					"What does 'IMSI' (The mobile device ID technology) stand for?": "International Mobile Subscriber Identity",
-					"What does 'SIM' (The concept relevant to IMSI) stand for?": "Subscriber Identity Module",
-					"What does '3GPP' (Pertaining to cellular standards) stand for?": "Third Generation Partnership Project"
-				},
 				"Cellular Standard Generations": {
 					"What generation of cellular standards includes GSM and GPRS?": "2G",
 					"What generation of cellular standards includes UMTS?": "3G",
@@ -81,24 +59,6 @@
 		},
 		"Domain 2: Networking": {
 			"Protocols": {
-				"Acronyms": {
-					"What does 'IP' (the protocol) stand for?": "Internet Protocol",
-					"What does 'TCP' (the protocol) stand for?": "Transmission Control Protocol",
-					"What does 'UDP' (the protocol) stand for?": "User Datagram Protocol",
-					"What does 'HTTP' (the protocol) stand for?": "HyperText Transfer Protocol",
-					"What does 'SMTP' (the protocol) stand for?": "Simple Mail Transfer Protocol",
-					"What does 'POP3' (the protocol) stand for?": ["Post Office Protocol", "Post Office Protocol 3"],
-					"What does 'IMAP' (the protocol) stand for?": "Internet Message Access Protocol",
-					"What does 'FTP' (the protocol) stand for?": "File Transfer Protocol",
-					"What does 'SSH' (the protocol) stand for?": "Secure SHell",
-					"What does 'DHCP' (the protocol) stand for?": "Dynamic Host Configuration Protocol",
-					"What does 'DNS' (the protocol) stand for?": "Domain Name System",
-					"What does 'LDAP' (the protocol) stand for?": "Lightweight Directory Access Protocol",
-					"What does 'RDP' (the protocol) stand for?": "Remote Desktop Protocol",
-					"What does 'SMB' (the protocol) stand for?": "Server Message Block",
-					"What does 'SNMP' (the protocol) stand for?": "Simple Network Management Protocol",
-					"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network"
-				},
 				"Ports": {
 					"Plain Ports": {
 						"What is the original, plain port number typically used by HTTP?": "80",
@@ -158,7 +118,7 @@
 					"What is used to analyze nearby Wi-Fi traffic?": {"answer": "Wi-Fi Analyzer", "hidden-answer": "WiFi Analyzer"}
 				}
 			},
-			"802.11 Wi-Fi Versions": {
+			"802.11 Wi-Fi": {
 				"Maximum Data Rate": {
 					"What is the maximum data rate for 802.11a?": "54Mbps",
 					"What is the maximum data rate for 802.11b?": "11Mbps",
@@ -174,6 +134,17 @@
 					"Does the 802.11n (Wi-Fi 4) standard use 2.4GHz, 5GHz, or both?": "Both",
 					"Does the 802.11ac (Wi-Fi 5) standard use 2.4GHz, 5GHz, or both?": "5GHz",
 					"Does the 802.11ax (Wi-Fi 6) standard use 2.4GHz, 5GHz, or both?": "Both"
+				},
+				"MIMO & MU-MIMO": {
+					"What is the earliest version of the 802.11 standard which supports MIMO?": ["802.11n", "n"],
+					"What is the earliest version of the 802.11 standard which supports MU-MIMO?": ["802.11ac", "ac"]
+				}
+			},
+			"Other Wireless Technologies": {
+				"Properties": {
+					"What short-range wireless technology connects devices into a WPAN?": "Bluetooth",
+					"What wireless technology allows the identification of a tag embedded in a device or card?": "RFID",
+					"What wireles technology is often used for payment transactions and requires devices to be touching or nearly touching?": "NFC"
 				}
 			},
 			"Transport-layer Knowledge": {
@@ -181,24 +152,18 @@
 				"Between TCP and UDP, which guarantees eventual delivery of transmitted data?": "TCP",
 				"Between TCP and UDP, which does NOT retransmit data which failed to reach the intended recipient?": "UDP",
 				"What does an APIPA-assigned address start with?": "169.254",
+				"What does a class-C private IP address start with?": "192.168",
 				"What is used by a computer to determine which portion of its IP address constitutes a subnet identifier?": "Subnet Mask",
 				"What is the subnet mask of a class-B network?": "255.255.0.0",
 				"What is the subnet mask of a class-C network?": "255.255.255.0"
 			},
 			"Introductory Cybersecurity Concepts": {
-				"In cybersecurity, what does 'AAA' stand for?": "Authentication, Authorization, Accounting",
-				"In cybersecurity, what does 'IDS' stand for?": "Intrusion Detection System",
-				"In cybersecurity, what does 'IPS' stand for?": "Intrusion Prevention System",
 				"Which of the following can alert an admin to a potential security incident, but takes no action to prevent it: 'IDS' or 'IPS'?": "IDS",
 				"Which of the following can detect and take action to mitigate a potential security incident: 'IDS' or 'IPS'?": "IPS"
 			}
 		},
 		"Domain 3: Hardware": {
 			"Cables & Connectors": {
-				"Acronyms": {
-					"What does 'UTP' (the cable) stand for?": "Unshielded Twisted Pair",
-					"What does 'STP' (the cable) stand for?": "Shielded Twisted Pair"
-				},
 				"Twisted Pair Categories": {
 					"What is the maximum network speed rating of Cat5 cable?": "100Mbps",
 					"What is the maximum network speed rating of Cat5e cable?": ["1000Mbps", "1Gbps"],
@@ -217,11 +182,8 @@
 					"How many pins does an RJ11 plug contain?": "6"
 				},
 				"Optical Cable": {
-					"Acronyms": {
-						"What does 'ST' (the optical cable) stand for?": "Straight Tip",
-						"What does 'SC' (the optical cable) stand for?": "Subscriber Connector",
-						"What does 'LC' (the optical cable) stand for?": "Lucent Connector"
-					}
+					"Between single-mode and multi-mode, which kind of fiber optic cable has greater range?": "single-mode",
+					"Between single-mode and multi-mode, which kind of fiber optic cable has greater performance?": "single-mode"
 				},
 				"USB": {
 					"What is the maximum data transfer rate of USB 2.0?": "480Mbps",
@@ -238,11 +200,6 @@
 					"What Connector does Thunderbolt Version 3 use?": "USB-C"
 				},
 				"Video Cables": {
-					"Acronyms": {
-						"What does 'HDMI' (the video connector) stand for?": {"answer": "High-Definition Multimedia Interface", "hidden-answer": "High Definition Multimedia Interface"},
-						"What does 'DVI' (the video connector) stand for?": "Digital Visual Interface",
-						"What does 'VGA' (the video connector) stand for?": "Video Graphics Array"
-					},
 					"Features": {
 						"How many pins does a VGA connector have?": "15",
 						"What kind of video connector has a square grid of pins and single tab to one side?": "DVI"
@@ -260,12 +217,6 @@
 				}
 			},
 			"RAM Types": {
-				"Acronyms": {
-					"What does 'RAM' (the computer component) stand for?": "Random Access Memory",
-					"What was 'DDR' (the RAM technology) stand for?": "Double Data Rate",
-					"What does 'DIMM' (the RAM form factor) stand for?": "Dual Inline Memory Module",
-					"What does 'SODIMM' (the RAM form factor) stand for?": {"answer": ["Small Outline DIMM", "Small Outline Dual Inline Memory Module"], "hidden-answer": ["Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
-				},
 				"DDR Features": {
 					"What kind of RAM has 240 pins?": "DDR3",
 					"How many pins does a DIMM DDR3 RAM module have?": "240",
@@ -280,7 +231,6 @@
 					"What is the term for a motherboard which contains a single data bus shared by all RAM modules?": {"answer": "Single-Channel", "hidden-answer": "Single Channel"}
 				},
 				"Error Correction Code": {
-					"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},
 					"What technology reduces the failure rate of RAM by detecting and correcting individual errors, but introduces additional access latency?": "ECC"
 				}
 			},
@@ -302,8 +252,6 @@
 					"What is the minimum number of disks used in a RAID 10 array?": "4"
 				},
 				"Optical Drive & Devices": {
-					"What does 'CD' (The optical storage device) stand for?": "Compact Disc",
-					"What does 'DVD' (The optical storage device) stand for?": "Digital Versatile Disc",
 					"What optical storage technology uses blue light?": ["Blu-Ray Disc", "Blu-Ray"]
 				},
 				"Storage Drive Properties": {
@@ -321,8 +269,6 @@
 					"How many screws are used to affix an M.2 card?": "1",
 					"How many screws are used to affix a Mini PCIe card?": "2",
 					"How many pins does an M.2 card have?": "67",
-					"What does 'PCI' (the expansion card connector) stand for?": "Peripheral Component Interface",
-					"What does 'PCIe' (the expansion card connector) stand for?": ["Peripheral Component Interface Express", "PCI Express"]
 				}
 			},
 			"CPU Concepts": {
@@ -337,6 +283,113 @@
 					}
 				}
 			}	
+		},
+		"Domain 4: Virtualization and Cloud Computing": {
+			"Cloud Infrastructure Types": {
+				"What kind of cloud infrastructure is offered by a service provider to the general public?": "Public",
+				"What kind of cloud infrastructure is hosted internally by the organization which uses it?": "Private",
+				"What kind of cloud infrastructure is a combination of public and private?": "Hybrid",
+				"What kind of cloud infrastructure is hosted and used by multiple organizations in a collaborative effort?": "Community"
+			},
+			"Cloud Characteristics": {
+				"What term refers to the practice of measuring a cloud user's utilization of services and billing them proportionally?": "Metered Utilization"
+			}
+		},
+		"Domain 5: Troubleshooting": {},
+		"Acronyms": {
+			"Electrical": {
+				"What does 'DC' (the kind of electrical current) stand for?": "Direct Current",
+				"What does 'AC' (the kind of electrical current) stand for?": "Alternating Current"
+			},
+			"Cables & Connectors": {
+				"What does 'UTP' (the cable) stand for?": "Unshielded Twisted Pair",
+				"What does 'STP' (the cable) stand for?": "Shielded Twisted Pair",
+				"What does 'ST' (the optical cable) stand for?": "Straight Tip",
+				"What does 'SC' (the optical cable) stand for?": "Subscriber Connector",
+				"What does 'LC' (the optical cable) stand for?": "Lucent Connector"
+			},
+			"Cellular Standards": {
+				"What does 'GSM' (The cellular standard) stand for?": {"answer": "Global System for Mobile Communications", "hidden-answer": "Global System for Mobile Communication"},
+				"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
+				"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM Evolution",
+				"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",
+				"What does 'IMT' (The cellular standard) stand for?": {"answer": "International Mobile Telecommunications", "hidden-answer": "International Mobile Telecommunication"},
+				"What does 'CDMA' (The cellular standard) stand for?": "Code Division Multiple Access",
+				"What does 'PRL' (The concept relevant to CDMA) stand for?": "Preferred Roaming List",
+				"What does 'IMEI' (The mobile device ID technology) stand for?": "International Mobile Equipment Identity",
+				"What does 'IMSI' (The mobile device ID technology) stand for?": "International Mobile Subscriber Identity",
+				"What does 'SIM' (The concept relevant to IMSI) stand for?": "Subscriber Identity Module",
+				"What does '3GPP' (Pertaining to cellular standards) stand for?": "Third Generation Partnership Project"
+			},
+			"Computer Components": {
+				"What does 'CPU' (the computer component) stand for?": "Central Processing Unit",
+				"What does 'PCI' (the expansion card connector) stand for?": "Peripheral Component Interface",
+				"What does 'PCIe' (the expansion card connector) stand for?": {"answer": "PCI Express", "hidden-answer": "Peripheral Component Interface Express"},
+				"What does 'RAM' (the computer component) stand for?": "Random Access Memory",
+				"What was 'DDR' (the RAM technology) stand for?": "Double Data Rate",
+				"What does 'DIMM' (the RAM form factor) stand for?": "Dual Inline Memory Module",
+				"What does 'SODIMM' (the RAM form factor) stand for?": {"answer": ["Small Outline DIMM"], "hidden-answer": ["Small Outline Dual Inline Memory Module", "Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
+			},
+			"Cybersecurity Concepts, Systems, Devices, & Attacks": {
+				"What does 'AAA' (the cybersecurity concept) stand for?": "Authentication, Authorization, Accounting",
+				"What does 'IDS' (the cybersecurity system) stand for?": "Intrusion Detection System",
+				"What does 'IPS' (the cybersecurity system) stand for?": "Intrusion Prevention System",
+				"What does 'DoS' stand for?": "Denial of Service",
+				"What does 'DDoS' stand for?": {"answer": "Distributed DoS", "hidden-answer": "Distributed Denial of Service"}
+			},
+			"Display Technologies": {
+				"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
+				"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
+				"What does 'IPS' (the display technology) stand for?": {"answer": "In-Plane Switching", "hidden-answer": "In Plane Switching"},
+				"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
+				"What does 'LED' (the display technology) stand for?": {"answer": "Light-Emitting Diode", "hidden-answer": "Light Emitting Diode"},
+				"What does 'OLED' (the display technology) stand for?": {"answer": ["Organic Light-Emitting Diode", "Organic LED"], "hidden-answer": "Organic Light Emitting Diode"},
+				"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
+			},
+			"Networking Protocols": {
+				"What does 'IP' (the protocol) stand for?": "Internet Protocol",
+				"What does 'TCP' (the protocol) stand for?": "Transmission Control Protocol",
+				"What does 'UDP' (the protocol) stand for?": "User Datagram Protocol",
+				"What does 'HTTP' (the protocol) stand for?": "HyperText Transfer Protocol",
+				"What does 'SMTP' (the protocol) stand for?": "Simple Mail Transfer Protocol",
+				"What does 'POP3' (the protocol) stand for?": ["Post Office Protocol", "Post Office Protocol 3"],
+				"What does 'IMAP' (the protocol) stand for?": "Internet Message Access Protocol",
+				"What does 'FTP' (the protocol) stand for?": "File Transfer Protocol",
+				"What does 'SSH' (the protocol) stand for?": "Secure SHell",
+				"What does 'DHCP' (the protocol) stand for?": "Dynamic Host Configuration Protocol",
+				"What does 'DNS' (the protocol) stand for?": "Domain Name System",
+				"What does 'ARP' (the protocol) stand for?": "Address Resolution Protocol",
+				"What does 'LDAP' (the protocol) stand for?": "Lightweight Directory Access Protocol",
+				"What does 'RDP' (the protocol) stand for?": "Remote Desktop Protocol",
+				"What does 'SMB' (the protocol) stand for?": "Server Message Block",
+				"What does 'SNMP' (the protocol) stand for?": "Simple Network Management Protocol",
+				"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network"
+			},
+			"Storage Devices": {
+				"What does 'CD' (The optical storage device) stand for?": "Compact Disc",
+				"What does 'DVD' (The optical storage device) stand for?": "Digital Versatile Disc",
+				"What does 'HDD' (The storage device) stand for?": "Hard Disk Drive",
+				"What does 'SSD' (The storage device) stand for?": "Solid State Drive"
+			},
+			"Video Standards & Connectors": {
+				"What does 'HDMI' (the video connector) stand for?": {"answer": "High-Definition Multimedia Interface", "hidden-answer": "High Definition Multimedia Interface"},
+				"What does 'DVI' (the video connector) stand for?": "Digital Visual Interface",
+				"What does 'VGA' (the video connector) stand for?": "Video Graphics Array"
+			},
+			"Virtualization & Cloud Computing": {
+				"What does 'SaaS' (the type of cloud service) stand for?": "Software as a Service",
+				"What does 'PaaS' (the type of cloud service) stand for?": "Platform as a Service",
+				"What does 'IaaS' (the type of cloud service) stand for?": "Infrastructure as a Service"
+			},
+			"Wireless Technologies": {
+				"What does 'RFID' (The wireless technology) stand for?": {"answer": "Radio-Frequency Identification", "hidden-answer": "Radio Frequency Identification"},
+				"What does 'NFC' (The wireless technology) stand for?": {"answer": "Near-Field Communication", "hidden-answer": "Near Field Communication"},
+				"What does MIMO (the 802.11 technology) stand for?": {"answer": "Multiple-Input Multiple-Output", "hidden-answer": "Multiple Input Multiple Output"},
+				"What does MU-MIMO (the 802.11 technology) stand for?": {"answer": "Multiuser MIMO", "hidden-answer": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"}
+			},
+			"Other": {
+				"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]}
+			}
 		}
 	}
 }

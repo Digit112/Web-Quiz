@@ -268,7 +268,7 @@
 				"Expansion Slots": {
 					"How many screws are used to affix an M.2 card?": "1",
 					"How many screws are used to affix a Mini PCIe card?": "2",
-					"How many pins does an M.2 card have?": "67",
+					"How many pins does an M.2 card have?": "67"
 				}
 			},
 			"CPU Concepts": {
@@ -385,7 +385,7 @@
 				"What does 'RFID' (The wireless technology) stand for?": {"answer": "Radio-Frequency Identification", "hidden-answer": "Radio Frequency Identification"},
 				"What does 'NFC' (The wireless technology) stand for?": {"answer": "Near-Field Communication", "hidden-answer": "Near Field Communication"},
 				"What does MIMO (the 802.11 technology) stand for?": {"answer": "Multiple-Input Multiple-Output", "hidden-answer": "Multiple Input Multiple Output"},
-				"What does MU-MIMO (the 802.11 technology) stand for?": {"answer": "Multiuser MIMO", "hidden-answer": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"}
+				"What does MU-MIMO (the 802.11 technology) stand for?": {"answer": "Multiuser MIMO", "hidden-answer": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"]}
 			},
 			"Other": {
 				"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]}

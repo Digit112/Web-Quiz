@@ -157,6 +157,22 @@
 				"What is the subnet mask of a class-B network?": "255.255.0.0",
 				"What is the subnet mask of a class-C network?": "255.255.255.0"
 			},
+			"Application-Layer Knowledge": {
+				"What DNS-based email security system allows the validation of the sending IP-address from which an email originates?": "SPF",
+				"What DNS-based email security system allows the validation of a digital signature attached to an email using a public key?": "DKIM",
+				"What DNS-based email security system allows administrators to publish policies for the handling and reporting of email sent from a domain?": "DMARC",
+				"What is the term for an IP address within a DHCP scope which is permanatly reserved for a particular device?": "DHCP Reservation"
+			},
+			"DNS Records": {
+				"What kind of DNS record converts from a domain name to an IPv4 address?": ["A Record", "A"],
+				"What kind of DNS record converts from a domain name to an IPv6 address?": ["AAAA Record", "AAAA"],
+				"What kind of DNS record stores the authoritative server for a domain's records?": ["NS Record", "NS"],
+				"What kind of DNS record stores administrative information for a domain?": ["SOA Record", "SOA"],
+				"What kind of DNS record stores the mail server for a domain?": ["MX Record", "MX"],
+				"What kind of DNS record converts from an IP address to a domain?": ["PTR Record", "PTR"],
+				"What kind of DNS record stores text-based notes?": ["TXT Record", "TXT"],
+				"What kind of DNS record stores SPF, DKIM, and DMARC information?": ["TXT Record", "TXT"]
+			},
 			"Introductory Cybersecurity Concepts": {
 				"Which of the following can alert an admin to a potential security incident, but takes no action to prevent it: 'IDS' or 'IPS'?": "IDS",
 				"Which of the following can detect and take action to mitigate a potential security incident: 'IDS' or 'IPS'?": "IPS"
@@ -244,12 +260,12 @@
 					"What is the common name for RAID 0?": "Striping",
 					"What is the common name for RAID 1?": "Mirroring",
 					"What is the common name for RAID 5?": "Striping with Parity",
-					"What is the common name for RAID 10?": ["Stripe of Mirrors", "Mirrored Striping"],
+					"What is the common name for RAID 10?": {"answer": ["Stripe of Mirrors", "Striped Mirror"], "hidden-answer": "Striping of Mirrors"},
 					"What RAID level provides a potential performance increase but no fault tolerance?": ["RAID 0", "0"],
-					"What is the minimum number of disks used in a RAID 0 array?": "2",
-					"What is the minimum number of disks used in a RAID 1 array?": "2",
-					"What is the minimum number of disks used in a RAID 5 array?": "3",
-					"What is the minimum number of disks used in a RAID 10 array?": "4"
+					"What is the minimum number of disks used in a RAID 0 array?": {"answer": "2", "hidden-answer": "two"},
+					"What is the minimum number of disks used in a RAID 1 array?": {"answer": "2", "hidden-answer": "two"},
+					"What is the minimum number of disks used in a RAID 5 array?": {"answer": "3", "hidden-answer": "three"},
+					"What is the minimum number of disks used in a RAID 10 array?": {"answer": "4", "hidden-answer": "four"}
 				},
 				"Optical Drive & Devices": {
 					"What optical storage technology uses blue light?": ["Blu-Ray Disc", "Blu-Ray"]
@@ -292,14 +308,16 @@
 				"What kind of cloud infrastructure is hosted and used by multiple organizations in a collaborative effort?": "Community"
 			},
 			"Cloud Characteristics": {
-				"What term refers to the practice of measuring a cloud user's utilization of services and billing them proportionally?": "Metered Utilization"
+				"What term refers to the practice of measuring a cloud user's utilization of services and billing them proportionally?": "Metered Utilization",
+				"What term refers to the ability of a cloud service to quickly and efficient extend a cloud-bassed network to meet demand?": "Rapid Elasticity",
+				"What term refers to a cloud service which is available in real-time, 24/7?": "High Availability"
 			}
 		},
 		"Domain 5: Troubleshooting": {},
 		"Acronyms": {
-			"Electrical": {
-				"What does 'DC' (the kind of electrical current) stand for?": "Direct Current",
-				"What does 'AC' (the kind of electrical current) stand for?": "Alternating Current"
+			"Administrative Systems": {
+				"What does 'MAM' (the administrative system) stand for?": "Mobile Application Management",
+				"What does 'MDM' (the administrative system) stand for?": "Mobile Device Management"
 			},
 			"Cables & Connectors": {
 				"What does 'UTP' (the cable) stand for?": "Unshielded Twisted Pair",
@@ -323,9 +341,11 @@
 			},
 			"Computer Components": {
 				"What does 'CPU' (the computer component) stand for?": "Central Processing Unit",
+				"What does 'GPU' (the computer component) stand for?": "Graphics Processing Unit",
+				"What does 'RAM' (the computer component) stand for?": "Random Access Memory",
+				"What does 'PSU' (the computer component) stand for?": "Power Supply Unit",
 				"What does 'PCI' (the expansion card connector) stand for?": "Peripheral Component Interface",
 				"What does 'PCIe' (the expansion card connector) stand for?": {"answer": "PCI Express", "hidden-answer": "Peripheral Component Interface Express"},
-				"What does 'RAM' (the computer component) stand for?": "Random Access Memory",
 				"What was 'DDR' (the RAM technology) stand for?": "Double Data Rate",
 				"What does 'DIMM' (the RAM form factor) stand for?": "Dual Inline Memory Module",
 				"What does 'SODIMM' (the RAM form factor) stand for?": {"answer": ["Small Outline DIMM"], "hidden-answer": ["Small Outline Dual Inline Memory Module", "Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
@@ -334,8 +354,10 @@
 				"What does 'AAA' (the cybersecurity concept) stand for?": "Authentication, Authorization, Accounting",
 				"What does 'IDS' (the cybersecurity system) stand for?": "Intrusion Detection System",
 				"What does 'IPS' (the cybersecurity system) stand for?": "Intrusion Prevention System",
-				"What does 'DoS' stand for?": "Denial of Service",
-				"What does 'DDoS' stand for?": {"answer": "Distributed DoS", "hidden-answer": "Distributed Denial of Service"}
+				"What does 'MFA' (the cybersecurity concept) stand for?": {"answer": "Multifactor Authentication", "hidden-answer": "Multi-Factor Authentication"},
+				"What does 'DoS' (the kind of attack) stand for?": "Denial of Service",
+				"What does 'DDoS' (the kind of attack) stand for?": {"answer": "Distributed DoS", "hidden-answer": "Distributed Denial of Service"},
+				"What does 'XSS' (the kind of attack) stand for?": "Denial of Service"
 			},
 			"Display Technologies": {
 				"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
@@ -346,7 +368,23 @@
 				"What does 'OLED' (the display technology) stand for?": {"answer": ["Organic Light-Emitting Diode", "Organic LED"], "hidden-answer": "Organic Light Emitting Diode"},
 				"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
 			},
+			"Electrical": {
+				"What does 'DC' (the kind of electrical current) stand for?": "Direct Current",
+				"What does 'AC' (the kind of electrical current) stand for?": "Alternating Current"
+			},
+			"Network Types": {
+				"What does 'LAN' (the network type) stand for?": "Local Area Network",
+				"What does 'WAN' (the network type) stand for?": "Wide Area Network",
+				"What does 'PAN' (the network type) stand for?": "Personal Area Network",
+				"What does 'MAN' (the network type) stand for?": "Metropolitan Area Network",
+				"What does 'SAN' (the network type) stand for?": "Storage Area Network",
+				"What does 'WLAN' (the network type) stand for?": {"answer": "Wireless LAN", "hidden-answer": "Wireless Local Area Network"},
+				"What does 'WWAN' (the network type) stand for?": {"answer": "Wireless WAN", "hidden-answer": "Wireless Wide Area Network"},
+				"What does 'VLAN' (the network type) stand for?": {"answer": "Virtual LAN", "hidden-answer": "Virtual Local Area Network"},
+				"What does 'VPN' (the network type) stand for?": "Virtual Private Network"
+			},
 			"Networking Protocols": {
+				"What does 'MAC' (the device identification system) stand for?": "Media Access Control",
 				"What does 'IP' (the protocol) stand for?": "Internet Protocol",
 				"What does 'TCP' (the protocol) stand for?": "Transmission Control Protocol",
 				"What does 'UDP' (the protocol) stand for?": "User Datagram Protocol",
@@ -363,7 +401,8 @@
 				"What does 'RDP' (the protocol) stand for?": "Remote Desktop Protocol",
 				"What does 'SMB' (the protocol) stand for?": "Server Message Block",
 				"What does 'SNMP' (the protocol) stand for?": "Simple Network Management Protocol",
-				"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network"
+				"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network",
+				"What does 'DORA' (the DHCP mechanism) stand for?": {"answer": "Discovery, Offering, Request, Acknowledgement", "hidden-answer": "Discovery Offering Request Acknowledgement"}
 			},
 			"Storage Devices": {
 				"What does 'CD' (The optical storage device) stand for?": "Compact Disc",
@@ -379,16 +418,19 @@
 			"Virtualization & Cloud Computing": {
 				"What does 'SaaS' (the type of cloud service) stand for?": "Software as a Service",
 				"What does 'PaaS' (the type of cloud service) stand for?": "Platform as a Service",
-				"What does 'IaaS' (the type of cloud service) stand for?": "Infrastructure as a Service"
+				"What does 'IaaS' (the type of cloud service) stand for?": "Infrastructure as a Service",
+				"What does 'VDI'  (the virtualization concept) stand for?": "Virtual Desktop Infrastructure"
 			},
 			"Wireless Technologies": {
 				"What does 'RFID' (The wireless technology) stand for?": {"answer": "Radio-Frequency Identification", "hidden-answer": "Radio Frequency Identification"},
 				"What does 'NFC' (The wireless technology) stand for?": {"answer": "Near-Field Communication", "hidden-answer": "Near Field Communication"},
-				"What does MIMO (the 802.11 technology) stand for?": {"answer": "Multiple-Input Multiple-Output", "hidden-answer": "Multiple Input Multiple Output"},
-				"What does MU-MIMO (the 802.11 technology) stand for?": {"answer": "Multiuser MIMO", "hidden-answer": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"]}
+				"What does 'MIMO' (the 802.11 technology) stand for?": {"answer": "Multiple-Input Multiple-Output", "hidden-answer": "Multiple Input Multiple Output"},
+				"What does 'MU-MIMO' (the 802.11 technology) stand for?": {"answer": "Multiuser MIMO", "hidden-answer": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"]}
 			},
 			"Other": {
-				"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]}
+				"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},
+				"What does 'IoT' (the networking concept) stand for?": "Internet of Things",
+				"What does 'FQDN' (The DNS concept) stand for?": {"answer": "Fully Qualified Domain Name", "hidden-answer": "Fully-Qualified Domain Name"}
 			}
 		}
 	}

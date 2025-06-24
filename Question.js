@@ -97,7 +97,10 @@ class Question {
 		// It is considered mastered when this is above MASTERY_THRESHHOLD
 		this.mastery_level = my_library.STARTING_MASTERY
 		
-		// This is true if this was the last question asked.
+		// Used to un-mark the previous attempt
+		this.previous_mastery_level = null
+		
+		// True for the last question that the user answered
 		this.was_asked_last = false
 		
 		// The number of times attempt() has been called on this question
@@ -140,6 +143,9 @@ class Question {
 	attempt(response) {
 		let my_library = this.get_library()
 		
+		this.set_was_asked_last()
+		this.previous_mastery_level = this.mastery_level
+		
 		// Determine whether the answer is correct.
 		if (this.case_sensitive) {
 			var correct = this.a.includes(response) || this.hidden_a.includes(response)
@@ -176,6 +182,17 @@ class Question {
 		return correct
 	}
 	
+	// Undoes the result of the last call to attempt(), but leaves was_asked_last unmodified.
+	unmark() {
+		if (this.previous_mastery_level == null) throw new Error("Cannot unmark unasked question, or question which was already unmarked.")
+		if (this.num_attempts <= 0) throw new Error("Question '" + this.get_ancestors_as_string() + "' is in invalid state.")
+	
+		console.log("Unmarked '" + this.get_ancestors_as_string() + "'")
+		this.mastery_level = this.previous_mastery_level
+		this.previous_mastery_level = null
+		this.num_attempts--
+	}
+	
 	get_mastery() {
 		return this.mastery_level
 	}
@@ -185,10 +202,14 @@ class Question {
 	}
 	
 	// Calculates the adaptive weight of this question, for use in choosing random questions with adaptive mode enabled.
-	// Note that the actual weight will be this or the reciprical of the number of questions, whichever is higher.
+	// Note that the actual weight will be this or the reciprocal of the number of questions, whichever is higher.
 	get_adaptive_weight() {
 		let my_library = this.get_library()
-		return 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery())
+		let raw_weight = 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery())
+		//let raw_weight = 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery() / this.get_remainder())
+		
+		// Additional constant ensures that questions always have some fair chance of being chosen even if its raw_weight is exceptionally small.
+		return raw_weight + my_library.ADAPTIVE_WEIGHT_ADDEND
 	}
 	
 	get_weight(am_adaptive, am_windowed) {

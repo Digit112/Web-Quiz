@@ -366,75 +366,6 @@ class QuestionGroup {
 		return false
 	}
 	
-	// Adds questions in bulk.
-	// If passed am object, it is interpreted as a list of implicit questions in the form of key-value pairs.
-	// In that case, if the value is a string or array of strings, it is interpreted as the answer or set of answers, respectively.
-	// If the value is an object, it is interpreted as an explicit question object. Regardless, the key is interpreted as the primary question.
-	//
-	// If passed an array, it is interpreted as a list of explicit questions.
-	add_questions(new_questions) {
-		if (this.children_are_groups === true) throw new Error("Cannot add questions to this group. This group has only other groups as children.")
-		this.children_are_groups = false
-		
-		if (Array.isArray(new_questions)) {
-			// Interpret as list of explicit question objects.
-			for (let question of new_questions) {
-				this.add_child(new Question(question, null, this))
-			}
-		}
-		else if (new_questions instanceof Object) {
-			// Interpret key/value pairs as implicit questions.
-			for (const key in new_questions) {
-				var value = new_questions[key]
-				
-				if (Array.isArray(value)) {
-					// Set children_are_groups exactly once.
-					if (this.children_are_groups == null) this.children_are_groups = false
-					
-					// If children_are_groups was previously set to "true", then there is an error.
-					if (this.children_are_groups === true) {
-						throw new Error("While adding question '" + key + "' to QuestionGroup '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
-					}
-					
-					// Check that the array elements are all strings.
-					for (const answer in value) {
-						if (typeof answer != "string") {
-							throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', found an answer '" + answer + "' which is not a string. All answers must be strings.")
-						}
-					}
-					
-					this.add_child(new Question(key, value, this))
-				}
-				else if (typeof value == "string") {
-					// Set children_are_groups exactly once.
-					if (this.children_are_groups == null) this.children_are_groups = false
-					
-					// If children_are_groups was previously set to "true", then there is an error.
-					if (this.children_are_groups === true) {
-						throw new Error("While adding Question '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
-					}
-					
-					this.add_child(new Question(key, value, this))
-				}
-				else if (typeof value == "object") {
-					// Set children_are_groups exactly once.
-					if (this.children_are_groups == null) this.children_are_groups = true
-					
-					// If children_are_groups was previously set to "false", then there is an error.
-					if (this.children_are_groups === false) {
-						throw new Error("While adding Question Group '" + key + "' to Question Group '" + this.get_ancestors_as_string() + "', attempted to add both Questions and Question Groups to a group, but a group may only contain one or the other.")
-					}
-					
-					const new_child = this.add_child(new QuestionGroup(key, this, true))
-					new_child.add_children_from_dict(value)
-				}
-				else {
-					throw new Error("While attempting to add elements to '" + this.get_ancestors_as_string() + "', found invalid element '" + value + "'. All values must be string, lists of strings, or nested Question Group definitions.")
-				}
-			}
-		}
-	}
-	
 	// Returns true if this group is enabled or if any of its ancestors are enabled.
 	// Returns false otherwise.
 	get_enabled() {
@@ -803,17 +734,27 @@ class QuestionGroup {
 	}
 	
 	// Sets was_asked_last to true for self and all ancestors.
+	// Automatically clears was_asked_last if it is set on any other groups or questions on the same tree, by calling reset_was_asked_last() on the root.
 	set_was_asked_last() {
+		if (this.parent_group instanceof Library) this.reset_was_asked_last()
+		else this.parent_group.set_was_asked_last()
 		this.was_asked_last = true
-		this.parent_group.set_was_asked_last()
 	}
 	
 	// Recursively sets was_asked_last to false for all questions.
 	reset_was_asked_last() {
 		this.was_asked_last = false
 		for (let i = 0; i < this.children.length; i++) {
-			if (this.children[i].was_asked_last) {
-				this.children[i].reset_was_asked_last()
+			if (this.children[i].was_asked_last) this.children[i].reset_was_asked_last()
+		}
+	}
+	
+	// Recursively locates the previously asked question and unmarks it, undoing the result of the last attempt.
+	unmark() {
+		for (let child of this.children) {
+			if (child.was_asked_last) {
+				child.unmark()
+				break
 			}
 		}
 	}
@@ -840,7 +781,7 @@ class QuestionGroup {
 	}
 	
 	// Returns a string representation of the ancestors of this node.
-	// Returns th labeels of all ancestors, separated by arrows.
+	// Returns the labels of all ancestors, separated by arrows.
 	get_ancestors_as_string() {
 		if (this.parent_group instanceof Library) {
 			return this.label
@@ -853,17 +794,32 @@ class QuestionGroup {
 	// Prints the weight of this node and all descendants.
 	debug_weights(depth = 0) {
 		let str = ""
-		for (let i = 0; i < depth; i++) {
-			str += ". "
-		}
+		for (let i = 0; i < depth; i++) str += ". "
 		
 		str += this.label + ": " + this.weight + "/" + this.enabled_weight + "/" + this.windowed_weight + "/" + this.adaptive_weight + "; " + this.difficulty
 		
+		if (depth == 0) console.log("label: num questions / enabled / windowed / adaptive / difficulty")
 		console.log(str)
 		
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
 				this.children[i].debug_weights(depth + 1)
+			}
+		}
+	}
+	
+	// Prints was_asked_last of this node and all descendants.
+	debug_was_asked_last(depth = 0) {
+		let str = ""
+		for (let i = 0; i < depth; i++) str += ". "
+		
+		str += this.label + ": " + this.was_asked_last
+		
+		console.log(str)
+		
+		if (this.children_are_groups) {
+			for (let i = 0; i < this.children.length; i++) {
+				this.children[i].debug_was_asked_last(depth + 1)
 			}
 		}
 	}

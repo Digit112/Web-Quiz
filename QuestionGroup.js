@@ -781,7 +781,7 @@ class QuestionGroup {
 	}
 	
 	// Returns a string representation of the ancestors of this node.
-	// Returns th labeels of all ancestors, separated by arrows.
+	// Returns the labels of all ancestors, separated by arrows.
 	get_ancestors_as_string() {
 		if (this.parent_group instanceof Library) {
 			return this.label

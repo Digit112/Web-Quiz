@@ -59,6 +59,9 @@ class Library {
 		this.ADAPTIVE_WEIGHT_BIAS = 0.65
 		this.IDEAL_OVERALL_DIFFICULTY = 0.3
 		
+		// Added to the calculation for all adaptive weights. Prevents the adaptive weight of a question from dropping too low when there are few questions.
+		this.ADAPTIVE_WEIGHT_ADDEND = 0.3
+		
 		// Used during HTML regeneration.
 		this.doc_parent = null
 		this.editing_pane = null
@@ -155,7 +158,12 @@ class Library {
 	}
 	
 	get_new_question_weight(am_adaptive) {
-		return am_adaptive ? Math.pow(this.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY / (1 - this.STARTING_MASTERY)) : 1
+		if(am_adaptive) {
+			return 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.STARTING_MASTERY) + this.ADAPTIVE_WEIGHT_ADDEND
+		}
+		else {
+			return 1
+		}
 	}
 	
 	// Called from the constructor if an initialization object is provided.

@@ -170,6 +170,10 @@ function generate_next_question() {
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
 			if (theoretical_difficulty > my_library.root_q.difficulty && theoretical_difficulty_offset < difficulty_offset) {
+			
+			// Add question if doing so would increase the difficulty beyond the preferred difficulty threshold.
+			// This method prevents lockup associated with the new question having extremely high probability and thus dominating the theoretical difficulty calculation, thus
+			// if (my_library.root_q.difficulty < my_library.IDEAL_OVERALL_DIFFICULTY && theoretical_difficulty > my_library.IDEAL_OVERALL_DIFFICULTY) {
 				if (i == 19) console.log("WARNING: Added 20 questions to the window at once. This may be a bug.")
 				
 				let new_question = my_library.root_q.activate_question(am_ordered, am_adaptive)

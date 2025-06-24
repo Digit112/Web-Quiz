@@ -202,10 +202,14 @@ class Question {
 	}
 	
 	// Calculates the adaptive weight of this question, for use in choosing random questions with adaptive mode enabled.
-	// Note that the actual weight will be this or the reciprical of the number of questions, whichever is higher.
+	// Note that the actual weight will be this or the reciprocal of the number of questions, whichever is higher.
 	get_adaptive_weight() {
 		let my_library = this.get_library()
-		return 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery())
+		let raw_weight = 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery())
+		//let raw_weight = 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery() / this.get_remainder())
+		
+		// Additional constant ensures that questions always have some fair chance of being chosen even if its raw_weight is exceptionally small.
+		return raw_weight + my_library.ADAPTIVE_WEIGHT_ADDEND
 	}
 	
 	get_weight(am_adaptive, am_windowed) {

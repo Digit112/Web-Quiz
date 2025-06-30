@@ -186,7 +186,9 @@
 					"What is the maximum network speed rating of Cat6 cable?": "10Gbps",
 					"What is the maximum network speed rating of Cat6a cable?": "10Gbps",
 					"What is the maximum network speed rating of Cat7 cable?": "10Gbps",
-					"What is the maximum network speed rating of Cat8 cable?": "40Gbps"
+					"What is the maximum length of a Cat5e cable providing 1Gbps speed?": ["100 meters", "100m"],
+					"What is the maximum length of a Cat6 cable providing 10Gbps speed?": ["55 meters", "55m"],
+					"What is the maximum length of a Cat6a cable providing 10Gbps speed?": ["100 meters", "100m"]
 				},
 				"Coaxial, RG-6 Cable": {
 					"What sort of cable typically connects to a cable modem to provide access to an internet service?": ["RG-6", "Coaxial", "Coaxial Cable"],
@@ -205,7 +207,8 @@
 					"What is the maximum data transfer rate of USB 2.0?": "480Mbps",
 					"What is the maximum data transfer rate of USB 3.0?": "5Gbps",
 					"What is the maximum data transfer rate of USB 3.1?": "10Gbps",
-					"What is the maximum data transfer rate of USB 3.2 (USB-C)?": "20Gbps"
+					"What is the maximum data transfer rate of USB 3.2 (USB-C)?": "20Gbps",
+					"What is the practical cable length limitation for USB 3.x?": ["3 meters", "3m"]
 				},
 				"Thunderbolt": {
 					"What is the maximum data transfer rate of Thunderbolt Version 1?": "10Gbps",
@@ -213,7 +216,9 @@
 					"What is the maximum data transfer rate of Thunderbolt Version 3?": "40Gbps",
 					"What Connector does Thunderbolt Version 1 use?": "Mini DisplayPort",
 					"What Connector does Thunderbolt Version 2 use?": "Mini DisplayPort",
-					"What Connector does Thunderbolt Version 3 use?": "USB-C"
+					"What Connector does Thunderbolt Version 3 use?": "USB-C",
+					"What is the maximum length of Thunderbolt fiber-optic cable?": ["60 meters", "60m"],
+					"What is the maximum allowable length for a Thunderbolt copper cable?": ["3 meters", "3m"]
 				},
 				"Video Cables": {
 					"Features": {
@@ -234,13 +239,22 @@
 			},
 			"RAM Types": {
 				"DDR Features": {
-					"What kind of RAM has 240 pins?": "DDR3",
+					"What kind of SDRAM has 240 pins?": "DDR3",
 					"How many pins does a DIMM DDR3 RAM module have?": "240",
 					"How many pins does a DIMM DDR4 RAM module have?": "288",
 					"How many pins does a DIMM DDR5 RAM module have?": "288",
 					"What kind of RAM has a common voltage of 1.2 or 1.5V?": "DDR3",
 					"What kind of RAM has a common voltage of 1.2 or 1.35V?": "DDR4",
-					"What kind of RAM has a common voltage of 1.1V?": "DDR5"
+					"What kind of RAM has a common voltage of 1.1V?": "DDR5",
+					"What is the maximum capacity of a DDR3 SDRAM module?": "16GB",
+					"What is the maximum capacity of a DDR4 SDRAM module?": "32GB",
+					"What is the maximum capacity of a DDR5 SDRAM module?": "64GB"
+				},
+				"SRAM vs DRAM": {
+					"Which is typically faster: SRAM or DRAM?": "SRAM",
+					"Which is typically less expensive: SRAM or DRAM?": "DRAM",
+					"Which is typically used for cache storage on chips: SRAM or DRAM?": "SRAM",
+					"Which is typically used as the primary storage media and installed on motherboards: SRAM or DRAM?": "DRAM"
 				},
 				"Single- vs Multi-Channel": {
 					"What is the term for a motherboard which contains multiple data buses to separate RAM banks to increase throughput?": {"answer": "Multi-Channel", "hidden-answer": "Multi Channel"},
@@ -298,7 +312,11 @@
 						"What does 'clock speed' refer to?": "The CPU's base clock speed."
 					}
 				}
-			}	
+			},
+			"Printers": {
+				"Between PCL and PostScript, Which type of printer driver is most often used to print typical office documents?": "PCL",
+				"Between PCL and PostScript, Which type of printer driver is most often used to print professional graphics and presentations?": "PostScript"
+			}
 		},
 		"Domain 4: Virtualization and Cloud Computing": {
 			"Cloud Infrastructure Types": {
@@ -313,7 +331,23 @@
 				"What term refers to a cloud service which is available in real-time, 24/7?": "High Availability"
 			}
 		},
-		"Domain 5: Troubleshooting": {},
+		"Domain 5: Troubleshooting": {
+			"CompTIA A+ Troubleshooting Process": {
+				"Steps and Order": {
+					"What is Step 1 of the CompTIA six-step Troubleshooting process?": {"answer": "Identify", "hidden-answer": "Identification"},
+					"What is Step 2 of the CompTIA six-step Troubleshooting process?": {"answer": "Theorize", "hidden-answer": "Theorizing"},
+					"What is Step 3 of the CompTIA six-step Troubleshooting process?": {"answer": "Test", "hidden-answer": "Testing"},
+					"What is Step 4 of the CompTIA six-step Troubleshooting process?": {"answer": "Plan", "hidden-answer": "Planning"},
+					"What is Step 5 of the CompTIA six-step Troubleshooting process?": {"answer": "Verify", "hidden-answer": "Verification"},
+					"What is Step 6 of the CompTIA six-step Troubleshooting process?": {"answer": "Document", "hidden-answer": "Documentation"}
+				},
+				"Important Considerations": {
+					"During which step of the CompTIA six-step Troubleshooting process should you perform any necessary backups?": {"answer": ["Step 1: Identify", "1"],  "hidden-answer": ["one", "Identify", "Identification"]},
+					"During which step of the CompTIA six-step Troubleshooting process should you consult applicable vendor documentation?": {"answer": ["Step 4: Plan", "4"],  "hidden-answer": ["four", "Plan", "Planning"]},
+					"During which step of the CompTIA six-step Troubleshooting process should you implement applicable preventative measures?": {"answer": ["Step 5: Verify", "5"],  "hidden-answer": ["five", "Verify", "Verification"]}
+				}
+			}
+		},
 		"Acronyms": {
 			"Administrative Systems": {
 				"What does 'MAM' (the administrative system) stand for?": "Mobile Application Management",
@@ -370,7 +404,8 @@
 			},
 			"Electrical": {
 				"What does 'DC' (the kind of electrical current) stand for?": "Direct Current",
-				"What does 'AC' (the kind of electrical current) stand for?": "Alternating Current"
+				"What does 'AC' (the kind of electrical current) stand for?": "Alternating Current",
+				"What does 'ESD' (the potential hazard for sensitive electrical components) stand for?": "Electrostatic Discharge"
 			},
 			"Network Types": {
 				"What does 'LAN' (the network type) stand for?": "Local Area Network",
@@ -381,7 +416,8 @@
 				"What does 'WLAN' (the network type) stand for?": {"answer": "Wireless LAN", "hidden-answer": "Wireless Local Area Network"},
 				"What does 'WWAN' (the network type) stand for?": {"answer": "Wireless WAN", "hidden-answer": "Wireless Wide Area Network"},
 				"What does 'VLAN' (the network type) stand for?": {"answer": "Virtual LAN", "hidden-answer": "Virtual Local Area Network"},
-				"What does 'VPN' (the network type) stand for?": "Virtual Private Network"
+				"What does 'VPN' (the network type) stand for?": "Virtual Private Network",
+				"What does 'WMN' (the network type) stand for?": "Wireless Mesh Network"
 			},
 			"Networking Protocols": {
 				"What does 'MAC' (the device identification system) stand for?": "Media Access Control",
@@ -404,11 +440,15 @@
 				"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network",
 				"What does 'DORA' (the DHCP mechanism) stand for?": {"answer": "Discovery, Offering, Request, Acknowledgement", "hidden-answer": "Discovery Offering Request Acknowledgement"}
 			},
-			"Storage Devices": {
+			"Storage Devices & Cables": {
 				"What does 'CD' (The optical storage device) stand for?": "Compact Disc",
 				"What does 'DVD' (The optical storage device) stand for?": "Digital Versatile Disc",
 				"What does 'HDD' (The storage device) stand for?": "Hard Disk Drive",
-				"What does 'SSD' (The storage device) stand for?": "Solid State Drive"
+				"What does 'SSD' (The storage device) stand for?": "Solid State Drive",
+				"What does 'SATA' (The storage cable) stand for?": "Serial Advanced Technology Attachment",
+				"What does 'eSATA' (The storage cable) stand for?": {"answer": "External SATA", "hidden-answer": "External Serial Advanced Technology Attachment"},
+				"What does 'SCSI' (The storage cable) stand for?": "Small Computer System Interface",
+				"What does 'IDE' (The storage cable) stand for?": "Integrated Drive Electronics"
 			},
 			"Video Standards & Connectors": {
 				"What does 'HDMI' (the video connector) stand for?": {"answer": "High-Definition Multimedia Interface", "hidden-answer": "High Definition Multimedia Interface"},
@@ -430,7 +470,11 @@
 			"Other": {
 				"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},
 				"What does 'IoT' (the networking concept) stand for?": "Internet of Things",
-				"What does 'FQDN' (The DNS concept) stand for?": {"answer": "Fully Qualified Domain Name", "hidden-answer": "Fully-Qualified Domain Name"}
+				"What does 'FQDN' (the DNS concept) stand for?": {"answer": "Fully Qualified Domain Name", "hidden-answer": "Fully-Qualified Domain Name"},
+				"What does 'BSOD' (the proprietry crash screen) stand for?": "Blue Screen of Death",
+				"What does 'PCL' (the kind of printer driver) stand for?": "Printer Command Language",
+				"What does 'OCP' (The printer component) stand for?": "Operator Control Panel",
+				"What does 'QoS' (The networking feature) stand for?": "Quality of Service"
 			}
 		}
 	}

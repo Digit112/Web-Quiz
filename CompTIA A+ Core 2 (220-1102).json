@@ -47,6 +47,68 @@
 					"What flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
 					"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
 				}
+			},
+			"Disks, Drives, Volumes": {
+				"Basic vs Dynamic": {
+					"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
+					"In Windows, what term describes a disk that uses traditional partitioning and whose volumes must be wholly contained on that disk?": "Basic"
+				},
+				"MBR vs GPT": {
+					"mode-of-presentaion": "multiple-choice",
+					"descendants-give-incorrect-answers": true,
+					"questions": {
+						"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",
+						"Which partitioning scheme is obsoleted and mostly replaced by the other?": "MBR",
+						"Which partitioning scheme supports a maximum of 128 partitions?": "GPT",
+						"Which partitioning scheme supports a maximum of 2TB partitions?": "MBR"
+					}
+				}
+			},
+			"Filesystems": {
+				"What filesystem is most often used on a Windows machine?": "NTFS",
+				"What filesystem is most often used on a Linux machine?": "ext4"
+			},
+			"Windows Basics": {
+				"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
+				"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
+				"In Windows, what application is used to browse files?": "File Explorer"
+			},
+			"macOS Basics": {
+				"Common Tools": {
+					"In macOS, what part of the GUI along the bottom of the screen is used to launch and switch between apps?": "Dock",
+					"In macOS, what application is used to browse files?": "Finder",
+					"In macOS, what application is used to manage running apps and switch between desktops?": "Mission Control",
+					"In macOS, what application is use to run comprehensive searches of a term across files, apps, devices, and remote media?": "Spotlight",
+					"In macOS, what application is used to setup dual booting?": ["Boot Camp", "Boot Camp Assistant"],
+					"In macOS, what application is used to store passwords, private keys, and certificates?": ["Keychain", "Keychain Access"],
+					"In macOS, what application is used to automatically create backups of the computer and restore the computer to a previous state?": "Time Machine",
+					"In macOS, what application is used to format, partition, repair, and image disks?": "Disk Utility",
+					"In macOS, what application is used to encrypt files?": "FileVault",
+					"In macOS, what application is used to kill unresponsive applications?": ["Force Quit", "Activity Monitor"]
+				},
+				"Installer Filetypes": {
+					"In macOS, what filetype represents a mountable disk image and is commonly used to distribute applications?": ["dmg", ".dmg"],
+					"In macOS, what filetype represents a portable, executable file?": ["APP", ".app"],
+					"In macOS, what filetype represents an application which can be installed and often involves an attended installation process?": ["pkg", ".pkg"]
+				}
+			},
+			"Linux Basics": {
+				"Common Commands": {
+					"In Linux, what command is used to change the current working directory?": "cd",
+					"In Linux, what command is used to list the contents of a directory?": "ls",
+					"In Linux, what command displays the full path to the current working directory?": "pwd",
+					"In Linux, what command is used to move and rename files?": "mv",
+					"In Linux, what command is used to copy files?": "cp",
+					"In Linux, what command is used to delete files?": "rm",
+					"In Linux, what command is used to search for files?": "find",
+					"In Linux, what command dumps the full text of a file to the terminal?": "cat",
+					"In Linux, what command is used to search and filter text for a given pattern?": "grep",
+					"In Linux, what command is used to display information about the dilesystem and available disk space?": "df",
+					"In Linux, what command is used to read and write permissions for a file or directory?": "chmod",
+					"In Linux, what command is used to read and modify the owner of a file or directory?": "chown",
+					"In Linux, what command is used to display information about running processes?": "ps",
+					"In Linux, what flag makes grep case-insensitive?": "-i"
+				}
 			}
 		},
 		"Domain 2: Security": {

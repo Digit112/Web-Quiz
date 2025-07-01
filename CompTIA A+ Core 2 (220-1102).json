@@ -100,13 +100,19 @@
 					"In Linux, what command is used to move and rename files?": "mv",
 					"In Linux, what command is used to copy files?": "cp",
 					"In Linux, what command is used to delete files?": "rm",
-					"In Linux, what command is used to search for files?": "find",
-					"In Linux, what command dumps the full text of a file to the terminal?": "cat",
-					"In Linux, what command is used to search and filter text for a given pattern?": "grep",
-					"In Linux, what command is used to display information about the dilesystem and available disk space?": "df",
 					"In Linux, what command is used to read and write permissions for a file or directory?": "chmod",
 					"In Linux, what command is used to read and modify the owner of a file or directory?": "chown",
+					"In Linux, what command is used to run a shell as another user, typically root?": "su",
+					"In Linux, what command is used to execute a command as another user, typically root?": "sudo",
+					"In Linux, what command is used to show and manipulate network routing, devices, and tunnels?": "ip",
+					"In Linux, what command is used to display information about the filesystem disk space usage?": "df",
+					"In Linux, what command is used to search and filter text for a given pattern?": "grep",
 					"In Linux, what command is used to display information about running processes?": "ps",
+					"In Linux, what command is used to display command manual pages?": "man",
+					"In Linux, what command is used to display tasks?": "top",
+					"In Linux, what command is used to search for files?": "find",
+					"In Linux, what command is used to perform DNS lookup?": "dig",
+					"In Linux, what command dumps the full text of a file to the terminal?": "cat",
 					"In Linux, what flag makes grep case-insensitive?": "-i"
 				}
 			}

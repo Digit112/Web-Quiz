@@ -48,26 +48,6 @@
 					"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
 				}
 			},
-			"Disks, Drives, Volumes": {
-				"Basic vs Dynamic": {
-					"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
-					"In Windows, what term describes a disk that uses traditional partitioning and whose volumes must be wholly contained on that disk?": "Basic"
-				},
-				"MBR vs GPT": {
-					"mode-of-presentaion": "multiple-choice",
-					"descendants-give-incorrect-answers": true,
-					"questions": {
-						"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",
-						"Which partitioning scheme is obsoleted and mostly replaced by the other?": "MBR",
-						"Which partitioning scheme supports a maximum of 128 partitions?": "GPT",
-						"Which partitioning scheme supports a maximum of 2TB partitions?": "MBR"
-					}
-				}
-			},
-			"Filesystems": {
-				"What filesystem is most often used on a Windows machine?": "NTFS",
-				"What filesystem is most often used on a Linux machine?": "ext4"
-			},
 			"Windows Basics": {
 				"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
 				"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
@@ -86,7 +66,7 @@
 					"In macOS, what application is used to encrypt files?": "FileVault",
 					"In macOS, what application is used to kill unresponsive applications?": ["Force Quit", "Activity Monitor"]
 				},
-				"Installer Filetypes": {
+				"Common Filetypes": {
 					"In macOS, what filetype represents a mountable disk image and is commonly used to distribute applications?": ["dmg", ".dmg"],
 					"In macOS, what filetype represents a portable, executable file?": ["APP", ".app"],
 					"In macOS, what filetype represents an application which can be installed and often involves an attended installation process?": ["pkg", ".pkg"]
@@ -113,12 +93,45 @@
 					"In Linux, what command is used to search for files?": "find",
 					"In Linux, what command is used to perform DNS lookup?": "dig",
 					"In Linux, what command dumps the full text of a file to the terminal?": "cat",
+					"In Debian and Ubuntu (among others), what command checks for and caches available updates to installed programs and the system?": ["apt-get update", "apt update"],
+					"In Debian and Ubuntu (among others), what command installs availabe updates for installed programs and the system?": ["apt-get upgrade", "apt upgrade"],
+					"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "dnf update",
 					"In Linux, what flag makes grep case-insensitive?": "-i"
 				}
+			},
+			"Disks, Drives, Volumes": {
+				"Fundamental Concepts": {
+					"What term describes the act of making the root of a volume appear as a directory withing anthoer filesystem?": {"answer": "Mounting", "hidden-answer": "Mount"}
+				},
+				"Basic vs Dynamic": {
+					"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
+					"In Windows, what term describes a disk that uses traditional partitioning and whose volumes must be wholly contained on that disk?": "Basic"
+				},
+				"MBR vs GPT": {
+					"mode-of-presentaion": "multiple-choice",
+					"descendants-give-incorrect-answers": true,
+					"questions": {
+						"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",
+						"Which partitioning scheme is obsoleted and mostly replaced by the other?": "MBR",
+						"Which partitioning scheme supports a maximum of 128 partitions?": "GPT",
+						"Which partitioning scheme supports a maximum of 2TB partitions?": "MBR"
+					}
+				}
+			},
+			"Filesystems": {
+				"What filesystem is most often used on a Windows machine?": "NTFS",
+				"What filesystem is most often used on a Linux machine?": "ext4"
 			}
 		},
 		"Domain 2: Security": {
-			
+			"Physical Security": {
+				"What should you use to prevent physical acceess of unauthorized persons to restricted areas suh a s server rooms?": ["Physical Locks", "Locks"],
+				"What is the common term for a policy requiring that users remove all paper from their desks before leavin for lunch or for the day?": "Clean Desk Policy",
+				"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen, Privacy Filter"]
+			},
+			"Logical Security": {
+				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answer": "Multi-Factor Authentication": "hidden-answer": "Multi Factor Authentication"}
+			}
 		},
 		"Domain 3: Software Troubleshhoting": {
 			

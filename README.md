@@ -156,6 +156,32 @@ The best Library allows a user to answer very rapidly. Answers are typed and the
 
 But most importantly of all, test! Review the questions, ensure they are consistent and make sense, check to confirm that the answers are correct and that there are no correct ansswers which would be graded as incorrect (this is especially important for verbatim questions). Use the test yourself, and get feedback from others if possible.
 
+### Be Unambigous
+
+Users do not see the names of the groups which contain a question, they only see the question! Although it may seem redundant to specify the exact same context at the beginning of every question statement in a large group, it is necesary to make sure that the user is always aware of that context when the question gets asked. Users may mix together questions from many different contexts.
+
+### Use Hidden Answers
+
+The hidden-answers field allows you to specify acceptable answers which will not be displayed to the user but which are marked correct when entered, and is meant to be used to specify alternative or non-canonical spellings for the correct answer. Again, users don't want to memorize the exact nuances of your orthography in order to get a good grade! Use this field to specify acceptable spellings *even if typo forgiveness would normally make that accomodation!* For example, the answer "Light-Emitting Diode" has 20 characters and therefore affords a user one typo at the default forgiveness level of `"low"`. This allows the user to type "Light Emitting Diode" and still be marked correct because the use of a space instead of a hyphen counts as one typo. However, if the user answers that way every single time, then they have effectively eliminated their typo forgiveness.
+
+The typo forgiveness feature checks a user's submission against all answers and hidden answers. By utilizing the hidden-answers field, you afford the user maximum leeway in answering the question.
+
+### Account For Multiple Correct Answers
+
+When a question has more than one correct answer, you have a few options.
+
+1. Make the question more specific
+	
+	This is the obvious choice. It's often possible to add more qualifiers to a question until only one answer is strictly correct. Keep in mind though, that the user may memorize the association between only of the qualifiers with the correct answer, if no other questions in the library have that same qualifier.
+
+2. Set the question's preferred presentation style to `"multiple-choice"`
+
+	This is a great way to ensure that the user doesn't have to read a lengthy question and doesn't feel cheated when a technically correct submission gets marked wrong. It also makes the questions easier, and some questions simply don't lend themselves well to multiple-choice (for example, questions asking what an acronym stands for)
+
+3. Allow multiple correct answers
+	
+	This is a valid approach as well. The user will see all acceptable answers after submitting their response. The user may only memorize one of the correct answers, and perhaps that is acceptable.
+
 ### Question Groups
 
 Question Groups allow a hierarchical organization of questions for a reason: to allow the user of a Library to choose the level of granularity of their control over questions. Or put another way, a user can quiz themselves on an entire library with one click, or only on very specific components with some more clicks. This allows the user to avoid questions they don't care about or have already mastered. A chunk of questions should be divided if there is a reasonable suspicion that a user might not want to select all of them at once. There is not really a practical limit on the depth that a quiz should go to. So, use QuestionGroups!

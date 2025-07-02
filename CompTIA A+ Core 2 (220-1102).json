@@ -10,48 +10,53 @@
 	
 	"question-root": {
 		"Domain 1: Operating Systems": {
-			"Windows Edition Features": {
-				"What is the maximum ram supported by Windows 10/11 Home?": "128GB",
-				"What is the maximum ram supported by Windows 10/11 Pro?": "2TB",
-				"What is the maximum ram supported by Windows 10/11 Pro for Workstations?": "6TB",
-				"What is the maximum ram supported by Windows 10/11 Enterprise?": "6TB"
-			},
-			"The Run Prompt": {
-				"What is the key combination for opening the Run prompt": {"answer": "Win+R", "hidden-answer": ["Win + R", "Windows+R", "Windows + R"]},
-				"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"]
-			},
-			"Common Windows Command Line Utilities": {
-				"Command Names": {
-					"In Windows, what command is used to change the working directory?": "cd",
-					"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
-					"In Windows, what command would change the working directory to the parent of the current working directory?": "cd ..",
-					"In Windows, what command is used to make a directory?": {"answer": "md", "hidden-answer": "mkdir"},
-					"In Windows, what command is used to remove a directory?": {"answer": "rd", "hidden-answer": "rmdir"},
-					"In Windows, what command is used to delete a file?": {"answer": "rd", "hidden-answer": "del"},
-					"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
-					"In Windows, what command is used to get a list of files and folders in the current working directory and all descendants?": "tree",
-					"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
-					"In Windows, what deprecated command can be used to copy files, folders, and directory structures?": "xcopy",
-					"In Windows, what command can be used to copy folders and directory structures, and is considered the successor of xcopy?": "robocopy",
-					"In Windows, what command can be used to create, delete, modify, and extend volumes, among other disk management functions?": "diskpart",
-					"In Windows, what command can be used to format storage media?": "format",
-					"In Windows, what command can be used to defragment a storage volume?": "defrag",
-					"In Windows, what command can be used to check a drive and fix basic issues?": "chkdsk",
-					"In Windows, what command can be used to check the integrity of system files?": "sfc",
-					"In Windows, what command can be used to display a window with Windows version info?": "winver",
-					"In Windows, what command can be used to shutdown a computer?": "shutdown"
-				},
-				"Command Flags": {
-					"What flag causes the `chkdsk` command to fix errors on the disk?": "/F",
-					"What flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
-					"What flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
-					"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
-				}
-			},
 			"Windows Basics": {
-				"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
-				"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
-				"In Windows, what application is used to browse files?": "File Explorer"
+				"Windows Edition Features": {
+					"What is the maximum ram supported by Windows 10/11 Home?": "128GB",
+					"What is the maximum ram supported by Windows 10/11 Pro?": "2TB",
+					"What is the maximum ram supported by Windows 10/11 Pro for Workstations?": "6TB",
+					"What is the maximum ram supported by Windows 10/11 Enterprise?": "6TB"
+				},
+				"Common Tools": {
+					"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
+					"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
+					"In Windows, what application is used to browse files?": "File Explorer"
+				},
+				"The Run Prompt": {
+					"What is the key combination for opening the Run prompt": {"answer": "Win+R", "hidden-answer": ["Win + R", "Windows+R", "Windows + R"]},
+					"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"],
+					"What would you type into the run prompt to open the local security policy window?": "secpol.msc",
+					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc",
+				},
+				"Common Windows Command Line Utilities": {
+					"Command Names": {
+						"In Windows, what command is used to change the working directory?": "cd",
+						"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
+						"In Windows, what command would change the working directory to the parent of the current working directory?": "cd ..",
+						"In Windows, what command is used to make a directory?": {"answer": "md", "hidden-answer": "mkdir"},
+						"In Windows, what command is used to remove a directory?": {"answer": "rd", "hidden-answer": "rmdir"},
+						"In Windows, what command is used to delete a file?": {"answer": "rd", "hidden-answer": "del"},
+						"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
+						"In Windows, what command is used to get a list of files and folders in the current working directory and all descendants?": "tree",
+						"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
+						"In Windows, what deprecated command can be used to copy files, folders, and directory structures?": "xcopy",
+						"In Windows, what command can be used to copy folders and directory structures, and is considered the successor of xcopy?": "robocopy",
+						"In Windows, what command can be used to create, delete, modify, and extend volumes, among other disk management functions?": "diskpart",
+						"In Windows, what command can be used to format storage media?": "format",
+						"In Windows, what command can be used to defragment a storage volume?": "defrag",
+						"In Windows, what command can be used to check a drive and fix basic issues?": "chkdsk",
+						"In Windows, what command can be used to check the integrity of system files?": "sfc",
+						"In Windows, what command can be used to display a window with Windows version info?": "winver",
+						"In Windows, what command can be used to update the group policy to reflect new changes?": "gpupdate",
+						"In Windows, what command can be used to shutdown a computer?": "shutdown"
+					},
+					"Command Flags": {
+						"What flag causes the `chkdsk` command to fix errors on the disk?": "/F",
+						"What flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
+						"What flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
+						"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
+					}
+				},
 			},
 			"macOS Basics": {
 				"Common Tools": {
@@ -125,16 +130,21 @@
 		},
 		"Domain 2: Security": {
 			"Physical Security": {
-				"What should you use to prevent physical acceess of unauthorized persons to restricted areas suh a s server rooms?": ["Physical Locks", "Locks"],
 				"What is the common term for a policy requiring that users remove all paper from their desks before leavin for lunch or for the day?": "Clean Desk Policy",
-				"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen, Privacy Filter"]
+				"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen, Privacy Filter"],
+				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 			},
 			"Logical Security": {
 				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answer": "Multi-Factor Authentication": "hidden-answer": "Multi Factor Authentication"}
+			},
+			"Active Directory": {
+				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answer": "Login Script", "hidden-answer": "Logon Script"}
 			}
 		},
 		"Domain 3: Software Troubleshhoting": {
-			
+			"Physical Security": {
+				"What 
+			}
 		},
 		"Domain 4: Operational Procedures": {
 			

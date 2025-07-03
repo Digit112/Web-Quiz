@@ -57,33 +57,39 @@ The Library object is the root JSON object. It has the following properties:
 
 ### QuestionGroup
 
-A QuestionGroup object represents either a collection of questions OR of other QuestionGroups.
+A QuestionGroup object represents either a collection of questions OR of other QuestionGroups, never a mixture of the two. It allows a hierarchical organization of questions that gives users accessible and fine-grained control of the questions they can be asked.
 
-A QuestionGroup has the following properties:
+**A QuestionGroup has the following properties:**
 
 - `label`: The name of this group which will be visible to users.
 - `questions` OR `groups` (never both): The children of this QuestionGroup, either a list of Question objects or QuestionnGroup objects. The two may not be mixed together.
-- `descendants-give-incorrect-answers` (optional; inherits by default): If `true`, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice. If inheriting is impossible (because all ancestors also inherit) the default is `true`.
 - `incorrect-answers` (optional): A list of incorrect answers which can be used by all children in addition to their own `incorrect-answers` lists and the lists on any intermediate groups.
+- `descendants-give-incorrect-answers` (optional; default `false`): If `true`, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice.
+
+**The following traits may be inherited, and only effect a QuestionGroup's descendant Questions, not the QuestionGroup itself.**
 
 - `case-sensitive` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
 - `mode-of-presentation` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
 - `max-choices` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
+- `typo-forgiveness-level` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
 
-### A Question has the following properties:
+### Question
+
+A question represents the association between a *question statement* and one or more answers, which the user is expected to memorize.
+
+**A Question has the following properties:**
 
 - `question`: A list of question statements which the user can see. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
 - `answer`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
 - `hidden-answer`: A string or list of strings which are considered correct, but which will not be shown to the user either in the correct answer list or as a possible correct answer in multiple-choice presentation. This is meant to account for slight spelling variations in an answer, for example, "Light-Emitting Diode" and "Light Emitting Diode"
 - `incorrect-answers` (optional): A list of incorrect answers which may be displayed to the user as options in multiple-choice presentation.
+
+**The following traits may be inherited:**
+
 - `case-sensitive` (optional; inherits by default): Whether a response with the same text but wrong letter casing counts as correct. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `false`.
 - `mode-of-presentation` (optional; inherits by default): Whether this question requires a `verbatim` response from the user, or a `multiple-choice` selection. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `verbatim`.
 - `max-choices` (optional; inherits by default): How many options should be shown to the user by default in `multiple-choice` presentation. Fewer options may be displayed if an insufficient number of incorrect answers can be found by the system. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `4`.
 - `typo-forgiveness-level` (optional; inherits by default): The level of typo forgivness, with higher levels being more likely to grade an answer correct despite small errors including insertions, deletions, and substitutions. Must be one of `"none"`, `"low"`, `"medium"`, or `"high"`. If inheriting is impossible (because all ancestors also inherit), defaults to `low`. See [link](#typo-forgiveness) for details on this.
-
-### Common parameters for both Groups and Questions
-
-The following pertain to Question presentation. If a Question lacks these parameters, they can be inherited from its ancestors.
 
 ### QuestionList
 
@@ -100,7 +106,7 @@ Embedded-Explicit:
 Implicit:
 `{"q": "a"}`
 
-**The following constructs both represent equivalent definitions of a QuestionList containing two questions. Note that the second question cannot be written in implicit form because it contains multiple questrion statements:**
+**The following constructs both represent equivalent definitions of a QuestionList containing two questions. Note that the second question cannot be written in implicit form because it contains multiple question statements:**
 
 Explicit:
 ```
@@ -152,19 +158,19 @@ In all facets of writing, consistency is key. Many unwritten rules can guide a u
 
 ### UX & Testing
 
-The best Library allows a user to answer very rapidly. Answers are typed and the user presses enter, the next question appears instantly. The user can even type to select an answer to a multiple-choice question so they don't have to intermittantly grab the mouse. A user does not want to spend significant time typing long answers to questions they have mastered or don't want to master. The system will do its best to prevent this, but an author must do their part too: Keep answers concise, group them appropriately, and set the correct presentation style! To ensure the best experience, an author should periodically review their Library while making changes.
+The best Library allows a user to answer very rapidly. Answers are typed and the user presses enter, the next question appears instantly. The user can even type to select an answer to a multiple-choice question so they don't have to intermittently grab the mouse. A user does not want to spend significant time typing long answers to questions they have mastered or don't want to master. The system will do its best to prevent this, but an author must do their part too: Keep answers concise, group them appropriately, and set the correct presentation style! To ensure the best experience, an author should periodically review their Library while making changes.
 
-But most importantly of all, test! Review the questions, ensure they are consistent and make sense, check to confirm that the answers are correct and that there are no correct ansswers which would be graded as incorrect (this is especially important for verbatim questions). Use the test yourself, and get feedback from others if possible.
+But most importantly of all, test! Review the questions, ensure they are consistent and make sense, check to confirm that the answers are correct and that there are no correct answers which would be graded as incorrect (this is especially important for verbatim questions). Use the test yourself, and get feedback from others if possible.
 
 ### Be Unambigous
 
-Users do not see the names of the groups which contain a question, they only see the question! Although it may seem redundant to specify the exact same context at the beginning of every question statement in a large group, it is necesary to make sure that the user is always aware of that context when the question gets asked. Users may mix together questions from many different contexts.
+Users do not see the names of the groups which contain a question, they only see the question! Although it may seem redundant to specify the exact same context at the beginning of every question statement in a large group, it is necessary to make sure that the user is always aware of that context when the question gets asked. Users may mix together questions from many different contexts.
 
 ### Use Hidden Answers
 
-The hidden-answers field allows you to specify acceptable answers which will not be displayed to the user but which are marked correct when entered, and is meant to be used to specify alternative or non-canonical spellings for the correct answer. Again, users don't want to memorize the exact nuances of your orthography in order to get a good grade! Use this field to specify acceptable spellings *even if typo forgiveness would normally make that accomodation!* For example, the answer "Light-Emitting Diode" has 20 characters and therefore affords a user one typo at the default forgiveness level of `"low"`. This allows the user to type "Light Emitting Diode" and still be marked correct because the use of a space instead of a hyphen counts as one typo. However, if the user answers that way every single time, then they have effectively eliminated their typo forgiveness.
+The `hidden-answers` field allows you to specify acceptable answers which will not be displayed to the user but which are marked correct when entered, and is meant to be used to specify alternative or non-canonical spellings for the correct answer. Again, users don't want to memorize the exact nuances of your orthography in order to get a good grade! Use this field to specify acceptable spellings *even if typo forgiveness would normally make that accommodation!* For example, the answer "Light-Emitting Diode" has 20 characters and therefore affords a user one typo at the default forgiveness level of `"low"`. This allows the user to type "Light Emitting Diode" and still be marked correct because the use of a space instead of a hyphen counts as one typo. However, if the user answers that way every single time, then they have effectively eliminated their typo forgiveness.
 
-The typo forgiveness feature checks a user's submission against all answers and hidden answers. By utilizing the hidden-answers field, you afford the user maximum leeway in answering the question.
+The typo forgiveness feature checks a user's submission against all answers and hidden answers. By utilizing the `hidden-answers` field, you afford the user maximum leeway in answering the question.
 
 ### Account For Multiple Correct Answers
 
@@ -172,15 +178,19 @@ When a question has more than one correct answer, you have a few options.
 
 1. Make the question more specific
 	
-	This is the obvious choice. It's often possible to add more qualifiers to a question until only one answer is strictly correct. Keep in mind though, that the user may memorize the association between only of the qualifiers with the correct answer, if no other questions in the library have that same qualifier.
+	This is the obvious choice. It's often possible to add more qualifiers to a question until only one answer is strictly correct. Keep in mind though, that the user may memorize the association between only one of the qualifiers with the correct answer, if no other questions in the library have that same qualifier.
 
-2. Set the question's preferred presentation style to `"multiple-choice"`
+2. Set the question's `mode-of-presentation` to `"multiple-choice"`
 
 	This is a great way to ensure that the user doesn't have to read a lengthy question and doesn't feel cheated when a technically correct submission gets marked wrong. It also makes the questions easier, and some questions simply don't lend themselves well to multiple-choice (for example, questions asking what an acronym stands for)
 
 3. Allow multiple correct answers
 	
-	This is a valid approach as well. The user will see all acceptable answers after submitting their response. The user may only memorize one of the correct answers, and perhaps that is acceptable.
+	This is a valid approach as well. The user will see all acceptable answers after submitting their response. However, the user may only memorize one of the correct answers.
+
+Methods 2 and 3 work very well in conjunction. If there are multiple answers on a question, by default, a random one will be chosen as the single correct answer which the user will have to select to be marked correct in multiple-choice presentation. This will require that they learn both correct answers to consistently get that question correct.
+
+Note that in this case, the question remains a single question and the user's progress is tracked as such. The system will not recognize a situation in which, for example, the user has only mastered one of two or more answers. If it is vital that a user spend as much effort on the individual answers as they would on any other question, the questions should be split into multiple questions with identical question statements but different answers. The user's progress on each question will be tracked separately.
 
 ### Question Groups
 
@@ -189,6 +199,14 @@ Question Groups allow a hierarchical organization of questions for a reason: to 
 ### Other Tips
 
 - QuestionGroups can either contain Questions or other QuestionGroups, without mixing. When displayed, QuestionGroups with groups for children are collapsible, and this is signified by a square "+" button on their left. I try to keep these groups above the others as they tend to be the more important ones, but this does not always make sense in terms of the library's organization.
+
+## Incorrect Answer Generation
+
+Incorrect answers can be specified on a question or its ancestors, or can be received from the correct answers to sibling or cousin questions. 
+
+Groups compile lists of available incorrect answers which come from Questions below and from QuestionGroups above. Notably, a question will only donate its correct answer to the incorrect answer list of a single group, its nearest ancestor which has `descendants-give-incorrect-answers` set to `true`. Questions also do not donate hidden answers.
+
+All ancestors' explicit incorrect answer lists are concatenated to produce the list of answers for a question. Afterwords, each question donates its answer(s) to its nearest accepting ancestor (if any). All lists are checked for duplicates, which are culled.
 
 ## Typo Forgiveness
 

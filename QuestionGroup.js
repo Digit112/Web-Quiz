@@ -89,7 +89,7 @@ class QuestionGroup {
 		}
 		
 		if (!(qg_data instanceof Object) || Array.isArray(qg_data)) {
-			throw new LibraryLoadingError(false, label, parent_group, "QuestionGroup must be non-Array object.")
+			throw new LibraryLoadingError(true, label, parent_group, "QuestionGroup must be non-Array object.")
 		}
 		
 		// The label for this group that the user will see.
@@ -98,7 +98,7 @@ class QuestionGroup {
 		}
 		else {
 			this.label = qg_data["label"]
-			if (!this.label) throw new LibraryLoadingError(false, label, parent_group, "required parameter 'label' is missing.")
+			if (!this.label) throw new LibraryLoadingError(true, label, parent_group, "required parameter 'label' is missing.")
 		}
 	
 		console.log("Constructing Group '" + this.label + "'")
@@ -149,13 +149,13 @@ class QuestionGroup {
 		this.html_header_root = null
 		this.html_label_element = null
 		
-		// Used by regenerate_HTML() to regenerate in the same state as usual.
+		// Used by regenerate_HTML() to retain state through a regeneration.
 		this.is_expanded = false
 		this.currently_editing = false
 		
 		// Values which are loaded from file
 		let children = []
-		this.incorrect_answers = []
+		this.incorrect_answers = null
 		
 		this.descendants_give_incorrect_answers = null
 		this.case_sensitive = null
@@ -165,10 +165,8 @@ class QuestionGroup {
 		
 		// Attempt to interpret as an explicit QuestionGroup.
 		if (qg_data["questions"] || qg_data["groups"]) {
-			// Read inheritable fields before instantiating children (which may attempt to inherit)
+			/* ---- Read Inheritables ---- */
 			
-			console.log(this.parent_group.case_sensitive)
-			console.log(this.parent_group["case_sensitive"])
 			// This function is used to handle the repetitive process of attempting to read or inherit a field.
 			let attempt_read_inherit = (key) => {
 				if (qg_data[key]) return qg_data[key] // read
@@ -178,34 +176,50 @@ class QuestionGroup {
 			// descendants-give-incorrect-answers
 			this.descendants_give_incorrect_answers = attempt_read_inherit("descendants-give-incorrect-answers")
 			if (typeof this.descendants_give_incorrect_answers != "boolean")
-				throw new LibraryLoadingError(false, this.label, parent_group, "'descendants-give-incorrect-answers' must be a boolean.")
+				throw new LibraryLoadingError(true, this.label, parent_group, "'descendants-give-incorrect-answers' must be a boolean.")
 			
 			// case-sensitive
 			this.case_sensitive = attempt_read_inherit("case-sensitive")
 			if (typeof this.case_sensitive != "boolean")
-				throw new LibraryLoadingError(false, this.label, parent_group, "'case-sensitive' must be a boolean.")
+				throw new LibraryLoadingError(true, this.label, parent_group, "'case-sensitive' must be a boolean.")
 			
 			// mode-of-presentation
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
 			if (typeof this.mode_of_presentation != "string")
-				throw new LibraryLoadingError(false, this.label, parent_group, "'mode-of-presentation' must be a string.")
+				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be a string.")
 			// TODO: Also check that this value is valid
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
 			if (typeof this.max_choices != "number")
-				throw new LibraryLoadingError(false, this.label, parent_group, "'max-choices' must be an integer.")
+				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
 			// TODO: Also check that max-choices is not fractional
 			
 			// typo-forgiveness-level
 			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
 			if (typeof this.typo_forgiveness_level != "string")
-				throw new LibraryLoadingError(false, this.label, parent_group, "'typo-forgiveness-level' must be a string.")
+				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be a string.")
 			// TODO: Also check that the level is a valid entry.
+			
+			/* ---- Read Non-Inheritables ---- */
+			
+			// Read incorrect-answers
+			if (qg_data["incorrect-answer"]) {
+				if (typeof qg_data["incorrect-answer"] == "string") {
+					this.incorrect_answers = [qg_data["incorrect-answer"]]
+				}
+				else if (Array.isArray(qg_data["incorrect-answer"])) {
+					// TODO: Validate that qg_data["incorrect-answer"] is array of strings.
+					this.incorrect_answers = qg_data["incorrect-answer"]
+				}
+				else throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answer' must be either string or array of strings.")
+			}
+			
+			/* ---- Instantiate Children ---- */
 			
 			// Read and instantiate children
 			if (qg_data["questions"]) {
-				if (qg_data["groups"]) throw new LibraryLoadingError(false, this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
+				if (qg_data["groups"]) throw new LibraryLoadingError(true, this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
 				this.children_are_groups = false
 				
 				if (Array.isArray(qg_data["questions"])) {
@@ -222,7 +236,7 @@ class QuestionGroup {
 					}
 				}
 				else {
-					throw new LibraryLoadingError(false, this.label, parent_group, "'questions' must be an array or object.")
+					throw new LibraryLoadingError(true, this.label, parent_group, "'questions' must be an array or object.")
 				}
 			}
 			else if (qg_data["groups"]) {
@@ -242,7 +256,7 @@ class QuestionGroup {
 					}
 				}
 				else {
-					throw new LibraryLoadingError(false, this.label, parent_group, "'groups' must be an array or object.")
+					throw new LibraryLoadingError(true, this.label, parent_group, "'groups' must be an array or object.")
 				}
 			}
 		}
@@ -254,6 +268,9 @@ class QuestionGroup {
 			this.mode_of_presentation = this.parent_group.mode_of_presentation
 			this.max_choices = this.parent_group.max_choices
 			this.typo_forgiveness_level = this.parent_group.typo_forgiveness_level
+			
+			// Default all non-inheritables
+			this.incorrect_answers = []
 			
 			// Attempt interpretation as list of implicit and embedded-explicit questions.
 			let q_error = null
@@ -289,7 +306,7 @@ class QuestionGroup {
 					if (e instanceof LibraryLoadingError && e.allow_recurse) {
 						let qg_error = e.toString()
 						
-						throw new LibraryLoadingError(false, this.label, parent_group, "failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error, false)
+						throw new LibraryLoadingError(true, this.label, parent_group, "failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error, false)
 					}
 					else throw e
 				}

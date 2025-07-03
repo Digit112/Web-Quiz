@@ -59,6 +59,13 @@ class Library {
 		this.ADAPTIVE_WEIGHT_BIAS = 0.65
 		this.IDEAL_OVERALL_DIFFICULTY = 0.3
 		
+		// Default values that child groups and questions will inherit
+		this.descendants_give_incorrect_answers = false
+		this.case_sensitive = false
+		this.mode_of_presentation = "verbatim"
+		this.max_choices = 4
+		this.typo_forgiveness_level = "low"
+		
 		// Added to the calculation for all adaptive weights. Prevents the adaptive weight of a question from dropping too low when there are few questions.
 		this.ADAPTIVE_WEIGHT_ADDEND = 0.3
 		

@@ -26,7 +26,7 @@
 					"What is the key combination for opening the Run prompt": {"answer": "Win+R", "hidden-answer": ["Win + R", "Windows+R", "Windows + R"]},
 					"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"],
 					"What would you type into the run prompt to open the local security policy window?": "secpol.msc",
-					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc",
+					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc"
 				},
 				"Common Windows Command Line Utilities": {
 					"Command Names": {
@@ -56,7 +56,7 @@
 						"What flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
 						"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
 					}
-				},
+				}
 			},
 			"macOS Basics": {
 				"Common Tools": {
@@ -135,16 +135,14 @@
 				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 			},
 			"Logical Security": {
-				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answer": "Multi-Factor Authentication": "hidden-answer": "Multi Factor Authentication"}
+				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answer": "Multi-Factor Authentication", "hidden-answer": "Multi Factor Authentication"}
 			},
 			"Active Directory": {
 				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answer": "Login Script", "hidden-answer": "Logon Script"}
 			}
 		},
 		"Domain 3: Software Troubleshhoting": {
-			"Physical Security": {
-				"What 
-			}
+			
 		},
 		"Domain 4: Operational Procedures": {
 			

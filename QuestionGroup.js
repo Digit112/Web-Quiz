@@ -153,53 +153,108 @@ class QuestionGroup {
 		this.is_expanded = false
 		this.currently_editing = false
 		
-		// Interpret data as a QuestionGroup
-		let children = qg_data["questions"]
+		// Values which are loaded from file
+		let children = []
+		this.incorrect_answers = []
+		
+		this.descendants_give_incorrect_answers = null
+		this.case_sensitive = null
+		this.mode_of_presentation = null
+		this.max_choices = null
+		this.typo_forgiveness_level = null
 		
 		// Attempt to interpret as an explicit QuestionGroup.
-		if (qg_data["questions"]) {
-			if (qg_data["groups"]) throw new LibraryLoadingError(false, this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
-			this.children_are_groups = false
+		if (qg_data["questions"] || qg_data["groups"]) {
+			// Read inheritable fields before instantiating children (which may attempt to inherit)
 			
-			if (Array.isArray(qg_data["questions"])) {
-				// Interpret questions parameter as list of explicit question definitions.
-				for (child of qg_data["questions"]) {
-					this.add_child(new Question(child, null, this))
-				}
+			console.log(this.parent_group.case_sensitive)
+			console.log(this.parent_group["case_sensitive"])
+			// This function is used to handle the repetitive process of attempting to read or inherit a field.
+			let attempt_read_inherit = (key) => {
+				if (qg_data[key]) return qg_data[key] // read
+				else return this.parent_group[key.replaceAll("-", "_")] // inherit
 			}
-			else if (qg_data["questions"] instanceof Object) {
-				// Interpret questions parameter as list of implicit or embedded-explicit question definitions.
-				for (let key in qg_data["questions"]) {
-					let val = qg_data["questions"][key]
-					this.add_child(new Question(val, key, this))
-				}
-			}
-			else {
-				throw new LibraryLoadingError(false, this.label, parent_group, "'questions' must be an array or object.")
-			}
-		}
-		else if (qg_data["groups"]) {
-			this.children_are_groups = true
 			
-			if (Array.isArray(qg_data["groups"])) {
-				// Interpret groups parameter as list of explicit QuestionGroup definitions.
-				for (let child of qg_data["groups"]) {
-					this.add_child(new QuestionGroup(child, null, this))
+			// descendants-give-incorrect-answers
+			this.descendants_give_incorrect_answers = attempt_read_inherit("descendants-give-incorrect-answers")
+			if (typeof this.descendants_give_incorrect_answers != "boolean")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'descendants-give-incorrect-answers' must be a boolean.")
+			
+			// case-sensitive
+			this.case_sensitive = attempt_read_inherit("case-sensitive")
+			if (typeof this.case_sensitive != "boolean")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'case-sensitive' must be a boolean.")
+			
+			// mode-of-presentation
+			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
+			if (typeof this.mode_of_presentation != "string")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'mode-of-presentation' must be a string.")
+			// TODO: Also check that this value is valid
+			
+			// max-choices
+			this.max_choices = attempt_read_inherit("max-choices")
+			if (typeof this.max_choices != "number")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'max-choices' must be an integer.")
+			// TODO: Also check that max-choices is not fractional
+			
+			// typo-forgiveness-level
+			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
+			if (typeof this.typo_forgiveness_level != "string")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'typo-forgiveness-level' must be a string.")
+			// TODO: Also check that the level is a valid entry.
+			
+			// Read and instantiate children
+			if (qg_data["questions"]) {
+				if (qg_data["groups"]) throw new LibraryLoadingError(false, this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
+				this.children_are_groups = false
+				
+				if (Array.isArray(qg_data["questions"])) {
+					// Interpret questions parameter as list of explicit question definitions.
+					for (child of qg_data["questions"]) {
+						this.add_child(new Question(child, null, this))
+					}
+				}
+				else if (qg_data["questions"] instanceof Object) {
+					// Interpret questions parameter as list of implicit or embedded-explicit question definitions.
+					for (let key in qg_data["questions"]) {
+						let val = qg_data["questions"][key]
+						this.add_child(new Question(val, key, this))
+					}
+				}
+				else {
+					throw new LibraryLoadingError(false, this.label, parent_group, "'questions' must be an array or object.")
 				}
 			}
-			else if (qg_data["groups"] instanceof Object) {
-				// Interpret groups parameter as list of implicit or embedded-explicit QuestionGroup definitions.
-				for (let key in qg_data["groups"]) {
-					let val = qg_data["groups"][key]
-					this.add_child(new QuestionGroup(val, key, this))
+			else if (qg_data["groups"]) {
+				this.children_are_groups = true
+				
+				if (Array.isArray(qg_data["groups"])) {
+					// Interpret groups parameter as list of explicit QuestionGroup definitions.
+					for (let child of qg_data["groups"]) {
+						this.add_child(new QuestionGroup(child, null, this))
+					}
 				}
-			}
-			else {
-				throw new LibraryLoadingError(false, this.label, parent_group, "'groups' must be an array or object.")
+				else if (qg_data["groups"] instanceof Object) {
+					// Interpret groups parameter as list of implicit or embedded-explicit QuestionGroup definitions.
+					for (let key in qg_data["groups"]) {
+						let val = qg_data["groups"][key]
+						this.add_child(new QuestionGroup(val, key, this))
+					}
+				}
+				else {
+					throw new LibraryLoadingError(false, this.label, parent_group, "'groups' must be an array or object.")
+				}
 			}
 		}
 		// Interpret as implicit QuestionGroup.
 		else {
+			// Inherit all inheritable properties
+			this.descendants_give_incorrect_answers = this.parent_group.descendants_give_incorrect_answers
+			this.case_sensitive = this.parent_group.case_sensitive
+			this.mode_of_presentation = this.parent_group.mode_of_presentation
+			this.max_choices = this.parent_group.max_choices
+			this.typo_forgiveness_level = this.parent_group.typo_forgiveness_level
+			
 			// Attempt interpretation as list of implicit and embedded-explicit questions.
 			let q_error = null
 			try {
@@ -242,9 +297,17 @@ class QuestionGroup {
 		}
 	}
 	
+	// Returns true if this is the library's root QuestionGroup
+	am_root() {
+		if (this.parent_group == null)
+			throw new Error("QuestionGroup has no relation to a Library; it has no parent.")
+		
+		return this.parent_group instanceof Library
+	}
+	
 	// Returns the library that this QuestionGroup ultimately descends from.
 	get_library() {
-		if (this.parent_group instanceof Library) {
+		if (this.am_root()) {
 			return this.parent_group
 		}
 		else {
@@ -369,7 +432,7 @@ class QuestionGroup {
 	// Returns true if this group is enabled or if any of its ancestors are enabled.
 	// Returns false otherwise.
 	get_enabled() {
-		if (this.parent_group instanceof Library) {
+		if (this.am_root()) {
 			return this.is_enabled
 		}
 		else {
@@ -489,7 +552,7 @@ class QuestionGroup {
 			edit_node.question_group = this
 			edit_node.addEventListener("click", () => this.generate_properties_html(editing_pane))
 			
-			if (!(this.parent_group instanceof Library)) {
+			if (!this.am_root()) {
 				var move_up_node = document.createElement("button")
 				move_up_node.setAttribute("type", "button")
 				move_up_node.setAttribute("class", "collapsible-button")
@@ -522,7 +585,7 @@ class QuestionGroup {
 		this.html_label_element = header.appendChild(text_node)
 		if (editing_pane && currently_editing) {
 			header.appendChild(edit_node)
-			if (!(this.parent_group instanceof Library)) {
+			if (!this.am_root()) {
 				header.appendChild(move_up_node)
 				header.appendChild(move_down_node)
 			}
@@ -598,7 +661,7 @@ class QuestionGroup {
 		
 		this.html_edit_container.replaceChildren()
 		
-		if (!(this.parent_group instanceof Library)) {
+		if (!this.am_root()) {
 			var hierarchy_node = document.createElement("p")
 			hierarchy_node.setAttribute("class", "editing-pane-header-subtitle")
 			hierarchy_node.textContent = this.parent_group.get_ancestors_as_string()
@@ -621,16 +684,18 @@ class QuestionGroup {
 		group_delete_button.question_group = this
 		group_delete_button.addEventListener("click", group_delete)
 			
-		if (!(this.parent_group instanceof Library)) this.html_edit_container.appendChild(hierarchy_node)
-		this.html_edit_container.appendChild(name_edit_label)
-		this.html_edit_container.appendChild(name_edit)
-		this.html_edit_container.appendChild(group_delete_button)
+		if (!this.am_root()) {
+			this.html_edit_container.appendChild(hierarchy_node)
+			this.html_edit_container.appendChild(name_edit_label)
+			this.html_edit_container.appendChild(name_edit)
+			this.html_edit_container.appendChild(group_delete_button)
+		}
 	}
 	
 	// Swaps this group with its predecessor in the parent's child list & regenerates HTML.
 	// If this is the first child, does nothing.
 	move_up() {
-		if (this.parent_group instanceof Library) return
+		if (this.am_root()) return
 		
 		for (let i = 0; i < this.parent_group.children.length; i++) {
 			let child = this.parent_group.children[i]
@@ -649,7 +714,7 @@ class QuestionGroup {
 	
 	// Swaps this group with its successor in the parent's child list & regenerates HTML.
 	move_down() {
-		if (this.parent_group instanceof Library) return
+		if (this.am_root()) return
 		
 		for (let i = 0; i < this.parent_group.children.length; i++) {
 			let child = this.parent_group.children[i]
@@ -700,7 +765,7 @@ class QuestionGroup {
 		console.log("Propogating: " + this.label)
 		let was_enabled = this.is_enabled
 		
-		if (this.parent_group instanceof QuestionGroup) {
+		if (this.am_root()) {
 			was_enabled = this.parent_group.propogate_and_disable() || was_enabled
 		}
 		
@@ -736,7 +801,7 @@ class QuestionGroup {
 	// Sets was_asked_last to true for self and all ancestors.
 	// Automatically clears was_asked_last if it is set on any other groups or questions on the same tree, by calling reset_was_asked_last() on the root.
 	set_was_asked_last() {
-		if (this.parent_group instanceof Library) this.reset_was_asked_last()
+		if (this.am_root()) this.reset_was_asked_last()
 		else this.parent_group.set_was_asked_last()
 		this.was_asked_last = true
 	}
@@ -783,7 +848,7 @@ class QuestionGroup {
 	// Returns a string representation of the ancestors of this node.
 	// Returns the labels of all ancestors, separated by arrows.
 	get_ancestors_as_string() {
-		if (this.parent_group instanceof Library) {
+		if (this.am_root()) {
 			return this.label
 		}
 		else {

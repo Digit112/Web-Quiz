@@ -14,13 +14,19 @@ class Question {
 		this.q = null
 		this.a = null
 		this.hidden_a = []
-		this.case_sensitive = false
 		
 		// Interpret as implicit question.
 		if (typeof q_data == "string" || Array.isArray(q_data)) {
 			if (!q) throw new LibraryLoadingError(true, q, parent_group, "explicit question must be an object.")
 			
 			this.q = [q]
+			
+			// Inherit all inheritable properties
+			this.descendants_give_incorrect_answers = this.parent_group.descendants_give_incorrect_answers
+			this.case_sensitive = this.parent_group.case_sensitive
+			this.mode_of_presentation = this.parent_group.mode_of_presentation
+			this.max_choices = this.parent_group.max_choices
+			this.typo_forgiveness_level = this.parent_group.typo_forgiveness_level
 			
 			if (typeof q_data == "string") {
 				this.a = [q_data]
@@ -32,6 +38,37 @@ class Question {
 		}
 		// Interpret as explicit or embedded-explicit question.
 		else if (q_data instanceof Object) {
+			// Read inheritable fields
+			
+			// This function is used to handle the repetitive process of attempting to read or inherit a field.
+			let attempt_read_inherit = (key) => {
+				if (q_data[key]) return q_data[key] // read
+				else return this.parent_group[key.replaceAll("-", "_")] // inherit
+			}
+			
+			// case-sensitive
+			this.case_sensitive = attempt_read_inherit("case-sensitive")
+			if (typeof this.case_sensitive != "boolean")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'case-sensitive' must be a boolean.")
+			
+			// mode-of-presentation
+			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
+			if (typeof this.mode_of_presentation != "string")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'mode-of-presentation' must be a string.")
+			// TODO: Also check that this value is valid
+			
+			// max-choices
+			this.max_choices = attempt_read_inherit("max-choices")
+			if (typeof this.max_choices != "number")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'max-choices' must be an integer.")
+			// TODO: Also check that max-choices is not fractional
+			
+			// typo-forgiveness-level
+			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
+			if (typeof this.typo_forgiveness_level != "string")
+				throw new LibraryLoadingError(false, this.label, parent_group, "'typo-forgiveness-level' must be a string.")
+			// TODO: Also check that the level is a valid entry.
+			
 			// The question and answer.
 			// The answer can either be a single item or an array of multiple items, all of which are considered acceptable.
 			if (q_data["question"]) {

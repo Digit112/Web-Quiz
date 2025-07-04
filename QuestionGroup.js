@@ -196,19 +196,22 @@ class QuestionGroup {
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
 			if (typeof this.mode_of_presentation != "string")
 				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be a string.")
-			// TODO: Also check that this value is valid
+			if (!["verbatim", "multiple-choice", "flash-card"].includes(this.mode_of_presentation))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
 			if (typeof this.max_choices != "number")
 				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
-			// TODO: Also check that max-choices is not fractional
+			if (!Number.isInteger(this.max_choices))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
 			
 			// typo-forgiveness-level
 			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
 			if (typeof this.typo_forgiveness_level != "string")
 				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be a string.")
-			// TODO: Also check that the level is a valid entry.
+			if (!["none", "low", "medium", "high"].includes(this.typo_forgiveness_level))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
 			
 			/* ---- Read Non-Inheritables ---- */
 			
@@ -218,7 +221,6 @@ class QuestionGroup {
 					this.incorrect_answers = [qg_data["incorrect-answers"]]
 				}
 				else if (Array.isArray(qg_data["incorrect-answers"])) {
-					// TODO: Validate that qg_data["incorrect-answers"] is array of strings.
 					this.incorrect_answers = qg_data["incorrect-answers"]
 				}
 				else throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
@@ -227,7 +229,12 @@ class QuestionGroup {
 				this.incorrect_answers = []
 			}
 			
-			this.num_explicit_incorrect_answers = this.parent_group.num_explicit_incorrect_answers + this.incorrect_answers.length
+			for (let incorrect_answer of this.incorrect_answers) {
+				if (typeof incorrect_answer != "string")
+					throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
+				if (typeof incorrect_answer != "string")
+					throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
+			}
 			
 			/* ---- Instantiate Children ---- */
 			
@@ -288,7 +295,6 @@ class QuestionGroup {
 			
 			// Default all non-inheritables
 			this.incorrect_answers = []
-			this.num_explicit_incorrect_answers = this.parent_group.num_explicit_incorrect_answers
 			
 			// Attempt interpretation as list of implicit and embedded-explicit questions.
 			let q_error = null
@@ -333,30 +339,9 @@ class QuestionGroup {
 		
 		console.assert(typeof this.children_are_groups == "boolean", "Failed to determine child type.")
 		
-		// Calculate num_offered_incorrect_answers
-		if (this.children_are_groups) {
-			this.num_offered_incorrect_answers = 0
-			for (let child of this.children) {
-				// If this child passed on the incorrect answers which it sees,
-				// include them in the count of available answers for this question.
-				if (!child.descendants_give_incorrect_answers) {
-					this.num_offered_incorrect_answers += child.num_offered_incorrect_answers
-				}
-			}
-		}
-		else {
-			this.num_offered_incorrect_answers = this.children.length
-		}
-		
 		console.assert(this.descendants_give_incorrect_answers != null, "Failed to obtain descendants-give-incorrect-answers")
 		
 		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers.")
-		
-		console.assert(typeof this.num_explicit_incorrect_answers == "number", "Failed to calculate num_explicit_incorrect_answers")
-		console.assert(typeof this.num_offered_incorrect_answers == "number", "Failed to calculate num_offered_incorrect_answers")
-		
-		console.assert(!isNaN(this.num_explicit_incorrect_answers), "Failed to calculate num_explicit_incorrect_answers")
-		console.assert(!isNaN(this.num_offered_incorrect_answers), "Failed to calculate num_offered_incorrect_answers")
 	}
 	
 	// Returns true if this is the library's root QuestionGroup
@@ -375,6 +360,34 @@ class QuestionGroup {
 		else {
 			return this.parent_group.get_library()
 		}
+	}
+	
+	// Recalculates terms used in indexing incorrect answers. Recursively recalculates for children.
+	// These values are constant during normal use, but could be modified by a user while editing.
+	// In that case, they need to be dynamically reloaded.
+	recalc_available_incorrect_answers() {
+		this.num_explicit_incorrect_answers = this.parent_group.num_explicit_incorrect_answers + this.incorrect_answers.length
+		
+		if (this.children_are_groups) {
+			this.num_offered_incorrect_answers = 0
+			for (let child of this.children) {
+				child.recalc_available_incorrect_answers()
+				
+				// If this child passed on the incorrect answers which it sees,
+				// include them in the count of available answers for this question.
+				if (!child.descendants_give_incorrect_answers) {
+					this.num_offered_incorrect_answers += child.num_offered_incorrect_answers
+				}
+			}
+		}
+		else {
+			this.num_offered_incorrect_answers = this.children.length
+		}
+		
+		console.assert(typeof this.num_explicit_incorrect_answers == "number", "Failed to calculate num_explicit_incorrect_answers")
+		console.assert(typeof this.num_offered_incorrect_answers == "number", "Failed to calculate num_offered_incorrect_answers")
+		console.assert(!isNaN(this.num_explicit_incorrect_answers), "Failed to calculate num_explicit_incorrect_answers")
+		console.assert(!isNaN(this.num_offered_incorrect_answers), "Failed to calculate num_offered_incorrect_answers")
 	}
 	
 	// Returns the number of incorrect answers which have been donated to descendants of this group by other questions.

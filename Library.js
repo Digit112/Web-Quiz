@@ -243,5 +243,7 @@ class Library {
 		if (!root_qg_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")
 		
 		this.root_q = new QuestionGroup(root_qg_data, this.title ? this.title : "All Questions", this)
+		this.root_q.recalc_available_incorrect_answers()
+		this.root_q.cache_weights()
 	}
 }

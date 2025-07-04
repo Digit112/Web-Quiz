@@ -306,7 +306,7 @@
 					"hidden": true,
 					"presentation": "multiple-choice",
 					"max-choices": 2,
-					"children-give-incorrect-answers": true,
+					"descendants-give-incorrect-answers": true,
 					"questions": {
 						"What does 'bus speed' refer to?": "The Motherboard's base clock speed.",
 						"What does 'clock speed' refer to?": "The CPU's base clock speed."

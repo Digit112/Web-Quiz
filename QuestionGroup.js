@@ -128,6 +128,15 @@ class QuestionGroup {
 		// This is the difficulty of each child, times the probability of that child being chosen, summed over all children.
 		this.difficulty = 0
 		
+		// The number of incorrect answers explicitly specified on this group and all ancestors.
+		this.num_explicit_incorrect_answers = null;
+		
+		// The number of incorrect answers offered to this group by its descendants.
+		// Excludes answers claimed by groups descending from this group.
+		// Groups claim all offered answers by setting descendants-give-incorrect-answers to true.
+		// Unclaimed answers propagate up.
+		this.num_offered_incorrect_answers = null
+		
 		// Whether the checkbox associated with this Group has been manually checked.
 		// The questions that descend from this group are included iff this group OR ANY OF ITS ANCESTORS have been manually checked.
 		// To determine whether the questions descending from this group can be used, call get_enabled()
@@ -214,6 +223,11 @@ class QuestionGroup {
 				}
 				else throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answer' must be either string or array of strings.")
 			}
+			else {
+				this.incorrect_answers = []
+			}
+			
+			this.num_explicit_incorrect_answers = this.parent_group.num_explicit_incorrect_answers + this.incorrect_answers.length
 			
 			/* ---- Instantiate Children ---- */
 			
@@ -259,6 +273,9 @@ class QuestionGroup {
 					throw new LibraryLoadingError(true, this.label, parent_group, "'groups' must be an array or object.")
 				}
 			}
+			else {
+				console.assert(false)
+			}
 		}
 		// Interpret as implicit QuestionGroup.
 		else {
@@ -271,6 +288,7 @@ class QuestionGroup {
 			
 			// Default all non-inheritables
 			this.incorrect_answers = []
+			this.num_explicit_incorrect_answers = this.parent_group.num_explicit_incorrect_answers
 			
 			// Attempt interpretation as list of implicit and embedded-explicit questions.
 			let q_error = null
@@ -312,6 +330,33 @@ class QuestionGroup {
 				}
 			}
 		}
+		
+		console.assert(typeof this.children_are_groups == "boolean", "Failed to determine child type.")
+		
+		// Calculate num_offered_incorrect_answers
+		if (this.children_are_groups) {
+			this.num_offered_incorrect_answers = 0
+			for (let child of this.children) {
+				// If this child passed on the incorrect answers which it sees,
+				// include them in the count of available answers for this question.
+				if (!child.descendants_give_incorrect_answers) {
+					this.num_offered_incorrect_answers += child.num_offered_incorrect_answers
+				}
+			}
+		}
+		else {
+			this.num_offered_incorrect_answers = this.children.length
+		}
+		
+		console.assert(this.descendants_give_incorrect_answers != null, "Failed to obtain descendants-give-incorrect-answers")
+		
+		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers.")
+		
+		console.assert(typeof this.num_explicit_incorrect_answers == "number", "Failed to calculate num_explicit_incorrect_answers")
+		console.assert(typeof this.num_offered_incorrect_answers == "number", "Failed to calculate num_offered_incorrect_answers")
+		
+		console.assert(!isNaN(this.num_explicit_incorrect_answers), "Failed to calculate num_explicit_incorrect_answers")
+		console.assert(!isNaN(this.num_offered_incorrect_answers), "Failed to calculate num_offered_incorrect_answers")
 	}
 	
 	// Returns true if this is the library's root QuestionGroup
@@ -329,6 +374,120 @@ class QuestionGroup {
 		}
 		else {
 			return this.parent_group.get_library()
+		}
+	}
+	
+	// Returns the number of incorrect answers which have been donated to descendants of this group by other questions.
+	// This is the number stored on the nearest ancestor which claims incorrect answers.
+	// This function is called by its descendant, recursively, to locate that ancestor,
+	// and ultimately to obtain the number of incorrect answers available to a particular question.
+	get_num_claimed_incorrect_answers() {
+		if (this.descendants_give_incorrect_answers) {
+			return this.num_offered_incorrect_answers
+		}
+		else if (this.am_root()) {
+			return 0
+		}
+		else {
+			return this.parent_group.get_num_claimed_incorrect_answers()
+		}
+	}
+	
+	// Returns the number of available incorrect answers retrievable from this group,
+	// Inherited from Groups above and claimed from Questions below.
+	get_num_available_incorrect_answers() {
+		return this.get_num_claimed_incorrect_answers() + this.num_explicit_incorrect_answers
+	}
+	
+	// Converts an index into an incorrect-answer.
+	get_incorrect_answer_by_index(i, had_encountered_answer_claimant = false) {
+		// NOTE the two very similarly named variables!!
+		let have_encountered_answer_claimant = had_encountered_answer_claimant || this.descendants_give_incorrect_answers
+		
+		// Check if the index is into this group.
+		if (i < this.incorrect_answers.length) {
+			return this.incorrect_answers[i]
+		}
+		// Otherwise propagate
+		else {
+			if (this.am_root()) {
+				// Index goes beyond all explicitly-specified incorrect answers.
+				console.assert(have_encountered_answer_claimant, "Invalid incorrect-answer index should have thrown one initial call.") // We must need to borrow claimed answers...
+				
+				// Check if the root is the claimant (an edge case)
+				if (!had_encountered_answer_claimant) {
+					return this.get_claimed_incorrect_answer_by_index(i - this.incorrect_answers.length)
+				}
+				else {
+					return i - this.incorrect_answers.length
+				}
+			}
+			else {
+				// Check ancestors for the indexed incorrect answer
+				let res = this.parent_group.get_incorrect_answer_by_index(
+					i - this.incorrect_answers.length,
+					have_encountered_answer_claimant
+				)
+				
+				if (typeof res == "string") {
+					// An ancestor had the indexed incorrect answer.
+					return res
+				}
+				else if (typeof res == "number") {
+					// The indexed answer is a donated answer of some question descended from the answer claimant.
+					
+					// The return value of a failed pull is the new index after enumerating available explicitly-specified incorrect answers.
+					i = res
+					
+					// Check if we are the prophesied incorrect answer claimant.
+					if (!had_encountered_answer_claimant && have_encountered_answer_claimant) {
+						if (i >= this.num_offered_incorrect_answers)
+							throw new Error("Invalid index exceeds the number of available incorrect answers.")
+						
+						return this.get_claimed_incorrect_answer_by_index(i)
+					}
+					else {
+						// Pass control to the caller, a child of this node, until the claimant is found.
+						console.assert(had_encountered_answer_claimant, "Claimant appeared to have existed but no longer does, or the claimant returned null.")
+						return i
+					}
+				}
+				else {
+					console.assert(false)
+					return null
+				}
+			}
+		}
+		
+	}
+	
+	// Returns the answer to a descendant of this question uniquely identified by the passed integer.
+	// If there are multiple answers, picks one at random. Ignores hidden answers.
+	// Ignores questions if the path to them from this node passes through a claimant.
+	get_claimed_incorrect_answer_by_index(i) {
+		// console.log("Getting incorrect answer " + i + " from '" + this.label + "'")
+		if (this.children_are_groups) {
+			console.assert(i < num_offered_incorrect_answers, "Illegal state. Error should have been thrown before the first call to this recursive functions.")
+			
+			for (let child of this.children) {
+				// Ignore children which are claimants; they block our access to their descendants.
+				if (!child.descendants_give_incorrect_answers) {
+					if (i >= child.num_offered_incorrect_answers) {
+						i -= child.num_offered_incorrect_answers
+					}
+					else {
+						return child.get_claimed_incorrect_answer_by_index(i)
+					}
+				}
+			}
+			
+			console.assert(false, "The sums of the offered answers on non-claimant children appear to exceed the offered answers on this question (these things should be equal!)")
+		}
+		else {
+			console.assert(i < this.children.length, "Illegal state. Error should have been thrown before the first call to this recursive functions.")
+			
+			let answer_i = Math.floor(Math.random() * this.children[i].a.length);
+			return this.children[i].a[answer_i]
 		}
 	}
 	

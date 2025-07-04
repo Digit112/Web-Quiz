@@ -39,7 +39,7 @@ class Question {
 				this.a = [q_data]
 			}
 			else {
-				// TODO: Check that answers in array are all strings.
+				// TODO: Check that answers in array are all non-empty strings.
 				this.a = q_data
 			}
 		}
@@ -53,7 +53,7 @@ class Question {
 					this.q = [q_data["question"]]
 				}
 				else if (Array.isArray(q_data["question"])) {
-					// TODO: Check that questions in array are all strings.
+					// TODO: Check that questions in array are all non-empty strings.
 					if (q_data["question"].length == 0) throw new LibraryLoadingError(false, q_name, parent_group, "parameter 'question' must have at least one element.")
 					this.q = q_data["question"]
 				}
@@ -72,7 +72,7 @@ class Question {
 				throw new LibraryLoadingError(false, "", parent_group, "required parameter 'question' is missing.")
 			}
 			
-			if (!this.q) throw new Error("Failed to obtain question statement(s)")
+			if (!this.q) throw new Error("Failed to obtain question statement")
 			
 			/* ---- Read Inheritables ---- */
 			
@@ -114,40 +114,50 @@ class Question {
 				this.a = [q_data["answer"]]
 			}
 			else if (Array.isArray(q_data["answer"])) {
-				// TODO: Check that answers in array are all strings.
+				// TODO: Check that answers in array are all non-empty strings.
 				this.a = q_data["answer"]
 			}
 			else {
 				throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'answer' must be object or string.")
 			}
 			
-			// Read hidden-answer
+			// Read hidden-answers
 			if (q_data["hidden-answer"]) {
 				if (typeof q_data["hidden-answer"] == "string") {
 					this.hidden_answers = [q_data["hidden-answer"]]
 				}
 				else if (Array.isArray(q_data["hidden-answer"])) {
-					// TODO: Validate that q_data["hidden-answer"] is array of strings.
+					// TODO: Validate that q_data["hidden-answer"] is array of non-empty strings.
 					this.hidden_answers = q_data["hidden-answer"]
 				}
 				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'hidden-answer' must be either string or array of strings.")
 			}
+			else {
+				this.hidden_answers = []
+			}
 			
-			// Read incorrect-answer
+			// Read incorrect-answers
 			if (q_data["incorrect-answer"]) {
 				if (typeof q_data["incorrect-answer"] == "string") {
 					this.incorrect_answers = [q_data["incorrect-answer"]]
 				}
 				else if (Array.isArray(q_data["incorrect-answer"])) {
-					// TODO: Validate that q_data["incorrect-answer"] is array of strings.
+					// TODO: Validate that q_data["incorrect-answer"] is array of non-empty strings.
 					this.incorrect_answers = q_data["incorrect-answer"]
 				}
 				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'incorrect-answer' must be either string or array of strings.")
+			}
+			else {
+				this.incorrect_answers = []
 			}
 		}
 		else {
 			throw new LibraryLoadingError(false, this.q[0], parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
 		}
+		
+		console.assert(this.a, "Failed to obtain answers")
+		console.assert(this.hidden_answers, "Failed to obtain hidden-answers")
+		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers")
 		
 		// Approximate measure of user's mastery of this question.
 		// It is considered mastered when this is above MASTERY_THRESHHOLD
@@ -171,11 +181,80 @@ class Question {
 	
 	// Returns the library that this Question ultimately descends from.
 	get_library() {
-		if (this.parent_group != null) {
-			return this.parent_group.get_library()
+		assert(this.parent_group != null, "The QuestionGroup constructor should throw to prevent this assertion from failing.")
+		return this.parent_group.get_library()
+	}
+	
+	// Returns the number of incorrect answers available for this question.
+	get_num_available_incorrect_answers() {
+		return this.incorrect_answers.length + this.parent_group.get_num_available_incorrect_answers()
+	}
+	
+	// Obtains and returns a list of up to the requested number of incorrect answers, if they are available.
+	get_incorrect_answers(num_desired_incorrect_answers) {
+		if (num_desired_incorrect_answers <= 0)
+			throw new Error("Must request at least 1 incorrect answer.")
+		
+		let num_available_incorrect_answers = this.get_num_available_incorrect_answers()
+		
+		// Calculate the number of incorrect answers we will actually generate.
+		// NOTE: Maximum number of choices on a question is 20.
+		let num_answers = Math.min(19, num_desired_incorrect_answers, num_available_incorrect_answers)
+		
+		let valid_indices = []
+		for (let i = 0; i < num_available_incorrect_answers; i++) {
+			valid_indices.push(i)
 		}
 		
-		throw new Error("Question has no Library; it has no parent QuestionGroup.")
+		// Fisher-Yates shuffle a sufficient segment of the list of all indices.
+		// For each one, obtain and sanity-check the result.
+		// Return when we have enough incorrect answers, or after all have been exhausted.
+		let ret = []
+		for (let i = 0; i < num_available_incorrect_answers; i++) {
+			// Pick an index for a random element in the remainder of the array.
+			let j = Math.floor(Math.random() * (num_available_incorrect_answers - i) + i)
+			
+			if (i != j) {
+				let temp = valid_indices[i]
+				valid_indices[i] = valid_indices[j]
+				valid_indices[j] = temp
+			}
+			
+			// Convert incorrect answer indices into incorrect answers.
+			// This process is rather involved...
+			let incorrect_answer_index = valid_indices[i]
+			
+			//console.log("Getting incorrect answer " + incorrect_answer_index + "...")
+			let incorrect_answer = this.get_incorrect_answer_by_index(incorrect_answer_index)
+			//console.log("Got '" + incorrect_answer + "'")
+			
+			if (!ret.includes(incorrect_answer) && !this.is_exactly_correct(incorrect_answer)) {
+				ret.push(incorrect_answer)
+				if (ret.length == num_answers) return ret
+			}
+		}
+		
+		return ret
+	}
+	
+	// Converts an index into an incorrect answer.
+	// Lower indices pull explicitly specified incorrect answers from this Question,
+	// then its parent, its grandparent, and so on to the root.
+	// If the index is greater than the number of answers in this question plus all ancestors,
+	// begins iterating over children which can provide answers.
+	// These would be children of the nearest ancestor to this question which has
+	// descendants-give-incorrect-answers set to true.
+	// see get_num_available_incorrect_answers() to obtain the maximum index.
+	get_incorrect_answer_by_index(i) {
+		if (i < 0 || i > this.get_num_available_incorrect_answers())
+			throw new Error("Invalid incorrect answer index")
+		
+		if (i < this.incorrect_answers.length) {
+			return this.incorrect_answers[i]
+		}
+		else {
+			return this.parent_group.get_incorrect_answer_by_index(i - this.incorrect_answers.length)
+		}
 	}
 	
 	// Returns true if any of this question's ancestors are enabled.
@@ -194,6 +273,30 @@ class Question {
 		return am_windowed ? this.windowed : this.get_enabled()
 	}
 	
+	// Returns true if the passed response is correct without using typo forgiveness.
+	// Despite the name, this does respect the case-sensitive setting on this question,
+	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
+	is_exactly_correct(response) {
+		if (this.case_sensitive) {
+			return this.a.includes(response) || this.hidden_answers.includes(response)
+		}
+		else {
+			var correct = false
+			response = response.toLowerCase()
+			for (let answer of this.a) {
+				if (answer.toLowerCase() == response) {
+					return true
+				}
+			}
+			
+			for (let answer of this.hidden_answers) {
+				if (answer.toLowerCase() == response) {
+					return true
+				}
+			}
+		}
+	}
+	
 	// Checks whether the given answer is correct.
 	// Updates responses and recalculates the response_score.
 	attempt(response) {
@@ -203,28 +306,7 @@ class Question {
 		this.previous_mastery_level = this.mastery_level
 		
 		// Determine whether the answer is correct.
-		if (this.case_sensitive) {
-			var correct = this.a.includes(response) || this.hidden_answers.includes(response)
-		}
-		else {
-			var correct = false
-			response = response.toLowerCase()
-			for (let answer of this.a) {
-				if (answer.toLowerCase() == response) {
-					correct = true
-					break
-				}
-			}
-			
-			if (!correct) {
-				for (let answer of this.hidden_answers) {
-					if (answer.toLowerCase() == response) {
-						correct = true
-						break
-					}
-				}
-			}
-		}
+		let correct = this.is_exactly_correct(response)
 		
 		// Causes the earlier attempts to have much higher weight than later attempts.
 		// Because of this, the actual adaptation rate will always be slightly above the specified constant.

@@ -66,6 +66,9 @@ class Library {
 		this.max_choices = 4
 		this.typo_forgiveness_level = "low"
 		
+		this.num_explicit_incorrect_answers = 0
+		this.num_offered_incorrect_answers = 0
+		
 		// Added to the calculation for all adaptive weights. Prevents the adaptive weight of a question from dropping too low when there are few questions.
 		this.ADAPTIVE_WEIGHT_ADDEND = 0.3
 		

@@ -202,11 +202,13 @@ Question Groups allow a hierarchical organization of questions for a reason: to 
 
 ## Incorrect Answer Generation
 
-Incorrect answers can be specified on a question or its ancestors, or can be received from the correct answers to sibling or cousin questions. 
+Incorrect answers can be specified on a question or its ancestors, or can be received from the correct answers to sibling or cousin questions.
 
-Groups compile lists of available incorrect answers which come from Questions below and from QuestionGroups above. Notably, a question will only donate its correct answer to the incorrect answer list of a single group, its nearest ancestor which has `descendants-give-incorrect-answers` set to `true`. Questions also do not donate hidden answers.
+A Group can be queried for the number of available incorrect answers it has. A kind of group called a claimant accepts answers donated by its descendant questions. An answer can only be claimed by a single claimant, which is always the nearest ancestor that has the `descendants-give-incorrect-answers` property set to `true`. These can only appear as incorrect answers to descendants of the claimant, so a claimant should really be thought of as a partition. Answers flow freely within the subtree at a claimant's root, but can never enter or exit through that root.
 
-All ancestors' explicit incorrect answer lists are concatenated to produce the list of answers for a question. Afterwords, each question donates its answer(s) to its nearest accepting ancestor (if any). All lists are checked for duplicates, which are culled.
+Incorrect answers can also come from the `incorrect-answers` property of a question or any of its ancestors. The entries in `incorrect-answers` on the root can appear on any question in the library, and claimants do not effect this. The two systems are completely separate.
+
+There is no concept of statistical weight assigned to incorrect answers which would cause some to appear more often than others, HOWEVER, duplicates WILL have a higher chance of appearing as incorrect answers since they count as distinct incorrect answers logically. Don't worry, before displaying them, the system does a sanity check to remove duplicate answers and, of course, to ensure that none of the "incorrect" answers would be graded as correct had they been entered verbatim.
 
 ## Typo Forgiveness
 

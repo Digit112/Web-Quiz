@@ -107,45 +107,45 @@ class Question {
 			
 			/* ---- Read Non-inheritables ---- */
 			
-			// Read answer
+			// Read answers
 			// The answer can either be a single item or an array of multiple items, all of which are considered acceptable.
-			if (!q_data["answer"]) throw new LibraryLoadingError(false, this.q[0], parent_group, "required parameter 'answer' is missing.");
-			if (typeof q_data["answer"] == "string") {
-				this.a = [q_data["answer"]]
+			if (!q_data["answers"]) throw new LibraryLoadingError(false, this.q[0], parent_group, "required parameter 'answer' is missing.");
+			if (typeof q_data["answers"] == "string") {
+				this.a = [q_data["answers"]]
 			}
-			else if (Array.isArray(q_data["answer"])) {
+			else if (Array.isArray(q_data["answers"])) {
 				// TODO: Check that answers in array are all non-empty strings.
-				this.a = q_data["answer"]
+				this.a = q_data["answers"]
 			}
 			else {
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'answer' must be object or string.")
+				throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'answers' must be object or string.")
 			}
 			
 			// Read hidden-answers
-			if (q_data["hidden-answer"]) {
-				if (typeof q_data["hidden-answer"] == "string") {
-					this.hidden_answers = [q_data["hidden-answer"]]
+			if (q_data["hidden-answers"]) {
+				if (typeof q_data["hidden-answers"] == "string") {
+					this.hidden_answers = [q_data["hidden-answers"]]
 				}
-				else if (Array.isArray(q_data["hidden-answer"])) {
-					// TODO: Validate that q_data["hidden-answer"] is array of non-empty strings.
-					this.hidden_answers = q_data["hidden-answer"]
+				else if (Array.isArray(q_data["hidden-answers"])) {
+					// TODO: Validate that q_data["hidden-answers"] is array of non-empty strings.
+					this.hidden_answers = q_data["hidden-answers"]
 				}
-				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'hidden-answer' must be either string or array of strings.")
+				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'hidden-answers' must be either string or array of strings.")
 			}
 			else {
 				this.hidden_answers = []
 			}
 			
 			// Read incorrect-answers
-			if (q_data["incorrect-answer"]) {
-				if (typeof q_data["incorrect-answer"] == "string") {
-					this.incorrect_answers = [q_data["incorrect-answer"]]
+			if (q_data["incorrect-answers"]) {
+				if (typeof q_data["incorrect-answers"] == "string") {
+					this.incorrect_answers = [q_data["incorrect-answers"]]
 				}
-				else if (Array.isArray(q_data["incorrect-answer"])) {
-					// TODO: Validate that q_data["incorrect-answer"] is array of non-empty strings.
-					this.incorrect_answers = q_data["incorrect-answer"]
+				else if (Array.isArray(q_data["incorrect-answers"])) {
+					// TODO: Validate that q_data["incorrect-answers"] is array of non-empty strings.
+					this.incorrect_answers = q_data["incorrect-answers"]
 				}
-				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'incorrect-answer' must be either string or array of strings.")
+				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 			}
 			else {
 				this.incorrect_answers = []
@@ -181,7 +181,7 @@ class Question {
 	
 	// Returns the library that this Question ultimately descends from.
 	get_library() {
-		assert(this.parent_group != null, "The QuestionGroup constructor should throw to prevent this assertion from failing.")
+		console.assert(this.parent_group != null, "The QuestionGroup constructor should throw to prevent this assertion from failing.")
 		return this.parent_group.get_library()
 	}
 	

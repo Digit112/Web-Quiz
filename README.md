@@ -80,8 +80,8 @@ A question represents the association between a *question statement* and one or 
 **A Question has the following properties:**
 
 - `question`: A list of question statements which the user can see. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
-- `answer`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
-- `hidden-answer`: A string or list of strings which are considered correct, but which will not be shown to the user either in the correct answer list or as a possible correct answer in multiple-choice presentation. This is meant to account for slight spelling variations in an answer, for example, "Light-Emitting Diode" and "Light Emitting Diode"
+- `answers`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
+- `hidden-answers`: A string or list of strings which are considered correct, but which will not be shown to the user either in the correct answer list or as a possible correct answer in multiple-choice presentation. This is meant to account for slight spelling variations in an answer, for example, "Light-Emitting Diode" and "Light Emitting Diode"
 - `incorrect-answers` (optional): A list of incorrect answers which may be displayed to the user as options in multiple-choice presentation.
 
 **The following traits may be inherited:**

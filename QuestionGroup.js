@@ -213,15 +213,15 @@ class QuestionGroup {
 			/* ---- Read Non-Inheritables ---- */
 			
 			// Read incorrect-answers
-			if (qg_data["incorrect-answer"]) {
-				if (typeof qg_data["incorrect-answer"] == "string") {
-					this.incorrect_answers = [qg_data["incorrect-answer"]]
+			if (qg_data["incorrect-answers"]) {
+				if (typeof qg_data["incorrect-answers"] == "string") {
+					this.incorrect_answers = [qg_data["incorrect-answers"]]
 				}
-				else if (Array.isArray(qg_data["incorrect-answer"])) {
-					// TODO: Validate that qg_data["incorrect-answer"] is array of strings.
-					this.incorrect_answers = qg_data["incorrect-answer"]
+				else if (Array.isArray(qg_data["incorrect-answers"])) {
+					// TODO: Validate that qg_data["incorrect-answers"] is array of strings.
+					this.incorrect_answers = qg_data["incorrect-answers"]
 				}
-				else throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answer' must be either string or array of strings.")
+				else throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 			}
 			else {
 				this.incorrect_answers = []

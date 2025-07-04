@@ -35,8 +35,8 @@
 				}
 			},
 			"Mobile Device RAM": {
-				"What form-factor of DDR RAM is most often found in laptops?": {"answer": "SODIMM", "hidden-answer": ["SO-DIMM", "SODIMMs", "SO-DIMMs"]},
-				"What form-factor of DDR RAM is most often found in desktop computerd?": {"answer": "DIMM", "hidden-answer": "DIMMs"},
+				"What form-factor of DDR RAM is most often found in laptops?": {"answers": "SODIMM", "hidden-answers": ["SO-DIMM", "SODIMMs", "SO-DIMMs"]},
+				"What form-factor of DDR RAM is most often found in desktop computerd?": {"answers": "DIMM", "hidden-answers": "DIMMs"},
 				"How many pins does SODIMM DDR3 have?": "204",
 				"How many pins does SODIMM DDR4 have?": "260",
 				"How many pins does SODIMM DDR5 have?": "262"
@@ -79,10 +79,10 @@
 					},
 					"Secure Ports": {
 						"What is the newer, secure port number typically used by HTTP?": "443",
-						"What is a newer, secure port number typically used by SMTP?": {"answer": ["465", "587"], "correct-answer-source": "random"},
+						"What is a newer, secure port number typically used by SMTP?": {"answers": ["465", "587"], "correct-answers-source": "random"},
 						"What is the newer, secure port number typically used by POP3?": "995",
 						"What is the newer, secure port number typically used by IMAP?": "993",
-						"What is a newer, secure port number typically used by FTP?": {"answer": ["989", "990"], "correct-answer-source": "random"},
+						"What is a newer, secure port number typically used by FTP?": {"answers": ["989", "990"], "correct-answers-source": "random"},
 						"What is the newer, secure port number typically used by LDAP?": "636"
 					}
 				},
@@ -107,7 +107,7 @@
 					"What device provide equal distribution of IP traffic to multiple servers?": "Load Balancer"
 				},
 				"Networking Tools": {
-					"What is used to cut cable into segments?": {"answer": ["Cable Cutters", "Cable Snips"], "hidden-answer": "Cable Cutter"},
+					"What is used to cut cable into segments?": {"answers": ["Cable Cutters", "Cable Snips"], "hidden-answers": "Cable Cutter"},
 					"What is used to remove the plastic jacket from a cable to expose the wires?": "Cable Stripper",
 					"What is used to terminate wires into a patch panel?": "Punchdown Tool",
 					"What is used to ensure the correct operation of every wire in a cable?": ["Cable Tester", "Continuity Tester", "Cable Certifier"],
@@ -115,7 +115,7 @@
 					"What is used to attach the wires of a cable to a plug?": "Crimper",
 					"What is used to verify the correct functioning of a patch cable?": "Patch tester",
 					"What is used to capture network traffic for later analysis?": "Network Tap",
-					"What is used to analyze nearby Wi-Fi traffic?": {"answer": "Wi-Fi Analyzer", "hidden-answer": "WiFi Analyzer"}
+					"What is used to analyze nearby Wi-Fi traffic?": {"answers": "Wi-Fi Analyzer", "hidden-answers": "WiFi Analyzer"}
 				}
 			},
 			"802.11 Wi-Fi": {
@@ -257,8 +257,8 @@
 					"Which is typically used as the primary storage media and installed on motherboards: SRAM or DRAM?": "DRAM"
 				},
 				"Single- vs Multi-Channel": {
-					"What is the term for a motherboard which contains multiple data buses to separate RAM banks to increase throughput?": {"answer": "Multi-Channel", "hidden-answer": "Multi Channel"},
-					"What is the term for a motherboard which contains a single data bus shared by all RAM modules?": {"answer": "Single-Channel", "hidden-answer": "Single Channel"}
+					"What is the term for a motherboard which contains multiple data buses to separate RAM banks to increase throughput?": {"answers": "Multi-Channel", "hidden-answers": "Multi Channel"},
+					"What is the term for a motherboard which contains a single data bus shared by all RAM modules?": {"answers": "Single-Channel", "hidden-answers": "Single Channel"}
 				},
 				"Error Correction Code": {
 					"What technology reduces the failure rate of RAM by detecting and correcting individual errors, but introduces additional access latency?": "ECC"
@@ -266,7 +266,7 @@
 			},
 			"Storage Drives": {
 				"SATA": {
-					"What voltages are received by a SATA drive?": {"answer": "3.3V, 5V, and 12V", "hidden-answer": ["3.3V 5V and 12V", "3.3V, 5V, 12V", "3.3V 5V 12V"]},
+					"What voltages are received by a SATA drive?": {"answers": "3.3V, 5V, and 12V", "hidden-answers": ["3.3V 5V and 12V", "3.3V, 5V, 12V", "3.3V 5V 12V"]},
 					"What is the maximum data transfer rate of SATA Revision 3.0?": "600MBps",
 					"What is the maximum data transfer rate of SATA Revision 3.2?": "1969MBps"
 				},
@@ -274,25 +274,25 @@
 					"What is the common name for RAID 0?": "Striping",
 					"What is the common name for RAID 1?": "Mirroring",
 					"What is the common name for RAID 5?": "Striping with Parity",
-					"What is the common name for RAID 10?": {"answer": ["Stripe of Mirrors", "Striped Mirror"], "hidden-answer": "Striping of Mirrors"},
+					"What is the common name for RAID 10?": {"answers": ["Stripe of Mirrors", "Striped Mirror"], "hidden-answers": "Striping of Mirrors"},
 					"What RAID level provides a potential performance increase but no fault tolerance?": ["RAID 0", "0"],
-					"What is the minimum number of disks used in a RAID 0 array?": {"answer": "2", "hidden-answer": "two"},
-					"What is the minimum number of disks used in a RAID 1 array?": {"answer": "2", "hidden-answer": "two"},
-					"What is the minimum number of disks used in a RAID 5 array?": {"answer": "3", "hidden-answer": "three"},
-					"What is the minimum number of disks used in a RAID 10 array?": {"answer": "4", "hidden-answer": "four"}
+					"What is the minimum number of disks used in a RAID 0 array?": {"answers": "2", "hidden-answers": "two"},
+					"What is the minimum number of disks used in a RAID 1 array?": {"answers": "2", "hidden-answers": "two"},
+					"What is the minimum number of disks used in a RAID 5 array?": {"answers": "3", "hidden-answers": "three"},
+					"What is the minimum number of disks used in a RAID 10 array?": {"answers": "4", "hidden-answers": "four"}
 				},
 				"Optical Drive & Devices": {
 					"What optical storage technology uses blue light?": ["Blu-Ray Disc", "Blu-Ray"]
 				},
 				"Storage Drive Properties": {
-					"Between SSDs and Magnetic Drives, which is characterized by greater typical storage capacity?": {"answer": "Magnetic Drive", "hidden-answer": "Magnetic Drives"},
-					"Between SSDs and Magnetic Drives, which is characterized by greater typical performance?": {"answer": "SSD", "hidden-answer": "SSDs"},
-					"Between SSDs and Magnetic Drives, which is characterized by greater typical device cost?": {"answer": "SSD", "hidden-answer": "SSDs"}
+					"Between SSDs and Magnetic Drives, which is characterized by greater typical storage capacity?": {"answers": "Magnetic Drive", "hidden-answers": "Magnetic Drives"},
+					"Between SSDs and Magnetic Drives, which is characterized by greater typical performance?": {"answers": "SSD", "hidden-answers": "SSDs"},
+					"Between SSDs and Magnetic Drives, which is characterized by greater typical device cost?": {"answers": "SSD", "hidden-answers": "SSDs"}
 				}
 			},
 			"Motherboard Concepts": {
 				"Power": {
-					"What voltages are delivered by an ATX power connector?": {"answer": "3.3V, 5V, 12V, and -12V", "hidden-answer": ["3.3V 5V 12V and -12V", "3.3V, 5V, 12V, -12V", "3.3V 5V 12V -12V"]},
+					"What voltages are delivered by an ATX power connector?": {"answers": "3.3V, 5V, 12V, and -12V", "hidden-answers": ["3.3V 5V 12V and -12V", "3.3V, 5V, 12V, -12V", "3.3V 5V 12V -12V"]},
 					"How many pins does the ATX12V version 2 power connector have?": "24"
 				},
 				"Expansion Slots": {
@@ -334,17 +334,17 @@
 		"Domain 5: Troubleshooting": {
 			"CompTIA A+ Troubleshooting Process": {
 				"Steps and Order": {
-					"What is Step 1 of the CompTIA six-step Troubleshooting process?": {"answer": "Identify", "hidden-answer": "Identification"},
-					"What is Step 2 of the CompTIA six-step Troubleshooting process?": {"answer": "Theorize", "hidden-answer": "Theorizing"},
-					"What is Step 3 of the CompTIA six-step Troubleshooting process?": {"answer": "Test", "hidden-answer": "Testing"},
-					"What is Step 4 of the CompTIA six-step Troubleshooting process?": {"answer": "Plan", "hidden-answer": "Planning"},
-					"What is Step 5 of the CompTIA six-step Troubleshooting process?": {"answer": "Verify", "hidden-answer": "Verification"},
-					"What is Step 6 of the CompTIA six-step Troubleshooting process?": {"answer": "Document", "hidden-answer": "Documentation"}
+					"What is Step 1 of the CompTIA six-step Troubleshooting process?": {"answers": "Identify", "hidden-answers": "Identification"},
+					"What is Step 2 of the CompTIA six-step Troubleshooting process?": {"answers": "Theorize", "hidden-answers": "Theorizing"},
+					"What is Step 3 of the CompTIA six-step Troubleshooting process?": {"answers": "Test", "hidden-answers": "Testing"},
+					"What is Step 4 of the CompTIA six-step Troubleshooting process?": {"answers": "Plan", "hidden-answers": "Planning"},
+					"What is Step 5 of the CompTIA six-step Troubleshooting process?": {"answers": "Verify", "hidden-answers": "Verification"},
+					"What is Step 6 of the CompTIA six-step Troubleshooting process?": {"answers": "Document", "hidden-answers": "Documentation"}
 				},
 				"Important Considerations": {
-					"During which step of the CompTIA six-step Troubleshooting process should you perform any necessary backups?": {"answer": ["Step 1: Identify", "1"],  "hidden-answer": ["one", "Identify", "Identification"]},
-					"During which step of the CompTIA six-step Troubleshooting process should you consult applicable vendor documentation?": {"answer": ["Step 4: Plan", "4"],  "hidden-answer": ["four", "Plan", "Planning"]},
-					"During which step of the CompTIA six-step Troubleshooting process should you implement applicable preventative measures?": {"answer": ["Step 5: Verify", "5"],  "hidden-answer": ["five", "Verify", "Verification"]}
+					"During which step of the CompTIA six-step Troubleshooting process should you perform any necessary backups?": {"answers": ["Step 1: Identify", "1"],  "hidden-answers": ["one", "Identify", "Identification"]},
+					"During which step of the CompTIA six-step Troubleshooting process should you consult applicable vendor documentation?": {"answers": ["Step 4: Plan", "4"],  "hidden-answers": ["four", "Plan", "Planning"]},
+					"During which step of the CompTIA six-step Troubleshooting process should you implement applicable preventative measures?": {"answers": ["Step 5: Verify", "5"],  "hidden-answers": ["five", "Verify", "Verification"]}
 				}
 			}
 		},
@@ -361,11 +361,11 @@
 				"What does 'LC' (the optical cable) stand for?": "Lucent Connector"
 			},
 			"Cellular Standards": {
-				"What does 'GSM' (The cellular standard) stand for?": {"answer": "Global System for Mobile Communications", "hidden-answer": "Global System for Mobile Communication"},
+				"What does 'GSM' (The cellular standard) stand for?": {"answers": "Global System for Mobile Communications", "hidden-answers": "Global System for Mobile Communication"},
 				"What does 'GPRS' (The cellular standard) stand for?": "General Packet Radio Service",
 				"What does 'EDGE' (The cellular standard) stand for?": "Enhanced Data Rates for GSM Evolution",
 				"What does 'LTE' (The cellular standard) stand for?": "Long Term Evolution",
-				"What does 'IMT' (The cellular standard) stand for?": {"answer": "International Mobile Telecommunications", "hidden-answer": "International Mobile Telecommunication"},
+				"What does 'IMT' (The cellular standard) stand for?": {"answers": "International Mobile Telecommunications", "hidden-answers": "International Mobile Telecommunication"},
 				"What does 'CDMA' (The cellular standard) stand for?": "Code Division Multiple Access",
 				"What does 'PRL' (The concept relevant to CDMA) stand for?": "Preferred Roaming List",
 				"What does 'IMEI' (The mobile device ID technology) stand for?": "International Mobile Equipment Identity",
@@ -379,27 +379,27 @@
 				"What does 'RAM' (the computer component) stand for?": "Random Access Memory",
 				"What does 'PSU' (the computer component) stand for?": "Power Supply Unit",
 				"What does 'PCI' (the expansion card connector) stand for?": "Peripheral Component Interface",
-				"What does 'PCIe' (the expansion card connector) stand for?": {"answer": "PCI Express", "hidden-answer": "Peripheral Component Interface Express"},
+				"What does 'PCIe' (the expansion card connector) stand for?": {"answers": "PCI Express", "hidden-answers": "Peripheral Component Interface Express"},
 				"What was 'DDR' (the RAM technology) stand for?": "Double Data Rate",
 				"What does 'DIMM' (the RAM form factor) stand for?": "Dual Inline Memory Module",
-				"What does 'SODIMM' (the RAM form factor) stand for?": {"answer": ["Small Outline DIMM"], "hidden-answer": ["Small Outline Dual Inline Memory Module", "Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
+				"What does 'SODIMM' (the RAM form factor) stand for?": {"answers": ["Small Outline DIMM"], "hidden-answers": ["Small Outline Dual Inline Memory Module", "Small-Outline DIMM", "Small-Outline Dual Inline Memory Module"]}
 			},
 			"Cybersecurity Concepts, Systems, Devices, & Attacks": {
 				"What does 'AAA' (the cybersecurity concept) stand for?": "Authentication, Authorization, Accounting",
 				"What does 'IDS' (the cybersecurity system) stand for?": "Intrusion Detection System",
 				"What does 'IPS' (the cybersecurity system) stand for?": "Intrusion Prevention System",
-				"What does 'MFA' (the cybersecurity concept) stand for?": {"answer": "Multifactor Authentication", "hidden-answer": "Multi-Factor Authentication"},
+				"What does 'MFA' (the cybersecurity concept) stand for?": {"answers": "Multifactor Authentication", "hidden-answers": "Multi-Factor Authentication"},
 				"What does 'DoS' (the kind of attack) stand for?": "Denial of Service",
-				"What does 'DDoS' (the kind of attack) stand for?": {"answer": "Distributed DoS", "hidden-answer": "Distributed Denial of Service"},
+				"What does 'DDoS' (the kind of attack) stand for?": {"answers": "Distributed DoS", "hidden-answers": "Distributed Denial of Service"},
 				"What does 'XSS' (the kind of attack) stand for?": "Denial of Service"
 			},
 			"Display Technologies": {
 				"What does 'LCD' (the display technology) stand for?": "Liquid Crystal Display",
 				"What does 'TN' (the display technology) stand for?": "Twisted Nematic",
-				"What does 'IPS' (the display technology) stand for?": {"answer": "In-Plane Switching", "hidden-answer": "In Plane Switching"},
+				"What does 'IPS' (the display technology) stand for?": {"answers": "In-Plane Switching", "hidden-answers": "In Plane Switching"},
 				"What does 'VA' (the display technology) stand for?": "Vertical Alignment",
-				"What does 'LED' (the display technology) stand for?": {"answer": "Light-Emitting Diode", "hidden-answer": "Light Emitting Diode"},
-				"What does 'OLED' (the display technology) stand for?": {"answer": ["Organic Light-Emitting Diode", "Organic LED"], "hidden-answer": "Organic Light Emitting Diode"},
+				"What does 'LED' (the display technology) stand for?": {"answers": "Light-Emitting Diode", "hidden-answers": "Light Emitting Diode"},
+				"What does 'OLED' (the display technology) stand for?": {"answers": ["Organic Light-Emitting Diode", "Organic LED"], "hidden-answers": "Organic Light Emitting Diode"},
 				"What does 'CCFL' (the kind of lightbuld) stand for?": "Cold Cathode Fluorescent Lamp"
 			},
 			"Electrical": {
@@ -413,9 +413,9 @@
 				"What does 'PAN' (the network type) stand for?": "Personal Area Network",
 				"What does 'MAN' (the network type) stand for?": "Metropolitan Area Network",
 				"What does 'SAN' (the network type) stand for?": "Storage Area Network",
-				"What does 'WLAN' (the network type) stand for?": {"answer": "Wireless LAN", "hidden-answer": "Wireless Local Area Network"},
-				"What does 'WWAN' (the network type) stand for?": {"answer": "Wireless WAN", "hidden-answer": "Wireless Wide Area Network"},
-				"What does 'VLAN' (the network type) stand for?": {"answer": "Virtual LAN", "hidden-answer": "Virtual Local Area Network"},
+				"What does 'WLAN' (the network type) stand for?": {"answers": "Wireless LAN", "hidden-answers": "Wireless Local Area Network"},
+				"What does 'WWAN' (the network type) stand for?": {"answers": "Wireless WAN", "hidden-answers": "Wireless Wide Area Network"},
+				"What does 'VLAN' (the network type) stand for?": {"answers": "Virtual LAN", "hidden-answers": "Virtual Local Area Network"},
 				"What does 'VPN' (the network type) stand for?": "Virtual Private Network",
 				"What does 'WMN' (the network type) stand for?": "Wireless Mesh Network"
 			},
@@ -438,7 +438,7 @@
 				"What does 'SMB' (the protocol) stand for?": "Server Message Block",
 				"What does 'SNMP' (the protocol) stand for?": "Simple Network Management Protocol",
 				"What does 'Telnet' (the protocol) stand for?": "Telecommunication Network",
-				"What does 'DORA' (the DHCP mechanism) stand for?": {"answer": "Discovery, Offering, Request, Acknowledgement", "hidden-answer": "Discovery Offering Request Acknowledgement"}
+				"What does 'DORA' (the DHCP mechanism) stand for?": {"answers": "Discovery, Offering, Request, Acknowledgment", "hidden-answers": "Discovery Offering Request Acknowledgment"}
 			},
 			"Storage Devices & Cables": {
 				"What does 'CD' (The optical storage device) stand for?": "Compact Disc",
@@ -446,12 +446,12 @@
 				"What does 'HDD' (The storage device) stand for?": "Hard Disk Drive",
 				"What does 'SSD' (The storage device) stand for?": "Solid State Drive",
 				"What does 'SATA' (The storage cable) stand for?": "Serial Advanced Technology Attachment",
-				"What does 'eSATA' (The storage cable) stand for?": {"answer": "External SATA", "hidden-answer": "External Serial Advanced Technology Attachment"},
+				"What does 'eSATA' (The storage cable) stand for?": {"answers": "External SATA", "hidden-answers": "External Serial Advanced Technology Attachment"},
 				"What does 'SCSI' (The storage cable) stand for?": "Small Computer System Interface",
 				"What does 'IDE' (The storage cable) stand for?": "Integrated Drive Electronics"
 			},
 			"Video Standards & Connectors": {
-				"What does 'HDMI' (the video connector) stand for?": {"answer": "High-Definition Multimedia Interface", "hidden-answer": "High Definition Multimedia Interface"},
+				"What does 'HDMI' (the video connector) stand for?": {"answers": "High-Definition Multimedia Interface", "hidden-answers": "High Definition Multimedia Interface"},
 				"What does 'DVI' (the video connector) stand for?": "Digital Visual Interface",
 				"What does 'VGA' (the video connector) stand for?": "Video Graphics Array"
 			},
@@ -462,15 +462,15 @@
 				"What does 'VDI'  (the virtualization concept) stand for?": "Virtual Desktop Infrastructure"
 			},
 			"Wireless Technologies": {
-				"What does 'RFID' (The wireless technology) stand for?": {"answer": "Radio-Frequency Identification", "hidden-answer": "Radio Frequency Identification"},
-				"What does 'NFC' (The wireless technology) stand for?": {"answer": "Near-Field Communication", "hidden-answer": "Near Field Communication"},
-				"What does 'MIMO' (the 802.11 technology) stand for?": {"answer": "Multiple-Input Multiple-Output", "hidden-answer": "Multiple Input Multiple Output"},
-				"What does 'MU-MIMO' (the 802.11 technology) stand for?": {"answer": "Multiuser MIMO", "hidden-answer": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"]}
+				"What does 'RFID' (The wireless technology) stand for?": {"answers": "Radio-Frequency Identification", "hidden-answers": "Radio Frequency Identification"},
+				"What does 'NFC' (The wireless technology) stand for?": {"answers": "Near-Field Communication", "hidden-answers": "Near Field Communication"},
+				"What does 'MIMO' (the 802.11 technology) stand for?": {"answers": "Multiple-Input Multiple-Output", "hidden-answers": "Multiple Input Multiple Output"},
+				"What does 'MU-MIMO' (the 802.11 technology) stand for?": {"answers": "Multiuser MIMO", "hidden-answers": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"]}
 			},
 			"Other": {
-				"What does 'ECC' (the memory correcting technology) stand for?": {"answer": "Error Correction Code", "hidden-answer": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},
+				"What does 'ECC' (the memory correcting technology) stand for?": {"answers": "Error Correction Code", "hidden-answers": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},
 				"What does 'IoT' (the networking concept) stand for?": "Internet of Things",
-				"What does 'FQDN' (the DNS concept) stand for?": {"answer": "Fully Qualified Domain Name", "hidden-answer": "Fully-Qualified Domain Name"},
+				"What does 'FQDN' (the DNS concept) stand for?": {"answers": "Fully Qualified Domain Name", "hidden-answers": "Fully-Qualified Domain Name"},
 				"What does 'BSOD' (the proprietry crash screen) stand for?": "Blue Screen of Death",
 				"What does 'PCL' (the kind of printer driver) stand for?": "Printer Command Language",
 				"What does 'OCP' (The printer component) stand for?": "Operator Control Panel",

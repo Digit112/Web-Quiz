@@ -23,7 +23,7 @@
 					"In Windows, what application is used to browse files?": "File Explorer"
 				},
 				"The Run Prompt": {
-					"What is the key combination for opening the Run prompt": {"answer": "Win+R", "hidden-answer": ["Win + R", "Windows+R", "Windows + R"]},
+					"What is the key combination for opening the Run prompt": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
 					"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"],
 					"What would you type into the run prompt to open the local security policy window?": "secpol.msc",
 					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc"
@@ -33,9 +33,9 @@
 						"In Windows, what command is used to change the working directory?": "cd",
 						"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
 						"In Windows, what command would change the working directory to the parent of the current working directory?": "cd ..",
-						"In Windows, what command is used to make a directory?": {"answer": "md", "hidden-answer": "mkdir"},
-						"In Windows, what command is used to remove a directory?": {"answer": "rd", "hidden-answer": "rmdir"},
-						"In Windows, what command is used to delete a file?": {"answer": "rd", "hidden-answer": "del"},
+						"In Windows, what command is used to make a directory?": {"answers": "md", "hidden-answers": "mkdir"},
+						"In Windows, what command is used to remove a directory?": {"answers": "rd", "hidden-answers": "rmdir"},
+						"In Windows, what command is used to delete a file?": {"answers": "rd", "hidden-answers": "del"},
 						"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
 						"In Windows, what command is used to get a list of files and folders in the current working directory and all descendants?": "tree",
 						"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
@@ -106,7 +106,7 @@
 			},
 			"Disks, Drives, Volumes": {
 				"Fundamental Concepts": {
-					"What term describes the act of making the root of a volume appear as a directory withing anthoer filesystem?": {"answer": "Mounting", "hidden-answer": "Mount"}
+					"What term describes the act of making the root of a volume appear as a directory withing another filesystem?": {"answers": "Mounting", "hidden-answers": "Mount"}
 				},
 				"Basic vs Dynamic": {
 					"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
@@ -135,10 +135,10 @@
 				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 			},
 			"Logical Security": {
-				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answer": "Multi-Factor Authentication", "hidden-answer": "Multi Factor Authentication"}
+				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "Multi-Factor Authentication", "hidden-answers": "Multi Factor Authentication"}
 			},
 			"Active Directory": {
-				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answer": "Login Script", "hidden-answer": "Logon Script"}
+				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answers": "Login Script", "hidden-answers": "Logon Script"}
 			}
 		},
 		"Domain 3: Software Troubleshhoting": {

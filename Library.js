@@ -81,7 +81,7 @@ class Library {
 		if (library_data) { this.initialize(library_data) }
 	}
 	
-	// Produces HTML corresponding to this library, which allows the selction of question groups or,
+	// Produces HTML corresponding to this library, which allows the selection of question groups or,
 	// if "editing" is true, allows the modification of the underlying structure.
 	// Deletes all existing children of the passed elements before adding new content.
 	// If an editing pane is supplied, and currently_editing is true, then editing options will be displayed.

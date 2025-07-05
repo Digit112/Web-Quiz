@@ -49,21 +49,65 @@ let current_mode_of_presentation = null
 // Number of correctly answered questions since the last quiz cycle.
 let quiz_score = 0
 
-// Used to select an available view for the question.
-function set_mode_of_presentation(new_mode) {
-	answer_text.value = ""
-	answer_text.focus()
+// These listeners are used to allow users to select multiple-choice questions by typing them.
+let selecting_string = "" // What the user typed while no text box has focus.
+let selecting_string_elem = null
+document.addEventListener("keypress", (event) => {
+	console.log('Key Press:', event.key);
 	
-	if (new_mode == "verbatim") {
-		verbatim_field.style.display = "block"
-		multiple_choice_field.style.display = "none"
+	// Match the new string against available multiple-choice options.
+	// TODO: Probably better to only lowercase for case-insensitive questions.
+	let new_selecting_string = selecting_string + event.key.toLowerCase() 
+	attempt_to_apply_new_selecting_string(new_selecting_string)
+});
+
+// Allows the user to submit their selection and also use backspace.
+document.addEventListener("keydown", (event) => {
+	console.log('Key Press:', event.key);
+	
+	if (event.key == "Enter" && selecting_string_elem != null) {
+		selecting_string_elem.click()
 	}
-	else if (new_mode == "multiple-choice") {
-		verbatim_field.style.display = "none"
-		multiple_choice_field.style.display = "flex"
+	else if (event.key == "Backspace" && selecting_string.length > 0) {
+		attempt_to_apply_new_selecting_string(selecting_string.slice(0, -1))
+	}
+});
+
+function attempt_to_apply_new_selecting_string(new_selecting_string) {
+	console.log("Applying '" + new_selecting_string + "'")
+	if (new_selecting_string.length == 0) {
+		// Clears stylings which use <span> elements
+		if (selecting_string_elem != null) {
+			selecting_string_elem.textContent = selecting_string_elem.textContent
+		}
+		
+		selecting_string = ""
+		selecting_string_elem = null
 	}
 	else {
-		throw new Error("Invalid mode")
+		for (let child of multiple_choice_field.children) {
+			console.log(child)
+			
+			let child_text = child.textContent
+			// TODO: Probably better to only lowercase for case-insensitive questions.
+			if (child_text.toLowerCase().startsWith(new_selecting_string)) {
+				// Found match. Underline match for the user to see and return.
+				// Note that if no match is found, selecting_string is not updated to reflect the new keypress.
+				selecting_string = new_selecting_string
+				selecting_string_elem = child
+				
+				let prefix = document.createElement("span")
+				prefix.style.textDecoration = "underline"
+				
+				let suffix = document.createElement("span")
+				
+				prefix.textContent = child_text.slice(0, new_selecting_string.length) // Preserve capitalization
+				suffix.textContent = child_text.slice(new_selecting_string.length)
+				child.replaceChildren(prefix, suffix)
+				
+				break
+			}
+		}
 	}
 }
 
@@ -226,6 +270,7 @@ function generate_next_question() {
 	// Get the next question. If in quiz mode, we already got it.
 	if (!am_quiz) {
 		// Get an active question. If no valid question exists, activate and return one.
+		// TODO: This sometimes seems to fail on very small question sets.
 		active_question = my_library.root_q.get_random(am_adaptive, am_windowed)
 		if (active_question == null) active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
 		if (active_question == null) throw new Error("Failed to get question in adaptive or random mode.")
@@ -240,6 +285,8 @@ function generate_next_question() {
 	answer_text.value = ""
 	answer_text.focus()
 	multiple_choice_field.replaceChildren()
+	selecting_string = ""
+	selecting_string_elem = null
 	
 	if (active_question.mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"
@@ -256,10 +303,7 @@ function generate_next_question() {
 		// Shuffle answers
 		for (let i = 0; i < available_answers.length; i++) {
 			let r = Math.random()
-			console.log(i + ": " + r + ": " + (available_answers.length - i))
-			console.log(Math.floor(r * (available_answers.length - i)))
 			let j = Math.floor(r * (available_answers.length - i)) + i
-			console.log("" + i + " <-> " + j)
 			
 			if (i != j) {
 				let temp = available_answers[i]
@@ -272,6 +316,7 @@ function generate_next_question() {
 		for (let avail_answer of available_answers) {
 			let new_button = document.createElement("button")
 			new_button.textContent = avail_answer
+			new_button.setAttribute("class", "multiple-choice-answer")
 			new_button.addEventListener("click", () => {
 				answer_text.value = new_button.textContent
 				generate_next_question()

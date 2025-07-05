@@ -166,6 +166,10 @@ class Question {
 			throw new LibraryLoadingError(false, this.q[0], parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
 		}
 		
+		console.assert(this.case_sensitive != null, "Failed to obtain case-sensitive")
+		console.assert(this.mode_of_presentation != null, "Failed to obtain mode-of-presentation")
+		console.assert(this.max_choices != null, "Failed to obtain max-choices")
+		console.assert(this.typo_forgiveness_level != null, "Failed to obtain typo-forgiveness-level")
 		console.assert(this.correct_answer_source, "Failed to obtain correct-answer-source")
 		
 		console.assert(this.a, "Failed to obtain answers")

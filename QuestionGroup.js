@@ -349,7 +349,7 @@ class QuestionGroup {
 		
 		console.assert(this.descendants_give_incorrect_answers != null, "Failed to obtain descendants-give-incorrect-answers")
 		console.assert(this.case_sensitive != null, "Failed to obtain case-sensitive")
-		console.assert(this.mode_of_presentation != null, "Failed to obtain case-sensitive")
+		console.assert(this.mode_of_presentation != null, "Failed to obtain mode-of-presentation")
 		console.assert(this.max_choices != null, "Failed to obtain max-choices")
 		console.assert(this.typo_forgiveness_level != null, "Failed to obtain typo-forgiveness-level")
 		console.assert(this.correct_answer_source != null, "Failed to obtain correct-answer-source")

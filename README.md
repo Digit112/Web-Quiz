@@ -66,12 +66,13 @@ A QuestionGroup object represents either a collection of questions OR of other Q
 - `incorrect-answers` (optional): A list of incorrect answers which can be used by all children in addition to their own `incorrect-answers` lists and the lists on any intermediate groups.
 - `descendants-give-incorrect-answers` (optional; default `false`): If `true`, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice.
 
-**The following traits may be inherited, and only effect a QuestionGroup's descendant Questions, not the QuestionGroup itself.**
+**The following traits may be inherited, and only effect a QuestionGroup's descendant Questions, not the QuestionGroup itself.** They may also be specified on individual Question objects, and their meanings are clarified below.
 
-- `case-sensitive` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
-- `mode-of-presentation` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
-- `max-choices` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
-- `typo-forgiveness-level` (optional): Specify on a group to allow its descendants to inherit the value. May be overridden by descendants.
+- `case-sensitive` (optional)
+- `mode-of-presentation` (optional)
+- `max-choices` (optional)
+- `typo-forgiveness-level` (optional)
+- `correct-answer-source` (optional
 
 ### Question
 
@@ -89,7 +90,8 @@ A question represents the association between a *question statement* and one or 
 - `case-sensitive` (optional; inherits by default): Whether a response with the same text but wrong letter casing counts as correct. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `false`.
 - `mode-of-presentation` (optional; inherits by default): Whether this question requires a `verbatim` response from the user, or a `multiple-choice` selection. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `verbatim`.
 - `max-choices` (optional; inherits by default): How many options should be shown to the user by default in `multiple-choice` presentation. Fewer options may be displayed if an insufficient number of incorrect answers can be found by the system. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `4`.
-- `typo-forgiveness-level` (optional; inherits by default): The level of typo forgivness, with higher levels being more likely to grade an answer correct despite small errors including insertions, deletions, and substitutions. Must be one of `"none"`, `"low"`, `"medium"`, or `"high"`. If inheriting is impossible (because all ancestors also inherit), defaults to `low`. See [link](#typo-forgiveness) for details on this.
+- `typo-forgiveness-level` (optional; inherits by default): The level of typo forgiveness, with higher levels being more likely to grade an answer correct despite small errors including insertions, deletions, and substitutions. Must be one of `"none"`, `"low"`, `"medium"`, or `"high"`. If inheriting is impossible (because all ancestors also inherit), defaults to `low`. See [link](#typo-forgiveness) for details on this.
+- `correct-answer-source` (optional; inherits by default): Where to obtain the correct response to a question which will be shown to the user in multiple-choice mode. If `"random"`, chooses a random (non-hidden) answer. If `"primary"`, always uses the primary (first) answer. If inheriting is impossible (because all ancestors also inherit), defaults to `random`. Naturally, this makes no difference unless a questions has multiple answers.
 
 ### QuestionList
 

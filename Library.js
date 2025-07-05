@@ -65,6 +65,7 @@ class Library {
 		this.mode_of_presentation = "verbatim"
 		this.max_choices = 4
 		this.typo_forgiveness_level = "low"
+		this.correct_answer_source = "random"
 		
 		this.num_explicit_incorrect_answers = 0
 		this.num_offered_incorrect_answers = 0

@@ -113,7 +113,7 @@
 					"In Windows, what term describes a disk that uses traditional partitioning and whose volumes must be wholly contained on that disk?": "Basic"
 				},
 				"MBR vs GPT": {
-					"mode-of-presentaion": "multiple-choice",
+					"mode-of-presentation": "multiple-choice",
 					"descendants-give-incorrect-answers": true,
 					"questions": {
 						"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",

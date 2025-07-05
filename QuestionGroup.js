@@ -213,6 +213,13 @@ class QuestionGroup {
 			if (!["none", "low", "medium", "high"].includes(this.typo_forgiveness_level))
 				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
 			
+			// correct-answer-source
+			this.correct_answer_source = attempt_read_inherit("correct-answer-source")
+			if (typeof this.correct_answer_source != "string")
+				throw new LibraryLoadingError(true, this.label, parent_group, "'correct-answer-source' must be a string.")
+			if (!["primary", "random"].includes(this.correct_answer_source))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
+			
 			/* ---- Read Non-Inheritables ---- */
 			
 			// Read incorrect-answers
@@ -292,6 +299,7 @@ class QuestionGroup {
 			this.mode_of_presentation = this.parent_group.mode_of_presentation
 			this.max_choices = this.parent_group.max_choices
 			this.typo_forgiveness_level = this.parent_group.typo_forgiveness_level
+			this.correct_answer_source = this.parent_group.correct_answer_source
 			
 			// Default all non-inheritables
 			this.incorrect_answers = []
@@ -340,8 +348,13 @@ class QuestionGroup {
 		console.assert(typeof this.children_are_groups == "boolean", "Failed to determine child type.")
 		
 		console.assert(this.descendants_give_incorrect_answers != null, "Failed to obtain descendants-give-incorrect-answers")
+		console.assert(this.case_sensitive != null, "Failed to obtain case-sensitive")
+		console.assert(this.mode_of_presentation != null, "Failed to obtain case-sensitive")
+		console.assert(this.max_choices != null, "Failed to obtain max-choices")
+		console.assert(this.typo_forgiveness_level != null, "Failed to obtain typo-forgiveness-level")
+		console.assert(this.correct_answer_source != null, "Failed to obtain correct-answer-source")
 		
-		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers.")
+		console.assert(this.incorrect_answers != null, "Failed to obtain incorrect-answers.")
 	}
 	
 	// Returns true if this is the library's root QuestionGroup

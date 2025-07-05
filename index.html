@@ -41,14 +41,20 @@
 			
 			<hr> <!-- Begin Question Area -->
 			
-			<p id="question_text" style="font-size: 2em;">?</p>
-			<input placeholder="your answer..." id="answer_text" type="text">
+			<p id="question-text" style="font-size: 2em;">?</p>
 			
-			<button id="next_question" type="button">Next Question</button>
-			<p id="correct_indicator" style="font-size: 18px;">N/A</p>
-			<p id="last_question">Last Question Was: N/A</p>
-			<p id="your_response">Your Response Was: N/A</p>
-			<p id="correct_answer">The Correct Answer Was: N/A</p>
+			<button id="begin-button" type="button">Begin</button>
+			<div id="verbatim-field" style="display: none;">
+				<input placeholder="your answer..." id="answer-text" type="text">
+				<button id="next-question" type="button">Next Question</button>
+			</div>
+			<div id="multiple-choice-field" style="display: none;">
+			</div>
+			
+			<p id="correct-indicator" style="font-size: 18px;">N/A</p>
+			<p id="last-question">Last Question Was: N/A</p>
+			<p id="your-response">Your Response Was: N/A</p>
+			<p id="correct-answer">The Correct Answer Was: N/A</p>
 		</article>
 		
 		<script src="Question.js"></script>

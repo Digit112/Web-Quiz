@@ -23,33 +23,59 @@ let shuffle_explanation = document.getElementById("shuffle_explanation")
 
 let reset_progress = document.getElementById("reset_progress")
 
-let question_text = document.getElementById("question_text")
-let answer_text = document.getElementById("answer_text")
-let next_question = document.getElementById("next_question")
+let begin_button = document.getElementById("begin-button")
 
-let correct_indicator = document.getElementById("correct_indicator")
-let last_question = document.getElementById("last_question")
-let your_response = document.getElementById("your_response")
-let correct_answer = document.getElementById("correct_answer")
+let verbatim_field = document.getElementById("verbatim-field")
+let multiple_choice_field = document.getElementById("multiple-choice-field")
+let current_mode = null
 
-var my_library = new Library()
+let question_text = document.getElementById("question-text")
+let answer_text = document.getElementById("answer-text")
+let next_question = document.getElementById("next-question")
+
+let correct_indicator = document.getElementById("correct-indicator")
+let last_question = document.getElementById("last-question")
+let your_response = document.getElementById("your-response")
+let correct_answer = document.getElementById("correct-answer")
+
+let my_library = new Library()
 my_library.generate_HTML( document.getElementById("collapsibles_root"), editing_pane )
 
 let last_active_question = null
 let active_question = null
 
+let current_mode_of_presentation = null
+
 // Number of correctly answered questions since the last quiz cycle.
 let quiz_score = 0
 
-random_gen.addEventListener("input", function() {
+// Used to select an available view for the question.
+function set_mode_of_presentation(new_mode) {
+	answer_text.value = ""
+	answer_text.focus()
+	
+	if (new_mode == "verbatim") {
+		verbatim_field.style.display = "block"
+		multiple_choice_field.style.display = "none"
+	}
+	else if (new_mode == "multiple-choice") {
+		verbatim_field.style.display = "none"
+		multiple_choice_field.style.display = "flex"
+	}
+	else {
+		throw new Error("Invalid mode")
+	}
+}
+
+random_gen.addEventListener("input", () => {
 	gen_explanation.innerHTML = random_gen_expl
 })
 
-adapt_gen.addEventListener("input", function() {
+adapt_gen.addEventListener("input", () => {
 	gen_explanation.innerHTML = adapt_gen_expl
 })
 
-quiz_gen.addEventListener("input", function() {
+quiz_gen.addEventListener("input", () => {
 	gen_explanation.innerHTML = quiz_gen_expl
 	
 	my_library.root_q.deactivate_all()
@@ -57,7 +83,7 @@ quiz_gen.addEventListener("input", function() {
 	quiz_score = 0
 })
 
-use_window.addEventListener("input", function() {
+use_window.addEventListener("input", () => {
 	if (this.checked) {
 		window_explanation.innerHTML = windowing_expl
 	}
@@ -66,7 +92,7 @@ use_window.addEventListener("input", function() {
 	}
 })
 
-do_shuffle.addEventListener("input", function() {
+do_shuffle.addEventListener("input", () => {
 	if (this.checked) {
 		shuffle_explanation.innerHTML = shuffle_expl
 	}
@@ -76,14 +102,21 @@ do_shuffle.addEventListener("input", function() {
 	}
 })
 
-reset_progress.addEventListener("click", function() {
+reset_progress.addEventListener("click", () => {
 	my_library.root_q.reset_all()
+})
+
+// Secretly the same as next-question
+begin_button.addEventListener("click", () => {
+	if (generate_next_question()) {
+		begin_button.style.display = "none"
+	}
 })
 
 // Add Event Listener for the next question button.
 next_question.addEventListener("click", generate_next_question)
-answer_text.addEventListener("keydown", function(event) {
-	if (event.key == "Enter") {
+answer_text.addEventListener("keydown", (e) => {
+	if (e.key == "Enter") {
 		generate_next_question()
 	}
 })
@@ -99,7 +132,7 @@ function generate_next_question() {
 	if (active_question != null) {
 		// Check the answer.
 		let answer = answer_text.value.trim()
-		if (answer == "") return // Do nothing if no answer provided.
+		if (answer == "") return false // Do nothing if no answer provided.
 		
 		let correct = active_question.attempt(answer)
 		if (correct) {
@@ -121,7 +154,7 @@ function generate_next_question() {
 	
 	if (my_library.root_q.enabled_weight == 0) {
 		alert("Please select some questions from the menu.")
-		return
+		return false
 	}
 	
 	// In quiz mode, question activation is used to retrieve questions.
@@ -202,6 +235,54 @@ function generate_next_question() {
 		last_active_question = active_question
 	}
 	
-	question_text.innerHTML = active_question.q
+	// Display the question.
+	question_text.innerHTML = active_question.q[0]
 	answer_text.value = ""
+	answer_text.focus()
+	multiple_choice_field.replaceChildren()
+	
+	if (active_question.mode_of_presentation == "verbatim") {
+		verbatim_field.style.display = "block"
+		multiple_choice_field.style.display = "none"
+	}
+	else if (active_question.mode_of_presentation == "multiple-choice") {
+		verbatim_field.style.display = "none"
+		multiple_choice_field.style.display = "flex"
+		
+		let available_answers = active_question.get_incorrect_answers(active_question.max_choices - 1)
+		available_answers.push(active_question.get_correct_answer())
+		console.log(available_answers)
+		
+		// Shuffle answers
+		for (let i = 0; i < available_answers.length; i++) {
+			let r = Math.random()
+			console.log(i + ": " + r + ": " + (available_answers.length - i))
+			console.log(Math.floor(r * (available_answers.length - i)))
+			let j = Math.floor(r * (available_answers.length - i)) + i
+			console.log("" + i + " <-> " + j)
+			
+			if (i != j) {
+				let temp = available_answers[i]
+				available_answers[i] = available_answers[j]
+				available_answers[j] = temp
+			}
+		}
+		
+		// Generate HTML
+		for (let avail_answer of available_answers) {
+			let new_button = document.createElement("button")
+			new_button.textContent = avail_answer
+			new_button.addEventListener("click", () => {
+				answer_text.value = new_button.textContent
+				generate_next_question()
+			})
+			
+			multiple_choice_field.appendChild(new_button)
+		}
+	}
+	else {
+		throw new Error("Question has invalid mode-of-presentation '" + active_question.mode_of_presentation + "'.")
+	}
+	
+	return true
 }

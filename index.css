@@ -19,6 +19,34 @@ body {
 		display: flex;
 	}
 	
+	#begin-button {
+		#next-question {
+			font-size: 1.2em;
+		}
+	}
+	
+	#multiple-choice-field {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4em;
+		
+		* {
+			font-size: 1.2em;
+			
+			padding: 0.5em;
+			text-align: center;
+			
+			background-color: #eee;
+			border-radius: 0;
+			border: 1px solid black;
+		}
+		
+		*:hover {
+			background-color: #ccc;
+			cursor: pointer;
+		}
+	}
+	
 	/* For the div containing a collapsible button & checkbox */
 	.collapsible_header {
 		padding: 0.5em;

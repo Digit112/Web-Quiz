@@ -26,6 +26,7 @@ class Question {
 			this.mode_of_presentation = this.parent_group.mode_of_presentation
 			this.max_choices = this.parent_group.max_choices
 			this.typo_forgiveness_level = this.parent_group.typo_forgiveness_level
+			this.correct_answer_source = this.parent_group.correct_answer_source
 			
 			// Default all non-inheritables
 			this.hidden_answers = []
@@ -91,19 +92,29 @@ class Question {
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
 			if (typeof this.mode_of_presentation != "string")
 				throw new LibraryLoadingError(false, this.q[0], parent_group, "'mode-of-presentation' must be a string.")
-			// TODO: Also check that this value is valid
+			if (!["verbatim", "multiple-choice", "flash-card"].includes(this.mode_of_presentation))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
 			if (typeof this.max_choices != "number")
 				throw new LibraryLoadingError(false, this.q[0], parent_group, "'max-choices' must be an integer.")
-			// TODO: Also check that max-choices is not fractional
+			if (!Number.isInteger(this.max_choices))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
 			
 			// typo-forgiveness-level
 			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
 			if (typeof this.typo_forgiveness_level != "string")
 				throw new LibraryLoadingError(false, this.q[0], parent_group, "'typo-forgiveness-level' must be a string.")
-			// TODO: Also check that the level is a valid entry.
+			if (!["none", "low", "medium", "high"].includes(this.typo_forgiveness_level))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
+			
+			// correct-answer-source
+			this.correct_answer_source = attempt_read_inherit("correct-answer-source")
+			if (typeof this.correct_answer_source != "string")
+				throw new LibraryLoadingError(false, this.q[0], parent_group, "'correct-answer-source' must be a string.")
+			if (!["primary", "random"].includes(this.correct_answer_source))
+				throw new LibraryLoadingError(true, this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
 			
 			/* ---- Read Non-inheritables ---- */
 			
@@ -155,6 +166,8 @@ class Question {
 			throw new LibraryLoadingError(false, this.q[0], parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
 		}
 		
+		console.assert(this.correct_answer_source, "Failed to obtain correct-answer-source")
+		
 		console.assert(this.a, "Failed to obtain answers")
 		console.assert(this.hidden_answers, "Failed to obtain hidden-answers")
 		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers")
@@ -188,6 +201,21 @@ class Question {
 	// Returns the number of incorrect answers available for this question.
 	get_num_available_incorrect_answers() {
 		return this.incorrect_answers.length + this.parent_group.get_num_available_incorrect_answers()
+	}
+	
+	// Obtains a correct answer to be displayed in multiple-choice presentation.
+	// Depending on its properties, the result may be chosen randomly from the answers,
+	// Or the primary may be chosen every time.
+	get_correct_answer() {
+		if (this.correct_answer_source == "primary") {
+			return this.a[0]
+		}
+		else if (this.correct_answer_source == "random") {
+			return this.a[Math.floor(Math.random() * this.a.length)]
+		}
+		else {
+			throw new Error("Question has invalid correct-answer-source.")
+		}
 	}
 	
 	// Obtains and returns a list of up to the requested number of incorrect answers, if they are available.

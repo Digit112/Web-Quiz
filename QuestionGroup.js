@@ -35,8 +35,8 @@ function check_event() {
 			}
 			this.did_recurse_last = true
 				
-			// Unchecked a box with a checked ancestor. We must also uncheck all anceestors.
-			// All ancestors of this node will propogate their status to their children,
+			// Unchecked a box with a checked ancestor. We must also uncheck all ancestors.
+			// All ancestors of this node will propagate their status to their children,
 			// except other ancestors of this node, which will all be disabled.
 			this.question_group.parent_group.propogate_and_disable()
 			

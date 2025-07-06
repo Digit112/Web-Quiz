@@ -73,40 +73,72 @@ document.addEventListener("keydown", (event) => {
 	}
 });
 
+// Removes stylings and clears the string typed via events.
+function clear_typed_selection_stylings() {
+	for (let child of multiple_choice_field.children) {
+		child.textContent = child.textContent // Removes <span> Elements
+		child.classList.remove("active");
+	}
+}
+
+function reset_selecting_string() {
+	attempt_to_apply_new_selecting_string("")
+}
+
 function attempt_to_apply_new_selecting_string(new_selecting_string) {
 	console.log("Applying '" + new_selecting_string + "'")
+	
+	clear_typed_selection_stylings()
 	if (new_selecting_string.length == 0) {
-		// Clears stylings which use <span> elements
-		if (selecting_string_elem != null) {
-			selecting_string_elem.textContent = selecting_string_elem.textContent
-		}
-		
 		selecting_string = ""
 		selecting_string_elem = null
 	}
 	else {
+		// The match will be highlighted (and selectable)
+		// only if we find an exact match or exactly one match.
+		let found_exact_match = false
+		let num_matches = 0
+		
 		for (let child of multiple_choice_field.children) {
-			console.log(child)
-			
-			let child_text = child.textContent
 			// TODO: Probably better to only lowercase for case-insensitive questions.
-			if (child_text.toLowerCase().startsWith(new_selecting_string)) {
-				// Found match. Underline match for the user to see and return.
-				// Note that if no match is found, selecting_string is not updated to reflect the new keypress.
-				selecting_string = new_selecting_string
-				selecting_string_elem = child
+			let child_text = child.textContent.toLowerCase()
+			let text_to_match = new_selecting_string.toLowerCase()
+			
+			// Check for match.
+			if (child_text.startsWith(text_to_match)) {
+				num_matches++
 				
+				// Save matching child. Do not overwrite any previous exact match.
+				// Value is discarded if there end up being multiple matches.
+				if (!found_exact_match) {
+					selecting_string_elem = child
+				}
+				
+				// Check for exact match
+				if (child_text == text_to_match) {
+					found_exact_match = true
+				}
+				
+				// Underline the matches.
 				let prefix = document.createElement("span")
-				prefix.style.textDecoration = "underline"
+				prefix.style.textDecorationLine = "underline"
 				
 				let suffix = document.createElement("span")
 				
 				prefix.textContent = child_text.slice(0, new_selecting_string.length) // Preserve capitalization
 				suffix.textContent = child_text.slice(new_selecting_string.length)
 				child.replaceChildren(prefix, suffix)
-				
-				break
 			}
+		}
+		
+		// If no match is found, selecting_string is not updated to reflect the new keypress.
+		if (num_matches > 0) {
+			selecting_string = new_selecting_string
+		}
+		
+		// Activate the canonical match, if any.
+		if (num_matches == 1 || found_exact_match) {
+			selecting_string_elem.classList.add("active")
 		}
 	}
 }
@@ -172,6 +204,9 @@ function generate_next_question() {
 	let am_quiz = quiz_gen.checked
 	let am_ordered = !do_shuffle.checked
 	let am_windowed = use_window.checked
+	
+	// Always delete the character's typed selection.
+	reset_selecting_string()
 	
 	if (active_question != null) {
 		// Check the answer.

@@ -1,0 +1,20 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "Test Quiz",
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"Multiple Choice Selection": {
+			"Question": {
+				"mode-of-presentation": "multiple-choice",
+				"answers": "correct",
+				"incorrect-answers": ["corner", "carrot", "correctomundo"]
+			}
+		}
+	}
+}

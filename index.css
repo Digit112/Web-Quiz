@@ -30,7 +30,7 @@ body {
 		flex-wrap: wrap;
 		gap: 0.4em;
 		
-		.multiple-choice-answer {
+		button.multiple-choice-answer {
 			font-size: 1.2em;
 			
 			padding: 0.5em;
@@ -39,9 +39,13 @@ body {
 			background-color: #eee;
 			border-radius: 0;
 			border: 1px solid black;
+			
+			span {
+				text-decoration-thickness: 3px;
+			}
 		}
 		
-		.multiple-choice-answer:hover {
+		button.multiple-choice-answer:hover, button.active {
 			background-color: #ccc;
 			cursor: pointer;
 		}

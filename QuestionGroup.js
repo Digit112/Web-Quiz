@@ -571,32 +571,45 @@ class QuestionGroup {
 	// Returns a randomly chosen active question.
 	// Will retry until it finds a question where was_asked_last is false.
 	// Assumes cache_weights() has been called.
-	get_random(am_adaptive, am_windowed) {
+	// last_asked allows the deduction of value from weights which prevent asking the same question twice in a row.
+	get_random(am_adaptive, am_windowed, last_asked) {
+		if (last_asked != null && !(last_asked instanceof Question))
+			throw new Error("last_asked must be the Question instance which was asked last, or null if there was none.")
+		
 //		console.log("Performing retrieval: " + am_adaptive + ", " + am_windowed)
 		let my_weight = this.get_weight(am_adaptive, am_windowed)
+		
 		// Note that an active question will almost never have an adaptive_weight of zero, it is actually impossible in the math,
 		// but it is possible in practice due to floating point precision limitations.
-		if (my_weight == 0) {
-			return null
+		if (my_weight == 0) return null
+		
+		if (this.was_asked_last) {
+			if (last_asked == null)
+				throw new Error("last_asked must not be null if there was a last asked question.")
+			
+			var last_asked_weight = last_asked.get_weight(am_adaptive, am_windowed)
+			my_weight -= last_asked_weight
+			
+			// The implication in this case is that the only available question is the last_asked question.
+			if (my_weight == 0) return null
 		}
 		
-		let question = null
-		for (let i = 0; i < 20; i++) {
-			let random = Math.random() * my_weight
-			let sum = 0
-			
-			for (let j = 0; j < this.children.length; j++) {
-				sum += this.children[j].get_weight(am_adaptive, am_windowed)
+		let random = Math.random() * my_weight
+		let sum = 0
+		
+		for (let j = 0; j < this.children.length; j++) {
+			if (this.children[j].was_asked_last) {
+				console.assert(this.was_asked_last, "Child cannot have was_asked_last if parent does not.")
 				
-				if (random < sum) {
-//					console.log("Retrieving child " + i + ": " + (this.children_are_groups ? this.children[j].label : this.children[j].q) + " because " + random + " (/ " + my_weight + ") < " + sum)
-					question = this.children[j].get_random(am_adaptive, am_windowed)
-					break
-				}
+				sum += this.children[j].get_weight(am_adaptive, am_windowed) - last_asked_weight
+			}
+			else {
+				sum += this.children[j].get_weight(am_adaptive, am_windowed)
 			}
 			
-			if (question == null || !question.was_asked_last) {
-				return question
+			if (random < sum) {
+//					console.log("Retrieving child " + i + ": " + (this.children_are_groups ? this.children[j].label : this.children[j].q) + " because " + random + " (/ " + my_weight + ") < " + sum)
+				return this.children[j].get_random(am_adaptive, am_windowed, last_asked)
 			}
 		}
 		

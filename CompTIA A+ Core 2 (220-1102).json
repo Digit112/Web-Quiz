@@ -135,7 +135,7 @@
 				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 			},
 			"Logical Security": {
-				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "Multi-Factor Authentication", "hidden-answers": "Multi Factor Authentication"}
+				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "MFA", "hidden-answers": ["Multi Factor Authentication", "Multi-Factor Authentication"]}
 			},
 			"Active Directory": {
 				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answers": "Login Script", "hidden-answers": "Logon Script"}

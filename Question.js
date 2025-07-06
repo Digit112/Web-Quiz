@@ -429,6 +429,7 @@ class Question {
 	// Called when the parent QuestionGroup chooses this question for retrieval.
 	// The parameter is included so that this function matches the signature of QuestionGroup.get_random, it is unused.
 	get_random(_am_adaptive, _am_windowed) {
+		console.assert(!this.was_asked_last, "Parent group should not have attempted retrieval of this question.")
 		return this
 	}
 	

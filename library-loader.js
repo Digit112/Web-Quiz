@@ -63,7 +63,7 @@ document.addEventListener("keypress", (event) => {
 
 // Allows the user to submit their selection and also use backspace.
 document.addEventListener("keydown", (event) => {
-	console.log('Key Press:', event.key);
+	console.log('Key Down:', event.key);
 	
 	if (event.key == "Enter" && selecting_string_elem != null) {
 		selecting_string_elem.click()
@@ -125,8 +125,8 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 				
 				let suffix = document.createElement("span")
 				
-				prefix.textContent = child_text.slice(0, new_selecting_string.length) // Preserve capitalization
-				suffix.textContent = child_text.slice(new_selecting_string.length)
+				prefix.textContent = child.textContent.slice(0, new_selecting_string.length) // Preserve capitalization
+				suffix.textContent = child.textContent.slice(new_selecting_string.length)
 				child.replaceChildren(prefix, suffix)
 			}
 		}
@@ -236,34 +236,7 @@ function generate_next_question() {
 		return false
 	}
 	
-	// In quiz mode, question activation is used to retrieve questions.
-	// This is because it has the property of getting each question in-turn, which is what we want.
-	// Note that if quizzing is enabled after answering some questions, all previously activated questions will be deactivated.
-	// If it is disabled mid-quiz, all quizzed questions since the last quiz cycle will suddenly be getting asked over and over again. This is a bit strange, but
-	// it is really the ideal interpretation of how to handle a player swapping modes mid-test in this way.
-	if (am_quiz) {
-		active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
-		
-		if (active_question == null) { // All question activated, restart the quiz.
-			my_library.root_q.deactivate_all()
-			my_library.root_q.cache_weights(am_adaptive, am_windowed)
-			
-			if (my_library.root_q.enabled_weight > 0) {
-				let quiz_grade = Math.round(quiz_score / my_library.root_q.enabled_weight * 100)
-				quiz_score = 0
-				
-				console.log("Quiz Complete. Score is " + quiz_grade + "%.")
-				correct_indicator.innerHTML += " - Quiz Complete! " + quiz_grade + "% correct."
-			}
-			
-			active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
-		}
-		
-		if (active_question == null) throw new Error("Failed to get new quiz question.")
-		
-		my_library.root_q.cache_weights(am_adaptive, am_windowed)
-	}
-	else {
+	if (!am_quiz) {
 		// Outside of quiz mode, consider expanding the window. This is done by activating questions until the preferred difficulty is reached.
 		// This is done even if windowing is not enabled. If it gets enabled down the line, then the questions should be appropriate.
 		for (let i = 0; i < 20; i++) {
@@ -302,11 +275,38 @@ function generate_next_question() {
 		}
 	}
 	
+	// In quiz mode, question activation is used to retrieve questions.
+	// This is because it has the property of getting each question in-turn, which is what we want.
+	// Note that if quizzing is enabled after answering some questions, all previously activated questions will be deactivated.
+	// If it is disabled mid-quiz, all quizzed questions since the last quiz cycle will suddenly be getting asked over and over again. This is a bit strange, but
+	// it is really the ideal interpretation of how to handle a player swapping modes mid-test in this way.
+	if (am_quiz) {
+		active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+		
+		if (active_question == null) { // All question activated, restart the quiz.
+			my_library.root_q.deactivate_all()
+			my_library.root_q.cache_weights(am_adaptive, am_windowed)
+			
+			if (my_library.root_q.enabled_weight > 0) {
+				let quiz_grade = Math.round(quiz_score / my_library.root_q.enabled_weight * 100)
+				quiz_score = 0
+				
+				console.log("Quiz Complete. Score is " + quiz_grade + "%.")
+				correct_indicator.innerHTML += " - Quiz Complete! " + quiz_grade + "% correct."
+			}
+			
+			active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+		}
+		
+		if (active_question == null) throw new Error("Failed to get new quiz question.")
+		
+		my_library.root_q.cache_weights(am_adaptive, am_windowed)
+	}
 	// Get the next question. If in quiz mode, we already got it.
-	if (!am_quiz) {
+	else {
 		// Get an active question. If no valid question exists, activate and return one.
 		// TODO: This sometimes seems to fail on very small question sets.
-		active_question = my_library.root_q.get_random(am_adaptive, am_windowed)
+		active_question = my_library.root_q.get_random(am_adaptive, am_windowed, active_question)
 		if (active_question == null) active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
 		if (active_question == null) throw new Error("Failed to get question in adaptive or random mode.")
 		
@@ -315,13 +315,12 @@ function generate_next_question() {
 		last_active_question = active_question
 	}
 	
+	// Reset fields
+	answer_text.value = ""
+	multiple_choice_field.replaceChildren()
+	
 	// Display the question.
 	question_text.innerHTML = active_question.q[0]
-	answer_text.value = ""
-	answer_text.focus()
-	multiple_choice_field.replaceChildren()
-	selecting_string = ""
-	selecting_string_elem = null
 	
 	if (active_question.mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"

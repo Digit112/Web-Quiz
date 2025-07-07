@@ -50,11 +50,10 @@ let current_mode_of_presentation = null
 let quiz_score = 0
 
 // These listeners are used to allow users to select multiple-choice questions by typing them.
+// TODO: The management of a "hidden textbox" with no cursor can be shunted to a separate file for simplicity.
 let selecting_string = "" // What the user typed while no text box has focus.
 let selecting_string_elem = null
 document.addEventListener("keypress", (event) => {
-	console.log('Key Press:', event.key);
-	
 	// Match the new string against available multiple-choice options.
 	// TODO: Probably better to only lowercase for case-insensitive questions.
 	let new_selecting_string = selecting_string + event.key.toLowerCase() 
@@ -63,8 +62,6 @@ document.addEventListener("keypress", (event) => {
 
 // Allows the user to submit their selection and also use backspace.
 document.addEventListener("keydown", (event) => {
-	console.log('Key Down:', event.key);
-	
 	if (event.key == "Enter" && selecting_string_elem != null) {
 		selecting_string_elem.click()
 	}
@@ -86,8 +83,6 @@ function reset_selecting_string() {
 }
 
 function attempt_to_apply_new_selecting_string(new_selecting_string) {
-	console.log("Applying '" + new_selecting_string + "'")
-	
 	clear_typed_selection_stylings()
 	if (new_selecting_string.length == 0) {
 		selecting_string = ""

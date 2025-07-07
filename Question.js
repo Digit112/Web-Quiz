@@ -326,6 +326,8 @@ class Question {
 					return true
 				}
 			}
+			
+			return false
 		}
 	}
 	
@@ -344,6 +346,11 @@ class Question {
 		// Because of this, the actual adaptation rate will always be slightly above the specified constant.
 		let altered_adaptation_rate = lerp(my_library.ADAPTATION_RATE, 1, 0.7 * Math.pow(0.7, this.num_attempts))
 		this.mastery_level = this.mastery_level * (1 - altered_adaptation_rate) + correct * altered_adaptation_rate
+		
+		let invalid_mastery_equ = this.previous_mastery_level + " * (1 - " + altered_adaptation_rate + ") + " + correct + " * " + altered_adaptation_rate
+		console.assert(!isNaN(this.mastery_level), invalid_mastery_equ)
+		console.assert(this.mastery_level != 0, invalid_mastery_equ)
+		console.assert(this.mastery_level != 1, invalid_mastery_equ)
 		
 //		console.log(this.mastery_level)
 

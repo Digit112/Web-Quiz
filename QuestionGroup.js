@@ -576,12 +576,13 @@ class QuestionGroup {
 		if (last_asked != null && !(last_asked instanceof Question))
 			throw new Error("last_asked must be the Question instance which was asked last, or null if there was none.")
 		
-//		console.log("Performing retrieval: " + am_adaptive + ", " + am_windowed)
 		let my_weight = this.get_weight(am_adaptive, am_windowed)
 		
 		// Note that an active question will almost never have an adaptive_weight of zero, it is actually impossible in the math,
 		// but it is possible in practice due to floating point precision limitations.
 		if (my_weight == 0) return null
+		
+//		console.log("Getting Random from '" + this.label + "' w/ weight " + my_weight)
 		
 		if (this.was_asked_last) {
 			if (last_asked == null)
@@ -592,6 +593,7 @@ class QuestionGroup {
 			
 			// The implication in this case is that the only available question is the last_asked question.
 			if (my_weight == 0) return null
+			
 		}
 		
 		let random = Math.random() * my_weight
@@ -716,6 +718,18 @@ class QuestionGroup {
 				}
 			}
 		}
+		
+		console.assert(!isNaN(this.weight))
+		console.assert(!isNaN(this.enabled_weight))
+		console.assert(!isNaN(this.windowed_weight))
+		console.assert(!isNaN(this.adaptive_weight))
+		console.assert(!isNaN(this.difficulty))
+		
+		console.assert(Math.abs(this.weight) != Infinity)
+		console.assert(Math.abs(this.enabled_weight) != Infinity)
+		console.assert(Math.abs(this.windowed_weight) != Infinity)
+		console.assert(Math.abs(this.adaptive_weight) != Infinity)
+		console.assert(Math.abs(this.difficulty) != Infinity)
 	}
 	
 	// Create HTML that represents this QuestionGroup so that users can interact with the objects.

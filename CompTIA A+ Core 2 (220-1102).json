@@ -135,7 +135,9 @@
 				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 			},
 			"Logical Security": {
-				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "MFA", "hidden-answers": ["Multi Factor Authentication", "Multi-Factor Authentication"]}
+				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "MFA", "hidden-answers": ["Multi Factor Authentication", "Multi-Factor Authentication"]},
+				"What is a generic term for a hardware-based security device used as a form of authentication?": ["Hard Token", "Hardware Token"],
+				"What is a generic term for a software-based keys which can be installed onto devices and used as a form of authentication?": ["Soft Token", "Software Token"],
 			},
 			"Active Directory": {
 				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answers": "Login Script", "hidden-answers": "Logon Script"}

@@ -233,6 +233,19 @@
 					"What term refers to wiping the data from a drive to the extent that it becomes nearly impossible to recover even with special techniques and equipment?": "Purging",
 					"What term refers to wiping a drive in such a way that, not only is the data unrecoverable, but the drive itself becomes unusable?": "Destroying"
 				}
+			},
+			"WinRE Options": {
+				"mode-of-presentation": "multiple-choice",
+				"descendants-give-incorrect-answers": true,
+				"max-choices": 6,
+				"questions": {
+					"Which WinRE option allows you to restore Windows from a restore point?": "System Restore",
+					"Which WinRE option allows you to return to an earlier version of Windows?": "Go back to the previous version",
+					"Which WinRE option allows you to restore Windows from a backup file?": "System Image Recovery",
+					"Which WinRE option allows you to fix issues that prevent Windows from loading?": "Startup Repair",
+					"Which WinRE option allows you to issue commands to perform recovery-related actions?": "Command Prompt",
+					"Which WinRE option allows you to access UEFI settings?": "UEFI Firmware Settings"
+				}
 			}
 		},
 		"Domain 3: Software Troubleshhoting": {

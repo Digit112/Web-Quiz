@@ -141,6 +141,21 @@
 			},
 			"Active Directory": {
 				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answers": "Login Script", "hidden-answers": "Logon Script"}
+			},
+			"Wireless Access Protocols": {
+				
+			},
+			"RADIUS, TACACS+, Kerberos": {
+				"What port does RADIUS use for authentication?": "1812",
+				"What port does RADIUS use for accounting?": "1813",
+				"What transport-layer protocol does RADIUS use?": "UDP",
+				"What port does TACACS+ use?": "49",
+				"What transport-layer protocol does TACACS+ use?": "TCP",
+				"What kind of server is a RADIUS or TACACS+ server?": ["AAA", "AAA Server"],
+				"What port does Kerberos use?": "88"
+			},
+			"Types of Viruses": {
+				"What is the term for a kind of virus which secretly performs malicious functions while seemingly operating as the user expects?": {"answers": ["Trojan Virus", "Trojan"], "hidden-answers": ["Trojan Horse", "Trojan Horse Virus"]},
 			}
 		},
 		"Domain 3: Software Troubleshhoting": {

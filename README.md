@@ -154,9 +154,35 @@ Simple libraries hide the tree structure from users and authors and enable all Q
 
 ## Library Authorship Best Practices
 
+Their are a few core principle which inform the development of this platform, and which should inform the writing of each library as well.
+
+1. Facilitate Engagement
+
+	From a UX standpoint, this means building questions and answers which are not antogonistic, and minimizing the odds that the users feels like the questions are "unfair". The library's answers should be correct and obvious for verbatim questions. If the question is multiple choice, they should be the *only* correct choice. The questions should not have multiple interpretations. Questions should account for multiple ways of spelling their correct answer *in addition* to utilizing typo forgiveness. In a nutshell, don't make the questions frustrating.
+
+2. Rapid-Fire Response
+
+	It's vital that you don't eat up all of the user's goodwill because all of it is consumed by the learning process itself... Learning is hard and frustrating. The faster you learn, the more frustrating it is. For the users with the greatest anger management skills, the system allows the user to answer as fast as possible. For example, there is no delay between when the user answers and when the next question appears. Certainly there isn't any animation that plays. The user can also submit with the enter key and select multiple-choice answers by typing them or by using the arrow keys, specifically so that they don't have to move their hand between the mouse and keyboard. Not only does this speed up the process of learning, it also allows the system to gather more information in less time, and this information is used to refine the experience for the user.
+	
+	Make sure your verbatim answers are short and simple, preferably a single word. Specify alternative spellings or synonyms where possible so that the user doesn't need to worry about whether to answer in American or British english or whether to use a hyphen or space between two words. If you can't follow these guidelines for certain questions, consider making them multiple-choice.
+
+3. Customizability
+
+	In general, the platform intends to enable users to shape their experience. This is done by making as few assumptions as possible about the user's needs. However, this can give the platform a steep learning curve. To balance customizability with usability, sensible defaults are employed. Most people probably just want a deck of flash cards, so a flash-card feature is employed. Under the hood, it's the same thing. The only difference is that most of the normal editing options are hidden. When the user wants more nuance, it is freely available to them.
+	
+	For a library author, all you really need is to organize your libraries effectively. A user may well only care about some of the questions, try to categorize them in the most useful way. Even if you're just making a deck of cards, users can still view the full structure of the library by default. If you make that structure meaningful, some might find it helpful.
+	
+4. Rote Memorization
+
+	This is not university. This is a platform for rapidly memorizing large numbers of associations between questions and answers. Sometimes, this might be all that a user needs. Other times it may be a mere supplement, for example a user might memorize thousands of nouns and verbs using this platform, but they can't learn a language with it. Understanding this limitation is vital. Users should be directed to use this platform and its libraries in parallel with more comprehensive resources such as textbooks and instruction.
+
+### Double-Check Questions
+
+If nothing else, the questions in your library *have to be correct!* Double-check that the answers are correct by searching and, if possible, conferring with others who have the relevant knowledge. Even a subject-matter expert can make mistakes. Ideally, questions should be completely and utterly correct. The question should not have multiple interpretations, and the intended interpretation should not have multiple answers (unless those multiple answers are all accounted for!) A question's answer should be objective, and should not depend of external assumptions or context. Questions are discouraged from asking for the "best" answer, as these questions are usually rife with varying interpretations and subjective answers. The best way to check for these issues is to show the questions to someone else and ask them for the answer. If they start explaining their interpretations and listing off answers, then you've got some rewriting to do!
+
 ### Consistency
 
-In all facets of writing, consistency is key. Many unwritten rules can guide a user in correctly providing the answer to a verbatim question. For example, it is better for an answer to be "Hub" and "Switch" rather than "A Hub" and "A Switch", but both are much better than "Hub" and "A Switch". A user wants to spend their mental effort memorizing the correct answers, not the numerous nuances of the particular ways in which the author of a Library *phrased* the answers! Consistency also helps greatly in the ever-vital aesthetic quality of a library. Consistency in capitalization, punctuation, and phrasing all serve to ease the experience of interacting with a Library. It is not unusual for an author to write a question of the form "What is ...?" or the form "A ... is?", but mixing them together can make the experience of a Library more jagged and, more importantly, the user may end up memorizing the answers based on the *phrasing* of the questions rather than their content!
+In all facets of writing, consistency is key. Many unwritten rules can guide a user in correctly providing the answer to a verbatim question. For example, it is better for an answer to be "Hub" and "Switch" rather than "A Hub" and "A Switch", but both are much better than "Hub" and "A Switch". A user wants to spend their mental effort memorizing the correct answers, not the nuances of the particular ways in which the author *phrased* the answers! Consistency also helps greatly in the ever-vital aesthetic quality of a library. Consistency in capitalization, punctuation, and phrasing all serve to ease the experience of interacting with a Library. It is not unusual for an author to write a question of the form "What is ...?" or the form "A ... is?", but mixing them together can make the experience of a Library more jagged and, more importantly, the user may end up memorizing the answers based on the *phrasing* of the questions rather than their content!
 
 ### UX & Testing
 

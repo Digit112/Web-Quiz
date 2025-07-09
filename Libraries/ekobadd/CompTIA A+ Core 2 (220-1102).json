@@ -65,6 +65,10 @@
 						"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": "/p",
 						"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volumn?": "/p",
 					}
+				},
+				"Other Windows Concepts": {
+					"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hyberfil.sys",
+					"In Windows, what is the name of the file containing pages of RAM stored to disk to free up memory for other programs?": "pagefile.sys"
 				}
 			},
 			"macOS Basics": {

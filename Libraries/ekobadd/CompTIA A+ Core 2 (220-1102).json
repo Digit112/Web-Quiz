@@ -26,7 +26,12 @@
 					"What is the key combination for opening the Run prompt": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
 					"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"],
 					"What would you type into the run prompt to open the local security policy window?": "secpol.msc",
-					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc"
+					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc",
+					"What would you type into the run prompt to open the registry editor?": ["regedit", "regedit.exe"],
+					"What would you type into the run prompt to open the local users and groups window?": "lusrmgr.msc",
+					"What would you type into the run prompt to open the Computer Management window?": "compmgmt.msc",
+					"What would you type into the run prompt to open the Internet Properties window?": "inetcpl.cpl",
+					"What would you type into the run prompt to open the Certificate Manager window?": "certmgr.msc"
 				},
 				"Common Windows Command Line Utilities": {
 					"Command Names": {
@@ -51,10 +56,13 @@
 						"In Windows, what command can be used to shutdown a computer?": "shutdown"
 					},
 					"Command Flags": {
-						"What flag causes the `chkdsk` command to fix errors on the disk?": "/F",
-						"What flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
-						"What flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
-						"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
+						"In Windows, what flag causes the `chkdsk` command to fix errors on the disk?": "/F",
+						"In Windows, what flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
+						"In Windows, what flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
+						"In Windows, what flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY",
+						"In Windows, what flag allows you to specify the filesystem to be used by the `format` command?": "/fs",
+						"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": "/p",
+						"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volumn?": "/p",
 					}
 				},
 				"Other Windows Concepts": {
@@ -159,7 +167,89 @@
 				"What port does Kerberos use?": "88"
 			},
 			"Types of Viruses": {
-				"What is the term for a kind of virus which secretly performs malicious functions while seemingly operating as the user expects?": {"answers": ["Trojan Virus", "Trojan"], "hidden-answers": ["Trojan Horse", "Trojan Horse Virus"]}
+				"What is the term for a kind of virus which secretly performs malicious functions while seemingly operating as the user expects?": {"answers": ["Trojan Virus", "Trojan"], "hidden-answers": ["Trojan Horse", "Trojan Horse Virus"]},
+				"What is the term for a kind of virus embedded in the boot sector of a hard drive?": "Boot Sector Virus",
+				"What is the term for a kind of virus whose purpose is to transmit sensitive information to an attacker while remaining undetected?": "Spyware",
+				"What is the term for software designed to gain administrator access to a system while remaining undetected?": {"answers": "Rootkit", "hidden-answers": "Root Kit"},
+				"What is the term for a virus which locks access to a system or its resources and demands payment to release that system?": "Ransomware",
+				"What is the term for a virus which records keystrokes and transmits them to an attacker?": "Keylogger",
+				"What is the term for software designed to mine cryptocurrency, and which is sometimes placed on systems withoout a user's consent?": {"answers": ["Cryptominer", "Cryptomalware"], "hidden-answers": ["Crypto-Miner", "Crypto-Malware"]}
+			},
+			"Types of Social Engineering Attacks": {
+				"What is the term for a social engineering attack in which individuals receive fraudulent, deceptive emails designed to trick uses into revealing sensitive info, among other things?": {"answers": "Phishing", "hidden-answers": "Phishing Attack"},
+				"What is the term for a kind of phishing attempt done over the phone?": "Vishing",
+				"What is the term for a kind of phishing which targets specific, high-priority targets?": "Whaling",
+				"What is the term that describes a kind of intrusion in which an unauthorized person follows an authorized person into a restricted area?": "Tailgating",
+				"What is the term for an attack in which a person searches through garbage contains for discarded documents containing sensitive information?": "Dumpster Diving",
+				"What is the term for an attack in which a malicious actor installs a WAP which emulates a legitimate access point and may fool users into connecting to it?": "Evil Twin",
+				"What is the term for a kind of phishing which targets a specific demographic, entity, or even specific indivuals?": "Spear Phishing"
+			},
+			"Types of Network Attacks": {
+				"What is the name for an attack designed to make network resources unavailable?": "DoS",
+				"What is the name for an attack which uses many computers to attack a network make resources unavailable?": "DDoS",
+				"What is the name for a kind of attack in which an attacker guesses a user's password in hopes of gaining access, typically using software?": "Password Cracking",
+				"What is the term for a kind of attack in which an attacker guesses passwords from a predefined list?": "Dictionary Attack",
+				"What is the term for a kind of attack in which an attacker guesses all possible passwords?": "Brute Force",
+				"What is the term for a table that maps known hash values to the passwords which produce them?": "Rainbow Table"
+			},
+			"File Encryption Options": {
+				"mode-of-presentation": "multiple-choice",
+				"descendants-give-incorrect-answers": true,
+				"questions": {
+					"Which of the following is a Windows feature designed to supply full-disk encryption?": "BitLocker",
+					"Which of the following is a MacOS feature designed to supply full-disk encryption?": "FileVault",
+					"Which of the following is a Linux feature designed to supply full-disk encryption?": {"answers": "LUKS", "hidden-answers": "Linux Unified Key Setup"},
+					"Which of the following is a Windows feature designed to encrypt individual files and directory structures?": "EFS"
+				}
+			},
+			"Common Windows Security Settings": {
+				"Block 1": {
+					"hidden": true,
+					"mode-of-presentation": "multiple-choice",
+					"incorrect-answers": ["Local Security Policy", "Local Users and Groups", "Group Policy Editor", "Firewall & Network Protection"],
+					"max-choices": 3,
+					"questions": {
+						"In Windows, which could you navigate to if you wanted to reset the administrator password?": "Local Users and Groups",
+						"In Windows, which could you navigate to if you wanted to disable an account?": "Local Users and Groups",
+						"In Windows, which could you navigate to if you wanted to disable AutoPlay/AutoRun?": "Group Policy Editor",
+						"In Windows, which could you navigate to if you wanted to allow or deny traffic to specific ports?": "Firewall & Network Protection",
+						"In Windows, which could you navigate to if you wanted to enforce a maximum password age?": ["Local Security Policy", "Group Policy Editor"],
+						"In Windows, which could you navigate to if you wanted to enforce a minimum password length?": ["Local Security Policy", "Group Policy Editor"],
+						"In Windows, which could you navigate to if you wanted to prevent users from reusing passwords?": ["Local Security Policy", "Group Policy Editor"]
+					}
+				},
+				"Block 2": {
+					"hidden": true,
+					"mode-of-presentation": "multiple-choice",
+					"incorrect-answers": ["Account", "General"],
+					"questions": {
+						"In Windows, which tab of a user's properties would allow you to restrict their logon times?": "Account",
+						"In Windows, which tab of a user's properties would allow you to enable or disable their account?": "General",
+						"In Windows, which tab of a user's properties would allow you rename the user?": "General"
+					}
+				}
+			},
+			"Drive Destruction Levels": {
+				"mode-of-presentation": "multiple-choice",
+				"descendants-give-incorrect-answers": true,
+				"questions": {
+					"What term refers to wiping the data from a drive in a way which is recoverable through special techniques and equipment?": "Clearing",
+					"What term refers to wiping the data from a drive to the extent that it becomes nearly impossible to recover even with special techniques and equipment?": "Purging",
+					"What term refers to wiping a drive in such a way that, not only is the data unrecoverable, but the drive itself becomes unusable?": "Destroying"
+				}
+			},
+			"WinRE Options": {
+				"mode-of-presentation": "multiple-choice",
+				"descendants-give-incorrect-answers": true,
+				"max-choices": 6,
+				"questions": {
+					"Which WinRE option allows you to restore Windows from a restore point?": "System Restore",
+					"Which WinRE option allows you to return to an earlier version of Windows?": "Go back to the previous version",
+					"Which WinRE option allows you to restore Windows from a backup file?": "System Image Recovery",
+					"Which WinRE option allows you to fix issues that prevent Windows from loading?": "Startup Repair",
+					"Which WinRE option allows you to issue commands to perform recovery-related actions?": "Command Prompt",
+					"Which WinRE option allows you to access UEFI settings?": "UEFI Firmware Settings"
+				}
 			}
 		},
 		"Domain 3: Software Troubleshhoting": {

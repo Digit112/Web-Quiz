@@ -56,6 +56,10 @@
 						"What flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
 						"What flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
 					}
+				},
+				"Other Windows Concepts": {
+					"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hyberfil.sys",
+					"In Windows, what is the name of the file containing pages of RAM stored to disk to free up memory for other programs?": "pagefile.sys"
 				}
 			},
 			"macOS Basics": {

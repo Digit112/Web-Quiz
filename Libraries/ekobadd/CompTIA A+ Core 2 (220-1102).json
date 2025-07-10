@@ -20,7 +20,8 @@
 				"Common Tools": {
 					"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
 					"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
-					"In Windows, what application is used to browse files?": "File Explorer"
+					"In Windows, what application is used to browse files?": "File Explorer",
+					"In Windows, what tool can be used to make regular backups of document structures such as the Desktop or Contacts?": "File History"
 				},
 				"The Run Prompt": {
 					"What is the key combination for opening the Run prompt": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
@@ -237,7 +238,9 @@
 					"What term refers to wiping the data from a drive to the extent that it becomes nearly impossible to recover even with special techniques and equipment?": "Purging",
 					"What term refers to wiping a drive in such a way that, not only is the data unrecoverable, but the drive itself becomes unusable?": "Destroying"
 				}
-			},
+			}
+		},
+		"Domain 3: Software Troubleshhoting": {
 			"WinRE Options": {
 				"mode-of-presentation": "multiple-choice",
 				"descendants-give-incorrect-answers": true,
@@ -250,13 +253,68 @@
 					"Which WinRE option allows you to issue commands to perform recovery-related actions?": "Command Prompt",
 					"Which WinRE option allows you to access UEFI settings?": "UEFI Firmware Settings"
 				}
+			},
+			"CompTIA A+ Malware Removal Process": {
+				"mode-of-presentation": "multiple-choice",
+				"max-choices": 7,
+				"questions": {
+					"What is step **1** of the CompTIA A+ Malware Removal Process?": {"answers": "Investigate & Verify", "hidden=answers": "Investigate and Verify"},
+					"What is step **2** of the CompTIA A+ Malware Removal Process?": "Quarantine",
+					"What is step **3** of the CompTIA A+ Malware Removal Process?": {"answers": "Disable System Restore in Windows", "hidden-answers": "Disable System Restore"},
+					"What is step **4** of the CompTIA A+ Malware Removal Process?": "Remediate",
+					"What is step **5** of the CompTIA A+ Malware Removal Process?": {"answers": "Schedule Scans & Update", "hidden-answers": "Schedule Scans and Update"}
+					"What is step **6** of the CompTIA A+ Malware Removal Process?": {"answers": "Create a Restore Point in Windows", "hidden-answers": "Create a Restore Point"},
+					"What is step **7** of the CompTIA A+ Malware Removal Process?": "Educate"
+				}
 			}
 		},
-		"Domain 3: Software Troubleshhoting": {
-			
-		},
 		"Domain 4: Operational Procedures": {
-			
+			"Ticketing Systems": {
+				"What is the term for software which allows the submission, documentation, and resolution of issues, and which is typically used by IT support and helpdesk agents?": {"answers": "Ticketing System", "hidden-answers": ["Ticket System", "Ticketing Software", "Ticket Software"]}
+			},
+			"Asset Management": {
+				"What is the common term for a barcode or other uniquely identifiable marking used to track an IT asset?": "Asset Tag"
+			},
+			"Common Documentation Types": {
+				"What kind of document outlines the restrictions which must be followed by users of a system, such as an office network?": {"answers": "AUP", "hidden-answers": "Acceptable Use Policy"},
+				"What kind of document identifies devices on a network and shows how they are connected?": ["Network Topology Diagram", "Network Diagram"],
+				"What kind of document specifies information and guidelines pertaining to a company's compliance and the compliance of its employees?": {"answers": ["Compliance and Regulatory Policy", "Compliance Policy"], "hidden-answers": "Compliance & Regulatory Policy"},
+				"What kind of document identifies the steps to take to complete a particualr process?": {"answers": ["SOP", "Standard Operating Procedure"], "hidden-answers": ["SOP Document", "Standard Operating Procedure Document"]},
+				"What kind of document contains records and documentation regarding an incident which occurred, such as a security event or IT outage?": "Incident Report"
+			},
+			"Change Management": {
+				"Block 1": {
+					"hidden": true,
+					"questions": {
+						"What is the term for a plan to return a system to its previously-working state in case an upgrade fails or causes unforseen issues?": "Rollback Plan",
+						"What is the term for a document outlining the reasons for a change to be made, and which typically requires one or more signatures for approval?": {"answers": ["Request Form", "Change Request"], "hidden-answers": ["Change Request Form", "Change Control Form"]}
+					}
+				}
+				"Block 2": {
+					"hidden": true,
+					"mode-of-presentation": "multiple-choice",
+					"questions": {}
+				}
+			},
+			"Backup and Recovvery": {
+				"What is the term for a type of backup which makes a complete copy of all data in question?": {"answers": "Full", "hidden-answers": "Full Backup"},
+				"What is the term for a type of backup which only makes a copy of the changes to the data in question?": {"answers": "Incremental", "hidden-answers": "Incremental Backup"},
+				"What is the term for a type of backup which only makes a copy of files which have changed since the last full backup?": {"answers": "Differential", "hidden-answers": "Differential Backup"},
+				"What is the term for a type of backup which is made by combining existing backups?": {"answers": "Synthetic", "hidden-answers": ["Synthetic Backup", "Synthetic Full Backup"]}
+			},
+			"Safety and Disposal": {
+				"What is the term for a special mat used while working on sensitive electrical devices?": "Antistatic Mat",
+				"What is the term for a special bag used to hold sensitive electrical devices?": "Antistatic Bag",
+				"What is the term for a document that provides information about the hazards associated with a product or material, and includes information about disposal?": {"answers": "MSDS", "hidden-answers": "Material Safety Data Sheet"}
+			},
+			"Power Events": {
+				"What term refers to a brief increase in the amount of voltage provided?": "Surge",
+				"What term refers to a temporary decrease in the amount of voltage provided?": "Under-Voltage Event",
+				"What term refers to a complete loss of power?": ["Power Failure", "Blackout"]
+			},
+			"Protected Information": {
+				"What is the term for a kind of protected information which can be used to uniquely identify or locate a person?": {"answers": "PII", "hidden-answers": "Personally Identifiable Information"}
+			}
 		}
 	}
 }

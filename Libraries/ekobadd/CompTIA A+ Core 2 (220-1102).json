@@ -314,7 +314,16 @@
 				"What term refers to a complete loss of power?": ["Power Failure", "Blackout"]
 			},
 			"Protected Information": {
-				"What is the term for a kind of protected information which can be used to uniquely identify or locate a person?": {"answers": "PII", "hidden-answers": "Personally Identifiable Information"}
+				"What is the term for a kind of protected information which can be used to uniquely identify or locate a person?": {"answers": "PII", "hidden-answers": "Personally Identifiable Information"},
+				"What is the term for a kind of protected information which includes a person's medical information, and which is protected under HIPAA?": {"answers": "PHI", "hidden-answers": "Protected Health Information"}
+			},
+			"Scripting File Extensions": {
+				"What is the file extension most commonly used to save Batch scripts?": {"answers": ".bat", "hidden-answers": "bat"},
+				"What is the file extension most commonly used to save PowerShell scripts?": {"answers": ".ps1", "hidden-answers": "ps1"},
+				"What is the file extension most commonly used to save Visual Basic scripts?": {"answers": ".vbs", "hidden-answers": "vbs"},
+				"What is the file extension most commonly used to save Bash scripts?": {"answers": ".sh", "hidden-answers": "sh"},
+				"What is the file extension most commonly used to save JavaScript scripts?": {"answers": ".js", "hidden-answers": "js"},
+				"What is the file extension most commonly used to save Python scripts?": {"answers": ".py", "hidden-answers": "py"}
 			}
 		}
 	}

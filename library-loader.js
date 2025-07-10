@@ -310,12 +310,18 @@ function generate_next_question() {
 		last_active_question = active_question
 	}
 	
+	// Reset fields
+	answer_text.value = ""
+	multiple_choice_field.replaceChildren()
+	
 	// Display the question.
 	question_text.innerHTML = active_question.q[0]
 	
 	if (active_question.mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"
 		multiple_choice_field.style.display = "none"
+		
+		answer_text.focus()
 	}
 	else if (active_question.mode_of_presentation == "multiple-choice") {
 		verbatim_field.style.display = "none"
@@ -323,7 +329,11 @@ function generate_next_question() {
 		
 		let available_answers = active_question.get_incorrect_answers(active_question.max_choices - 1)
 		available_answers.push(active_question.get_correct_answer())
-		console.log(available_answers)
+		
+		if (available_answers.length == 1) {
+			console.warn("No incorrect answers!")
+			console.log(available_answers)
+		}
 		
 		// Shuffle answers
 		for (let i = 0; i < available_answers.length; i++) {
@@ -336,6 +346,8 @@ function generate_next_question() {
 				available_answers[j] = temp
 			}
 		}
+		
+		console.log(available_answers)
 		
 		// Generate HTML
 		for (let avail_answer of available_answers) {
@@ -353,11 +365,6 @@ function generate_next_question() {
 	else {
 		throw new Error("Question has invalid mode-of-presentation '" + active_question.mode_of_presentation + "'.")
 	}
-	
-	// Reset fields
-	answer_text.value = ""
-	answer_text.focus()
-	multiple_choice_field.replaceChildren()
 	
 	return true
 }

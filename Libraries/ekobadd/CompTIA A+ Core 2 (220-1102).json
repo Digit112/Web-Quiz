@@ -256,13 +256,14 @@
 			},
 			"CompTIA A+ Malware Removal Process": {
 				"mode-of-presentation": "multiple-choice",
+				"descendants-give-incorrect-answers": true,
 				"max-choices": 7,
 				"questions": {
 					"What is step **1** of the CompTIA A+ Malware Removal Process?": {"answers": "Investigate & Verify", "hidden=answers": "Investigate and Verify"},
 					"What is step **2** of the CompTIA A+ Malware Removal Process?": "Quarantine",
 					"What is step **3** of the CompTIA A+ Malware Removal Process?": {"answers": "Disable System Restore in Windows", "hidden-answers": "Disable System Restore"},
 					"What is step **4** of the CompTIA A+ Malware Removal Process?": "Remediate",
-					"What is step **5** of the CompTIA A+ Malware Removal Process?": {"answers": "Schedule Scans & Update", "hidden-answers": "Schedule Scans and Update"}
+					"What is step **5** of the CompTIA A+ Malware Removal Process?": {"answers": "Schedule Scans & Update", "hidden-answers": "Schedule Scans and Update"},
 					"What is step **6** of the CompTIA A+ Malware Removal Process?": {"answers": "Create a Restore Point in Windows", "hidden-answers": "Create a Restore Point"},
 					"What is step **7** of the CompTIA A+ Malware Removal Process?": "Educate"
 				}
@@ -289,7 +290,7 @@
 						"What is the term for a plan to return a system to its previously-working state in case an upgrade fails or causes unforseen issues?": "Rollback Plan",
 						"What is the term for a document outlining the reasons for a change to be made, and which typically requires one or more signatures for approval?": {"answers": ["Request Form", "Change Request"], "hidden-answers": ["Change Request Form", "Change Control Form"]}
 					}
-				}
+				},
 				"Block 2": {
 					"hidden": true,
 					"mode-of-presentation": "multiple-choice",

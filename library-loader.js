@@ -310,10 +310,6 @@ function generate_next_question() {
 		last_active_question = active_question
 	}
 	
-	// Reset fields
-	answer_text.value = ""
-	multiple_choice_field.replaceChildren()
-	
 	// Display the question.
 	question_text.innerHTML = active_question.q[0]
 	
@@ -357,6 +353,11 @@ function generate_next_question() {
 	else {
 		throw new Error("Question has invalid mode-of-presentation '" + active_question.mode_of_presentation + "'.")
 	}
+	
+	// Reset fields
+	answer_text.value = ""
+	answer_text.focus()
+	multiple_choice_field.replaceChildren()
 	
 	return true
 }

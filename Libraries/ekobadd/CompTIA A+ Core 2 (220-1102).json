@@ -62,11 +62,11 @@
 						"In Windows, what flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY",
 						"In Windows, what flag allows you to specify the filesystem to be used by the `format` command?": "/fs",
 						"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": "/p",
-						"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volumn?": "/p",
+						"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volumn?": "/q"
 					}
 				},
 				"Other Windows Concepts": {
-					"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hyberfil.sys",
+					"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hiberfil.sys",
 					"In Windows, what is the name of the file containing pages of RAM stored to disk to free up memory for other programs?": "pagefile.sys"
 				}
 			},
@@ -118,7 +118,7 @@
 			},
 			"Disks, Drives, Volumes": {
 				"Fundamental Concepts": {
-					"What term describes the act of making the root of a volume appear as a directory withing another filesystem?": {"answers": "Mounting", "hidden-answers": "Mount"}
+					"What term describes the act of making the root of a volume appear as a directory within another filesystem?": {"answers": "Mounting", "hidden-answers": "Mount"}
 				},
 				"Basic vs Dynamic": {
 					"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
@@ -143,7 +143,7 @@
 		"Domain 2: Security": {
 			"Physical Security": {
 				"What is the common term for a policy requiring that users remove all paper from their desks before leavin for lunch or for the day?": "Clean Desk Policy",
-				"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen, Privacy Filter"],
+				"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen", "Privacy Filter"],
 				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 			},
 			"Logical Security": {
@@ -188,8 +188,8 @@
 				"What is the name for an attack designed to make network resources unavailable?": "DoS",
 				"What is the name for an attack which uses many computers to attack a network make resources unavailable?": "DDoS",
 				"What is the name for a kind of attack in which an attacker guesses a user's password in hopes of gaining access, typically using software?": "Password Cracking",
-				"What is the term for a kind of attack in which an attacker guesses passwords from a predefined list?": "Dictionary Attack",
-				"What is the term for a kind of attack in which an attacker guesses all possible passwords?": "Brute Force",
+				"What is the term for a kind of attack in which an attacker guesses passwords from a predefined list?": ["Dictionary", "Dictionary Attack"],
+				"What is the term for a kind of attack in which an attacker guesses all possible passwords?": ["Brute Force", "Brute Force Attack"],
 				"What is the term for a table that maps known hash values to the passwords which produce them?": "Rainbow Table"
 			},
 			"File Encryption Options": {

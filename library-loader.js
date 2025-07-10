@@ -130,6 +130,9 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 		if (num_matches > 0) {
 			selecting_string = new_selecting_string
 		}
+		else {
+			attempt_to_apply_new_selecting_string(selecting_string)
+		}
 		
 		// Activate the canonical match, if any.
 		if (num_matches == 1 || found_exact_match) {

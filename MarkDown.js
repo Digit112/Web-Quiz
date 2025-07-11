@@ -1,11 +1,12 @@
 class MarkDown {
+	static default_token_map = new Map([["**", "b"], ["*", "i"], ["__", "u"], ["`", "code"]])
 	// Parse the passed string as markdown.
 	// This accepts the following tokens:
 	// Bold Delimiter: **
 	// Italics Delimiter: *
 	// Code Delimiter: `
 	// Think of a delimiter as toggling a flag which denotes the presence of its associated effect.
-	constructor(str, token_map) {
+	constructor(str, token_map=MarkDown.default_token_map) {
 		if (!(token_map instanceof Map))
 			throw new Error("token_map must be Map")
 		
@@ -15,6 +16,8 @@ class MarkDown {
 		}
 		
 		console.log("Attempting to parse '" + str + "'")
+		
+		this.token_map = token_map
 		
 		// An array of pairs. Each of a string and a Set of tags which apply to that string.
 		this.segments = []
@@ -78,6 +81,73 @@ class MarkDown {
 		
 		console.log("Parsing Complete")
 	}
+	
+	// Returns a span node containing the result of parsing the markdown.
+	render() {
+		let root = document.createElement("span")
+		let open_node_stack = new Map()
+		
+		for (let segment of this.segments) {
+			console.log("Rendering '" + segment[0] + "'")
+			let leaf = root
+			let has_broken_chain = false
+			
+			for (let tag of this.token_map.values()) {
+				// We need this tag.
+				if (segment[1].has(tag)) {
+					// This tag or an ancestor was not open.
+					if (!open_node_stack.has(tag) || has_broken_chain) {
+						has_broken_chain = true
+						leaf = leaf.appendChild(document.createElement(tag))
+						open_node_stack.set(tag, leaf)
+					}
+					// This tag and all ancestors are open.
+					else {
+						leaf = open_node_stack.get(tag)
+					}
+				}
+				// We must exclude this tag.
+				else {
+					// This tag is open
+					if (open_node_stack.has(tag)) {
+						has_broken_chain = true
+						
+						// Close the tag
+						open_node_stack.delete(tag)
+					}
+				}
+			}
+			
+			let content = document.createElement("text")
+			content.textContent = segment[0]
+			leaf.appendChild(content)
+		}
+		
+		return root
+	}
+	
+	// Simpler render function.
+	// This function has no ability to concatenate node like the above down.
+	// The concatenation is likely to introduce bugs and has no benefit, except to make the output much prettier.
+	// render() {
+		// for (let segment of this.segments) {
+			// if (segment[1].size == 0) {
+				// let leaf = document.createElement("text")
+				// leaf.textContent = segment[0]
+				// root.appendChild(leaf)
+			// }
+			// else {
+				// let leaf = root
+				// for (let tag of segment[1]) {
+					// leaf = leaf.appendChild(document.createElement(tag))
+				// }
+			
+				// leaf.textContent = segment[0]
+			// }
+		// }
+		
+		// return root
+	// }
 	
 	// Apply a tag to the characters in the specified range.
 	add_tag(tag, start, end) {
@@ -190,9 +260,9 @@ class MarkDown {
 			}
 			
 			// Check that the token is not escaped.
-			// This arrangement ensures that a construct such as \** is interpreted as
+			// This arrangement (Check for all tokens then check for escaped-ness) ensures that a construct such as \** is interpreted as
 			// an escaped bold token rather than escaped and unescaped pair of italics tokens
-			if (first_token_i > 0 && str[first_token_i - 1] == "\\") {
+			if (first_token_i != -1 && MarkDown.is_escaped(str, first_token_i)) {
 				cursor = first_token_i + first_token.length
 				
 				first_token = null
@@ -205,14 +275,24 @@ class MarkDown {
 		
 		return [first_token_i, first_token]
 	}
+	
+	// Returns true if the character at the passed index is escaped.
+	static is_escaped(str, char_i) {
+		// Note that char_i can be the string length, this returns whether an appended character would be escaped...
+		if (char_i < 0 || char_i > str.length)
+			throw new Error("Index must be positive and must not be greater than string length.")
+		
+		let is_escaped = false
+		for (let i = char_i-1; i >= 0 && str[i] == "\\"; i--) is_escaped = !is_escaped
+		
+		return is_escaped
+	}
 }
 
-let token_map = new Map([["**", "b"], ["*", "i"]])
-
-let md = new MarkDown("none**bold*bolditalic**italic*trail", token_map)
-// new MarkDown("**unclosedbold*uncloseditalic", token_map).debug_segments()
-// new MarkDown("**unclosedbold*closeditalic*trail", token_map).debug_segments()
-// new MarkDown("**closedbold**none**unclosedbold*closeditalic*", token_map).debug_segments()
-// new MarkDown("**bold\\**bold**none*italics\\*italics*", token_map).debug_segments()
-md.add_tag("u", 3, 9)
-md.debug_segments()
+// let md = new MarkDown("none**bold*bolditalic**italic`itco*de`trail")
+// new MarkDown("**unclosedbold*uncloseditalic").debug_segments()
+// new MarkDown("**unclosedbold*closeditalic*trail").debug_segments()
+// new MarkDown("**closedbold**none**unclosedbold*closeditalic*").debug_segments()
+// new MarkDown("**bold\\**bold**none*italics\\*italics*").debug_segments()
+// md.add_tag("u", 3, 9)
+// md.debug_segments()

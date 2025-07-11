@@ -51,7 +51,7 @@
 					"What would you type into the run prompt to open the Device Manager?": "devmgmt.msc",
 					"What would you type into the run prompt to open the System Configuration utility?": ["msconfig", "msconfig.exe"],
 					"What would you type into the run prompt to open the Windows Firewall with Advanced Security?": "wf.msc",
-					"What would you type into the run prompt to open the Windows Firewall in the control panel?": "firewall.cpl",
+					"What would you type into the run prompt to open the Windows Firewall in the control panel?": "firewall.cpl"
 				},
 				"Common Windows Command Line Utilities": {
 					"Command Names": {
@@ -66,7 +66,7 @@
 										"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
 										"In Windows, what command would change the working directory to the parent of the current working directory?": "cd .."
 									}
-								}
+								},
 								"other": {
 									"hidden": true,
 									"questions": {

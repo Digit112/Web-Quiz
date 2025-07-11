@@ -39,36 +39,22 @@ let your_response = document.getElementById("your-response")
 let correct_answer = document.getElementById("correct-answer")
 
 let my_library = new Library()
-my_library.generate_HTML( document.getElementById("collapsibles_root"), editing_pane )
+my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_pane)
 
-let last_active_question = null
 let active_question = null
-
-let current_mode_of_presentation = null
 
 // Number of correctly answered questions since the last quiz cycle.
 let quiz_score = 0
 
 // These listeners are used to allow users to select multiple-choice questions by typing them.
-// TODO: The management of a "hidden textbox" with no cursor can be shunted to a separate file for simplicity.
-let selecting_string = "" // What the user typed while no text box has focus.
-let selecting_string_elem = null
-document.addEventListener("keypress", (event) => {
-	// Match the new string against available multiple-choice options.
-	// TODO: Probably better to only lowercase for case-insensitive questions.
-	let new_selecting_string = selecting_string + event.key.toLowerCase() 
-	attempt_to_apply_new_selecting_string(new_selecting_string)
-});
-
 // Allows the user to submit their selection and also use backspace.
+let selecting_string_elem = null
+let type_select_handler = new TypingEventHandler(document, attempt_to_apply_new_selecting_string)
 document.addEventListener("keydown", (event) => {
 	if (event.key == "Enter" && selecting_string_elem != null) {
 		selecting_string_elem.click()
 	}
-	else if (event.key == "Backspace" && selecting_string.length > 0) {
-		attempt_to_apply_new_selecting_string(selecting_string.slice(0, -1))
-	}
-});
+})
 
 // Removes stylings and clears the string typed via events.
 function clear_typed_selection_stylings() {
@@ -78,15 +64,13 @@ function clear_typed_selection_stylings() {
 	}
 }
 
-function reset_selecting_string() {
-	attempt_to_apply_new_selecting_string("")
-}
-
 function attempt_to_apply_new_selecting_string(new_selecting_string) {
+	new_selecting_string = new_selecting_string.toLowerCase()
+	
 	clear_typed_selection_stylings()
 	if (new_selecting_string.length == 0) {
-		selecting_string = ""
 		selecting_string_elem = null
+		return true
 	}
 	else {
 		// The match will be highlighted (and selectable)
@@ -126,17 +110,18 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 			}
 		}
 		
-		// If no match is found, selecting_string is not updated to reflect the new keypress.
-		if (num_matches > 0) {
-			selecting_string = new_selecting_string
-		}
-		else {
-			attempt_to_apply_new_selecting_string(selecting_string)
-		}
-		
 		// Activate the canonical match, if any.
 		if (num_matches == 1 || found_exact_match) {
 			selecting_string_elem.classList.add("active")
+		}
+		
+		// If no match is found, type_select_handler is not updated to reflect the new keypress.
+		if (num_matches > 0) {
+			return true
+		}
+		else {
+			attempt_to_apply_new_selecting_string(type_select_handler.value)
+			return false
 		}
 	}
 }
@@ -204,7 +189,7 @@ function generate_next_question() {
 	let am_windowed = use_window.checked
 	
 	// Always delete the character's typed selection.
-	reset_selecting_string()
+	type_select_handler.attempt_set_value("")
 	
 	if (active_question != null) {
 		// Check the answer.
@@ -302,15 +287,20 @@ function generate_next_question() {
 	}
 	// Get the next question. If in quiz mode, we already got it.
 	else {
+		if (active_question != null) console.log("Last question '" + active_question.q + "' now has a remainder of " + active_question.get_remainder())
+		let last_active_question = active_question
+	
 		// Get an active question. If no valid question exists, activate and return one.
-		// TODO: This sometimes seems to fail on very small question sets.
+		// TODO: This sometimes seems to fail on very small question sets. DOUBLE TODO Fixed I think???
 		active_question = my_library.root_q.get_random(am_adaptive, am_windowed, active_question)
 		if (active_question == null) active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+		
+		if (active_question == null) {
+			active_question = last_active_question
+			console.warn("Reusing previous question! Is more than one question selected?")
+		}
+		
 		if (active_question == null) throw new Error("Failed to get question in adaptive or random mode.")
-		
-		if (last_active_question != null) console.log("Last question '" + last_active_question.q + "' now has a remainder of " + last_active_question.get_remainder())
-		
-		last_active_question = active_question
 	}
 	
 	// Reset fields

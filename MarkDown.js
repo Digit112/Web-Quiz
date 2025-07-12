@@ -79,6 +79,8 @@ class MarkDown {
 			}
 		}
 		
+		this.cull_escaping_slashes()
+		
 		console.log("Parsing Complete")
 	}
 	
@@ -217,6 +219,54 @@ class MarkDown {
 		}
 	}
 	
+	// Removes all backslashes which escape tokens or other backslashes.
+	cull_escaping_slashes() {
+		for (let i = 0; i < this.segments.length; i++) {
+			let segment = this.segments[i][0]
+			let new_segment = ""
+			
+			let cursor = 0
+			let next_slash = segment.indexOf("\\")
+			let num_iters = 0
+			while (next_slash < segment.length - 1 && next_slash != -1) {
+				num_iters++
+				if (num_iters > 256)
+					throw new Error("Iteration Limit Reached")
+				
+				// Is escaped backslash. Keep only the escaping slash.
+				// Cursor is moved to after the escaped slash.
+				if (segment[next_slash+1] == "\\") {
+					new_segment += segment.slice(cursor, next_slash+1)
+					
+					cursor = next_slash + 2
+				}
+				else {
+					let is_escaped_token = false
+					for (let token of this.token_map.keys()) {
+						// Is escaped text. Omit the slash. Cursor is moved to the first character of the token.
+						if (segment.startsWith(token, next_slash+1)) {
+							new_segment += segment.slice(cursor, next_slash)
+							
+							is_escaped_token = true
+							break
+						}
+					}
+					
+					// Not an escaped token paste all text including the slash.
+					if (!is_escaped_token) {
+						new_segment += segment.slice(cursor, next_slash+1)
+					}
+					
+					cursor = next_slash + 1
+				}
+				
+				next_slash = segment.indexOf("\\", cursor)
+			}
+			
+			this.segments[i][0] = new_segment + segment.slice(cursor)
+		}
+	}
+	
 	debug_segments() {
 		for (let segment of this.segments) {
 			let str = segment[0]
@@ -242,8 +292,8 @@ class MarkDown {
 		let num_iters = 0
 		while (true) {
 			num_iters++
-			if (num_iters > 100)
-				throw new Error("Iter limit reached.")
+			if (num_iters >= 100)
+				throw new Error("Iteration limit reached.")
 			
 			// Get the first token.
 			for (let token of token_map.keys()) {
@@ -264,6 +314,7 @@ class MarkDown {
 			// This arrangement (Check for all tokens then check for escaped-ness) ensures that a construct such as \** is interpreted as
 			// an escaped bold token rather than escaped and unescaped pair of italics tokens
 			if (first_token_i != -1 && MarkDown.is_escaped(str, first_token_i)) {
+//				console.log("Token '" + first_token + "' is escaped.")
 				cursor = first_token_i + first_token.length
 				
 				first_token = null

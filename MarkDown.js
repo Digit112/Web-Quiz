@@ -36,7 +36,7 @@ class MarkDown {
 			let token = tok_data[1]
 			let tag = token_map.get(token)
 			
-//			console.log("Token '" + token + "' at " + tag + ".")
+			console.log("Token '" + token + "' at " + tag + ".")
 			
 			if (token_i > 0) {
 				// Push a portion of the string and the current tag list to the segments array.
@@ -162,11 +162,11 @@ class MarkDown {
 		
 		for (let i = 0; i < this.segments.length; i++) {
 			let segment = this.segments[i]
-			console.log(i + ": " + "'" + segment[0] + "', " + start + ", " + end)
+//			console.log(i + ": " + "'" + segment[0] + "', " + start + ", " + end)
 			
 			// This segment contains the start.
 			if (start > 0 && start < segment[0].length) {
-				console.log("Contains Start...")
+//				console.log("Contains Start...")
 				// Split the text
 				let left_str = this.segments[i][0].slice(0, start)
 				let right_str = this.segments[i][0].slice(start)
@@ -182,15 +182,12 @@ class MarkDown {
 			}
 			// This segment is past the start.
 			else if (start <= 0) {
-				console.log("Past Start...")
 				// This segment is before the end
 				if (end >= segment[0].length) {
-					console.log("Before End...")
 					this.segments[i][1].add(tag)
 				}
 				// This segment contains the end
 				else if (end > 0 && end < segment[0].length) {
-					console.log("Contains End...")
 					// Split the text
 					let left_str = this.segments[i][0].slice(0, end)
 					let right_str = this.segments[i][0].slice(end)
@@ -209,7 +206,7 @@ class MarkDown {
 				}
 				// This segment is past the end
 				else {
-					console.log("Past End...")
+//					console.log("Past End...")
 					break
 				}
 			}
@@ -239,6 +236,8 @@ class MarkDown {
 		let first_token = null
 		let first_token_i = -1
 		
+//		console.log("Getting token from '" + str + "'")
+		
 		let cursor = 0
 		let num_iters = 0
 		while (true) {
@@ -248,9 +247,11 @@ class MarkDown {
 			
 			// Get the first token.
 			for (let token of token_map.keys()) {
+				// Failure of this assertion can cause infinite loop (if it weren't for the iter limit)
 				console.assert(token.length > 0)
 				
 				let i = str.indexOf(token, cursor)
+//				console.log("Searching for token '" + token + "' from " + cursor + ", got " + i)
 				if (i != -1) {
 					if (first_token == null || i < first_token_i) {
 						first_token = token

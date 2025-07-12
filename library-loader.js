@@ -114,6 +114,9 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 		if (num_matches == 1 || found_exact_match) {
 			selecting_string_elem.classList.add("active")
 		}
+		else {
+			selecting_string_elem = null
+		}
 		
 		// If no match is found, type_select_handler is not updated to reflect the new keypress.
 		if (num_matches > 0) {
@@ -127,15 +130,15 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 }
 
 random_gen.addEventListener("input", () => {
-	gen_explanation.innerHTML = random_gen_expl
+	gen_explanation.textContent = random_gen_expl
 })
 
 adapt_gen.addEventListener("input", () => {
-	gen_explanation.innerHTML = adapt_gen_expl
+	gen_explanation.textContent = adapt_gen_expl
 })
 
 quiz_gen.addEventListener("input", () => {
-	gen_explanation.innerHTML = quiz_gen_expl
+	gen_explanation.textContent = quiz_gen_expl
 	
 	my_library.root_q.deactivate_all()
 	my_library.root_q.cache_weights(adapt_gen.checked, use_window.checked)
@@ -144,19 +147,19 @@ quiz_gen.addEventListener("input", () => {
 
 use_window.addEventListener("input", () => {
 	if (this.checked) {
-		window_explanation.innerHTML = windowing_expl
+		window_explanation.textContent = windowing_expl
 	}
 	else {
-		window_explanation.innerHTML = no_windowing_expl
+		window_explanation.textContent = no_windowing_expl
 	}
 })
 
 do_shuffle.addEventListener("input", () => {
 	if (this.checked) {
-		shuffle_explanation.innerHTML = shuffle_expl
+		shuffle_explanation.textContent = shuffle_expl
 	}
 	else {
-		shuffle_explanation.innerHTML = no_shuffle_expl
+		shuffle_explanation.textContent = no_shuffle_expl
 		my_library.root_q.reset_was_asked_last()
 	}
 })
@@ -198,17 +201,18 @@ function generate_next_question() {
 		
 		let correct = active_question.attempt(answer)
 		if (correct) {
-			correct_indicator.innerHTML = "Correct"
+			correct_indicator.textContent = "Correct"
 			correct_indicator.style.color = "#070"
 			if (am_quiz) quiz_score++
 		}
 		else {
-			correct_indicator.innerHTML = "Incorrect"
+			correct_indicator.textContent = "Incorrect"
 			correct_indicator.style.color = "#700"
 		}
-		last_question.innerHTML = "Last Question Was: " + active_question.q
-		your_response.innerHTML = "Your Response Was: " + answer
-		correct_answer.innerHTML = "The Correct Answer Was: " + active_question.a
+		
+		last_question.replaceChildren(new MarkDown(active_question.q[0]).render())
+		your_response.textContent = answer
+		correct_answer.textContent = active_question.a
 	}
 	
 	// Update weights.
@@ -242,7 +246,7 @@ function generate_next_question() {
 			// Add question if doing so would increase the difficulty beyond the preferred difficulty threshold.
 			// This method prevents lockup associated with the new question having extremely high probability and thus dominating the theoretical difficulty calculation, thus
 			// if (my_library.root_q.difficulty < my_library.IDEAL_OVERALL_DIFFICULTY && theoretical_difficulty > my_library.IDEAL_OVERALL_DIFFICULTY) {
-				if (i == 19) console.log("WARNING: Added 20 questions to the window at once. This may be a bug.")
+				if (i == 19) console.warn("Added 20 questions to the window at once. This may be a bug.")
 				
 				let new_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
 				
@@ -275,7 +279,7 @@ function generate_next_question() {
 				quiz_score = 0
 				
 				console.log("Quiz Complete. Score is " + quiz_grade + "%.")
-				correct_indicator.innerHTML += " - Quiz Complete! " + quiz_grade + "% correct."
+				correct_indicator.textContent += " - Quiz Complete! " + quiz_grade + "% correct."
 			}
 			
 			active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
@@ -308,7 +312,7 @@ function generate_next_question() {
 	multiple_choice_field.replaceChildren()
 	
 	// Display the question.
-	question_text.innerHTML = active_question.q[0]
+	question_text.replaceChildren(new MarkDown(active_question.q[0]).render())
 	
 	if (active_question.mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"

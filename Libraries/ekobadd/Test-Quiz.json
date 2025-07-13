@@ -15,6 +15,13 @@
 				"answers": "correct",
 				"incorrect-answers": ["corner", "carrot", "correctomundo"]
 			}
+		},
+		"MarkDown":  {
+			"**bold** *italics* `code` __underline__": {
+				"mode-of-presentation": "multiple-choice",
+				"answers": "**correct**",
+				"incorrect-answers": ["**bold**", "*italics*", "__underlined__"]
+			}
 		}
 	}
 }

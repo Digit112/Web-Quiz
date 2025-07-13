@@ -1,12 +1,12 @@
 class MarkDown {
 	static default_token_map = new Map([["**", "b"], ["*", "i"], ["__", "u"], ["`", "code"]])
-	// Parse the passed string as markdown.
-	// This accepts the following tokens:
-	// Bold Delimiter: **
-	// Italics Delimiter: *
-	// Code Delimiter: `
+	
+	// Parse the passed string as markdown using the provided map from tokens onto the HTML tags they toggle.
 	// Think of a delimiter as toggling a flag which denotes the presence of its associated effect.
 	constructor(str, token_map=MarkDown.default_token_map) {
+		if (!(str instanceof String || typeof str == "string"))
+			throw new Error("'str' must be string.")
+		
 		if (!(token_map instanceof Map))
 			throw new Error("token_map must be Map")
 		
@@ -81,11 +81,15 @@ class MarkDown {
 		
 		this.cull_escaping_slashes()
 		
+		this.length = 0
+		for (let segment of this.segments) this.length += segment[0].length
+		
 		console.log("Parsing Complete")
 	}
 	
 	// Returns a span node containing the result of parsing the markdown.
-	render() {
+	// TODO: Consider caching rendered value.
+	as_html() {
 		let root = document.createElement("span")
 		let open_node_stack = new Map()
 		
@@ -150,6 +154,15 @@ class MarkDown {
 		
 		// return root
 	// }
+	
+	// Returns the text with annotations excluded.
+	as_text() {
+		return this.segments.map((segment) => segment[0]).join("")
+	}
+	
+	toString() {
+		return this.as_text()
+	}
 	
 	// Apply a tag to the characters in the specified range.
 	add_tag(tag, start, end) {
@@ -277,6 +290,20 @@ class MarkDown {
 			
 			console.log(debug_str)
 		}
+	}
+	
+	static from(source) {
+		if (!(source instanceof MarkDown))
+			throw new Error("'source' must be a MarkDown.")
+		
+		let new_md = new MarkDown("")
+		new_md.segments = []
+		for (let segment of source.segments) {
+			new_md.token_map = source.token_map
+			new_md.segments.push([segment[0], new Set(segment[1])])
+		}
+		
+		return new_md
 	}
 	
 	// Retrieve the first token in the string.

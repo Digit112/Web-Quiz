@@ -103,6 +103,8 @@ class QuestionGroup {
 	
 		console.log("Constructing Group '" + this.label + "'")
 		
+		this.label = new MarkDown(this.label, Library.token_map) // Parse formatting
+		
 		// Whether this is a collection of other QuestionGroups or of Questions.
 		this.children_are_groups = null
 		
@@ -355,6 +357,10 @@ class QuestionGroup {
 		console.assert(this.correct_answer_source != null, "Failed to obtain correct-answer-source")
 		
 		console.assert(this.incorrect_answers != null, "Failed to obtain incorrect-answers.")
+		
+		for (let i = 0; i < this.incorrect_answers.length; i++) {
+			this.incorrect_answers[i] = new MarkDown(this.incorrect_answers[i])
+		}
 	}
 	
 	// Returns true if this is the library's root QuestionGroup

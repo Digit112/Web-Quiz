@@ -59,7 +59,7 @@ document.addEventListener("keydown", (event) => {
 // Removes stylings and clears the string typed via events.
 function clear_typed_selection_stylings() {
 	for (let child of multiple_choice_field.children) {
-		child.textContent = child.textContent // Removes <span> Elements
+		child.replaceChildren(child.markdown.as_html())
 		child.classList.remove("active");
 	}
 }
@@ -99,14 +99,9 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 				}
 				
 				// Underline the matches.
-				let prefix = document.createElement("span")
-				prefix.style.textDecorationLine = "underline"
-				
-				let suffix = document.createElement("span")
-				
-				prefix.textContent = child.textContent.slice(0, new_selecting_string.length) // Preserve capitalization
-				suffix.textContent = child.textContent.slice(new_selecting_string.length)
-				child.replaceChildren(prefix, suffix)
+				let new_markdown = MarkDown.from(child.markdown)
+				new_markdown.add_tag("u", 0, new_selecting_string.length)
+				child.replaceChildren(new_markdown.as_html())
 			}
 		}
 		
@@ -210,9 +205,9 @@ function generate_next_question() {
 			correct_indicator.style.color = "#700"
 		}
 		
-		last_question.replaceChildren(new MarkDown(active_question.q[0]).render())
+		last_question.replaceChildren(active_question.q[0].as_html())
 		your_response.textContent = answer
-		correct_answer.textContent = active_question.a
+		correct_answer.replaceChildren(...active_question.a.map((md) => md.as_html()))
 	}
 	
 	// Update weights.
@@ -312,7 +307,7 @@ function generate_next_question() {
 	multiple_choice_field.replaceChildren()
 	
 	// Display the question.
-	question_text.replaceChildren(new MarkDown(active_question.q[0]).render())
+	question_text.replaceChildren(active_question.q[0].as_html())
 	
 	if (active_question.mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"
@@ -349,7 +344,8 @@ function generate_next_question() {
 		// Generate HTML
 		for (let avail_answer of available_answers) {
 			let new_button = document.createElement("button")
-			new_button.textContent = avail_answer
+			new_button.replaceChildren(avail_answer.as_html())
+			new_button.markdown = avail_answer // Saved to allow regeneration.
 			new_button.setAttribute("class", "multiple-choice-answer")
 			new_button.addEventListener("click", () => {
 				answer_text.value = new_button.textContent

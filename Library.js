@@ -4,9 +4,9 @@ class LibraryLoadingError extends Error {
 	
 	if (parent_group) {
 		identifier = parent_group.get_ancestors_as_string()
-		if (label) identifier += " -> " + label
+		if (label != null) identifier += " -> " + label
 	}
-	else if (label) {
+	else if (label != null) {
 		identifier = label
 	}
 	
@@ -42,6 +42,8 @@ function import_event(e) {
 
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.
 class Library {
+	static token_map = new Map([["**", "b"], ["*", "i"], ["__", "u"], ["`", "code"]])
+	
 	constructor(
 		library_data = null,
 		ADAPTATION_RATE = 0.15,

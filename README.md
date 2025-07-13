@@ -158,7 +158,7 @@ Their are a few core principle which inform the development of this platform, an
 
 1. Facilitate Engagement
 
-	From a UX standpoint, this means building questions and answers which are not antogonistic, and minimizing the odds that the users feels like the questions are "unfair". The library's answers should be correct and obvious for verbatim questions. If the question is multiple choice, they should be the *only* correct choice. The questions should not have multiple interpretations. Questions should account for multiple ways of spelling their correct answer *in addition* to utilizing typo forgiveness. In a nutshell, don't make the questions frustrating.
+	From a UX standpoint, this means building questions and answers which are not antogonistic, and minimizing the odds that the users feels like the questions are "unfair". The library's answers should be correct and fairly obvious for verbatim questions. If the question is multiple choice, they should be the *only* correct choice. The questions should not have multiple interpretations. Questions should account for multiple ways of spelling their correct answer *in addition* to utilizing typo forgiveness. In a nutshell, don't make the questions frustrating.
 
 2. Rapid-Fire Response
 
@@ -260,7 +260,7 @@ Note also that in reality, comparing all answers to all other answers is not str
 
 NOTE: Preliminary tests of the current typo forgiveness Levenshtein algorithm show that a typical comparison will take 22us or so. Basic assumptions about a quiz's construction suggest that comparison of all pairs of questions in a 200-question quiz would take several seconds, and for a 1000-question quiz would take well over a minute.
 
-### A Note on Implicit QuestionGroup child type deduction.
+## A Note on Implicit QuestionGroup child type deduction.
 
 When interpreting an Implicit QuestionGroup, the parser must deduce whether the entity is a QuestionList or QuestionGroupList. However, some entities (such as the one below) constitute **both** a valid Question and QuestionGroup. In fact, all valid Question objects constitute a valid QuestionGroup.
 
@@ -348,14 +348,24 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ## Wishlist
 
-### Need
+### Must-Have
 
-- Typo forgiveness implementation.
-- MarkDown embedded in Question objects.
-- Answers support markdown.
+- Library refactor to uphold Law of Demeter
+- API serves quizzes
+- **Editing Support**
+	- Query Params control editing availability
+	- QuestionGroup export
+	- Advanced QuestionGroup Editing features
 
-### Want
+### Should-Have
 
+- Presentation type negotiation (between Library and User Preferences)
+- Arrow-key multiple-choice selection.
 - Dark mode.
 - Localization Support
+
+### Could-Have
+
+- "Put the pieces in order" question type.
+- "Select all that apply" question type.
 - `"auto"` setting for typo forgiveness.

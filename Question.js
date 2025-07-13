@@ -176,6 +176,19 @@ class Question {
 		console.assert(this.hidden_answers, "Failed to obtain hidden-answers")
 		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers")
 		
+		// Convert questions and answers into MarkDown entities.
+		for (let i = 0; i < this.q.length; i++) {
+			this.q[i] = new MarkDown(this.q[i], Library.token_map)
+		}
+		
+		for (let i = 0; i < this.a.length; i++) {
+			this.a[i] = new MarkDown(this.a[i], Library.token_map)
+		}
+		
+		for (let i = 0; i < this.incorrect_answers.length; i++) {
+			this.incorrect_answers[i] = new MarkDown(this.incorrect_answers[i])
+		}
+		
 		// Approximate measure of user's mastery of this question.
 		// It is considered mastered when this is above MASTERY_THRESHHOLD
 		this.mastery_level = my_library.STARTING_MASTERY
@@ -260,7 +273,7 @@ class Question {
 			let incorrect_answer = this.get_incorrect_answer_by_index(incorrect_answer_index)
 			//console.log("Got '" + incorrect_answer + "'")
 			
-			if (!ret.includes(incorrect_answer) && !this.is_exactly_correct(incorrect_answer)) {
+			if (!ret.includes(incorrect_answer) && !this.is_exactly_correct(incorrect_answer.as_text())) {
 				ret.push(incorrect_answer)
 				if (ret.length == num_answers) return ret
 			}
@@ -309,9 +322,10 @@ class Question {
 	// Despite the name, this does respect the case-sensitive setting on this question,
 	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
 	is_exactly_correct(response) {
+		console.log(response)
 		if (!this.case_sensitive) response = response.toLowerCase()
 			
-		for (let answer of this.a) {
+		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.
 			if (!this.case_sensitive) answer = answer.toLowerCase()
 			if (answer == response) {
 				return true
@@ -339,7 +353,7 @@ class Question {
 		let typo_divisor = this.get_typo_divisor()
 		if (typo_divisor == Infinity) return false
 		
-		for (let answer of this.a) {
+		for (let answer of this.a.map((a) => a.as_text())) {
 			if (!this.case_sensitive) answer = answer.toLowerCase()
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
 			if (Levenshtein(response, answer, max_distance) <= max_distance) {

@@ -36,6 +36,7 @@ let next_question = document.getElementById("next-question")
 let correct_indicator = document.getElementById("correct-indicator")
 let last_question = document.getElementById("last-question")
 let your_response = document.getElementById("your-response")
+let correct_answer_label = document.getElementById("correct-answer-label")
 let correct_answer = document.getElementById("correct-answer")
 
 let my_library = new Library()
@@ -135,8 +136,8 @@ adapt_gen.addEventListener("input", () => {
 quiz_gen.addEventListener("input", () => {
 	gen_explanation.textContent = quiz_gen_expl
 	
-	my_library.root_q.deactivate_all()
-	my_library.root_q.cache_weights(adapt_gen.checked, use_window.checked)
+	my_library.deactivate_all()
+	my_library.cache_weights(adapt_gen.checked, use_window.checked)
 	quiz_score = 0
 })
 
@@ -155,12 +156,12 @@ do_shuffle.addEventListener("input", () => {
 	}
 	else {
 		shuffle_explanation.textContent = no_shuffle_expl
-		my_library.root_q.reset_was_asked_last()
+		my_library.reset_was_asked_last()
 	}
 })
 
 reset_progress.addEventListener("click", () => {
-	my_library.root_q.reset_all()
+	my_library.reset_all()
 })
 
 // Secretly the same as next-question
@@ -207,13 +208,31 @@ function generate_next_question() {
 		
 		last_question.replaceChildren(active_question.q[0].as_html())
 		your_response.textContent = answer
-		correct_answer.replaceChildren(...active_question.a.map((md) => md.as_html()))
+		
+		// Display acceptable answers
+		if (active_question.a.length == 1) {
+			correct_answer_label.textContent = "The Correct Answer Was: "
+		}
+		else {
+			correct_answer_label.textContent = "Correct Answers Include: " 
+		}
+		
+		let correct_answers = ["'", active_question.a[0].as_html()]
+		for (let i = 1; i < active_question.a.length; i++) {
+			let separator = document.createElement("i")
+			separator.textContent = "', '"
+			correct_answers.push(separator)
+			
+			correct_answers.push(active_question.a[i].as_html())
+		}
+		correct_answers.push("'")
+		correct_answer.replaceChildren(...correct_answers)
 	}
 	
 	// Update weights.
-	my_library.root_q.cache_weights(am_adaptive, am_windowed)
+	my_library.cache_weights(am_adaptive, am_windowed)
 	
-	if (my_library.root_q.enabled_weight == 0) {
+	if (my_library.get_num_enabled_questions() == 0) {
 		alert("Please select some questions from the menu.")
 		return false
 	}
@@ -223,32 +242,32 @@ function generate_next_question() {
 		// This is done even if windowing is not enabled. If it gets enabled down the line, then the questions should be appropriate.
 		for (let i = 0; i < 20; i++) {
 			let new_question_weight = my_library.get_new_question_weight(am_adaptive)
-			let new_question_probability = new_question_weight / (new_question_weight + my_library.root_q.get_weight(am_adaptive, am_windowed))
+			let new_question_probability = new_question_weight / (new_question_weight + my_library.get_weight(am_adaptive, am_windowed))
 			let new_question_difficulty = 1 - my_library.STARTING_MASTERY
 			
 			// Calculate what the difficulty would be if we added a new question.
-			let theoretical_difficulty = my_library.root_q.difficulty * (1 - new_question_probability) + new_question_difficulty * new_question_probability
+			let theoretical_difficulty = my_library.get_difficulty() * (1 - new_question_probability) + new_question_difficulty * new_question_probability
 			
 			console.log("New question's probability of being chosen: " + (new_question_probability * 100) + "%")
-			console.log("Current Difficulty: " + my_library.root_q.difficulty + ", Theoretical Difficulty: " + theoretical_difficulty)
+			console.log("Current Difficulty: " + my_library.get_difficulty() + ", Theoretical Difficulty: " + theoretical_difficulty)
 			
-			let difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - my_library.root_q.difficulty)
+			let difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - my_library.get_difficulty())
 			let theoretical_difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
-			if (theoretical_difficulty > my_library.root_q.difficulty && theoretical_difficulty_offset < difficulty_offset) {
+			if (theoretical_difficulty > my_library.get_difficulty() && theoretical_difficulty_offset < difficulty_offset) {
 			
 			// Add question if doing so would increase the difficulty beyond the preferred difficulty threshold.
 			// This method prevents lockup associated with the new question having extremely high probability and thus dominating the theoretical difficulty calculation, thus
 			// if (my_library.root_q.difficulty < my_library.IDEAL_OVERALL_DIFFICULTY && theoretical_difficulty > my_library.IDEAL_OVERALL_DIFFICULTY) {
 				if (i == 19) console.warn("Added 20 questions to the window at once. This may be a bug.")
 				
-				let new_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+				let new_question = my_library.activate_question(am_ordered, am_adaptive)
 				
 				// Failed to activate a question. We have activated all of them already.
 				if (new_question == null) break
 				
-				my_library.root_q.cache_weights(am_adaptive, am_windowed)
+				my_library.cache_weights(am_adaptive, am_windowed)
 			}
 			else {
 				// We have achieved ideal difficulty.
@@ -263,26 +282,26 @@ function generate_next_question() {
 	// If it is disabled mid-quiz, all quizzed questions since the last quiz cycle will suddenly be getting asked over and over again. This is a bit strange, but
 	// it is really the ideal interpretation of how to handle a player swapping modes mid-test in this way.
 	if (am_quiz) {
-		active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+		active_question = my_library.activate_question(am_ordered, am_adaptive)
 		
 		if (active_question == null) { // All question activated, restart the quiz.
-			my_library.root_q.deactivate_all()
-			my_library.root_q.cache_weights(am_adaptive, am_windowed)
+			my_library.deactivate_all()
+			my_library.cache_weights(am_adaptive, am_windowed)
 			
-			if (my_library.root_q.enabled_weight > 0) {
-				let quiz_grade = Math.round(quiz_score / my_library.root_q.enabled_weight * 100)
+			if (my_library.get_num_enabled_questions() > 0) {
+				let quiz_grade = Math.round(quiz_score / my_library.get_num_enabled_questions() * 100)
 				quiz_score = 0
 				
 				console.log("Quiz Complete. Score is " + quiz_grade + "%.")
 				correct_indicator.textContent += " - Quiz Complete! " + quiz_grade + "% correct."
 			}
 			
-			active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+			active_question = my_library.activate_question(am_ordered, am_adaptive)
 		}
 		
 		if (active_question == null) throw new Error("Failed to get new quiz question.")
 		
-		my_library.root_q.cache_weights(am_adaptive, am_windowed)
+		my_library.cache_weights(am_adaptive, am_windowed)
 	}
 	// Get the next question. If in quiz mode, we already got it.
 	else {
@@ -291,8 +310,8 @@ function generate_next_question() {
 	
 		// Get an active question. If no valid question exists, activate and return one.
 		// TODO: This sometimes seems to fail on very small question sets. DOUBLE TODO Fixed I think???
-		active_question = my_library.root_q.get_random(am_adaptive, am_windowed, active_question)
-		if (active_question == null) active_question = my_library.root_q.activate_question(am_ordered, am_adaptive)
+		active_question = my_library.get_random(am_adaptive, am_windowed, active_question)
+		if (active_question == null) active_question = my_library.activate_question(am_ordered, am_adaptive)
 		
 		if (active_question == null) {
 			active_question = last_active_question

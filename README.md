@@ -220,6 +220,10 @@ Methods 2 and 3 work very well in conjunction. If there are multiple answers on 
 
 Note that in this case, the question remains a single question and the user's progress is tracked as such. The system will not recognize a situation in which, for example, the user has only mastered one of two or more answers. If it is vital that a user spend as much effort on the individual answers as they would on any other question, the questions should be split into multiple questions with identical question statements but different answers. The user's progress on each question will be tracked separately.
 
+### Use Markdown
+
+Markdown is valid in `answers`, `incorrect-answers`, `question`, and `label` strings. This supports bold (\*\*), italics (\*), and code (\`). Use it to emphasize the portion of a question which a user should focus on.
+
 ### Question Groups
 
 Question Groups allow a hierarchical organization of questions for a reason: to allow the user of a Library to choose the level of granularity of their control over questions. Or put another way, a user can quiz themselves on an entire library with one click, or only on very specific components with some more clicks. This allows the user to avoid questions they don't care about or have already mastered. A chunk of questions should be divided if there is a reasonable suspicion that a user might not want to select all of them at once. There is not really a practical limit on the depth that a quiz should go to. So, use QuestionGroups!
@@ -350,7 +354,6 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
-- Library refactor to uphold Law of Demeter
 - API serves quizzes
 - **Editing Support**
 	- Query Params control editing availability

@@ -179,6 +179,42 @@ class Library {
 		}
 	}
 	
+	deactivate_all() {
+		this.root_q.deactivate_all()
+	}
+	
+	cache_weights(am_adaptive, am_windowed) {
+		this.root_q.cache_weights(am_adaptive, am_windowed)
+	}
+	
+	get_random(am_adaptive, am_windowed, last_asked) {
+		return this.root_q.get_random(am_adaptive, am_windowed, last_asked)
+	}
+	
+	activate_question(am_ordered, am_adaptive) {
+		return this.root_q.activate_question(am_ordered, am_adaptive)
+	}
+	
+	reset_was_asked_last() {
+		this.root_q.reset_was_asked_last()
+	}
+	
+	reset_all() {
+		this.root_q.reset_all()
+	}
+	
+	get_num_enabled_questions() {
+		return this.root_q.enabled_weight
+	}
+	
+	get_difficulty() {
+		return this.root_q.difficulty
+	}
+	
+	get_weight(am_adaptive, am_windowed) {
+		return this.root_q.get_weight(am_adaptive, am_windowed)
+	}
+	
 	// Called from the constructor if an initialization object is provided.
 	// Otherwise, may be called manually after construction.
 	// library_data should be the unmodified output of JSON.parse() called on a valid library object,

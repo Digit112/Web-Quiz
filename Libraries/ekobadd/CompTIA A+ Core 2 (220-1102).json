@@ -24,7 +24,7 @@
 							"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
 							"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
 							"In Windows, what application is used to browse files?": "File Explorer",
-							"In Windows, what application is used to ciew and modify installed devices?": "Device Manager",
+							"In Windows, what application is used to view and modify installed devices?": "Device Manager",
 							"In Windows, what application is used to view and stop running applications, and also to view system resource utilization?": "Task Manager",
 							"In Windows, what application is used to view notes, warnings, and errors raised by applications, as well as auditing information?": "Event Viewer",
 							"In Windows, what application is used to run programs and scripts at scheduled times?": "Task Scheduler",

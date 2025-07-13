@@ -578,6 +578,7 @@ class QuestionGroup {
 	// Will retry until it finds a question where was_asked_last is false.
 	// Assumes cache_weights() has been called.
 	// last_asked allows the deduction of value from weights which prevent asking the same question twice in a row.
+	// TODO: last_asked should be tracked by the Library, which will need to take more control of question retrieval.
 	get_random(am_adaptive, am_windowed, last_asked) {
 		if (last_asked != null && !(last_asked instanceof Question))
 			throw new Error("last_asked must be the Question instance which was asked last, or null if there was none.")

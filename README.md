@@ -258,6 +258,8 @@ The optimal choice of y-intercept and slope for `t(n)` is a question of great co
 
 Note also that in reality, comparing all answers to all other answers is not strictly necessary since there is no point in comparing answers to the same question to each other. Also, answers which are equal to each other need not be counted. Still, the operation is O(n^2) in the number of questions, which could be quite large. The calculation must be performed either by all clients upon loading the quiz, or it must be performed and cached by the server, which would likely recalculate the values internally upon receiving a PUT or PATCH request to its API.
 
+NOTE: Preliminary tests of the current typo forgiveness Levenshtein algorithm show that a typical comparison will take 22us or so. Basic assumptions about a quiz's construction suggest that comparison of all pairs of questions in a 200-question quiz would take several seconds, and for a 1000-question quiz would take well over a minute.
+
 ### A Note on Implicit QuestionGroup child type deduction.
 
 When interpreting an Implicit QuestionGroup, the parser must deduce whether the entity is a QuestionList or QuestionGroupList. However, some entities (such as the one below) constitute **both** a valid Question and QuestionGroup. In fact, all valid Question objects constitute a valid QuestionGroup.
@@ -343,3 +345,17 @@ Same as above but with an array of length one. Additional answers can be added t
 `{"group-name": {"q": ["a"]}}`
 
 Unless generators or properties must be assigned to Questions and QuestionGroups, implicit mode is 
+
+## Wishlist
+
+### Need
+
+- Typo forgiveness implementation.
+- MarkDown embedded in Question objects.
+- Answers support markdown.
+
+### Want
+
+- Dark mode.
+- Localization Support
+- `"auto"` setting for typo forgiveness.

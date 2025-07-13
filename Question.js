@@ -309,25 +309,72 @@ class Question {
 	// Despite the name, this does respect the case-sensitive setting on this question,
 	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
 	is_exactly_correct(response) {
-		if (this.case_sensitive) {
-			return this.a.includes(response) || this.hidden_answers.includes(response)
+		if (!this.case_sensitive) response = response.toLowerCase()
+			
+		for (let answer of this.a) {
+			if (!this.case_sensitive) answer = answer.toLowerCase()
+			if (answer == response) {
+				return true
+			}
+		}
+		
+		for (let answer of this.hidden_answers) {
+			if (!this.case_sensitive) answer = answer.toLowerCase()
+			if (answer == response) {
+				return true
+			}
+		}
+		
+		return false
+	}
+	
+	// Returns true if the passed response is within the typo forgiveness threshold
+	// For at least one available answer or hidden-answer.
+	is_correct(response) {
+		// Check if this is exactly correct (This is typically >20,000 times faster than Levenshtein, according to preliminary tests!)
+		if (this.is_exactly_correct(response)) return true
+		if (!this.case_sensitive) response = response.toLowerCase()
+		
+		// Check if typo forgiveness is enabled. We already know the answer is not exactly correct.
+		let typo_divisor = this.get_typo_divisor()
+		if (typo_divisor == Infinity) return false
+		
+		for (let answer of this.a) {
+			if (!this.case_sensitive) answer = answer.toLowerCase()
+			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
+			if (Levenshtein(response, answer, max_distance) <= max_distance) {
+				return true
+			}
+		}
+		
+		for (let answer of this.hidden_answers) {
+			if (!this.case_sensitive) answer = answer.toLowerCase()
+			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
+			if (Levenshtein(response, answer, max_distance) <= max_distance) {
+				return true
+			}
+		}
+		
+		return false
+	}
+	
+	// Returns the number to divide the length of an answer by to get the number of acceptable typos.
+	get_typo_divisor() {
+		if (this.typo_forgiveness_level == "none") {
+			return Infinity
+		}
+		else if (this.typo_forgiveness_level == "low") {
+			return 15
+		}
+		else if (this.typo_forgiveness_level == "medium") {
+			return 10
+		}
+		else if (this.typo_forgiveness_level == "high") {
+			return 5
 		}
 		else {
-			var correct = false
-			response = response.toLowerCase()
-			for (let answer of this.a) {
-				if (answer.toLowerCase() == response) {
-					return true
-				}
-			}
-			
-			for (let answer of this.hidden_answers) {
-				if (answer.toLowerCase() == response) {
-					return true
-				}
-			}
-			
-			return false
+			console.assert(false)
+			return null
 		}
 	}
 	
@@ -340,7 +387,7 @@ class Question {
 		this.previous_mastery_level = this.mastery_level
 		
 		// Determine whether the answer is correct.
-		let correct = this.is_exactly_correct(response)
+		let correct = this.is_correct(response)
 		
 		// Causes the earlier attempts to have much higher weight than later attempts.
 		// Because of this, the actual adaptation rate will always be slightly above the specified constant.

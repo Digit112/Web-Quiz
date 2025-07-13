@@ -9,372 +9,375 @@
 	"ideal-overall-difficulty": 0.27,
 	
 	"question-root": {
-		"Domain 1: Operating Systems": {
-			"Windows Basics": {
-				"Windows Edition Features": {
-					"What is the maximum ram supported by Windows 10/11 Home?": "128GB",
-					"What is the maximum ram supported by Windows 10/11 Pro?": "2TB",
-					"What is the maximum ram supported by Windows 10/11 Pro for Workstations?": "6TB",
-					"What is the maximum ram supported by Windows 10/11 Enterprise?": "6TB"
-				},
-				"Common Tools": {
-					"Tool Names": {
-						"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
-						"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
-						"In Windows, what application is used to browse files?": "File Explorer",
-						"In Windows, what application is used to ciew and modify installed devices?": "Device Manager",
-						"In Windows, what application is used to view and stop running applications, and also to view system resource utilization?": "Task Manager",
-						"In Windows, what application is used to view notes, warnings, and errors raised by applications, as well as auditing information?": "Event Viewer",
-						"In Windows, what application is used to run programs and scripts at scheduled times?": "Task Scheduler",
-						"In Windows, what application is used to view and modify installed certificates?": "Certificate Manager",
-						"In Windows, what tool can be used to make regular backups of document structures such as the Desktop or Contacts?": "File History"
+		"typo-forgiveness-level": "medium",
+		"groups": {
+			"Domain 1: Operating Systems": {
+				"Windows Basics": {
+					"Windows Edition Features": {
+						"What is the maximum ram supported by Windows 10/11 Home?": "128GB",
+						"What is the maximum ram supported by Windows 10/11 Pro?": "2TB",
+						"What is the maximum ram supported by Windows 10/11 Pro for Workstations?": "6TB",
+						"What is the maximum ram supported by Windows 10/11 Enterprise?": "6TB"
 					},
-					"Task Manager": {
-						"What tab in the Task Manager can be used to see the resource utilization of a specific user?": "Users",
-						"What tab in Task Manager can be used to see a list of running processes?": "Processes",
-						"What tab in Task Manager can be used to see graphs of resource utilization?": "Performance",
-						"What tab in Task Manager can be used to see the impact of individual apps on startup time?": "Startup apps"
-					}
-				},
-				"The Run Prompt": {
-					"What is the key combination for opening the Run prompt": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
-					"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"],
-					"What would you type into the run prompt to open the local security policy window?": "secpol.msc",
-					"What would you type into the run prompt to open the local group policy window?": "gpedit.msc",
-					"What would you type into the run prompt to open the registry editor?": ["regedit", "regedit.exe"],
-					"What would you type into the run prompt to open the local users and groups window?": "lusrmgr.msc",
-					"What would you type into the run prompt to open the Computer Management window?": "compmgmt.msc",
-					"What would you type into the run prompt to open the Internet Properties window?": "inetcpl.cpl",
-					"What would you type into the run prompt to open the Certificate Manager window?": "certmgr.msc",
-					"What would you type into the run prompt to open the Event Viewer?": "eventvwr.msc",
-					"What would you type into the run prompt to open the Task Scheduler?": "taskschd.msc",
-					"What would you type into the run prompt to open the Device Manager?": "devmgmt.msc",
-					"What would you type into the run prompt to open the System Configuration utility?": ["msconfig", "msconfig.exe"],
-					"What would you type into the run prompt to open the Windows Firewall with Advanced Security?": "wf.msc",
-					"What would you type into the run prompt to open the Windows Firewall in the control panel?": "firewall.cpl"
-				},
-				"Common Windows Command Line Utilities": {
-					"Command Names": {
-						"descendants-give-incorrect-answers": true,
-						"groups": {
-							"Directories & Files": {
-								"cd": {
-									"hidden": true,
-									"descendants-give-incorrect-answers": true,
-									"incorrect-answers": ["cd", "cdir"],
-									"questions": {
-										"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
-										"In Windows, what command would change the working directory to the parent of the current working directory?": "cd .."
-									}
-								},
-								"other": {
-									"hidden": true,
-									"questions": {
-										"In Windows, what command is used to change the working directory?": "cd",
-										"In Windows, what command is used to make a directory?": {"answers": "md", "hidden-answers": "mkdir"},
-										"In Windows, what command is used to remove a directory?": {"answers": "rd", "hidden-answers": "rmdir"},
-										"In Windows, what command is used to delete a file?": {"answers": "rd", "hidden-answers": "del"},
-										"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
-										"In Windows, what command is used to get a list of files and folders in the current working directory and all descendants?": "tree",
-										"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
-										"In Windows, what deprecated command can be used to copy files, folders, and directory structures?": "xcopy",
-										"In Windows, what command can be used to copy folders and directory structures, and is considered the successor of xcopy?": "robocopy"
-									}
-								}
-							},
-							"Utilities": {
-								"In Windows, what command can be used to show IP configuration info such as the IP address and subnet mask?": "ipconfig",
-								"In Windows, what command can be used to see the intermediary hops performed while connceting to a remote host?": "tracert",
-								"In Windows, what command can be used to perform a DNS lookup?": "nslookup",
-								"In Windows, what command can be used to create, delete, modify, and extend volumes, among other disk management functions?": "diskpart",
-								"In Windows, what command can be used to format storage media?": "format",
-								"In Windows, what command can be used to defragment a storage volume?": "defrag",
-								"In Windows, what command can be used to check a drive and fix basic issues?": "chkdsk",
-								"In Windows, what command can be used to check the integrity of system files?": "sfc",
-								"In Windows, what command can be used to display a window with Windows version info?": "winver",
-								"In Windows, what command can be used to update the group policy to reflect new changes?": "gpupdate",
-								"In Windows, what command can be used to view the resultant set of policy to reflect new changes?": "gpresult",
-								"In Windows, what command can be used to shutdown a computer?": "shutdown",
-								"In Windows, what command can be used to map a network drive?": "net use"
-							}
+					"Common Tools": {
+						"Tool Names": {
+							"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
+							"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
+							"In Windows, what application is used to browse files?": "File Explorer",
+							"In Windows, what application is used to ciew and modify installed devices?": "Device Manager",
+							"In Windows, what application is used to view and stop running applications, and also to view system resource utilization?": "Task Manager",
+							"In Windows, what application is used to view notes, warnings, and errors raised by applications, as well as auditing information?": "Event Viewer",
+							"In Windows, what application is used to run programs and scripts at scheduled times?": "Task Scheduler",
+							"In Windows, what application is used to view and modify installed certificates?": "Certificate Manager",
+							"In Windows, what tool can be used to make regular backups of document structures such as the Desktop or Contacts?": "File History"
+						},
+						"Task Manager": {
+							"What tab in the Task Manager can be used to see the resource utilization of a specific user?": "Users",
+							"What tab in Task Manager can be used to see a list of running processes?": "Processes",
+							"What tab in Task Manager can be used to see graphs of resource utilization?": "Performance",
+							"What tab in Task Manager can be used to see the impact of individual apps on startup time?": "Startup apps"
 						}
 					},
-					"Command Flags": {
-						"In Windows, what flag causes the `chkdsk` command to fix errors on the disk?": "/F",
-						"In Windows, what flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
-						"In Windows, what flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
-						"In Windows, what flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY",
-						"In Windows, what flag allows you to specify the filesystem to be used by the `format` command?": "/fs",
-						"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": "/p",
-						"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volume?": "/q",
-						"In Windows, what flag is used to specify the size of a packet used by the `ping` command?": "-l",
-						"In Windows, what flag is used to specify that the `ping` command should run continuously until stopped?": "-t",
-						"In Windows, what flag is used to specify the number of a packet used by the `ping` command?": "-n",
-						"In Windows, what flag is used to force the `ping` command to use IPv4?": "-4",
-						"In Windows, what flag is used to force the `ping` command to use IPv6?": "-6"
+					"The Run Prompt": {
+						"What is the key combination for opening the Run prompt": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
+						"What would you type into the run prompt to open PowerShell?": ["powershell", "powershell.exe"],
+						"What would you type into the run prompt to open the local security policy window?": "secpol.msc",
+						"What would you type into the run prompt to open the local group policy window?": "gpedit.msc",
+						"What would you type into the run prompt to open the registry editor?": ["regedit", "regedit.exe"],
+						"What would you type into the run prompt to open the local users and groups window?": "lusrmgr.msc",
+						"What would you type into the run prompt to open the Computer Management window?": "compmgmt.msc",
+						"What would you type into the run prompt to open the Internet Properties window?": "inetcpl.cpl",
+						"What would you type into the run prompt to open the Certificate Manager window?": "certmgr.msc",
+						"What would you type into the run prompt to open the Event Viewer?": "eventvwr.msc",
+						"What would you type into the run prompt to open the Task Scheduler?": "taskschd.msc",
+						"What would you type into the run prompt to open the Device Manager?": "devmgmt.msc",
+						"What would you type into the run prompt to open the System Configuration utility?": ["msconfig", "msconfig.exe"],
+						"What would you type into the run prompt to open the Windows Firewall with Advanced Security?": "wf.msc",
+						"What would you type into the run prompt to open the Windows Firewall in the control panel?": "firewall.cpl"
+					},
+					"Common Windows Command Line Utilities": {
+						"Command Names": {
+							"descendants-give-incorrect-answers": true,
+							"groups": {
+								"Directories & Files": {
+									"cd": {
+										"hidden": true,
+										"descendants-give-incorrect-answers": true,
+										"incorrect-answers": ["cd", "cdir"],
+										"questions": {
+											"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
+											"In Windows, what command would change the working directory to the parent of the current working directory?": "cd .."
+										}
+									},
+									"other": {
+										"hidden": true,
+										"questions": {
+											"In Windows, what command is used to change the working directory?": "cd",
+											"In Windows, what command is used to make a directory?": {"answers": "md", "hidden-answers": "mkdir"},
+											"In Windows, what command is used to remove a directory?": {"answers": "rd", "hidden-answers": "rmdir"},
+											"In Windows, what command is used to delete a file?": {"answers": "rd", "hidden-answers": "del"},
+											"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
+											"In Windows, what command is used to get a list of files and folders in the current working directory and all descendants?": "tree",
+											"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
+											"In Windows, what deprecated command can be used to copy files, folders, and directory structures?": "xcopy",
+											"In Windows, what command can be used to copy folders and directory structures, and is considered the successor of xcopy?": "robocopy"
+										}
+									}
+								},
+								"Utilities": {
+									"In Windows, what command can be used to show IP configuration info such as the IP address and subnet mask?": "ipconfig",
+									"In Windows, what command can be used to see the intermediary hops performed while connceting to a remote host?": "tracert",
+									"In Windows, what command can be used to perform a DNS lookup?": "nslookup",
+									"In Windows, what command can be used to create, delete, modify, and extend volumes, among other disk management functions?": "diskpart",
+									"In Windows, what command can be used to format storage media?": "format",
+									"In Windows, what command can be used to defragment a storage volume?": "defrag",
+									"In Windows, what command can be used to check a drive and fix basic issues?": "chkdsk",
+									"In Windows, what command can be used to check the integrity of system files?": "sfc",
+									"In Windows, what command can be used to display a window with Windows version info?": "winver",
+									"In Windows, what command can be used to update the group policy to reflect new changes?": "gpupdate",
+									"In Windows, what command can be used to view the resultant set of policy to reflect new changes?": "gpresult",
+									"In Windows, what command can be used to shutdown a computer?": "shutdown",
+									"In Windows, what command can be used to map a network drive?": "net use"
+								}
+							}
+						},
+						"Command Flags": {
+							"In Windows, what flag causes the `chkdsk` command to fix errors on the disk?": "/F",
+							"In Windows, what flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
+							"In Windows, what flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
+							"In Windows, what flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY",
+							"In Windows, what flag allows you to specify the filesystem to be used by the `format` command?": "/fs",
+							"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": "/p",
+							"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volume?": "/q",
+							"In Windows, what flag is used to specify the size of a packet used by the `ping` command?": "-l",
+							"In Windows, what flag is used to specify that the `ping` command should run continuously until stopped?": "-t",
+							"In Windows, what flag is used to specify the number of a packet used by the `ping` command?": "-n",
+							"In Windows, what flag is used to force the `ping` command to use IPv4?": "-4",
+							"In Windows, what flag is used to force the `ping` command to use IPv6?": "-6"
+						}
+					},
+					"Other Windows Concepts": {
+						"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hiberfil.sys",
+						"In Windows, what is the name of the file containing pages of RAM stored to disk to free up memory for other programs?": "pagefile.sys",
+						"In Windows, what technology requires explicit permission to be given to execute individual applications with administrator priviledge?": ["UAC", "User Account Control"]
 					}
 				},
-				"Other Windows Concepts": {
-					"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hiberfil.sys",
-					"In Windows, what is the name of the file containing pages of RAM stored to disk to free up memory for other programs?": "pagefile.sys",
-					"In Windows, what technology requires explicit permission to be given to execute individual applications with administrator priviledge?": ["UAC", "User Account Control"]
+				"macOS Basics": {
+					"Common Tools": {
+						"In macOS, what part of the GUI along the bottom of the screen is used to launch and switch between apps?": "Dock",
+						"In macOS, what application is used to browse files?": "Finder",
+						"In macOS, what application is used to manage running apps and switch between desktops?": "Mission Control",
+						"In macOS, what application is use to run comprehensive searches of a term across files, apps, devices, and remote media?": "Spotlight",
+						"In macOS, what application is used to setup dual booting?": ["Boot Camp", "Boot Camp Assistant"],
+						"In macOS, what application is used to store passwords, private keys, and certificates?": ["Keychain", "Keychain Access"],
+						"In macOS, what application is used to automatically create backups of the computer and restore the computer to a previous state?": "Time Machine",
+						"In macOS, what application is used to format, partition, repair, and image disks?": "Disk Utility",
+						"In macOS, what application is used to encrypt files?": "FileVault",
+						"In macOS, what application is used to kill unresponsive applications?": ["Force Quit", "Activity Monitor"]
+					},
+					"Common Filetypes": {
+						"In macOS, what filetype represents a mountable disk image and is commonly used to distribute applications?": ["dmg", ".dmg"],
+						"In macOS, what filetype represents a portable, executable file?": ["APP", ".app"],
+						"In macOS, what filetype represents an application which can be installed and often involves an attended installation process?": ["pkg", ".pkg"]
+					}
+				},
+				"Linux Basics": {
+					"Common Commands": {
+						"In Linux, what command is used to change the current working directory?": "cd",
+						"In Linux, what command is used to list the contents of a directory?": "ls",
+						"In Linux, what command displays the full path to the current working directory?": "pwd",
+						"In Linux, what command is used to move and rename files?": "mv",
+						"In Linux, what command is used to copy files?": "cp",
+						"In Linux, what command is used to delete files?": "rm",
+						"In Linux, what command is used to read and write permissions for a file or directory?": "chmod",
+						"In Linux, what command is used to read and modify the owner of a file or directory?": "chown",
+						"In Linux, what command is used to run a shell as another user, typically root?": "su",
+						"In Linux, what command is used to execute a command as another user, typically root?": "sudo",
+						"In Linux, what command is used to show and manipulate network routing, devices, and tunnels?": "ip",
+						"In Linux, what command is used to display information about the filesystem disk space usage?": "df",
+						"In Linux, what command is used to search and filter text for a given pattern?": "grep",
+						"In Linux, what command is used to display information about running processes?": "ps",
+						"In Linux, what command is used to display command manual pages?": "man",
+						"In Linux, what command is used to display tasks?": "top",
+						"In Linux, what command is used to search for files?": "find",
+						"In Linux, what command is used to perform DNS lookup?": "dig",
+						"In Linux, what command dumps the full text of a file to the terminal?": "cat",
+						"In Debian and Ubuntu (among others), what command checks for and caches available updates to installed programs and the system?": ["apt-get update", "apt update"],
+						"In Debian and Ubuntu (among others), what command installs availabe updates for installed programs and the system?": ["apt-get upgrade", "apt upgrade"],
+						"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "dnf update",
+						"In Linux, what flag makes grep case-insensitive?": "-i"
+					}
+				},
+				"Disks, Drives, Volumes": {
+					"Fundamental Concepts": {
+						"What term describes the act of making the root of a volume appear as a directory within another filesystem?": {"answers": "Mounting", "hidden-answers": "Mount"}
+					},
+					"Basic vs Dynamic": {
+						"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
+						"In Windows, what term describes a disk that uses traditional partitioning and whose volumes must be wholly contained on that disk?": "Basic"
+					},
+					"MBR vs GPT": {
+						"mode-of-presentation": "multiple-choice",
+						"descendants-give-incorrect-answers": true,
+						"questions": {
+							"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",
+							"Which partitioning scheme is obsoleted and mostly replaced by the other?": "MBR",
+							"Which partitioning scheme supports a maximum of 128 partitions?": "GPT",
+							"Which partitioning scheme supports a maximum of 2TB partitions?": "MBR"
+						}
+					}
+				},
+				"Filesystems": {
+					"What filesystem is most often used on a Windows machine?": "NTFS",
+					"What filesystem is most often used on a Linux machine?": "ext4",
+					"What filesystem is most often used on a MacOS machine?": "APFS"
 				}
 			},
-			"macOS Basics": {
-				"Common Tools": {
-					"In macOS, what part of the GUI along the bottom of the screen is used to launch and switch between apps?": "Dock",
-					"In macOS, what application is used to browse files?": "Finder",
-					"In macOS, what application is used to manage running apps and switch between desktops?": "Mission Control",
-					"In macOS, what application is use to run comprehensive searches of a term across files, apps, devices, and remote media?": "Spotlight",
-					"In macOS, what application is used to setup dual booting?": ["Boot Camp", "Boot Camp Assistant"],
-					"In macOS, what application is used to store passwords, private keys, and certificates?": ["Keychain", "Keychain Access"],
-					"In macOS, what application is used to automatically create backups of the computer and restore the computer to a previous state?": "Time Machine",
-					"In macOS, what application is used to format, partition, repair, and image disks?": "Disk Utility",
-					"In macOS, what application is used to encrypt files?": "FileVault",
-					"In macOS, what application is used to kill unresponsive applications?": ["Force Quit", "Activity Monitor"]
+			"Domain 2: Security": {
+				"Physical Security": {
+					"What is the common term for a policy requiring that users remove all paper from their desks before leavin for lunch or for the day?": "Clean Desk Policy",
+					"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen", "Privacy Filter"],
+					"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
 				},
-				"Common Filetypes": {
-					"In macOS, what filetype represents a mountable disk image and is commonly used to distribute applications?": ["dmg", ".dmg"],
-					"In macOS, what filetype represents a portable, executable file?": ["APP", ".app"],
-					"In macOS, what filetype represents an application which can be installed and often involves an attended installation process?": ["pkg", ".pkg"]
-				}
-			},
-			"Linux Basics": {
-				"Common Commands": {
-					"In Linux, what command is used to change the current working directory?": "cd",
-					"In Linux, what command is used to list the contents of a directory?": "ls",
-					"In Linux, what command displays the full path to the current working directory?": "pwd",
-					"In Linux, what command is used to move and rename files?": "mv",
-					"In Linux, what command is used to copy files?": "cp",
-					"In Linux, what command is used to delete files?": "rm",
-					"In Linux, what command is used to read and write permissions for a file or directory?": "chmod",
-					"In Linux, what command is used to read and modify the owner of a file or directory?": "chown",
-					"In Linux, what command is used to run a shell as another user, typically root?": "su",
-					"In Linux, what command is used to execute a command as another user, typically root?": "sudo",
-					"In Linux, what command is used to show and manipulate network routing, devices, and tunnels?": "ip",
-					"In Linux, what command is used to display information about the filesystem disk space usage?": "df",
-					"In Linux, what command is used to search and filter text for a given pattern?": "grep",
-					"In Linux, what command is used to display information about running processes?": "ps",
-					"In Linux, what command is used to display command manual pages?": "man",
-					"In Linux, what command is used to display tasks?": "top",
-					"In Linux, what command is used to search for files?": "find",
-					"In Linux, what command is used to perform DNS lookup?": "dig",
-					"In Linux, what command dumps the full text of a file to the terminal?": "cat",
-					"In Debian and Ubuntu (among others), what command checks for and caches available updates to installed programs and the system?": ["apt-get update", "apt update"],
-					"In Debian and Ubuntu (among others), what command installs availabe updates for installed programs and the system?": ["apt-get upgrade", "apt upgrade"],
-					"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "dnf update",
-					"In Linux, what flag makes grep case-insensitive?": "-i"
-				}
-			},
-			"Disks, Drives, Volumes": {
-				"Fundamental Concepts": {
-					"What term describes the act of making the root of a volume appear as a directory within another filesystem?": {"answers": "Mounting", "hidden-answers": "Mount"}
+				"Logical Security": {
+					"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "MFA", "hidden-answers": ["Multi Factor Authentication", "Multi-Factor Authentication"]},
+					"What is a generic term for a hardware-based security device used as a form of authentication?": ["Hard Token", "Hardware Token"],
+					"What is a generic term for a software-based keys which can be installed onto devices and used as a form of authentication?": ["Soft Token", "Software Token"]
 				},
-				"Basic vs Dynamic": {
-					"In Windows, what term describes a disk whose volumes may span multiple disks and support advanced functionality such as RAID?": "Dynamic",
-					"In Windows, what term describes a disk that uses traditional partitioning and whose volumes must be wholly contained on that disk?": "Basic"
+				"Active Directory": {
+					"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answers": "Login Script", "hidden-answers": "Logon Script"}
 				},
-				"MBR vs GPT": {
+				"Wireless Access Protocols": {
+					
+				},
+				"RADIUS, TACACS+, Kerberos": {
+					"What port does RADIUS use for authentication?": "1812",
+					"What port does RADIUS use for accounting?": "1813",
+					"What transport-layer protocol does RADIUS use?": "UDP",
+					"What port does TACACS+ use?": "49",
+					"What transport-layer protocol does TACACS+ use?": "TCP",
+					"What kind of server is a RADIUS or TACACS+ server?": ["AAA", "AAA Server"],
+					"What port does Kerberos use?": "88"
+				},
+				"Types of Viruses": {
+					"What is the term for a kind of virus which secretly performs malicious functions while seemingly operating as the user expects?": {"answers": ["Trojan Virus", "Trojan"], "hidden-answers": ["Trojan Horse", "Trojan Horse Virus"]},
+					"What is the term for a kind of virus embedded in the boot sector of a hard drive?": "Boot Sector Virus",
+					"What is the term for a kind of virus whose purpose is to transmit sensitive information to an attacker while remaining undetected?": "Spyware",
+					"What is the term for software designed to gain administrator access to a system while remaining undetected?": {"answers": "Rootkit", "hidden-answers": "Root Kit"},
+					"What is the term for a virus which locks access to a system or its resources and demands payment to release that system?": "Ransomware",
+					"What is the term for a virus which records keystrokes and transmits them to an attacker?": "Keylogger",
+					"What is the term for software designed to mine cryptocurrency, and which is sometimes placed on systems withoout a user's consent?": {"answers": ["Cryptominer", "Cryptomalware"], "hidden-answers": ["Crypto-Miner", "Crypto-Malware"]}
+				},
+				"Types of Social Engineering Attacks": {
+					"What is the term for a social engineering attack in which individuals receive fraudulent, deceptive emails designed to trick uses into revealing sensitive info, among other things?": {"answers": "Phishing", "hidden-answers": "Phishing Attack"},
+					"What is the term for a kind of phishing attempt done over the phone?": "Vishing",
+					"What is the term for a kind of phishing which targets specific, high-priority targets?": "Whaling",
+					"What is the term that describes a kind of intrusion in which an unauthorized person follows an authorized person into a restricted area?": "Tailgating",
+					"What is the term for an attack in which a person searches through garbage contains for discarded documents containing sensitive information?": "Dumpster Diving",
+					"What is the term for an attack in which a malicious actor installs a WAP which emulates a legitimate access point and may fool users into connecting to it?": "Evil Twin",
+					"What is the term for a kind of phishing which targets a specific demographic, entity, or even specific indivuals?": "Spear Phishing"
+				},
+				"Types of Network Attacks": {
+					"What is the name for an attack designed to make network resources unavailable?": "DoS",
+					"What is the name for an attack which uses many computers to attack a network make resources unavailable?": "DDoS",
+					"What is the name for a kind of attack in which an attacker guesses a user's password in hopes of gaining access, typically using software?": "Password Cracking",
+					"What is the term for a kind of attack in which an attacker guesses passwords from a predefined list?": ["Dictionary", "Dictionary Attack"],
+					"What is the term for a kind of attack in which an attacker guesses all possible passwords?": ["Brute Force", "Brute Force Attack"],
+					"What is the term for a table that maps known hash values to the passwords which produce them?": "Rainbow Table"
+				},
+				"File Encryption Options": {
 					"mode-of-presentation": "multiple-choice",
 					"descendants-give-incorrect-answers": true,
 					"questions": {
-						"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",
-						"Which partitioning scheme is obsoleted and mostly replaced by the other?": "MBR",
-						"Which partitioning scheme supports a maximum of 128 partitions?": "GPT",
-						"Which partitioning scheme supports a maximum of 2TB partitions?": "MBR"
-					}
-				}
-			},
-			"Filesystems": {
-				"What filesystem is most often used on a Windows machine?": "NTFS",
-				"What filesystem is most often used on a Linux machine?": "ext4",
-				"What filesystem is most often used on a MacOS machine?": "APFS"
-			}
-		},
-		"Domain 2: Security": {
-			"Physical Security": {
-				"What is the common term for a policy requiring that users remove all paper from their desks before leavin for lunch or for the day?": "Clean Desk Policy",
-				"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen", "Privacy Filter"],
-				"What is the term for a small room with two doors, each of which must be unlocked in sequence in order for a person to gain access to a restricted area?": ["Access Control Vestibule", "Security Vestibule", "Mantrap"]
-			},
-			"Logical Security": {
-				"What is the term that describes the use of multiple authentication methods to determine a user's identity?": {"answers": "MFA", "hidden-answers": ["Multi Factor Authentication", "Multi-Factor Authentication"]},
-				"What is a generic term for a hardware-based security device used as a form of authentication?": ["Hard Token", "Hardware Token"],
-				"What is a generic term for a software-based keys which can be installed onto devices and used as a form of authentication?": ["Soft Token", "Software Token"]
-			},
-			"Active Directory": {
-				"In Active Directory, what is the term for a script that runs whenever a user logs in?": {"answers": "Login Script", "hidden-answers": "Logon Script"}
-			},
-			"Wireless Access Protocols": {
-				
-			},
-			"RADIUS, TACACS+, Kerberos": {
-				"What port does RADIUS use for authentication?": "1812",
-				"What port does RADIUS use for accounting?": "1813",
-				"What transport-layer protocol does RADIUS use?": "UDP",
-				"What port does TACACS+ use?": "49",
-				"What transport-layer protocol does TACACS+ use?": "TCP",
-				"What kind of server is a RADIUS or TACACS+ server?": ["AAA", "AAA Server"],
-				"What port does Kerberos use?": "88"
-			},
-			"Types of Viruses": {
-				"What is the term for a kind of virus which secretly performs malicious functions while seemingly operating as the user expects?": {"answers": ["Trojan Virus", "Trojan"], "hidden-answers": ["Trojan Horse", "Trojan Horse Virus"]},
-				"What is the term for a kind of virus embedded in the boot sector of a hard drive?": "Boot Sector Virus",
-				"What is the term for a kind of virus whose purpose is to transmit sensitive information to an attacker while remaining undetected?": "Spyware",
-				"What is the term for software designed to gain administrator access to a system while remaining undetected?": {"answers": "Rootkit", "hidden-answers": "Root Kit"},
-				"What is the term for a virus which locks access to a system or its resources and demands payment to release that system?": "Ransomware",
-				"What is the term for a virus which records keystrokes and transmits them to an attacker?": "Keylogger",
-				"What is the term for software designed to mine cryptocurrency, and which is sometimes placed on systems withoout a user's consent?": {"answers": ["Cryptominer", "Cryptomalware"], "hidden-answers": ["Crypto-Miner", "Crypto-Malware"]}
-			},
-			"Types of Social Engineering Attacks": {
-				"What is the term for a social engineering attack in which individuals receive fraudulent, deceptive emails designed to trick uses into revealing sensitive info, among other things?": {"answers": "Phishing", "hidden-answers": "Phishing Attack"},
-				"What is the term for a kind of phishing attempt done over the phone?": "Vishing",
-				"What is the term for a kind of phishing which targets specific, high-priority targets?": "Whaling",
-				"What is the term that describes a kind of intrusion in which an unauthorized person follows an authorized person into a restricted area?": "Tailgating",
-				"What is the term for an attack in which a person searches through garbage contains for discarded documents containing sensitive information?": "Dumpster Diving",
-				"What is the term for an attack in which a malicious actor installs a WAP which emulates a legitimate access point and may fool users into connecting to it?": "Evil Twin",
-				"What is the term for a kind of phishing which targets a specific demographic, entity, or even specific indivuals?": "Spear Phishing"
-			},
-			"Types of Network Attacks": {
-				"What is the name for an attack designed to make network resources unavailable?": "DoS",
-				"What is the name for an attack which uses many computers to attack a network make resources unavailable?": "DDoS",
-				"What is the name for a kind of attack in which an attacker guesses a user's password in hopes of gaining access, typically using software?": "Password Cracking",
-				"What is the term for a kind of attack in which an attacker guesses passwords from a predefined list?": ["Dictionary", "Dictionary Attack"],
-				"What is the term for a kind of attack in which an attacker guesses all possible passwords?": ["Brute Force", "Brute Force Attack"],
-				"What is the term for a table that maps known hash values to the passwords which produce them?": "Rainbow Table"
-			},
-			"File Encryption Options": {
-				"mode-of-presentation": "multiple-choice",
-				"descendants-give-incorrect-answers": true,
-				"questions": {
-					"Which of the following is a Windows feature designed to supply full-disk encryption?": "BitLocker",
-					"Which of the following is a MacOS feature designed to supply full-disk encryption?": "FileVault",
-					"Which of the following is a Linux feature designed to supply full-disk encryption?": {"answers": "LUKS", "hidden-answers": "Linux Unified Key Setup"},
-					"Which of the following is a Windows feature designed to encrypt individual files and directory structures?": "EFS"
-				}
-			},
-			"Common Windows Security Settings": {
-				"Block 1": {
-					"hidden": true,
-					"mode-of-presentation": "multiple-choice",
-					"incorrect-answers": ["Local Security Policy", "Local Users and Groups", "Group Policy Editor", "Firewall & Network Protection"],
-					"max-choices": 3,
-					"questions": {
-						"In Windows, which could you navigate to if you wanted to reset the administrator password?": "Local Users and Groups",
-						"In Windows, which could you navigate to if you wanted to disable an account?": "Local Users and Groups",
-						"In Windows, which could you navigate to if you wanted to disable AutoPlay/AutoRun?": "Group Policy Editor",
-						"In Windows, which could you navigate to if you wanted to allow or deny traffic to specific ports?": "Firewall & Network Protection",
-						"In Windows, which could you navigate to if you wanted to enforce a maximum password age?": ["Local Security Policy", "Group Policy Editor"],
-						"In Windows, which could you navigate to if you wanted to enforce a minimum password length?": ["Local Security Policy", "Group Policy Editor"],
-						"In Windows, which could you navigate to if you wanted to prevent users from reusing passwords?": ["Local Security Policy", "Group Policy Editor"]
+						"Which of the following is a Windows feature designed to supply full-disk encryption?": "BitLocker",
+						"Which of the following is a MacOS feature designed to supply full-disk encryption?": "FileVault",
+						"Which of the following is a Linux feature designed to supply full-disk encryption?": {"answers": "LUKS", "hidden-answers": "Linux Unified Key Setup"},
+						"Which of the following is a Windows feature designed to encrypt individual files and directory structures?": "EFS"
 					}
 				},
-				"Block 2": {
-					"hidden": true,
-					"mode-of-presentation": "multiple-choice",
-					"incorrect-answers": ["Account", "General"],
-					"questions": {
-						"In Windows, which tab of a user's properties would allow you to restrict their logon times?": "Account",
-						"In Windows, which tab of a user's properties would allow you to enable or disable their account?": "General",
-						"In Windows, which tab of a user's properties would allow you rename the user?": "General"
-					}
-				}
-			},
-			"Drive Destruction Levels": {
-				"mode-of-presentation": "multiple-choice",
-				"descendants-give-incorrect-answers": true,
-				"questions": {
-					"What term refers to wiping the data from a drive in a way which is recoverable through special techniques and equipment?": "Clearing",
-					"What term refers to wiping the data from a drive to the extent that it becomes nearly impossible to recover even with special techniques and equipment?": "Purging",
-					"What term refers to wiping a drive in such a way that, not only is the data unrecoverable, but the drive itself becomes unusable?": "Destroying"
-				}
-			}
-		},
-		"Domain 3: Software Troubleshhoting": {
-			"WinRE Options": {
-				"mode-of-presentation": "multiple-choice",
-				"descendants-give-incorrect-answers": true,
-				"max-choices": 6,
-				"questions": {
-					"Which WinRE option allows you to restore Windows from a restore point?": "System Restore",
-					"Which WinRE option allows you to return to an earlier version of Windows?": "Go back to the previous version",
-					"Which WinRE option allows you to restore Windows from a backup file?": "System Image Recovery",
-					"Which WinRE option allows you to fix issues that prevent Windows from loading?": "Startup Repair",
-					"Which WinRE option allows you to issue commands to perform recovery-related actions?": "Command Prompt",
-					"Which WinRE option allows you to access UEFI settings?": "UEFI Firmware Settings"
-				}
-			},
-			"CompTIA A+ Malware Removal Process": {
-				"mode-of-presentation": "multiple-choice",
-				"descendants-give-incorrect-answers": true,
-				"max-choices": 7,
-				"questions": {
-					"What is step **1** of the CompTIA A+ Malware Removal Process?": {"answers": "Investigate & Verify", "hidden=answers": "Investigate and Verify"},
-					"What is step **2** of the CompTIA A+ Malware Removal Process?": "Quarantine",
-					"What is step **3** of the CompTIA A+ Malware Removal Process?": {"answers": "Disable System Restore in Windows", "hidden-answers": "Disable System Restore"},
-					"What is step **4** of the CompTIA A+ Malware Removal Process?": "Remediate",
-					"What is step **5** of the CompTIA A+ Malware Removal Process?": {"answers": "Schedule Scans & Update", "hidden-answers": "Schedule Scans and Update"},
-					"What is step **6** of the CompTIA A+ Malware Removal Process?": {"answers": "Create a Restore Point in Windows", "hidden-answers": "Create a Restore Point"},
-					"What is step **7** of the CompTIA A+ Malware Removal Process?": "Educate"
-				}
-			}
-		},
-		"Domain 4: Operational Procedures": {
-			"Ticketing Systems": {
-				"What is the term for software which allows the submission, documentation, and resolution of issues, and which is typically used by IT support and helpdesk agents?": {"answers": "Ticketing System", "hidden-answers": ["Ticket System", "Ticketing Software", "Ticket Software"]}
-			},
-			"Asset Management": {
-				"What is the common term for a barcode or other uniquely identifiable marking used to track an IT asset?": "Asset Tag"
-			},
-			"Common Documentation Types": {
-				"What kind of document outlines the restrictions which must be followed by users of a system, such as an office network?": {"answers": "AUP", "hidden-answers": "Acceptable Use Policy"},
-				"What kind of document identifies devices on a network and shows how they are connected?": ["Network Topology Diagram", "Network Diagram"],
-				"What kind of document specifies information and guidelines pertaining to a company's compliance and the compliance of its employees?": {"answers": ["Compliance and Regulatory Policy", "Compliance Policy"], "hidden-answers": "Compliance & Regulatory Policy"},
-				"What kind of document identifies the steps to take to complete a particualr process?": {"answers": ["SOP", "Standard Operating Procedure"], "hidden-answers": ["SOP Document", "Standard Operating Procedure Document"]},
-				"What kind of document contains records and documentation regarding an incident which occurred, such as a security event or IT outage?": "Incident Report"
-			},
-			"Change Management": {
-				"Block 1": {
-					"hidden": true,
-					"questions": {
-						"What is the term for a plan to return a system to its previously-working state in case an upgrade fails or causes unforseen issues?": "Rollback Plan",
-						"What is the term for a document outlining the reasons for a change to be made, and which typically requires one or more signatures for approval?": {"answers": ["Request Form", "Change Request"], "hidden-answers": ["Change Request Form", "Change Control Form"]}
+				"Common Windows Security Settings": {
+					"Block 1": {
+						"hidden": true,
+						"mode-of-presentation": "multiple-choice",
+						"incorrect-answers": ["Local Security Policy", "Local Users and Groups", "Group Policy Editor", "Firewall & Network Protection"],
+						"max-choices": 3,
+						"questions": {
+							"In Windows, which could you navigate to if you wanted to reset the administrator password?": "Local Users and Groups",
+							"In Windows, which could you navigate to if you wanted to disable an account?": "Local Users and Groups",
+							"In Windows, which could you navigate to if you wanted to disable AutoPlay/AutoRun?": "Group Policy Editor",
+							"In Windows, which could you navigate to if you wanted to allow or deny traffic to specific ports?": "Firewall & Network Protection",
+							"In Windows, which could you navigate to if you wanted to enforce a maximum password age?": ["Local Security Policy", "Group Policy Editor"],
+							"In Windows, which could you navigate to if you wanted to enforce a minimum password length?": ["Local Security Policy", "Group Policy Editor"],
+							"In Windows, which could you navigate to if you wanted to prevent users from reusing passwords?": ["Local Security Policy", "Group Policy Editor"]
+						}
+					},
+					"Block 2": {
+						"hidden": true,
+						"mode-of-presentation": "multiple-choice",
+						"incorrect-answers": ["Account", "General"],
+						"questions": {
+							"In Windows, which tab of a user's properties would allow you to restrict their logon times?": "Account",
+							"In Windows, which tab of a user's properties would allow you to enable or disable their account?": "General",
+							"In Windows, which tab of a user's properties would allow you rename the user?": "General"
+						}
 					}
 				},
-				"Block 2": {
-					"hidden": true,
+				"Drive Destruction Levels": {
 					"mode-of-presentation": "multiple-choice",
-					"questions": {}
+					"descendants-give-incorrect-answers": true,
+					"questions": {
+						"What term refers to wiping the data from a drive in a way which is recoverable through special techniques and equipment?": "Clearing",
+						"What term refers to wiping the data from a drive to the extent that it becomes nearly impossible to recover even with special techniques and equipment?": "Purging",
+						"What term refers to wiping a drive in such a way that, not only is the data unrecoverable, but the drive itself becomes unusable?": "Destroying"
+					}
 				}
 			},
-			"Backup and Recovvery": {
-				"What is the term for a type of backup which makes a complete copy of all data in question?": {"answers": "Full", "hidden-answers": "Full Backup"},
-				"What is the term for a type of backup which only makes a copy of the changes to the data in question?": {"answers": "Incremental", "hidden-answers": "Incremental Backup"},
-				"What is the term for a type of backup which only makes a copy of files which have changed since the last full backup?": {"answers": "Differential", "hidden-answers": "Differential Backup"},
-				"What is the term for a type of backup which is made by combining existing backups?": {"answers": "Synthetic", "hidden-answers": ["Synthetic Backup", "Synthetic Full Backup"]}
+			"Domain 3: Software Troubleshhoting": {
+				"WinRE Options": {
+					"mode-of-presentation": "multiple-choice",
+					"descendants-give-incorrect-answers": true,
+					"max-choices": 6,
+					"questions": {
+						"Which WinRE option allows you to restore Windows from a restore point?": "System Restore",
+						"Which WinRE option allows you to return to an earlier version of Windows?": "Go back to the previous version",
+						"Which WinRE option allows you to restore Windows from a backup file?": "System Image Recovery",
+						"Which WinRE option allows you to fix issues that prevent Windows from loading?": "Startup Repair",
+						"Which WinRE option allows you to issue commands to perform recovery-related actions?": "Command Prompt",
+						"Which WinRE option allows you to access UEFI settings?": "UEFI Firmware Settings"
+					}
+				},
+				"CompTIA A+ Malware Removal Process": {
+					"mode-of-presentation": "multiple-choice",
+					"descendants-give-incorrect-answers": true,
+					"max-choices": 7,
+					"questions": {
+						"What is step **1** of the CompTIA A+ Malware Removal Process?": {"answers": "Investigate & Verify", "hidden=answers": "Investigate and Verify"},
+						"What is step **2** of the CompTIA A+ Malware Removal Process?": "Quarantine",
+						"What is step **3** of the CompTIA A+ Malware Removal Process?": {"answers": "Disable System Restore in Windows", "hidden-answers": "Disable System Restore"},
+						"What is step **4** of the CompTIA A+ Malware Removal Process?": "Remediate",
+						"What is step **5** of the CompTIA A+ Malware Removal Process?": {"answers": "Schedule Scans & Update", "hidden-answers": "Schedule Scans and Update"},
+						"What is step **6** of the CompTIA A+ Malware Removal Process?": {"answers": "Create a Restore Point in Windows", "hidden-answers": "Create a Restore Point"},
+						"What is step **7** of the CompTIA A+ Malware Removal Process?": "Educate"
+					}
+				}
 			},
-			"Safety and Disposal": {
-				"What is the term for a special mat used while working on sensitive electrical devices?": "Antistatic Mat",
-				"What is the term for a special bag used to hold sensitive electrical devices?": "Antistatic Bag",
-				"What is the term for a document that provides information about the hazards associated with a product or material, and includes information about disposal?": {"answers": "MSDS", "hidden-answers": "Material Safety Data Sheet"},
-				"What kind of fire extinguisher is suitable for electrical fires such as that which may occur in a server room?": ["Class C", "CO2"]
-			},
-			"Power Events": {
-				"What term refers to a brief increase in the amount of voltage provided?": "Surge",
-				"What term refers to a temporary decrease in the amount of voltage provided?": "Under-Voltage Event",
-				"What term refers to a complete loss of power?": ["Power Failure", "Blackout"]
-			},
-			"Protected Information": {
-				"What is the term for a kind of protected information which can be used to uniquely identify or locate a person?": {"answers": "PII", "hidden-answers": "Personally Identifiable Information"},
-				"What is the term for a kind of protected information which includes a person's medical information, and which is protected under HIPAA?": {"answers": "PHI", "hidden-answers": "Protected Health Information"}
-			},
-			"Scripting File Extensions": {
-				"What is the file extension most commonly used to save Batch scripts?": {"answers": ".bat", "hidden-answers": "bat"},
-				"What is the file extension most commonly used to save PowerShell scripts?": {"answers": ".ps1", "hidden-answers": "ps1"},
-				"What is the file extension most commonly used to save Visual Basic scripts?": {"answers": ".vbs", "hidden-answers": "vbs"},
-				"What is the file extension most commonly used to save Bash scripts?": {"answers": ".sh", "hidden-answers": "sh"},
-				"What is the file extension most commonly used to save JavaScript scripts?": {"answers": ".js", "hidden-answers": "js"},
-				"What is the file extension most commonly used to save Python scripts?": {"answers": ".py", "hidden-answers": "py"}
+			"Domain 4: Operational Procedures": {
+				"Ticketing Systems": {
+					"What is the term for software which allows the submission, documentation, and resolution of issues, and which is typically used by IT support and helpdesk agents?": {"answers": "Ticketing System", "hidden-answers": ["Ticket System", "Ticketing Software", "Ticket Software"]}
+				},
+				"Asset Management": {
+					"What is the common term for a barcode or other uniquely identifiable marking used to track an IT asset?": "Asset Tag"
+				},
+				"Common Documentation Types": {
+					"What kind of document outlines the restrictions which must be followed by users of a system, such as an office network?": {"answers": "AUP", "hidden-answers": "Acceptable Use Policy"},
+					"What kind of document identifies devices on a network and shows how they are connected?": ["Network Topology Diagram", "Network Diagram"],
+					"What kind of document specifies information and guidelines pertaining to a company's compliance and the compliance of its employees?": {"answers": ["Compliance and Regulatory Policy", "Compliance Policy"], "hidden-answers": "Compliance & Regulatory Policy"},
+					"What kind of document identifies the steps to take to complete a particualr process?": {"answers": ["SOP", "Standard Operating Procedure"], "hidden-answers": ["SOP Document", "Standard Operating Procedure Document"]},
+					"What kind of document contains records and documentation regarding an incident which occurred, such as a security event or IT outage?": "Incident Report"
+				},
+				"Change Management": {
+					"Block 1": {
+						"hidden": true,
+						"questions": {
+							"What is the term for a plan to return a system to its previously-working state in case an upgrade fails or causes unforseen issues?": "Rollback Plan",
+							"What is the term for a document outlining the reasons for a change to be made, and which typically requires one or more signatures for approval?": {"answers": ["Request Form", "Change Request"], "hidden-answers": ["Change Request Form", "Change Control Form"]}
+						}
+					},
+					"Block 2": {
+						"hidden": true,
+						"mode-of-presentation": "multiple-choice",
+						"questions": {}
+					}
+				},
+				"Backup and Recovvery": {
+					"What is the term for a type of backup which makes a complete copy of all data in question?": {"answers": "Full", "hidden-answers": "Full Backup"},
+					"What is the term for a type of backup which only makes a copy of the changes to the data in question?": {"answers": "Incremental", "hidden-answers": "Incremental Backup"},
+					"What is the term for a type of backup which only makes a copy of files which have changed since the last full backup?": {"answers": "Differential", "hidden-answers": "Differential Backup"},
+					"What is the term for a type of backup which is made by combining existing backups?": {"answers": "Synthetic", "hidden-answers": ["Synthetic Backup", "Synthetic Full Backup"]}
+				},
+				"Safety and Disposal": {
+					"What is the term for a special mat used while working on sensitive electrical devices?": "Antistatic Mat",
+					"What is the term for a special bag used to hold sensitive electrical devices?": "Antistatic Bag",
+					"What is the term for a document that provides information about the hazards associated with a product or material, and includes information about disposal?": {"answers": "MSDS", "hidden-answers": "Material Safety Data Sheet"},
+					"What kind of fire extinguisher is suitable for electrical fires such as that which may occur in a server room?": ["Class C", "CO2"]
+				},
+				"Power Events": {
+					"What term refers to a brief increase in the amount of voltage provided?": "Surge",
+					"What term refers to a temporary decrease in the amount of voltage provided?": "Under-Voltage Event",
+					"What term refers to a complete loss of power?": ["Power Failure", "Blackout"]
+				},
+				"Protected Information": {
+					"What is the term for a kind of protected information which can be used to uniquely identify or locate a person?": {"answers": "PII", "hidden-answers": "Personally Identifiable Information"},
+					"What is the term for a kind of protected information which includes a person's medical information, and which is protected under HIPAA?": {"answers": "PHI", "hidden-answers": "Protected Health Information"}
+				},
+				"Scripting File Extensions": {
+					"What is the file extension most commonly used to save Batch scripts?": {"answers": ".bat", "hidden-answers": "bat"},
+					"What is the file extension most commonly used to save PowerShell scripts?": {"answers": ".ps1", "hidden-answers": "ps1"},
+					"What is the file extension most commonly used to save Visual Basic scripts?": {"answers": ".vbs", "hidden-answers": "vbs"},
+					"What is the file extension most commonly used to save Bash scripts?": {"answers": ".sh", "hidden-answers": "sh"},
+					"What is the file extension most commonly used to save JavaScript scripts?": {"answers": ".js", "hidden-answers": "js"},
+					"What is the file extension most commonly used to save Python scripts?": {"answers": ".py", "hidden-answers": "py"}
+				}
 			}
 		}
 	}

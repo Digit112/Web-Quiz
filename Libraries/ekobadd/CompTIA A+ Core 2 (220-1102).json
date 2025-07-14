@@ -51,8 +51,21 @@
 						},
 						"Control Panel": {
 							"Control Panel Items": {
+								"Which Control Panel Item allows you to manage Internet Explorer settings?": "Internet Properties",
+								"Which Control Panel Item allows you to view active networks, setup a network connection, and troubleshoot network issues?": "Network and Sharing Center"
 							},
 							"Internet Properties": {
+								"tab by function": {
+									"hidden": true,
+									"descendants-give-incorrect-answers": true,
+									"questions": {
+										"Which tab of the Windows Internet Properties allows you to configure a pop-up blocker?": "Privacy",
+										"Which tab of the Windows Internet Properties allows you to manage certificates?": "Content",
+										"Which tab of the Windows Internet Properties allows you to configure a VPN or Proxy?": "Connections",
+										"Which tab of the Windows Internet Properties allows you to manage web browser extensions?": "Programs",
+										"Which tab of the Windows Internet Properties allows you to factory reset the default web browser?": "Advanced"
+									}
+								},
 							}
 						},
 						"Task Manager": {

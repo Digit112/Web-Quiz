@@ -8,6 +8,8 @@
 	"adaptive-weight-bias": 12,
 	"ideal-overall-difficulty": 0.27,
 	
+	"comment": ["assigned access", "windows edition features", "netstat flags: -p, -b, -n, -q, -r", "copy flags: /v, /y, /a", "shutdown flags: /r, /s, /t", "net session", "net user", "net use", "net share", "perfmon.msc vs resmon.msc", "diskmgmt.msc", "msinfo32.exe", "msconfig tabs", "dfrgui.exe", "cleanmgr.exe", "Internet Options tabs", "Network and sharing center"],
+	
 	"question-root": {
 		"typo-forgiveness-level": "medium",
 		"groups": {
@@ -19,6 +21,21 @@
 						"What is the maximum ram supported by Windows 10/11 Pro for Workstations?": "6TB",
 						"What is the maximum ram supported by Windows 10/11 Enterprise?": "6TB"
 					},
+					"Windows 10 Upgrade Paths": {
+						"mode-of-presentation": "multiple-choice",
+						"incorrect-answers": ["Windows 7 Home Basic", "Windows 7 Home Premium", "Windows 7 Professional/Ultimate", "Windows 7 Enterprise", "Windows 8.1 Connected (Core)", "Windows 8.1 Pro", "Windows 8.1 Enterprise", "Windows 10 Home", "Windows 10 Pro"],
+						"questions": {
+							"Which of the following can be upgraded to Windows 10 Home?": {
+								"answers": ["Windows 7 Home Basic", "Windows 7 Home Premium", "Windows 7 Professional/Ultimate", "Windows 8.1 Connected (Core)"],
+								"hidden-answers": ["Windows 10 Home", "Windows 10 Pro"]
+							},
+							"Which of the following can be upgraded to Windows 10 Pro?": {
+								"answers": ["Windows 7 Home Basic", "Windows 7 Home Premium", "Windows 7 Professional/Ultimate", "Windows 8.1 Connected (Core)", "Windows 8.1 Pro", "Windows 10 Home"],
+								"hidden-answers": ["Windows 10 Pro"]
+							},
+							"Which of the following can be upgraded to Windows 10 Enterprise?": ["Windows 7 Professional/Ultimate", "Windows 7 Enterprise", "Windows 8.1 Pro", "Windows 8.1 Enterprise", "Windows 10 Pro"]
+						}
+					},
 					"Common Tools": {
 						"Tool Names": {
 							"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
@@ -29,13 +46,39 @@
 							"In Windows, what application is used to view notes, warnings, and errors raised by applications, as well as auditing information?": "Event Viewer",
 							"In Windows, what application is used to run programs and scripts at scheduled times?": "Task Scheduler",
 							"In Windows, what application is used to view and modify installed certificates?": "Certificate Manager",
-							"In Windows, what tool can be used to make regular backups of document structures such as the Desktop or Contacts?": "File History"
+							"In Windows, what tool can be used to make regular backups of document structures such as the Desktop or Contacts?": "File History",
+							"In Windows, what tool is used to troubleshoot system startup problems and manage startup processes as well as system settings?": ["System Configuration", "System Configuration Utility"]
+						},
+						"Control Panel": {
+							"Control Panel Items": {
+							},
+							"Internet Properties": {
+							}
 						},
 						"Task Manager": {
 							"What tab in the Task Manager can be used to see the resource utilization of a specific user?": "Users",
 							"What tab in Task Manager can be used to see a list of running processes?": "Processes",
 							"What tab in Task Manager can be used to see graphs of resource utilization?": "Performance",
 							"What tab in Task Manager can be used to see the impact of individual apps on startup time?": "Startup apps"
+						},
+						"System Configuration Utility": {
+							"tab by function": {
+								"hidden": true,
+								"descendants-give-incorrect-answers": true,
+								"questions": {
+									"Which tab of the Windows System Configuration Utility allows you to boot with only essential services and drivers?": "General",
+									"Which tab of the Windows System Configuration Utility allows you to configure background apps which run on startup?": "Services",
+								}
+							},
+							"function by tab": {
+								"hidden": true,
+								"mode-of-presentation": "multiple-choice",
+								"descendants-give-incorrect-answers": true,
+								"questions": {
+									"Which of the following functions can be performed from the **General** tab of the **Windows System Configuration Utility**?": [""],
+									"Which of the following functions can be performed from the **Boot** tab of the **Windows System Configuration Utility**?": ["Configure safe boot options", "Configure boot logging", "Configure a default OS to load", "Configure resource limitations by OS"]
+								}
+							}
 						}
 					},
 					"The Run Prompt": {
@@ -72,10 +115,10 @@
 									"other": {
 										"hidden": true,
 										"questions": {
-											"In Windows, what command is used to change the working directory?": "cd",
-											"In Windows, what command is used to make a directory?": {"answers": "md", "hidden-answers": "mkdir"},
-											"In Windows, what command is used to remove a directory?": {"answers": "rd", "hidden-answers": "rmdir"},
-											"In Windows, what command is used to delete a file?": {"answers": "rd", "hidden-answers": "del"},
+											"In Windows, what command is used to change the working directory?": ["cd", "chdir"],
+											"In Windows, what command is used to make a directory?": ["md", "mkdir"],
+											"In Windows, what command is used to remove a directory?": ["rd", "rmdir"],
+											"In Windows, what command is used to delete a file?": "del",
 											"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
 											"In Windows, what command is used to get a list of files and folders in the current working directory and all descendants?": "tree",
 											"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
@@ -102,6 +145,7 @@
 							}
 						},
 						"Command Flags": {
+							"In Windows, what flag causes the `ipconfig` command to display full configuration information?": "/all",
 							"In Windows, what flag causes the `chkdsk` command to fix errors on the disk?": "/F",
 							"In Windows, what flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R",
 							"In Windows, what flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
@@ -119,7 +163,7 @@
 					"Other Windows Concepts": {
 						"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hiberfil.sys",
 						"In Windows, what is the name of the file containing pages of RAM stored to disk to free up memory for other programs?": "pagefile.sys",
-						"In Windows, what technology requires explicit permission to be given to execute individual applications with administrator priviledge?": ["UAC", "User Account Control"]
+						"In Windows, what technology requires explicit permission to be given to execute individual applications with administrator privilege?": ["UAC", "User Account Control"]
 					}
 				},
 				"macOS Basics": {

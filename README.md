@@ -232,6 +232,10 @@ Question Groups allow a hierarchical organization of questions for a reason: to 
 
 - QuestionGroups can either contain Questions or other QuestionGroups, without mixing. When displayed, QuestionGroups with groups for children are collapsible, and this is signified by a square "+" button on their left. I try to keep these groups above the others as they tend to be the more important ones, but this does not always make sense in terms of the library's organization.
 
+- `hidden-answers` entries will never be shown as *either* the correct or incorrect option on a multiple choice question. You can use it to hide inconveniant values that would otherwise appear. Mainly, you can use it to hide values which are arguably correct or incorrect depending on your interpretation of the question.
+
+- For better or for worse, the interpreter ignores unrecognized values in the JSON. Feel free to add `"comment"` keys with TODO items or design choice explanations to guide continuing work on the library.
+
 ## Incorrect Answer Generation
 
 Incorrect answers can be specified on a question or its ancestors, or can be received from the correct answers to sibling or cousin questions.
@@ -354,6 +358,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
+- Implement hidden groups
 - Fix type-to-select underlines.
 - API serves quizzes
 - **Editing Support**
@@ -370,6 +375,8 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Could-Have
 
+- Ability to specify totally separate question sets depending on a group's negotiated mode of presentation.
+- Warnings for unrecognized values in JSON.
 - "Put the pieces in order" question type.
 - "Select all that apply" question type.
 - `"auto"` setting for typo forgiveness.

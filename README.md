@@ -354,6 +354,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
+- Fix type-to-select underlines.
 - API serves quizzes
 - **Editing Support**
 	- Query Params control editing availability

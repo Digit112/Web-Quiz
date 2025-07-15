@@ -72,11 +72,17 @@
 									"hidden": true,
 									"incorrect-answers": ["General", "Security", "Privacy", "Content", "Connections", "Programs", "Advanced"],
 									"questions": {
-										"Which tab of the Windows Internet Properties allows you to delete browser history, cookies, and more?": "General",
+										"Which tab of the Windows Internet Properties allows you to delete browser history, cookies, and cached data?": "General",
+										"Which tab of the Windows Internet Properties allows you to configure the browser's appearance?": "General",
 										"Which tab of the Windows Internet Properties allows you to manage security zones?": "Security",
+										"Which tab of the Windows Internet Properties allows you to block individual websites?": "Security",
 										"Which tab of the Windows Internet Properties allows you to configure a pop-up blocker?": "Privacy",
+										"Which tab of the Windows Internet Properties allows you to configure advanced cookie retention settins?": "Privacy",
 										"Which tab of the Windows Internet Properties allows you to manage certificates?": "Content",
+										"Which tab of the Windows Internet Properties allows you to manage AutoComplete?": "Content",
+										"Which tab of the Windows Internet Properties allows you to manage RSS Feeds?": "Content",
 										"Which tab of the Windows Internet Properties allows you to configure a VPN or Proxy?": "Connections",
+										"Which tab of the Windows Internet Properties allows you to configure LAN settings?": "Connections",
 										"Which tab of the Windows Internet Properties allows you to manage web browser add-ons?": "Programs",
 										"Which tab of the Windows Internet Properties allows you to factory reset the default web browser?": "Advanced",
 										"Which tab of the Windows Internet Properties allows you to enable and disable different TLS versions?": "Advanced"

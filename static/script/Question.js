@@ -346,7 +346,11 @@ class Question {
 	// For at least one available answer or hidden-answer.
 	is_correct(response) {
 		// Check if this is exactly correct (This is typically >20,000 times faster than Levenshtein, according to preliminary tests!)
-		if (this.is_exactly_correct(response)) return true
+		if (this.is_exactly_correct(response)) {
+			console.log("'" + response + "' is exactly correct")
+			return true
+		}
+		
 		if (!this.case_sensitive) response = response.toLowerCase()
 		
 		// Check if typo forgiveness is enabled. We already know the answer is not exactly correct.
@@ -356,7 +360,9 @@ class Question {
 		for (let answer of this.a.map((a) => a.as_text())) {
 			if (!this.case_sensitive) answer = answer.toLowerCase()
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
-			if (Levenshtein(response, answer, max_distance) <= max_distance) {
+			let act_distance = Levenshtein(response, answer, max_distance)
+			if (act_distance <= max_distance) {
+				console.log("'" + response + "' matches '" + answer + "' with distance of " + act_distance + " over " + max_distance)
 				return true
 			}
 		}
@@ -364,7 +370,9 @@ class Question {
 		for (let answer of this.hidden_answers) {
 			if (!this.case_sensitive) answer = answer.toLowerCase()
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
-			if (Levenshtein(response, answer, max_distance) <= max_distance) {
+			let act_distance = Levenshtein(response, answer, max_distance)
+			if (act_distance <= max_distance) {
+				console.log("'" + response + "' matches '" + answer + "' with a distance of " + act_distance + " over " + max_distance)
 				return true
 			}
 		}

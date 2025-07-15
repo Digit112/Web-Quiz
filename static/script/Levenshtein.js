@@ -24,7 +24,9 @@ class LevenshteinMatrix {
 		
 		this.row_pair = [null, []]
 		
-		for (let r = 1; r <= a.length; r++) {
+		let rmin = 1
+		let rmax = this.get_max_r(this.b.length)
+		for (let r = rmin; r <= rmax; r++) {
 			let cmin = this.get_min_c(r)
 			let cmax = this.get_max_c(r)
 			
@@ -55,6 +57,16 @@ class LevenshteinMatrix {
 		if (this.debug) console.log(this.debug_str)
 		
 		this.value = this.row_pair[0][this.row_pair[0].length-1]
+		
+		// Account for unused columns
+		if (this.debug) console.log("Adjusting for extra columns gives: max(0, " + this.b.length + " - " + this.get_max_c(this.a.length) + ") = " + Math.max(0, this.b.length - this.get_max_c(this.a.length)))
+		this.value += Math.max(0, this.b.length - this.get_max_c(this.a.length))
+		
+		// Account for unused rows
+		if (this.debug) console.log("Adjusting for extra rows gives: max(0, " + this.a.length + " - " + this.get_max_r(this.b.length) + ") = " + Math.max(0, this.a.length - this.get_max_r(this.b.length)))
+		this.value += Math.max(0, this.a.length - this.get_max_r(this.b.length))
+		
+		if (this.debug) console.log("Final value is " + this.value)
 		if (this.value > this.max) this.value = Infinity
 	}
 	
@@ -77,6 +89,11 @@ class LevenshteinMatrix {
 	// Gets the maximum writable column index on this row.
 	get_max_c(r) {
 		return Math.min(r + this.max, this.b.length)
+	}
+	
+	// Gets the maximum writable row index on this column.
+	get_max_r(c) {
+		return Math.min(c + this.max, this.a.length)
 	}
 	
 	// Gets the Levenshtein distance between the prefixes of lengths r and c of the strings in question.

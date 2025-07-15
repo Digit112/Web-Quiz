@@ -15,7 +15,7 @@ class MarkDown {
 				throw new Error("Tokens must not be empty string.")
 		}
 		
-		console.log("Attempting to parse '" + str + "'")
+//		console.log("Attempting to parse '" + str + "'")
 		
 		this.token_map = token_map
 		
@@ -36,7 +36,7 @@ class MarkDown {
 			let token = tok_data[1]
 			let tag = token_map.get(token)
 			
-			console.log("Token '" + token + "' at " + tag + ".")
+//			console.log("Token '" + token + "' at " + tag + ".")
 			
 			if (token_i > 0) {
 				// Push a portion of the string and the current tag list to the segments array.
@@ -84,7 +84,7 @@ class MarkDown {
 		this.length = 0
 		for (let segment of this.segments) this.length += segment[0].length
 		
-		console.log("Parsing Complete")
+//		console.log("Parsing Complete")
 	}
 	
 	// Returns a span node containing the result of parsing the markdown.
@@ -94,7 +94,7 @@ class MarkDown {
 		let open_node_stack = new Map()
 		
 		for (let segment of this.segments) {
-			console.log("Rendering '" + segment[0] + "'")
+//			console.log("Rendering '" + segment[0] + "'")
 			let leaf = root
 			let has_broken_chain = false
 			

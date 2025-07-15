@@ -46,17 +46,17 @@
 							"In Windows, what application is used to view notes, warnings, and errors raised by applications, as well as auditing information?": "Event Viewer",
 							"In Windows, what application is used to run programs and scripts at scheduled times?": "Task Scheduler",
 							"In Windows, what application is used to view and modify installed certificates?": "Certificate Manager",
-							"In Windows, what tool can be used to make regular backups of document structures such as the Desktop or Contacts?": "File History",
+							"In Windows, what tool can be used to make regular backups of directories such as the Desktop or Contacts?": "File History",
 							"In Windows, what tool is used to troubleshoot system startup problems and manage startup processes as well as system settings?": ["System Configuration", "System Configuration Utility"],
 							"In Windows, what tool can be used to view live and recorded performance data?": {"answers": "Performance Monitor", "hidden-answers": "The Performance Monitor"},
-							"In Windows, what tool can be used to view detailed real-time infromation about hardware and system resources?": {"answers": "Performance Monitor", "hidden-answers": "The Performance Monitor"},
+							"In Windows, what tool can be used to view detailed real-time infoomation about hardware and system resources?": {"answers": "Resource Monitor", "hidden-answers": "The Resource Monitor"},
 							"In Windows, what graphical utility is used to free up used disk space?": {"answers": "Disk Cleanup", "hidden-answers": "Disk Cleanup Utility"},
 							"In Windows, what graphical utility is used to analyze and defragment drives?": {"answers": ["Optimize Drives", "Defragment and Optimize Drives"], "hidden-answers": "Disk Defragmenter"},
 							"In Windows, what application allows the user to view extensive information including installed hardware, drivers, services, and much more?": "System Information"
 						},
 						"Control Panel": {
 							"Control Panel Items": {
-								"Which Control Panel Item allows you to manage Internet Explorer settings?": "Internet Properties",
+								"Which Control Panel Item allows you to manage Internet Explorer settings?": {"answers": "Internet Options", "hidden-answers": "Internet Properties"},
 								"Which Control Panel Item allows you to view active networks, setup a network connection, and troubleshoot network issues?": "Network and Sharing Center",
 								"Which Control Panel Item allows you to enable/disable network discovery and printer sharing?": "Network and Sharing Center",
 								"Which Control Panel Item allows you to view and configure network adapters?": "Network Connections",

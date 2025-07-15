@@ -153,7 +153,11 @@
 									"In Windows, what command can be used to update the group policy to reflect new changes?": "gpupdate",
 									"In Windows, what command can be used to view the resultant set of policy to reflect new changes?": "gpresult",
 									"In Windows, what command can be used to shutdown a computer?": "shutdown",
-									"In Windows, what command can be used to map a network drive?": "net use"
+									"In Windows, what `net` command can be used to view and modify user accounts?": ["user", "net user"],
+									"In Windows, what `net` command can be used to map a network drive or shared resource?": ["use", "net use"],
+									"In Windows, what `net` command can be used to share a resource?": ["share", "net share"],
+									"In Windows, what `net` command can be used to display and delete sessions?": ["session", "net session"],
+									
 								}
 							}
 						},

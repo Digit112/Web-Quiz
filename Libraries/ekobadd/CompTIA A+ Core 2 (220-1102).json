@@ -19,7 +19,7 @@
 						"GUI Elements & Extremely Common Utilities": {
 							"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
 							"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
-							"In Windows, what part of the GUI is embedded in the taskbar, and contains pinned applications and a searchbat?": ["Start", "Start Menu"],
+							"In Windows, what part of the GUI is embedded in the taskbar, and contains pinned applications and a search bar?": ["Start", "Start Menu"],
 							"In Windows, what application is used to browse files?": "File Explorer"
 						},
 						"Windows Edition Features": {
@@ -59,114 +59,117 @@
 						}
 					},
 					"Command Line Tools (1.2)": {
-						"Command Names": {
-							"descendants-give-incorrect-answers": true,
-							"groups": {
-								"Navigation": {
-									"cd": {
-										"hidden": true,
-										"descendants-give-incorrect-answers": true,
-										"incorrect-answers": ["cd", "cdir"],
-										"questions": {
-											"In Windows, what command would change the working directory to the root of the current drive?": "cd /",
-											"In Windows, what command would change the working directory to the parent of the current working directory?": "cd .."
+						"typo-forgiveness-level": "none",
+						"groups": {
+							"Command Names": {
+								"descendants-give-incorrect-answers": true,
+								"groups": {
+									"Navigation": {
+										"cd": {
+											"hidden": true,
+											"descendants-give-incorrect-answers": true,
+											"incorrect-answers": ["`cd`", "`chdir`"],
+											"questions": {
+												"In Windows, what command would change the working directory to the root of the current drive?": "`cd /`",
+												"In Windows, what command would change the working directory to the parent of the current working directory?": "`cd ..`"
+											}
+										},
+										"other": {
+											"hidden": true,
+											"questions": {
+												"In Windows, what command is used to change the working directory?": ["`cd`", "`chdir`"],
+												"In Windows, what command is used to get a list of files and folders in the current working directory?": "`dir`",
+												"In Windows, what command is used to make a directory?": ["`md`", "`mkdir`"],
+												"In Windows, what command is used to remove a directory?": ["`rd`", "`rmdir`"]
+											}
 										}
 									},
-									"other": {
-										"hidden": true,
-										"questions": {
-											"In Windows, what command is used to change the working directory?": ["cd", "chdir"],
-											"In Windows, what command is used to get a list of files and folders in the current working directory?": "dir",
-											"In Windows, what command is used to make a directory?": ["md", "mkdir"],
-											"In Windows, what command is used to remove a directory?": ["rd", "rmdir"]
-										}
+									"Utilities": {
+										"In Windows, what command is used to show IP configuration info such as the IP address and subnet mask?": "`ipconfig`",
+										"In Windows, what command is used to perform a simple check of connectivity to a remote host?": "`ping`",
+										"In Windows, what command is used to show the name of the local host?": "`hostname`",
+										"In Windows, what command is used to show active connections, listening ports, and network statistics?": "`netstat`",
+										"In Windows, what command can be used to perform a DNS lookup?": "`nslookup`",
+										"In Windows, what command can be used to check a drive and fix basic issues?": "`chkdsk`",
+										"In Windows, what command can be used to see the intermediary hops performed while connecting to a remote host?": "`tracert`",
+										"In Windows, what command can be used to format storage media?": "`format`",
+										"In Windows, what deprecated command can be used to copy files, folders, and directory structures?": "`xcopy`",
+										"In Windows, what command is used to copy a file, but can't copy a directory structure?": "`copy`",
+										"In Windows, what command can be used to copy folders and directory structures, and is considered the successor of xcopy?": "`robocopy`",
+										"In Windows, what command can be used to update the group policy to reflect new changes?": "`gpupdate`",
+										"In Windows, what command can be used to view the resultant set of policy to reflect new changes?": "`gpresult`",
+										"In Windows, what command can be used to shutdown a computer?": "`shutdown`",
+										"In Windows, what command can be used to check the integrity of system files?": "`sfc`",
+										"In Windows, what command can be used to create, delete, modify, and extend volumes, among other disk management functions?": "`diskpart`",
+										"In Windows, what command is used to delete a file?": ["`del`", "`erase`"],
+										"In Windows, what command can be used to display a window with Windows version info?": "`winver`",
+										"In Windows, what command is used to view information about network latency and and intermediate hops performed while connecting to a remote host?": "`pathping`"
+										
 									}
-								},
-								"Utilities": {
-									"In Windows, what command is used to show IP configuration info such as the IP address and subnet mask?": "ipconfig",
-									"In Windows, what command is used to perform a simple check of connectivity to a remote host?": "ping",
-									"In Windows, what command is used to show the name of the local host?": "hostname",
-									"In Windows, what command is used to show active connections, listening ports, and network statistics?": "netstat",
-									"In Windows, what command can be used to perform a DNS lookup?": "nslookup",
-									"In Windows, what command can be used to check a drive and fix basic issues?": "chkdsk",
-									"In Windows, what command can be used to see the intermediary hops performed while connceting to a remote host?": "tracert",
-									"In Windows, what command can be used to format storage media?": "format",
-									"In Windows, what deprecated command can be used to copy files, folders, and directory structures?": "xcopy",
-									"In Windows, what command is used to copy a file, but can't copy a directory structure?": "copy",
-									"In Windows, what command can be used to copy folders and directory structures, and is considered the successor of xcopy?": "robocopy",
-									"In Windows, what command can be used to update the group policy to reflect new changes?": "gpupdate",
-									"In Windows, what command can be used to view the resultant set of policy to reflect new changes?": "gpresult",
-									"In Windows, what command can be used to shutdown a computer?": "shutdown",
-									"In Windows, what command can be used to check the integrity of system files?": "sfc",
-									"In Windows, what command can be used to create, delete, modify, and extend volumes, among other disk management functions?": "diskpart",
-									"In Windows, what command is used to delete a file?": ["del", "erase"],
-									"In Windows, what command can be used to display a window with Windows version info?": "winver",
-									"In Windows, what command is used to view information about network latenct and and intermediate hops performed while connecting to a remote host?": "pathping"
-									
 								}
-							}
-						},
-						"Command Line Tool Usage & Common Flags": {
-							"`ipconfig`": {
-								"In Windows, what flag causes the `ipconfig` command to display full configuration information?": "/all",
-								"In Windows, what flag causes the `ipconfig` command to release all DHCP leases?": "/release",
-								"In Windows, what flag causes the `ipconfig` command to renew all DHCP leases?": "/renew",
-								"In Windows, what flag causes the `ipconfig` command to purge the DNS resolver cache?": "/flushdns"
 							},
-							"`ping`": {
-								"In Windows, what flag is used to specify the size of a packet used by the `ping` command?": "-l",
-								"In Windows, what flag is used to specify that the `ping` command should run continuously until stopped?": "-t",
-								"In Windows, what flag is used to specify the number of a packet used by the `ping` command?": "-n",
-								"In Windows, what flag is used to force the `ping` command to use IPv4?": "-4",
-								"In Windows, what flag is used to force the `ping` command to use IPv6?": "-6"
-							},
-							"`netstat`": {
-								"In Windows, what flag causes the `netstat` command to display all connections and listening ports?": "-a",
-								"In Windows, what flag causes the `netstat` command to display the executables associated listening ports?": "-b",
-								"In Windows, what flag causes the `netstat` command to display the transsport-layer protocol associated listening ports?": "-p",
-								"In Windows, what flag causes the `netstat` command to display the routing table?": "-r"
-							},
-							"`chkdsk`": {
-								"In Windows, what flag causes the `chkdsk` command to fix errors on the disk?": "/F",
-								"In Windows, what flag causes the `chkdsk` command to attempt to recover data from bad secors?": "/R"
-							},
-							"`format`": {
-								"In Windows, what flag allows you to specify the filesystem to be used by the `format` command?": "/fs",
-								"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": "/p",
-								"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volume?": "/q"
-							},
-							"`copy`": {
-								"In Windows, what flag causes the `copy` command to suppress warnings for overwriting a file?": "/Y",
-								"In Windows, what flag causes the `copy` command to verify that files were written correctly?": "/V"
-							},
-							"`robocopy`": {
-								"In Windows, what flag causes the `robocopy` command to recursively copy subdirectories, excluding empty ones?": "/S",
-								"In Windows, what flag causes the `robocopy` command to recursively copy subdirectories, including empty ones?": "/E",
-								"In Windows, what flag causes the `robocopy` command to only copy files with the Archive attribute set, and reset it?": "/M"
-							},
-							"`net`": {
-								"In Windows, what `net` command can be used to view and modify user accounts?": ["user", "net user"],
-								"In Windows, what `net` command can be used to map a network drive or shared resource?": ["use", "net use"],
-								"In Windows, what `net` command can be used to share a resource?": ["share", "net share"],
-								"In Windows, what `net` command can be used to display and delete sessions?": ["session", "net session"]
-							},
-							"`shutdown`": {
-								"In Windows, what flag causes the `shutdown` command to open the shutdown GUI?": "/i",
-								"In Windows, what flag causes the `shutdown` command to abort a system shutdown?": "/a",
-								"In Windows, what flag causes the `shutdown` command to shutdown the computer?": "/s",
-								"In Windows, what flag causes the `shutdown` command to perform a full shutdown and restart?": "/r",
-								"In Windows, what flag for the `shutdown` command allows you to set the timeout period in seconds?": "/t",
-								"In Windows, what flag for the `shutdown` command allows you to specify which computer to shutdown?": "/m"
-							},
-							"`sfc`": {
-								"In Windows, what flag causes the `sfc` command to scan and attempt repair of all protected files?": "/SCANNOW",
-								"In Windows, what flag causes the `sfc` command to scan all protected files without repairing any issues?": "/VERIFYONLY"
-							},
-							"`pathping`": {
-								"In Windows, what flag allows you to specify the number of queries per hop?": "-q"
-							},
-							"Other": {
-								"In Windows, what flag is typically used to display the correct way to use a command?": "/?"
+							"Command Line Tool Usage & Common Flags": {
+								"`ipconfig`": {
+									"In Windows, what flag causes the `ipconfig` command to display full configuration information?": ["`/all`", "`ipconfig /all`"],
+									"In Windows, what flag causes the `ipconfig` command to release all DHCP leases?": ["`/release`", "`ipconfig /release`"],
+									"In Windows, what flag causes the `ipconfig` command to renew all DHCP leases?": ["`/renew`", "`ipconfig /renew`"],
+									"In Windows, what flag causes the `ipconfig` command to purge the DNS resolver cache?": ["`/flushdns`", "`ipconfig /flushdns`"]
+								},
+								"`ping`": {
+									"In Windows, what flag is used to specify the size of a packet used by the `ping` command?": ["`-l`", "`ping -l`"],
+									"In Windows, what flag is used to specify that the `ping` command should run continuously until stopped?": ["`-t`", "`ping -t`"],
+									"In Windows, what flag is used to specify the number of a packet used by the `ping` command?": ["`-n`", "`ping -n`"],
+									"In Windows, what flag is used to force the `ping` command to use IPv4?": ["`-4`", "`ping -4`"],
+									"In Windows, what flag is used to force the `ping` command to use IPv6?": ["`-6`", "`ping -6`"]
+								},
+								"`netstat`": {
+									"In Windows, what flag causes the `netstat` command to display all connections and listening ports?": ["`-a`", "`netstat -a`"],
+									"In Windows, what flag causes the `netstat` command to display the executables associated listening ports?": ["`-b`", "`netstat -b`"],
+									"In Windows, what flag causes the `netstat` command to display the transport-layer protocol associated listening ports?": ["`-p`", "`netstat -p`"],
+									"In Windows, what flag causes the `netstat` command to display the routing table?": ["`-r`", "`netstat -r`"]
+								},
+								"`chkdsk`": {
+									"In Windows, what flag causes the `chkdsk` command to fix errors on the disk?": ["`/F`", "`chkdsk /F`"],
+									"In Windows, what flag causes the `chkdsk` command to attempt to recover data from bad secors?": ["`/R`", "`chkdsk /R`"]
+								},
+								"`format`": {
+									"In Windows, what flag allows you to specify the filesystem to be used by the `format` command?": ["`/fs`", "`format /fs`"],
+									"In Windows, what flag allows you to specify the number of times to overwrite all sectors when using the `format` command?": ["`/p`", "`format /p`"],
+									"In Windows, what flag prevents the `format` command from overwriting all the sectors on a volume?": ["`/q`", "`format /q`"]
+								},
+								"`copy`": {
+									"In Windows, what flag causes the `copy` command to suppress warnings for overwriting a file?": ["`/Y`", "`copy /Y`"],
+									"In Windows, what flag causes the `copy` command to verify that files were written correctly?": ["`/V`", "`copy /V`"]
+								},
+								"`robocopy`": {
+									"In Windows, what flag causes the `robocopy` command to recursively copy subdirectories, excluding empty ones?": ["`/S`", "`robocopy /S`"],
+									"In Windows, what flag causes the `robocopy` command to recursively copy subdirectories, including empty ones?": ["`/E`", "`robocopy /E`"],
+									"In Windows, what flag causes the `robocopy` command to only copy files with the Archive attribute set, and reset it?": ["`/M`", "`robocopy /M`"]
+								},
+								"`net`": {
+									"In Windows, what `net` command can be used to view and modify user accounts?": ["`user`", "`net user`"],
+									"In Windows, what `net` command can be used to map a network drive or shared resource?": ["`use`", "`net use`"],
+									"In Windows, what `net` command can be used to share a resource?": ["`share`", "`net share`"],
+									"In Windows, what `net` command can be used to display and delete sessions?": ["`session`", "`net session`"]
+								},
+								"`shutdown`": {
+									"In Windows, what flag causes the `shutdown` command to open the shutdown GUI?": ["`/i`", "`shutdown /i`"],
+									"In Windows, what flag causes the `shutdown` command to abort a system shutdown?": ["`/a`", "`shutdown /a`"],
+									"In Windows, what flag causes the `shutdown` command to shutdown the computer?": ["`/s`", "`shutdown /s`"],
+									"In Windows, what flag causes the `shutdown` command to perform a full shutdown and restart?": ["`/r`", "`shutdown /r`"],
+									"In Windows, what flag for the `shutdown` command allows you to set the timeout period in seconds?": ["`/t`", "`shutdown /t`"],
+									"In Windows, what flag for the `shutdown` command allows you to specify which computer to shutdown?": ["`/m`", "`shutdown /m`"]
+								},
+								"`sfc`": {
+									"In Windows, what flag causes the `sfc` command to scan and attempt repair of all protected files?": ["`/SCANNOW`", "`sfc /SCANNOW`"],
+									"In Windows, what flag causes the `sfc` command to scan all protected files without repairing any issues?": ["`/VERIFYONLY`", "`sfc /VERIFYONLY`"]
+								},
+								"`pathping`": {
+									"In Windows, what flag allows you to specify the number of queries per hop for the `pathping` command?": ["`-q`", "`pathping -q`"]
+								},
+								"Other": {
+									"In Windows, what flag is typically used to display the correct way to use a command?": "`/?`"
+								}
 							}
 						}
 					},
@@ -190,12 +193,12 @@
 							"In Windows, what snap-in is used to modify permissions and policies for users and groups, which can also be managed from a domain controller?": {"answers": "Group Policy Editor", "hidden-answers": "The Group Policy Editor"}
 						},
 						"Additional Tools": {
-							"In Windows, what application is used to view extensive information including installed hardware, drivers, services, and much more?": "System Information",
-							"In Windows, what application is used to view detailed real-time infoomation about hardware and system resources?": {"answers": "Resource Monitor", "hidden-answers": "The Resource Monitor"},
-							"In Windows, what application is used to troubleshoot system startup problems and manage startup processes as well as system settings?": {"answers": "System Configuration", "hidden-answers": "System Configuration Utility"},
-							"In Windows, what application is used to free up used disk space?": {"answers": "Disk Cleanup", "hidden-answers": "Disk Cleanup Utility"},
-							"In Windows, what application is used to analyze and defragment drives?": {"answers": ["Optimize Drives", "Defragment and Optimize Drives"], "hidden-answers": "Disk Defragmenter"},
-							"In Windows, what application is used to view and edit extremely fine-grained, individual settings for a wide variety of system processes?": {"answers": "Registry Editor", "hidden-answers": ["The Registry Editor", "regedit", "regedit.exe"]}
+							"In Windows, what **application** is used to **view an extensive directory of information** including installed hardware, drivers, services, and much more?": "System Information",
+							"In Windows, what **application** is used to **view detailed real-time information about hardware and system resources**?": {"answers": "Resource Monitor", "hidden-answers": "The Resource Monitor"},
+							"In Windows, what **application** is used to **troubleshoot system startup problems** and manage **available statup resources and processes**?": {"answers": "System Configuration", "hidden-answers": "System Configuration Utility"},
+							"In Windows, what **application** is used to **free up used disk space**?": {"answers": "Disk Cleanup", "hidden-answers": "Disk Cleanup Utility"},
+							"In Windows, what **application** is used to **analyze and defragment drives**?": {"answers": ["Optimize Drives", "Defragment and Optimize Drives"], "hidden-answers": "Disk Defragmenter"},
+							"In Windows, what **application** is used to **view and edit extremely fine-grained, individual settings** for a wide variety of system processes?": {"answers": "Registry Editor", "hidden-answers": ["The Registry Editor", "regedit", "regedit.exe"]}
 						},
 						"System Configuration": {
 							"tab by function": {
@@ -209,7 +212,7 @@
 									"Which tab of the Windows System Configuration utility allows you to **limit the amount of resources available to the OS during startup**?": "Boot",
 									"Which tab of the Windows System Configuration utility allows you to **configure background apps which run on startup**?": "Services",
 									"Which tab of the Windows System Configuration utility **redirects the user to Task Manager**?": "Startup",
-									"Which tab of the Windows System Configuration utility allows you to **quick-launch various administrative utilities**?": "Utilities"
+									"Which tab of the Windows System Configuration utility allows you to **quick-launch various administrative utilities**?": "Tools"
 								}
 							},
 							"function by tab": {
@@ -228,69 +231,71 @@
 							}
 						},
 						"The Run Prompt": {
-							"What is the key combination for opening the **Run prompt**": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
-							"What would you type into the run prompt to open **PowerShell**?": ["powershell", "powershell.exe"],
-							"What would you type into the run prompt to open the **local security policy** window?": "secpol.msc",
-							"What would you type into the run prompt to open the **local group policy** window?": "gpedit.msc",
-							"What would you type into the run prompt to open the **Disk Management** window?": "diskmgmt.msc",
-							"What would you type into the run prompt to open the **registry editor**?": ["regedit", "regedit.exe"],
-							"What would you type into the run prompt to open the **local users and groups** window?": "lusrmgr.msc",
-							"What would you type into the run prompt to open the **Computer Management** window?": "compmgmt.msc",
-							"What would you type into the run prompt to open the **Internet Properties** window?": "inetcpl.cpl",
-							"What would you type into the run prompt to open the **Certificate Manager** window?": "certmgr.msc",
-							"What would you type into the run prompt to open the **Event Viewer**?": "eventvwr.msc",
-							"What would you type into the run prompt to open the **Task Scheduler**?": "taskschd.msc",
-							"What would you type into the run prompt to open the **Device Manager**?": "devmgmt.msc",
-							"What would you type into the run prompt to open the **System Configuration** utility?": ["msconfig", "msconfig.exe"],
-							"What would you type into the run prompt to open the **System Information**?": ["msinfo32", "msinfo32.exe"],
-							"What would you type into the run prompt to open the **Windows Firewall with Advanced Security**?": "wf.msc",
-							"What would you type into the run prompt to open the **Windows Firewall control panel item**?": "firewall.cpl",
-							"What would you type into the run prompt to open the **Performance Monitor**?": "perfmon.msc",
-							"What would you type into the run prompt to open the **Resource Monitor**?": ["resmon", "resmon.exe"]
+							"typo-forgiveness-level": "none",
+							"questions": {
+								"What is the key combination for opening the **Run prompt**": {"answers": "Win+R", "hidden-answers": ["Win + R", "Windows+R", "Windows + R"]},
+								"What would you type into the **Run prompt** to open **PowerShell**?": ["powershell", "powershell.exe"],
+								"What would you type into the **Run prompt** to open the **local security policy** window?": "secpol.msc",
+								"What would you type into the **Run prompt** to open the **local group policy** window?": "gpedit.msc",
+								"What would you type into the **Run prompt** to open the **Disk Management** window?": "diskmgmt.msc",
+								"What would you type into the **Run prompt** to open the **registry editor**?": ["regedit", "regedit.exe"],
+								"What would you type into the **Run prompt** to open the **local users and groups** window?": "lusrmgr.msc",
+								"What would you type into the **Run prompt** to open the **Computer Management** window?": "compmgmt.msc",
+								"What would you type into the **Run prompt** to open the **Internet Properties** window?": "inetcpl.cpl",
+								"What would you type into the **Run prompt** to open the **Certificate Manager** window?": "certmgr.msc",
+								"What would you type into the **Run prompt** to open the **Event Viewer**?": "eventvwr.msc",
+								"What would you type into the **Run prompt** to open the **Task Scheduler**?": "taskschd.msc",
+								"What would you type into the **Run prompt** to open the **Device Manager**?": "devmgmt.msc",
+								"What would you type into the **Run prompt** to open the **System Configuration** utility?": ["msconfig", "msconfig.exe"],
+								"What would you type into the **Run prompt** to open the **System Information**?": ["msinfo32", "msinfo32.exe"],
+								"What would you type into the **Run prompt** to open the **Windows Firewall with Advanced Security**?": "wf.msc",
+								"What would you type into the **Run prompt** to open the **Windows Firewall control panel item**?": "firewall.cpl",
+								"What would you type into the **Run prompt** to open the **Performance Monitor**?": "perfmon.msc",
+								"What would you type into the **Run prompt** to open the **Resource Monitor**?": ["resmon", "resmon.exe"]
+							}
 						}
 					},
 					"Control Panel (1.4)": {
 						"Control Panel Items": {
-							"Which Control Panel Item allows you to manage Internet Explorer settings?": "Internet Options",
-							"Which Control Panel Item allows you to add printers via network discovery, IP address, share name, and more?": "Devices and Printers",
-							"Which Control Panel Item allows you to view and uninstall applications?": "Programs and Features",
-							"Which Control Panel Item allows you to view active networks, setup a network connection, and troubleshoot network issues?": "Network and Sharing Center",
-							"Which Control Panel Item allows you to enable/disable network discovery and printer sharing?": "Network and Sharing Center",
-							"Which Control Panel Item redirects to the about page of settings?": "System",
-							"Which Control Panel Item allows you to enable or disable the firewall?": "Windows Defender Firewall",
-							"Which Control Panel Item allows you to add Outlook accounts, RSS feeds, SharePoint lists, Calenders, and more?": ["Mail", "Mail (Microsoft Outlook)"],
-							"Which Control Panel Item allows the configuration of input and output audio devices?": "Sound",
-							"Which Control Panel Item allows the configuration of system sound effects and when they play?": "Sound",
-							"Which Control Panel Item allows you to manage local account permissions and types?": "User Accounts",
-							"Which Control Panel Item allows you to manage UAC settings?": "User Accounts",
-							"Which Control Panel Item allows you to view a detailed catalog of attached devices?": "Device Manager",
-							"Which Control Panel Item allows you to configure which directories and filetypes get indexed to improve search speeds?": "Indexing Options",
-							"Which Control Panel Item opens a directory of snap-ins and other useful applications?": "Administrative Tools",
-							"Which Control Panel Item allows you to show protected system files in file explorer?": "File Explorer Options",
-							"Which Control Panel Item allows you to configure the amount of time until the computer goes to sleep?": "Power Options",
-							"Which Control Panel Item allows you set what closing the lid does?": "Power Options",
-							"Which Control Panel Item allows you to configure the magnifier, narrator, or on-screen character?": "Ease of Access Center",
-							"Which Control Panel Item allows you to retain copies of folders for recovery purposes?": "File History"
+							"Which **Control Panel Item** allows you to **manage Internet Explorer settings**?": "Internet Options",
+							"Which **Control Panel Item** allows you to **add printers via network discovery, IP address, share name, and more**?": "Devices and Printers",
+							"Which **Control Panel Item** allows you to **view and uninstall applications**?": "Programs and Features",
+							"Which **Control Panel Item** allows you to **view active networks, setup a network connection, and troubleshoot network issues**?": "Network and Sharing Center",
+							"Which **Control Panel Item** allows you to **enable/disable network discovery and printer sharing**?": "Network and Sharing Center",
+							"Which **Control Panel Item** redirects to the **about page of settings**?": "System",
+							"Which **Control Panel Item** allows you to **enable or disable the firewall**?": "Windows Defender Firewall",
+							"Which **Control Panel Item** allows you to **add Outlook accounts, RSS feeds, SharePoint lists, Calenders, and more**?": ["Mail", "Mail (Microsoft Outlook)"],
+							"Which **Control Panel Item** allows you to **configure input and output audio devices**?": "Sound",
+							"Which **Control Panel Item** allows you to **configure system sound effects and when they play**?": "Sound",
+							"Which **Control Panel Item** allows you to **manage local account permissions** and **UAC settings**?": "User Accounts",
+							"Which **Control Panel Item** allows you to **manage UAC settings**?": "User Accounts",
+							"Which **Control Panel Item** allows you to **view a detailed catalog of attached devices**?": "Device Manager",
+							"Which **Control Panel Item** allows you to **configure which directories and filetypes get indexed** to improve search speeds?": "Indexing Options",
+							"Which **Control Panel Item** opens a **directory of snap-ins and other useful applications**?": "Administrative Tools",
+							"Which **Control Panel Item** allows you to **show protected system files in file explorer**?": "File Explorer Options",
+							"Which **Control Panel Item** allows you to **configure the amount of time until the computer goes to sleep**?": "Power Options",
+							"Which **Control Panel Item** allows you to **change what closing the lid does**?": "Power Options",
+							"Which **Control Panel Item** allows you to **configure the magnifier, narrator, or on-screen keyboard**?": "Ease of Access Center",
+							"Which **Control Panel Item** allows you to **retain copies of folders** for recovery purposes?": "File History"
 						},
 						"Internet Properties": {
 							"tab by function": {
 								"hidden": true,
 								"incorrect-answers": ["General", "Security", "Privacy", "Content", "Connections", "Programs", "Advanced"],
 								"questions": {
-									"Which tab of the Windows Internet Properties allows you to delete browser history, cookies, and cached data?": "General",
-									"Which tab of the Windows Internet Properties allows you to configure the browser's appearance?": "General",
-									"Which tab of the Windows Internet Properties allows you to manage security zones?": "Security",
-									"Which tab of the Windows Internet Properties allows you to block individual websites?": "Security",
-									"Which tab of the Windows Internet Properties allows you to configure a pop-up blocker?": "Privacy",
-									"Which tab of the Windows Internet Properties allows you to configure advanced cookie retention settins?": "Privacy",
-									"Which tab of the Windows Internet Properties allows you to manage certificates?": "Content",
-									"Which tab of the Windows Internet Properties allows you to manage AutoComplete?": "Content",
-									"Which tab of the Windows Internet Properties allows you to manage RSS Feeds?": "Content",
-									"Which tab of the Windows Internet Properties allows you to configure a VPN or Proxy?": "Connections",
-									"Which tab of the Windows Internet Properties allows you to configure LAN settings?": "Connections",
-									"Which tab of the Windows Internet Properties allows you to manage web browser add-ons?": "Programs",
-									"Which tab of the Windows Internet Properties allows you to factory reset the default web browser?": "Advanced",
-									"Which tab of the Windows Internet Properties allows you to enable and disable different TLS versions?": "Advanced"
+									"Which tab of the Windows **Internet Options** allows you to **delete browser history, cookies, and cached data**?": "General",
+									"Which tab of the Windows **Internet Options** allows you to **configure the browser's appearance**?": "General",
+									"Which tab of the Windows **Internet Options** allows you to **manage security zones**?": "Security",
+									"Which tab of the Windows **Internet Options** allows you to **block individual websites**?": "Security",
+									"Which tab of the Windows **Internet Options** allows you to **configure a pop-up blocker**?": "Privacy",
+									"Which tab of the Windows **Internet Options** allows you to **configure advanced cookie retention settins**?": "Privacy",
+									"Which tab of the Windows **Internet Options** allows you to **manage certificates**?": "Content",
+									"Which tab of the Windows **Internet Options** allows you to **manage RSS Feeds**?": "Content",
+									"Which tab of the Windows **Internet Options** allows you to **configure a VPN or Proxy**?": "Connections",
+									"Which tab of the Windows **Internet Options** allows you to **configure LAN settings**?": "Connections",
+									"Which tab of the Windows **Internet Options** allows you to **manage web browser add-ons**?": "Programs",
+									"Which tab of the Windows **Internet Options** allows you to **factory reset the default web browser**?": "Advanced",
+									"Which tab of the Windows **Internet Options** allows you to **enable and disable different TLS versions**?": "Advanced"
 								}
 							}
 						},
@@ -300,6 +305,7 @@
 					"Settings (1.5)": {
 					},
 					"Networking Features (1.6)": {
+						
 					},
 					"Other Windows Concepts": {
 						"In Windows, what is the name of the file containing the state of RAM immediately before entering hibernation in Windows?": "hiberfil.sys",
@@ -331,32 +337,46 @@
 					}
 				},
 				"The Linux Operating System (1.11)": {
-					"Common Commands": {
+					"Terminal Tools": {
 						"case-sensitive": true,
-						"questions": {
-							"In Linux, what command is used to change the current working directory?": "cd",
-							"In Linux, what command is used to list the contents of a directory?": "ls",
-							"In Linux, what command displays the full path to the current working directory?": "pwd",
-							"In Linux, what command is used to move and rename files?": "mv",
-							"In Linux, what command is used to copy files?": "cp",
-							"In Linux, what command is used to delete files?": "rm",
-							"In Linux, what command is used to read and write permissions for a file or directory?": "chmod",
-							"In Linux, what command is used to read and modify the owner of a file or directory?": "chown",
-							"In Linux, what command is used to run a shell as another user, typically root?": "su",
-							"In Linux, what command is used to execute a command as another user, typically root?": "sudo",
-							"In Linux, what command is used to show and manipulate network routing, devices, and tunnels?": "ip",
-							"In Linux, what command is used to display information about the filesystem disk space usage?": "df",
-							"In Linux, what command is used to search and filter text for a given pattern?": "grep",
-							"In Linux, what command is used to display information about running processes?": "ps",
-							"In Linux, what command is used to display command manual pages?": "man",
-							"In Linux, what command is used to display tasks?": "top",
-							"In Linux, what command is used to search for files?": "find",
-							"In Linux, what command is used to perform DNS lookup?": "dig",
-							"In Linux, what command dumps the full text of a file to the terminal?": "cat",
-							"In Debian and Ubuntu (among others), what command checks for and caches available updates to installed programs and the system?": ["apt-get update", "apt update"],
-							"In Debian and Ubuntu (among others), what command installs availabe updates for installed programs and the system?": ["apt-get upgrade", "apt upgrade"],
-							"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "dnf update",
-							"In Linux, what flag makes grep case-insensitive?": "-i"
+						"groups": {
+							"Command Names": {
+								"In Linux, what command is used to list the contents of a directory?": "`ls`",
+								"In Linux, what command displays the full path to the current working directory?": "`pwd`",
+								"In Linux, what command is used to move and rename files?": "`mv`",
+								"In Linux, what command is used to copy files?": "`cp`",
+								"In Linux, what command is used to delete files?": "`rm`",
+								"In Linux, what command is used to read and write permissions for a file or directory?": "`chmod`",
+								"In Linux, what command is used to read and modify the owner of a file or directory?": "`chown`",
+								"In Linux, what command is used to run a shell as another user, typically root?": "`su`",
+								"In Linux, what command is used to execute a command as another user, typically root?": "`sudo`",
+								"What is the default package manager for Ubuntu and Debian (among others)?": ["`apt`", "`apt-get`"],
+								"What is the default package manager for Fedora and RHEL (among others)?": "`dnf`",
+								"What package manager used to be the default in RHEl before being succeeded by `dnf`?": "`yum`",
+								"In Linux, what command is used to show and manipulate network routing, devices, and tunnels?": "`ip`",
+								"In Linux, what command is used to display information about the filesystem disk space usage?": "`df`",
+								"In Linux, what command is used to search and filter text for a given pattern?": "`grep`",
+								"In Linux, what command is used to display information about running processes?": "`ps`",
+								"In Linux, what command is used to display command manual pages?": "`man`",
+								"In Linux, what command is used to display tasks?": "`top`",
+								"In Linux, what command is used to search for files?": "`find`",
+								"In Linux, what command is used to perform DNS lookup?": "`dig`",
+								"In Linux, what command dumps the full text of a file to the terminal?": "`cat`",
+								"In Linux, what command opens a lightweight, user-friendly text editor in the terminal?": "`nano`",
+								"In Linux, what command is used to change the current working directory?": "`cd`"
+							}
+							"Command Usage & Flags": {
+								"`grep`": {
+									"In Linux, what flag makes grep case-insensitive?": "`-i`
+								},
+								"`apt`": {
+									"In Debian and Ubuntu (among others), what command **checks for and caches available updates** to installed programs and the system?": ["`apt-get update`", "`apt update`"],
+									"In Debian and Ubuntu (among others), what command **installs availabe updates** for installed programs and the system?": ["`apt-get upgrade`", "`apt upgrade`"]
+								},
+								"`dnf`": {
+									"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "`dnf update`"",
+								}
+							}
 						}
 					}
 				},

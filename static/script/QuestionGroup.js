@@ -1,4 +1,5 @@
 // Event Listener for buttons that control the collapsibles.
+// TODO: Reset propogation is broken?
 function collapsible_event() {
 	this.classList.toggle("active");
 	this.question_group.is_expanded = this.classList.contains("active")

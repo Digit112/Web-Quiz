@@ -73,7 +73,7 @@ class Library {
 		this.num_offered_incorrect_answers = 0
 		
 		// Added to the calculation for all adaptive weights. Prevents the adaptive weight of a question from dropping too low when there are few questions.
-		this.ADAPTIVE_WEIGHT_ADDEND = 0.3
+		this.ADAPTIVE_WEIGHT_ADDEND = 0.05
 		
 		// Used during HTML regeneration.
 		this.doc_parent = null

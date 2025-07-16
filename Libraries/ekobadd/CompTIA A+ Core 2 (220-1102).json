@@ -249,7 +249,7 @@
 							"What would you type into the run prompt to open the **Resource Monitor**?": ["resmon", "resmon.exe"]
 						}
 					},
-					"Control Panel (1.4)": {
+					"The Control Panel (1.4)": {
 						"Control Panel Items": {
 							"Which Control Panel Item allows you to manage Internet Explorer settings?": "Internet Options",
 							"Which Control Panel Item allows you to add printers via network discovery, IP address, share name, and more?": "Devices and Printers",
@@ -268,36 +268,44 @@
 							"Which Control Panel Item opens a directory of snap-ins and other useful applications?": "Administrative Tools",
 							"Which Control Panel Item allows you to show protected system files in file explorer?": "File Explorer Options",
 							"Which Control Panel Item allows you to configure the amount of time until the computer goes to sleep?": "Power Options",
-							"Which Control Panel Item allows you set what closing the lid does?": "Power Options",
+							"Which Control Panel Item allows you choose what closing the lid does?": "Power Options",
+							"Which Control Panel Item allows you to make hibernation an option in the power menu?": "Power Options",
 							"Which Control Panel Item allows you to configure the magnifier, narrator, or on-screen character?": "Ease of Access Center",
 							"Which Control Panel Item allows you to retain copies of folders for recovery purposes?": "File History"
 						},
-						"Internet Properties": {
+						"Internet Options": {
 							"tab by function": {
 								"hidden": true,
 								"incorrect-answers": ["General", "Security", "Privacy", "Content", "Connections", "Programs", "Advanced"],
 								"questions": {
-									"Which tab of the Windows Internet Properties allows you to delete browser history, cookies, and cached data?": "General",
-									"Which tab of the Windows Internet Properties allows you to configure the browser's appearance?": "General",
-									"Which tab of the Windows Internet Properties allows you to manage security zones?": "Security",
-									"Which tab of the Windows Internet Properties allows you to block individual websites?": "Security",
-									"Which tab of the Windows Internet Properties allows you to configure a pop-up blocker?": "Privacy",
-									"Which tab of the Windows Internet Properties allows you to configure advanced cookie retention settins?": "Privacy",
-									"Which tab of the Windows Internet Properties allows you to manage certificates?": "Content",
-									"Which tab of the Windows Internet Properties allows you to manage AutoComplete?": "Content",
-									"Which tab of the Windows Internet Properties allows you to manage RSS Feeds?": "Content",
-									"Which tab of the Windows Internet Properties allows you to configure a VPN or Proxy?": "Connections",
-									"Which tab of the Windows Internet Properties allows you to configure LAN settings?": "Connections",
-									"Which tab of the Windows Internet Properties allows you to manage web browser add-ons?": "Programs",
-									"Which tab of the Windows Internet Properties allows you to factory reset the default web browser?": "Advanced",
-									"Which tab of the Windows Internet Properties allows you to enable and disable different TLS versions?": "Advanced"
+									"Which tab of the Windows Internet Options allows you to delete browser history, cookies, and cached data?": "General",
+									"Which tab of the Windows Internet Options allows you to configure the browser's appearance?": "General",
+									"Which tab of the Windows Internet Options allows you to manage security zones?": "Security",
+									"Which tab of the Windows Internet Options allows you to block individual websites?": "Security",
+									"Which tab of the Windows Internet Options allows you to configure a pop-up blocker?": "Privacy",
+									"Which tab of the Windows Internet Options allows you to configure advanced cookie retention settins?": "Privacy",
+									"Which tab of the Windows Internet Options allows you to manage certificates?": "Content",
+									"Which tab of the Windows Internet Options allows you to manage AutoComplete?": "Content",
+									"Which tab of the Windows Internet Options allows you to manage RSS Feeds?": "Content",
+									"Which tab of the Windows Internet Options allows you to configure a VPN or Proxy?": "Connections",
+									"Which tab of the Windows Internet Options allows you to configure LAN settings?": "Connections",
+									"Which tab of the Windows Internet Options allows you to manage web browser add-ons?": "Programs",
+									"Which tab of the Windows Internet Options allows you to factory reset the default web browser?": "Advanced",
+									"Which tab of the Windows Internet Options allows you to enable and disable different TLS versions?": "Advanced"
 								}
 							}
 						},
 						"Power Options": {
+							"In Windows, low-power setting saves the contents of RAM to the hard drive so that they can be restored?": {"answers": "Hibernation", "hidden-answers": "Hibernate"},
+							"In Windows, low-power setting leaves the RAM powered on?": "Sleep"
 						}
 					},
 					"Settings (1.5)": {
+						"hidden": true,
+						"incorrect-answers": ["Time and Language", "Update and Security", "Personalization", "Apps", "Privacy", "System", "Devices", "Network and Internet", "Gaming", "Accounts"],
+						"questions": {
+							"Which Windows Settings section can be used to make the cursor larger?": "Ease of Access"
+						}
 					},
 					"Networking Features (1.6)": {
 					},

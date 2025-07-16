@@ -196,6 +196,8 @@ function generate_next_question() {
 		if (answer == "") return false // Do nothing if no answer provided.
 		
 		let correct = active_question.attempt(answer)
+		console.log("  Question now has a remainder of " + (active_question.get_remainder() * 100).toFixed(1) + "%")
+		
 		if (correct) {
 			correct_indicator.textContent = "Correct"
 			correct_indicator.style.color = "#070"
@@ -248,19 +250,18 @@ function generate_next_question() {
 			// Calculate what the difficulty would be if we added a new question.
 			let theoretical_difficulty = my_library.get_difficulty() * (1 - new_question_probability) + new_question_difficulty * new_question_probability
 			
-			console.log("New question's probability of being chosen: " + (new_question_probability * 100) + "%")
-			console.log("Current Difficulty: " + my_library.get_difficulty() + ", Theoretical Difficulty: " + theoretical_difficulty)
+			console.log("  New question's probability of being chosen: " + (new_question_probability * 100).toFixed(1) + "%")
+			console.log("  Current Difficulty: " + (my_library.get_difficulty() * 100).toFixed(1) + "%, Theoretical Difficulty: " + (theoretical_difficulty * 100).toFixed(1) + "%")
 			
 			let difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - my_library.get_difficulty())
 			let theoretical_difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
 			if (theoretical_difficulty > my_library.get_difficulty() && theoretical_difficulty_offset < difficulty_offset) {
-			
-			// Add question if doing so would increase the difficulty beyond the preferred difficulty threshold.
-			// This method prevents lockup associated with the new question having extremely high probability and thus dominating the theoretical difficulty calculation, thus
-			// if (my_library.root_q.difficulty < my_library.IDEAL_OVERALL_DIFFICULTY && theoretical_difficulty > my_library.IDEAL_OVERALL_DIFFICULTY) {
-				if (i == 19) console.warn("Added 20 questions to the window at once. This may be a bug.")
+				// Add question if doing so would increase the difficulty beyond the preferred difficulty threshold.
+				// This method prevents lockup associated with the new question having extremely high probability and thus dominating the theoretical difficulty calculation, thus
+				// if (my_library.root_q.difficulty < my_library.IDEAL_OVERALL_DIFFICULTY && theoretical_difficulty > my_library.IDEAL_OVERALL_DIFFICULTY) {
+				if (i == 19) console.warn("  Added 20 questions to the window at once. This may be a bug.")
 				
 				let new_question = my_library.activate_question(am_ordered, am_adaptive)
 				
@@ -305,7 +306,6 @@ function generate_next_question() {
 	}
 	// Get the next question. If in quiz mode, we already got it.
 	else {
-		if (active_question != null) console.log("Last question '" + active_question.q + "' now has a remainder of " + active_question.get_remainder())
 		let last_active_question = active_question
 	
 		// Get an active question. If no valid question exists, activate and return one.
@@ -324,6 +324,8 @@ function generate_next_question() {
 	// Reset fields
 	answer_text.value = ""
 	multiple_choice_field.replaceChildren()
+	
+	console.log("Displaying '" + active_question.q[0].as_text() + "'")
 	
 	// Display the question.
 	question_text.replaceChildren(active_question.q[0].as_html())
@@ -357,8 +359,6 @@ function generate_next_question() {
 				available_answers[j] = temp
 			}
 		}
-		
-		console.log(available_answers)
 		
 		// Generate HTML
 		for (let avail_answer of available_answers) {

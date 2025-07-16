@@ -322,7 +322,6 @@ class Question {
 	// Despite the name, this does respect the case-sensitive setting on this question,
 	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
 	is_exactly_correct(response) {
-		console.log(response)
 		if (!this.case_sensitive) response = response.toLowerCase()
 			
 		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.
@@ -347,7 +346,7 @@ class Question {
 	is_correct(response) {
 		// Check if this is exactly correct (This is typically >20,000 times faster than Levenshtein, according to preliminary tests!)
 		if (this.is_exactly_correct(response)) {
-			console.log("'" + response + "' is exactly correct")
+			console.log("  '" + response + "' is exactly correct")
 			return true
 		}
 		
@@ -362,7 +361,7 @@ class Question {
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
 			let act_distance = Levenshtein(response, answer, max_distance)
 			if (act_distance <= max_distance) {
-				console.log("'" + response + "' matches '" + answer + "' with distance of " + act_distance + " over " + max_distance)
+				console.log("  '" + response + "' is inexactly correct, matching '" + answer + "' with " + act_distance + " of " + max_distance + " typo(s).")
 				return true
 			}
 		}
@@ -372,11 +371,12 @@ class Question {
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
 			let act_distance = Levenshtein(response, answer, max_distance)
 			if (act_distance <= max_distance) {
-				console.log("'" + response + "' matches '" + answer + "' with a distance of " + act_distance + " over " + max_distance)
+				console.log("  '" + response + "' is inexactly correct, matching '" + answer + "' with " + act_distance + " of " + max_distance + " typo(s).")
 				return true
 			}
 		}
 		
+		console.log("  '" + response + "' is incorrect.")
 		return false
 	}
 	
@@ -493,7 +493,7 @@ class Question {
 	// Called when the parent QuestionGroup has chosen this question for activation.
 	// The parameters are included so that this function matches the signature of QuestionGroup.activate_question, they are unused.
 	activate_question(_am_ordered, _am_adaptive) {
-		console.log("Activating " + this.q.toString() + ": " + this.a.toString())
+		console.log("  Activating Question '" + this.q.toString() + ": " + this.a.toString() + "'")
 		
 		if (this.windowed) throw new Error("Cannot activate a windowed question.")
 		this.windowed = true

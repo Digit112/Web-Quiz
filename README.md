@@ -359,6 +359,8 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 ### Must-Have
 
 - Display progress & errors while loading JSON
+- Pass button
+- Notification of correct answer with typos
 - Progress Export & Import
 - Implement hidden groups
 	- Auto-hide empty groups

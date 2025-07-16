@@ -358,9 +358,12 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
-- Progress export & Import
+- Display progress & errors while loading JSON
+- Progress Export & Import
 - Implement hidden groups
+	- Auto-hide empty groups
 - Fix type-to-select underlines.
+	- Requires tagging support in MarkDown.js
 - API serves quizzes
 - **Editing Support**
 	- Query Params control editing availability
@@ -369,6 +372,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Should-Have
 
+- Warn the user about case-sensitive questions.
 - Presentation type negotiation (between Library and User Preferences)
 - Arrow-key multiple-choice selection.
 - Dark mode.
@@ -378,6 +382,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 - Ability to specify totally separate question sets depending on a group's negotiated mode of presentation.
 - Warnings for unrecognized values in JSON.
+- Question Inversion
 - "Put the pieces in order" question type.
 - "Select all that apply" question type.
 - `"auto"` setting for typo forgiveness.

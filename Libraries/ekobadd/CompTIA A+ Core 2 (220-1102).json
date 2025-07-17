@@ -20,7 +20,8 @@
 							"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
 							"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
 							"In Windows, what part of the GUI is embedded in the taskbar, and contains pinned applications and a search bar?": ["Start", "Start Menu"],
-							"In Windows, what application is used to browse files?": "File Explorer"
+							"In Windows, what application is used to browse files?": "File Explorer",
+							"What is the key combination for opening **File Explorer**": {"answers": "Win+E", "hidden-answers": ["Win + E", "Windows+E", "Windows + E"]}
 						},
 						"Windows Edition Features": {
 							"block 1": {
@@ -309,7 +310,27 @@
 						"hidden": true,
 						"incorrect-answers": ["Time and Language", "Update and Security", "Personalization", "Apps", "Privacy", "System", "Devices", "Network and Internet", "Gaming", "Accounts"],
 						"questions": {
-							"Which Windows Settings section can be used to make the cursor larger?": "Ease of Access"
+							"Which **Windows Settings** section can be used to **make the cursor larger**?": "Ease of Access",
+							"Which **Windows Settings** section can be used to **enable the narrator or magnifier**?": "Ease of Access",
+							"Which **Windows Settings** section can be used to **set the current time zone**?": {"answers": "Time & Language", "hidden-answers": "Time and Language"},
+							"Which **Windows Settings** section can be used to **set the display language**?": {"answers": "Time & Language", "hidden-answers": "Time and Language"},
+							"Which **Windows Settings** section can be used to **check for updates**?": {"answers": "Update & Security", "hidden-answers": "Update and Security"},
+							"Which **Windows Settings** section can be used to **add a drive to File History**?": {"answers": "Update & Security", "hidden-answers": "Update and Security"},
+							"Which **Windows Settings** section can be used to **set the desktop or lock screen background**?": "Personalization",
+							"Which **Windows Settings** section can be used to **uninstall applications**?": "Apps",
+							"Which **Windows Settings** section can be used to **set file extension associations**?": "Apps",
+							"Which **Windows Settings** section can be used to **configure app permissions such as microphone and camera access for individual apps**?": "Privacy",
+							"Which **Windows Settings** section can be used to **configure display arrangement or select an output device**?": "System",
+							"Which **Windows Settings** section can be used to **configure the sleep and screen timeouts to save power**?": "System",
+							"Which **Windows Settings** section can be used to **configure remote desktop**?": "System",
+							"Which **Windows Settings** section can be used to **configure attached peripherals including bluetooth-connected devices**?": "Devices",
+							"Which **Windows Settings** section can be used to **add printers and scanners**?": "Devices",
+							"Which **Windows Settings** section can be used to **connect to a network**?": {"answers": "Network & Internet", "hidden-answers": "Network and Internet"},
+							"Which **Windows Settings** section can be used to **add a VPN or proxy connection**?": {"answers": "Network & Internet", "hidden-answers": "Network and Internet"},
+							"Which **Windows Settings** section can be used to **configure the game bar**?": "Gaming",
+							"Which **Windows Settings** section can be used to **change the local user's profile picture**?": "Accounts",
+							"Which **Windows Settings** section can be used to **add email accounts**?": "Accounts",
+							"Which **Windows Settings** section can be used to **access a work or school**?": "Accounts"
 						}
 					},
 					"Networking Features (1.6)": {

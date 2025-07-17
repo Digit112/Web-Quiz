@@ -132,13 +132,15 @@ class QuestionGroup {
 		this.difficulty = 0
 		
 		// The number of incorrect answers explicitly specified on this group and all ancestors.
-		this.num_explicit_incorrect_answers = null;
+		this.num_explicit_incorrect_answers = null
 		
 		// The number of incorrect answers offered to this group by its descendants.
 		// Excludes answers claimed by groups descending from this group.
 		// Groups claim all offered answers by setting descendants-give-incorrect-answers to true.
 		// Unclaimed answers propagate up.
 		this.num_offered_incorrect_answers = null
+		
+		this.cache_valid = false
 		
 		// Whether the checkbox associated with this Group has been manually checked.
 		// The questions that descend from this group are included iff this group OR ANY OF ITS ANCESTORS have been manually checked.
@@ -379,6 +381,41 @@ class QuestionGroup {
 		}
 		else {
 			return this.parent_group.get_library()
+		}
+	}
+	
+	// Returns an object representing the current state of the learner's progress.
+	// can be saved as JSON and loaded at a later time.
+	get_progress_object() {
+		let child_progress_objects = []
+		for (let child of this.children) {
+			child_progress_objects.push(child.get_progress_object())
+		}
+		
+		return {"label": this.label, "children": child_progress_objects}
+	}
+	
+	// Loads progress from an object retrieved by a call to get_progress_object()
+	load_progress_object(obj) {
+		if (obj.label != this.label)
+			throw new Error("Cannot load progress object with unmatching label.")
+		
+		if (!obj.contains("children")) {
+			throw new Error("Cannot load progress object which is missing child definitions.")
+		
+		for (let i = 0; i < obj["children"].length; i++) {
+			let child_progress = obj["children"][i]
+			for (let i_offset = 0; i_offset < this.children.length; i++) {
+				// This simple and unorthodox iteration method allows
+				// linear-time association of children with their associated progress objects *if* the two lists are in the same order,
+				// resorting to a polynomial time search otherwise.
+				let index = (i + i_offset) % this.children.length
+				let child = this.children[j]
+				
+				if (child_progress["label"] == child.label) {
+					child.load_progress_object(child_progress)
+				}
+			}
 		}
 	}
 	
@@ -665,6 +702,15 @@ class QuestionGroup {
 		}
 	}
 	
+	// Invalidates the cache of this group and all ancestors
+	// NOTE: The cache invalidation is only used to warn a user about unsaved progress. It does not guarantee that cache_weights() will have no effect (yet).
+	invalidate_cache() {
+		this.cache_valid = false
+		if (!this.am_root()) {
+			this.parent_group.invalidate_cache()
+		}
+	}
+	
 	// Recursively calculate the weight, windowed_weight, adaptive_weight, and difficulty of this node and all descendants.
 	// am_adaptive must be known to calculate difficulty, am_windowed must be known to calculate the windowed_weight.
 	cache_weights(am_adaptive, am_windowed, is_any_ancestor_enabled = false) {
@@ -738,6 +784,8 @@ class QuestionGroup {
 		console.assert(Math.abs(this.windowed_weight) != Infinity)
 		console.assert(Math.abs(this.adaptive_weight) != Infinity)
 		console.assert(Math.abs(this.difficulty) != Infinity)
+		
+		this.cache_valid = true
 	}
 	
 	// Create HTML that represents this QuestionGroup so that users can interact with the objects.

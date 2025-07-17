@@ -17,9 +17,11 @@ class Question {
 		this.hidden_answers = null
 		this.incorrect_answers = null
 		
+		let q_name = q ? q : "" // Used in reporting an error before acquiring a proper label.
+		
 		// Interpret as implicit question.
 		if (typeof q_data == "string" || Array.isArray(q_data)) {
-			if (!q) throw new LibraryLoadingError(false, "", parent_group, "explicit question must be an object.")
+			if (!q) throw new LibraryLoadingError("Question", "", parent_group, "explicit question must be an object.")
 			
 			// Inherit all inheritables
 			this.case_sensitive = this.parent_group.case_sensitive
@@ -41,25 +43,27 @@ class Question {
 			}
 			else {
 				// TODO: Check that answers in array are all non-empty strings.
+				for (let answer of q_data) {
+					if (typeof answer != "string" || answer.length == 0)
+						throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'answers' must be either a non-empty string or array of non-empty strings.")
+				}
 				this.a = q_data
 			}
 		}
 		// Interpret as explicit or embedded-explicit question.
 		else if (q_data instanceof Object) {
 			/* ---- Read Question ---- */
-			
-			let q_name = q ? q : "" // Used in reporting an error before acquiring a proper label.
 			if (q_data["question"]) {
 				if (typeof q_data["question"] == "string") {
 					this.q = [q_data["question"]]
 				}
 				else if (Array.isArray(q_data["question"])) {
 					// TODO: Check that questions in array are all non-empty strings.
-					if (q_data["question"].length == 0) throw new LibraryLoadingError(false, q_name, parent_group, "parameter 'question' must have at least one element.")
+					if (q_data["question"].length == 0) throw new LibraryLoadingError("Question", q_name, parent_group, "parameter 'question' must have at least one element.")
 					this.q = q_data["question"]
 				}
 				else {
-					throw new LibraryLoadingError(false, q_name, parent_group, "parameter 'question' must be either string or array.")
+					throw new LibraryLoadingError("Question", q_name, parent_group, "parameter 'question' must be either string or array.")
 				}
 				
 				// Note that if this question's question statement is provided by the key obtained by the caller (and subsequently passed to this function)
@@ -70,11 +74,10 @@ class Question {
 				this.q = [q]
 			}
 			else {
-				throw new LibraryLoadingError(false, "", parent_group, "required parameter 'question' is missing.")
+				throw new LibraryLoadingError("Question", "", parent_group, "required parameter 'question' is missing.")
 			}
 			
-			if (!this.q) throw new Error("Failed to obtain question statement")
-			
+			if (this.q == null) throw new Error("Failed to obtain question statement")
 			/* ---- Read Inheritables ---- */
 			
 			// This function is used to handle the repetitive process of attempting to read or inherit a field.
@@ -86,50 +89,57 @@ class Question {
 			// case-sensitive
 			this.case_sensitive = attempt_read_inherit("case-sensitive")
 			if (typeof this.case_sensitive != "boolean")
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "'case-sensitive' must be a boolean.")
+				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'case-sensitive' must be a boolean.")
 			
 			// mode-of-presentation
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
 			if (typeof this.mode_of_presentation != "string")
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "'mode-of-presentation' must be a string.")
+				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'mode-of-presentation' must be a string.")
 			if (!["verbatim", "multiple-choice", "flash-card"].includes(this.mode_of_presentation))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
+				throw new LibraryLoadingError("Question", this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
 			if (typeof this.max_choices != "number")
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "'max-choices' must be an integer.")
+				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'max-choices' must be an integer.")
 			if (!Number.isInteger(this.max_choices))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
+				throw new LibraryLoadingError("Question", this.label, parent_group, "'max-choices' must be an integer.")
 			
 			// typo-forgiveness-level
 			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
 			if (typeof this.typo_forgiveness_level != "string")
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "'typo-forgiveness-level' must be a string.")
+				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'typo-forgiveness-level' must be a string.")
 			if (!["none", "low", "medium", "high"].includes(this.typo_forgiveness_level))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
+				throw new LibraryLoadingError("Question", this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
 			
 			// correct-answer-source
 			this.correct_answer_source = attempt_read_inherit("correct-answer-source")
 			if (typeof this.correct_answer_source != "string")
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "'correct-answer-source' must be a string.")
+				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'correct-answer-source' must be a string.")
 			if (!["primary", "random"].includes(this.correct_answer_source))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
+				throw new LibraryLoadingError("Question", this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
 			
 			/* ---- Read Non-inheritables ---- */
 			
 			// Read answers
 			// The answer can either be a single item or an array of multiple items, all of which are considered acceptable.
-			if (!q_data["answers"]) throw new LibraryLoadingError(false, this.q[0], parent_group, "required parameter 'answer' is missing.");
-			if (typeof q_data["answers"] == "string") {
-				this.a = [q_data["answers"]]
-			}
-			else if (Array.isArray(q_data["answers"])) {
-				// TODO: Check that answers in array are all non-empty strings.
-				this.a = q_data["answers"]
+			if (q_data["answers"]) {
+				if (typeof q_data["answers"] == "string") {
+					this.a = [q_data["answers"]]
+				}
+				else if (Array.isArray(q_data["answers"])) {
+					for (let answer of q_data["answers"]) {
+						if (typeof answer != "string" || answer.length == 0)
+							throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'answers' must be either a non-empty string or array of non-empty strings.")
+					}
+					this.a = q_data["answers"]
+				}
+				else {
+					throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'answers' must be either string or array of non-empty strings.")
+				}
 			}
 			else {
-				throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'answers' must be object or string.")
+				throw new LibraryLoadingError("Question", this.q[0], parent_group, "required parameter 'answers' is missing.")
 			}
 			
 			// Read hidden-answers
@@ -138,10 +148,13 @@ class Question {
 					this.hidden_answers = [q_data["hidden-answers"]]
 				}
 				else if (Array.isArray(q_data["hidden-answers"])) {
-					// TODO: Validate that q_data["hidden-answers"] is array of non-empty strings.
+					for (let hidden_answer of q_data["hidden-answers"]) {
+						if (typeof hidden_answer != "string" || hidden_answer.length == 0)
+							throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'hidden-answers' must be either a non-empty string or array of non-empty strings.")
+					}
 					this.hidden_answers = q_data["hidden-answers"]
 				}
-				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'hidden-answers' must be either string or array of strings.")
+				else throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'hidden-answers' must be either string or array of non-empty strings.")
 			}
 			else {
 				this.hidden_answers = []
@@ -153,17 +166,22 @@ class Question {
 					this.incorrect_answers = [q_data["incorrect-answers"]]
 				}
 				else if (Array.isArray(q_data["incorrect-answers"])) {
-					// TODO: Validate that q_data["incorrect-answers"] is array of non-empty strings.
+					for (let incorrect_answer of q_data["incorrect-answers"]) {
+						if (typeof incorrect_answer != "string" || incorrect_answer.length == 0)
+							throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'incorrect-answers' must be either a non-empty string or array of non-empty strings.")
+					}
 					this.incorrect_answers = q_data["incorrect-answers"]
 				}
-				else throw new LibraryLoadingError(false, this.q[0], parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
+				else {
+					throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'incorrect-answers' must be either string or array of non-empty strings.")
+				}
 			}
 			else {
 				this.incorrect_answers = []
 			}
 		}
 		else {
-			throw new LibraryLoadingError(false, this.q[0], parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
+			throw new LibraryLoadingError("Question", q_name, parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
 		}
 		
 		console.assert(this.case_sensitive != null, "Failed to obtain case-sensitive")

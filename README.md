@@ -375,6 +375,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Should-Have
 
+- Library loader should actually conform to the spec....
 - Warn the user about case-sensitive questions.
 - Show the number of questions and number of questions selected while rendering groups.
 - Presentation type negotiation (between Library and User Preferences)

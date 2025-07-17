@@ -1,8 +1,8 @@
 class LibraryLoadingError extends Error {
-  constructor(is_group, label, parent_group, message, allow_recurse = true) {
+  constructor(entity_type, label, parent_group, message, allow_recurse = 2) {
 	let identifier = "null identifier"
 	
-	if (parent_group) {
+	if (parent_group instanceof QuestionGroup) {
 		identifier = parent_group.get_ancestors_as_string()
 		if (label != null) identifier += " -> " + label
 	}
@@ -10,14 +10,17 @@ class LibraryLoadingError extends Error {
 		identifier = label
 	}
 	
-    super("While interpreting " + (is_group ? "QuestionGroup" : "Question") + " '" + identifier + "'; " + message);
+    super("While interpreting " + entity_type + " '" + identifier + "'; " + message);
 	this.allow_recurse = allow_recurse
     this.name = "LibraryLoadingError";
   }
 }
 
+// NOTE: Accesses global my_library!
+// TODO: Instead, we should copy-assign a new library to this.
 function import_event(e) {
 	const file = e.target.files[0]; // Get the first selected file
+	e.target.value = ""
 	if (!file) { return }
 	
 	// File object is now available for further processing
@@ -26,13 +29,44 @@ function import_event(e) {
 	// You can read the file content using FileReader
 	const reader = new FileReader();
 	reader.onload = (e) => {
-		const library_data = JSON.parse(reader.result);
-	
-		my_library = new Library(library_data)
+		let error = null
+		try {
+			const library_data = JSON.parse(reader.result)
+			my_library = new Library(library_data)
+		}
+		catch (e) {
+			if (e instanceof SyntaxError || e instanceof LibraryLoadingError) {
+				console.warn("Rendering an error caught while attempting to load a library file.")
+				error = e
+				my_library = new Library()
+			}
+			else {
+				throw e
+			}
+		}
 
 		// Generate collapsibles HTML
 		my_library.generate_HTML( document.getElementById("collapsibles_root"), document.getElementById("editing-pane"))
-		last_active_question = null
+		if (error != null) { // Display the error.
+			let error_lines = error.message.split("\n")
+			
+			let error_line_span = document.createElement("span")
+			error_line_span.textContent = "Encountered error while attempting to parse Library file!"
+			
+			my_library.library_loading_error_label.appendChild(error_line_span)
+			my_library.library_loading_error_label.appendChild(document.createElement("br"))
+			
+			for (let i = 0; i < error_lines.length; i++) {
+				let error_line_span = document.createElement("span")
+				error_line_span.textContent = error_lines[i]
+				
+				my_library.library_loading_error_label.appendChild(document.createElement("br"))
+				my_library.library_loading_error_label.appendChild(error_line_span)
+			}
+			
+			my_library.library_loading_error_label.style.display = "block"
+		}
+		
 		active_question = null
 		quiz_score = 0
 	};
@@ -79,6 +113,9 @@ class Library {
 		this.doc_parent = null
 		this.editing_pane = null
 		this.currently_editing = false
+		
+		// Returned for callbacks.
+		this.library_loading_error_label = null
 		
 		if (library_data) { this.initialize(library_data) }
 	}
@@ -136,6 +173,9 @@ class Library {
 			}
 		}
 		
+		this.library_loading_error_label = document.createElement("p")
+		this.library_loading_error_label.style.display = "none"
+		
 		library_header.appendChild(import_button)
 		library_header.appendChild(import_file_selector)
 		
@@ -146,6 +186,8 @@ class Library {
 				library_header.appendChild(editing_controls_toggle)
 			}
 		}
+		
+		library_header.appendChild(this.library_loading_error_label)
 			
 		doc_parent.appendChild(library_header)
 		if (this.root_q) { this.root_q.generate_HTML(doc_parent, editing_pane, currently_editing) }

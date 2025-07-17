@@ -90,7 +90,7 @@ class QuestionGroup {
 		}
 		
 		if (!(qg_data instanceof Object) || Array.isArray(qg_data)) {
-			throw new LibraryLoadingError(true, label, parent_group, "QuestionGroup must be non-Array object.")
+			throw new LibraryLoadingError("QuestionGroup", label, parent_group, "QuestionGroup must be non-Array object.")
 		}
 		
 		// The label for this group that the user will see.
@@ -99,7 +99,7 @@ class QuestionGroup {
 		}
 		else {
 			this.label = qg_data["label"]
-			if (!this.label) throw new LibraryLoadingError(true, label, parent_group, "required parameter 'label' is missing.")
+			if (!this.label) throw new LibraryLoadingError("QuestionGroup", label, parent_group, "required parameter 'label' is missing.")
 		}
 	
 		console.log("Constructing Group '" + this.label + "'")
@@ -190,40 +190,40 @@ class QuestionGroup {
 			// descendants-give-incorrect-answers
 			this.descendants_give_incorrect_answers = attempt_read_inherit("descendants-give-incorrect-answers")
 			if (typeof this.descendants_give_incorrect_answers != "boolean")
-				throw new LibraryLoadingError(true, this.label, parent_group, "'descendants-give-incorrect-answers' must be a boolean.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'descendants-give-incorrect-answers' must be a boolean.")
 			
 			// case-sensitive
 			this.case_sensitive = attempt_read_inherit("case-sensitive")
 			if (typeof this.case_sensitive != "boolean")
-				throw new LibraryLoadingError(true, this.label, parent_group, "'case-sensitive' must be a boolean.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'case-sensitive' must be a boolean.")
 			
 			// mode-of-presentation
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
 			if (typeof this.mode_of_presentation != "string")
-				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be a string.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string.")
 			if (!["verbatim", "multiple-choice", "flash-card"].includes(this.mode_of_presentation))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
 			if (typeof this.max_choices != "number")
-				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'max-choices' must be an integer.")
 			if (!Number.isInteger(this.max_choices))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'max-choices' must be an integer.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'max-choices' must be an integer.")
 			
 			// typo-forgiveness-level
 			this.typo_forgiveness_level = attempt_read_inherit("typo-forgiveness-level")
 			if (typeof this.typo_forgiveness_level != "string")
-				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be a string.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'typo-forgiveness-level' must be a string.")
 			if (!["none", "low", "medium", "high"].includes(this.typo_forgiveness_level))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'typo-forgiveness-level' must be one of 'none', 'low', 'medium', or 'high'.")
 			
 			// correct-answer-source
 			this.correct_answer_source = attempt_read_inherit("correct-answer-source")
 			if (typeof this.correct_answer_source != "string")
-				throw new LibraryLoadingError(true, this.label, parent_group, "'correct-answer-source' must be a string.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'correct-answer-source' must be a string.")
 			if (!["primary", "random"].includes(this.correct_answer_source))
-				throw new LibraryLoadingError(true, this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
 			
 			/* ---- Read Non-Inheritables ---- */
 			
@@ -235,7 +235,7 @@ class QuestionGroup {
 				else if (Array.isArray(qg_data["incorrect-answers"])) {
 					this.incorrect_answers = qg_data["incorrect-answers"]
 				}
-				else throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
+				else throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 			}
 			else {
 				this.incorrect_answers = []
@@ -243,16 +243,16 @@ class QuestionGroup {
 			
 			for (let incorrect_answer of this.incorrect_answers) {
 				if (typeof incorrect_answer != "string")
-					throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 				if (typeof incorrect_answer != "string")
-					throw new LibraryLoadingError(true, this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 			}
 			
 			/* ---- Instantiate Children ---- */
 			
 			// Read and instantiate children
 			if (qg_data["questions"]) {
-				if (qg_data["groups"]) throw new LibraryLoadingError(true, this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
+				if (qg_data["groups"]) throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'questions' and 'groups' parameters must never appear together.")
 				this.children_are_groups = false
 				
 				if (Array.isArray(qg_data["questions"])) {
@@ -269,7 +269,7 @@ class QuestionGroup {
 					}
 				}
 				else {
-					throw new LibraryLoadingError(true, this.label, parent_group, "'questions' must be an array or object.")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'questions' must be an array or object.")
 				}
 			}
 			else if (qg_data["groups"]) {
@@ -289,7 +289,7 @@ class QuestionGroup {
 					}
 				}
 				else {
-					throw new LibraryLoadingError(true, this.label, parent_group, "'groups' must be an array or object.")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'groups' must be an array or object.")
 				}
 			}
 			else {
@@ -340,10 +340,16 @@ class QuestionGroup {
 					this.children = []
 					this.children_are_groups = null
 					
-					if (e instanceof LibraryLoadingError && e.allow_recurse) {
+					if (e instanceof LibraryLoadingError) {
 						let qg_error = e.toString()
 						
-						throw new LibraryLoadingError(true, this.label, parent_group, "failed to deduce type of definition. No 'questions' or 'groups' parameter is present.\nWhile interpreting as list of implicit and embedded-explicit Question(s), caught error:\n" + q_error + "\nWhile interpreting as list of implicit and embedded-explicit QuestionGroup(s), caught error:\n" + qg_error, false)
+						if (e.allow_recurse == 2) {
+							throw new LibraryLoadingError("", this.label, parent_group, "\n" + q_error + "\n" + qg_error, 1)
+						}
+						else if (e.allow_recurse == 1) {
+							throw new LibraryLoadingError("", this.label, parent_group, "Encountered multiple errors while attempting to interpret the following entity in multiple ways:\n" + qg_error + "\n" + q_error, 0)
+						}
+						else throw e
 					}
 					else throw e
 				}

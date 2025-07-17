@@ -47,6 +47,9 @@ let active_question = null
 // Number of correctly answered questions since the last quiz cycle.
 let quiz_score = 0
 
+// Used to deteermine when to save progress.
+let attempts_since_last_save = 0
+
 // These listeners are used to allow users to select multiple-choice questions by typing them.
 // Allows the user to submit their selection and also use backspace.
 let selecting_string_elem = null
@@ -161,7 +164,7 @@ do_shuffle.addEventListener("input", () => {
 })
 
 reset_progress.addEventListener("click", () => {
-	my_library.reset_all()
+	my_library.reset_progress()
 })
 
 // Secretly the same as next-question
@@ -191,6 +194,24 @@ function generate_next_question() {
 	type_select_handler.attempt_set_value("")
 	
 	if (active_question != null) {
+		// Save the player's progress
+		attempts_since_last_save++
+		if (attempts_since_last_save == 1) {
+			attempts_since_last_save = 0
+			let save_start = performance.now()
+			
+			// TODO: Entering slippery slope
+			my_library.get_id().then((library_id) => {
+				my_library.get_save_string().then((save_str) => {
+					let cookie_str = library_id + "-progress=" + save_str
+					document.cookie = cookie_str
+					
+					let save_end = performance.now()
+					console.log("Saved progress in " + (save_end - save_start) + "ms")
+				})
+			})
+		}
+		
 		// Check the answer.
 		let answer = answer_text.value.trim()
 		if (answer == "") return false // Do nothing if no answer provided.

@@ -209,6 +209,44 @@ class Question {
 		this.windowed = false
 	}
 	
+	reset_progress() {
+		this.mastery_level = 0.5
+		this.num_attemptes = 0
+	}
+	
+	// Returns a promise for a hash of the primary question statement.
+	// Note that the hash of two questions can be the same! In this case, the loading group will decide which is which by looking at the *order* of the questions.
+	async get_id() {
+		const encoder = new TextEncoder()
+		const data = encoder.encode(this.q[0].as_text())
+		const hash_buffer = await crypto.subtle.digest("SHA-1", data)
+		const byte_array = new Uint8Array(hash_buffer)
+		const hash_hex = Array.from(byte_array)
+			.map((byte) => byte.toString(16).padStart(2, '0'))
+			.join('')
+		
+		return hash_hex
+	}
+	
+	// Returns a saveable and loadable object representing the uer's progress.
+	async get_progress_object() {
+		return {"id": await this.get_id(), "ml": this.mastery_level, "na": this.num_attempts}
+	}
+	
+	load_progress_object(obj) {
+		if (!("id" in obj))
+			throw new Error("Cannot load progress object with missing id.")
+		
+		if (!("ml" in obj) || typeof obj["ml"] != "number" || obj["ml"] < 0 || obj["ml"] > 1)
+			throw new Error("Cannot load progress object with missing or invalid mastery-level.")
+		
+		if (!("na" in obj) || typeof obj["na"] != "number" || obj["na"] < 0 || !Number.isInteger(obj["na"]))
+			throw new Error("Cannot load progress object with missing or invalid num-attempts.")
+		
+		this.mastery_level = obj["ml"]
+		this.num_attemptes = obj["na"]
+	}
+	
 	// Returns the library that this Question ultimately descends from.
 	get_library() {
 		console.assert(this.parent_group != null, "The QuestionGroup constructor should throw to prevent this assertion from failing.")

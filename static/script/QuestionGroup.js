@@ -384,37 +384,73 @@ class QuestionGroup {
 		}
 	}
 	
+	// Returns a hash of this group's label.
+	async get_id() {
+		const encoder = new TextEncoder()
+		const data = encoder.encode(this.label.as_text())
+		const hash_buffer = await crypto.subtle.digest("SHA-1", data)
+		const byte_array = new Uint8Array(hash_buffer)
+		const hash_hex = Array.from(byte_array)
+			.map((byte) => byte.toString(16).padStart(2, '0'))
+			.join('')
+		
+		return hash_hex
+	}
+	
+	// Recursively reset all questions to their default state.
+	reset_progress() {
+		this.was_asked_last = false
+		for (let i = 0; i < this.children.length; i++) {
+			this.children[i].reset_progress()
+		}
+	}
+	
 	// Returns an object representing the current state of the learner's progress.
 	// can be saved as JSON and loaded at a later time.
-	get_progress_object() {
+	async get_progress_object() {
 		let child_progress_objects = []
 		for (let child of this.children) {
 			child_progress_objects.push(child.get_progress_object())
 		}
 		
-		return {"label": this.label, "children": child_progress_objects}
+		return {"id": await this.get_id(), "ch": await Promise.all(child_progress_objects)}
 	}
 	
 	// Loads progress from an object retrieved by a call to get_progress_object()
-	load_progress_object(obj) {
-		if (obj.label != this.label)
-			throw new Error("Cannot load progress object with unmatching label.")
+	async load_progress_object(obj) {
+		this.was_asked_last = false
 		
-		if (!obj.contains("children")) {
+		if (!("id" in obj))
+			throw new Error("Cannot load progress object with missing or non-matching id.")
+		
+		if (!("ch" in obj))
 			throw new Error("Cannot load progress object which is missing child definitions.")
 		
-		for (let i = 0; i < obj["children"].length; i++) {
-			let child_progress = obj["children"][i]
-			for (let i_offset = 0; i_offset < this.children.length; i++) {
+		for (let i = 0; i < obj["ch"].length; i++) {
+			if (typeof obj["ch"] != "object")
+				throw new Error("Cannot load progress object which has an invalid child definition.")
+		}
+		
+		for (let i = 0; i < this.children.length; i++) {
+			let child = this.children[i]
+			let child_id = await child.get_id()
+			let found_object = false
+			for (let i_offset = 0; i_offset < obj["ch"].length; i_offset++) {
 				// This simple and unorthodox iteration method allows
 				// linear-time association of children with their associated progress objects *if* the two lists are in the same order,
 				// resorting to a polynomial time search otherwise.
-				let index = (i + i_offset) % this.children.length
-				let child = this.children[j]
+				let j = (i + i_offset) % obj["ch"].length
 				
-				if (child_progress["label"] == child.label) {
+				let child_progress = obj["ch"][j]
+				if (child_progress["id"] == child_id) {
 					child.load_progress_object(child_progress)
+					found_object = true
+					break
 				}
+			}
+			
+			if (!found_object) {
+				child.reset_progress()
 			}
 		}
 	}
@@ -1112,21 +1148,6 @@ class QuestionGroup {
 	deactivate_all() {
 		for (let i = 0; i < this.children.length; i++) {
 			this.children[i].deactivate_all()
-		}
-	}
-	
-	// Recursively reset all questions to their default state.
-	reset_all(root_call = true) {
-		if (this.children_are_groups) {
-			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].reset_all(false)
-			}
-		}
-		else {
-			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].was_asked_last = false
-				this.children[i].mastery_level = 0.5
-			}
 		}
 	}
 	

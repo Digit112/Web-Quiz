@@ -364,17 +364,17 @@
 								"In Linux, what command dumps the full text of a file to the terminal?": "`cat`",
 								"In Linux, what command opens a lightweight, user-friendly text editor in the terminal?": "`nano`",
 								"In Linux, what command is used to change the current working directory?": "`cd`"
-							}
+							},
 							"Command Usage & Flags": {
 								"`grep`": {
-									"In Linux, what flag makes grep case-insensitive?": "`-i`
+									"In Linux, what flag makes grep case-insensitive?": "`-i`"
 								},
 								"`apt`": {
 									"In Debian and Ubuntu (among others), what command **checks for and caches available updates** to installed programs and the system?": ["`apt-get update`", "`apt update`"],
 									"In Debian and Ubuntu (among others), what command **installs availabe updates** for installed programs and the system?": ["`apt-get upgrade`", "`apt upgrade`"]
 								},
 								"`dnf`": {
-									"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "`dnf update`"",
+									"In Fedora and RHEL (among others), what command looks for and potentially installs updates to installed programs and the system?": "`dnf update`"
 								}
 							}
 						}

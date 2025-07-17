@@ -20,7 +20,8 @@
 							"In Windows, what part of the GUI contains the tray, time, audio, and network icons?": "Notification Area",
 							"In Windows, what part of the GUI along the bottom of the screen contains the start menu and pinned applications?": "Taskbar",
 							"In Windows, what part of the GUI is embedded in the taskbar, and contains pinned applications and a search bar?": ["Start", "Start Menu"],
-							"In Windows, what application is used to browse files?": "File Explorer"
+							"In Windows, what application is used to browse files?": "File Explorer",
+							"What is the key combination for opening **File Explorer**": {"answers": "Win+E", "hidden-answers": ["Win + E", "Windows+E", "Windows + E"]}
 						},
 						"Windows Edition Features": {
 							"block 1": {
@@ -255,7 +256,7 @@
 							}
 						}
 					},
-					"Control Panel (1.4)": {
+					"The Control Panel (1.4)": {
 						"Control Panel Items": {
 							"Which **Control Panel Item** allows you to **manage Internet Explorer settings**?": "Internet Options",
 							"Which **Control Panel Item** allows you to **add printers via network discovery, IP address, share name, and more**?": "Devices and Printers",
@@ -275,10 +276,11 @@
 							"Which **Control Panel Item** allows you to **show protected system files in file explorer**?": "File Explorer Options",
 							"Which **Control Panel Item** allows you to **configure the amount of time until the computer goes to sleep**?": "Power Options",
 							"Which **Control Panel Item** allows you to **change what closing the lid does**?": "Power Options",
+							"Which **Control Panel Item** allows you to **make hibernation an option in the power menu**?": "Power Options",
 							"Which **Control Panel Item** allows you to **configure the magnifier, narrator, or on-screen keyboard**?": "Ease of Access Center",
 							"Which **Control Panel Item** allows you to **retain copies of folders** for recovery purposes?": "File History"
 						},
-						"Internet Properties": {
+						"Internet Options": {
 							"tab by function": {
 								"hidden": true,
 								"incorrect-answers": ["General", "Security", "Privacy", "Content", "Connections", "Programs", "Advanced"],
@@ -300,9 +302,36 @@
 							}
 						},
 						"Power Options": {
+							"In Windows, low-power setting saves the contents of RAM to the hard drive so that they can be restored?": {"answers": "Hibernation", "hidden-answers": "Hibernate"},
+							"In Windows, low-power setting leaves the RAM powered on?": "Sleep"
 						}
 					},
 					"Settings (1.5)": {
+						"hidden": true,
+						"incorrect-answers": ["Time and Language", "Update and Security", "Personalization", "Apps", "Privacy", "System", "Devices", "Network and Internet", "Gaming", "Accounts"],
+						"questions": {
+							"Which **Windows Settings** section can be used to **make the cursor larger**?": "Ease of Access",
+							"Which **Windows Settings** section can be used to **enable the narrator or magnifier**?": "Ease of Access",
+							"Which **Windows Settings** section can be used to **set the current time zone**?": {"answers": "Time & Language", "hidden-answers": "Time and Language"},
+							"Which **Windows Settings** section can be used to **set the display language**?": {"answers": "Time & Language", "hidden-answers": "Time and Language"},
+							"Which **Windows Settings** section can be used to **check for updates**?": {"answers": "Update & Security", "hidden-answers": "Update and Security"},
+							"Which **Windows Settings** section can be used to **add a drive to File History**?": {"answers": "Update & Security", "hidden-answers": "Update and Security"},
+							"Which **Windows Settings** section can be used to **set the desktop or lock screen background**?": "Personalization",
+							"Which **Windows Settings** section can be used to **uninstall applications**?": "Apps",
+							"Which **Windows Settings** section can be used to **set file extension associations**?": "Apps",
+							"Which **Windows Settings** section can be used to **configure app permissions such as microphone and camera access for individual apps**?": "Privacy",
+							"Which **Windows Settings** section can be used to **configure display arrangement or select an output device**?": "System",
+							"Which **Windows Settings** section can be used to **configure the sleep and screen timeouts to save power**?": "System",
+							"Which **Windows Settings** section can be used to **configure remote desktop**?": "System",
+							"Which **Windows Settings** section can be used to **configure attached peripherals including bluetooth-connected devices**?": "Devices",
+							"Which **Windows Settings** section can be used to **add printers and scanners**?": "Devices",
+							"Which **Windows Settings** section can be used to **connect to a network**?": {"answers": "Network & Internet", "hidden-answers": "Network and Internet"},
+							"Which **Windows Settings** section can be used to **add a VPN or proxy connection**?": {"answers": "Network & Internet", "hidden-answers": "Network and Internet"},
+							"Which **Windows Settings** section can be used to **configure the game bar**?": "Gaming",
+							"Which **Windows Settings** section can be used to **change the local user's profile picture**?": "Accounts",
+							"Which **Windows Settings** section can be used to **add email accounts**?": "Accounts",
+							"Which **Windows Settings** section can be used to **access a work or school**?": "Accounts"
+						}
 					},
 					"Networking Features (1.6)": {
 						
@@ -405,7 +434,7 @@
 					"What filesystem is most often used on a MacOS machine?": "APFS"
 				}
 			},
-			"Domain 2: Security": {
+			"Domain 2.0: Security": {
 				"Physical Security": {
 					"What is the common term for a policy requiring that users remove all paper from their desks before leavin for lunch or for the day?": "Clean Desk Policy",
 					"What is the common term for a device which attaches to a monitor to reduce its viewing angle?": ["Privacy Screen", "Privacy Filter"],
@@ -504,7 +533,7 @@
 					}
 				}
 			},
-			"Domain 3: Software Troubleshhoting": {
+			"Domain 3.0: Software Troubleshhoting": {
 				"WinRE Options": {
 					"mode-of-presentation": "multiple-choice",
 					"descendants-give-incorrect-answers": true,
@@ -533,7 +562,7 @@
 					}
 				}
 			},
-			"Domain 4: Operational Procedures": {
+			"Domain 4.0: Operational Procedures": {
 				"Ticketing Systems": {
 					"What is the term for software which allows the submission, documentation, and resolution of issues, and which is typically used by IT support and helpdesk agents?": {"answers": "Ticketing System", "hidden-answers": ["Ticket System", "Ticketing Software", "Ticket Software"]}
 				},

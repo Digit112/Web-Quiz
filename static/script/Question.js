@@ -380,6 +380,12 @@ class Question {
 		return false
 	}
 	
+	// Invalidates the cache of all ancestors
+	// NOTE: The cache invalidation is only used to warn a user about unsaved progress. It does not guarantee that cache_weights() will have no effect (yet).
+	invalidate_cache() {
+		this.parent_group.invalidate_cache()
+	}
+	
 	// Returns the number to divide the length of an answer by to get the number of acceptable typos.
 	get_typo_divisor() {
 		if (this.typo_forgiveness_level == "none") {
@@ -405,6 +411,7 @@ class Question {
 	attempt(response) {
 		let my_library = this.get_library()
 		
+		this.invalidate_cache()
 		this.set_was_asked_last()
 		this.previous_mastery_level = this.mastery_level
 		

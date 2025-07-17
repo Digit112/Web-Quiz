@@ -73,7 +73,7 @@ class Library {
 		this.num_offered_incorrect_answers = 0
 		
 		// Added to the calculation for all adaptive weights. Prevents the adaptive weight of a question from dropping too low when there are few questions.
-		this.ADAPTIVE_WEIGHT_ADDEND = 0.05
+		this.ADAPTIVE_WEIGHT_ADDEND = 0.03
 		
 		// Used during HTML regeneration.
 		this.doc_parent = null
@@ -158,6 +158,12 @@ class Library {
 		this.root_q.reset_expansion()
 		this.root_q.check_elem.checked = this.root_q.get_enabled()
 		this.root_q.reset_all_descendents()
+	}
+	
+	// Returns an object representing the current state of the learner's progress.
+	// can be saved as JSON and loaded at a later time.
+	get_progress_object() {
+		return root_q.get_progress_object()
 	}
 	
 	generate_editing_controls() {

@@ -367,6 +367,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 - Fix type-to-select underlines.
 	- Requires tagging support in MarkDown.js
 - API serves quizzes
+- Library tagging
 - **Editing Support**
 	- Query Params control editing availability
 	- QuestionGroup export
@@ -375,6 +376,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 ### Should-Have
 
 - Warn the user about case-sensitive questions.
+- Show the number of questions and number of questions selected while rendering groups.
 - Presentation type negotiation (between Library and User Preferences)
 - Arrow-key multiple-choice selection.
 - Dark mode.

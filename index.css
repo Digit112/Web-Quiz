@@ -9,9 +9,8 @@ body {
 		margin: 0.5em 0;
 	}
 	
-	.library-header-control {
-		margin: 0.2em 0.5em;
-		
+	.library-header-control, .library-footer-control {
+		margin: 0.3em 0.5em;
 		border: 1px solid black;
 	}
 	
@@ -119,7 +118,7 @@ body {
 	}
 
 	/* For the buttons, on hover*/
-	.active, .library-header-control:hover {
+	.active, .library-header-control:hover, .library-footer-control:hover {
 		background-color: #ccc;
 		cursor: pointer;
 	}

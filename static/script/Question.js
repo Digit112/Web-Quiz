@@ -255,7 +255,7 @@ class Question {
 	
 	// Returns a saveable and loadable object representing the uer's progress.
 	async get_progress_object() {
-		return {"id": await this.get_id(), "ml": this.mastery_level, "na": this.num_attempts}
+		return {"id": await this.get_id(), "ml": this.mastery_level, "na": this.num_attempts, "iw": this.windowed}
 	}
 	
 	load_progress_object(obj) {
@@ -263,13 +263,18 @@ class Question {
 			throw new Error("Cannot load progress object with missing id.")
 		
 		if (!("ml" in obj) || typeof obj["ml"] != "number" || obj["ml"] < 0 || obj["ml"] > 1)
-			throw new Error("Cannot load progress object with missing or invalid mastery-level.")
+			throw new Error("Cannot load progress object with missing or invalid property 'mastery-level' (ml).")
 		
 		if (!("na" in obj) || typeof obj["na"] != "number" || obj["na"] < 0 || !Number.isInteger(obj["na"]))
-			throw new Error("Cannot load progress object with missing or invalid num-attempts.")
+			throw new Error("Cannot load progress object with missing or invalid property 'num-attempts' (na).")
+		
+		if (!("iw" in obj) || typeof obj["iw"] != "boolean")
+			throw new Error("Cannot load progress object with missing or invalid property 'is-windowed' (iw).")
 		
 		this.mastery_level = obj["ml"]
 		this.num_attemptes = obj["na"]
+		this.windowed = obj["iw"]
+		if (this.windowed !== false) console.log(obj["iw"])
 	}
 	
 	// Returns the library that this Question ultimately descends from.

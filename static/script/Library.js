@@ -103,6 +103,25 @@ function load_progress_event(e) {
 	reader.readAsText(file)
 }
 
+async function save_progress_event() {
+	function sanitize_filename(fn) {
+		return fn.replace(/[<>:"/\\|?*]+/g, '_').replace(/[\x00-\x1F]+/g, '').replace(/\.$/, '')
+	}
+	
+	const save_string = await my_library.get_save_string()
+	const blob = new Blob([save_string], {type: "text/plain"});
+	const url = URL.createObjectURL(blob);
+
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = sanitize_filename(my_library.title.toString()) + "-progress.json.b64"
+	
+	document.body.appendChild(a); // Append to the body temporarily
+	a.click();
+	document.body.removeChild(a); // Remove the element after clicking
+	URL.revokeObjectURL(url); // Release the object URL
+}
+
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.
 class Library {
 	static token_map = new Map([["**", "b"], ["*", "i"], ["__", "u"], ["`", "code"]])
@@ -236,12 +255,19 @@ class Library {
 			load_progress_selector.addEventListener("change", load_progress_event)
 			
 			var load_progress_button = document.createElement("button")
-			load_progress_button.setAttribute("class", "library-header-control")
+			load_progress_button.setAttribute("class", "library-footer-control")
 			load_progress_button.textContent = "Load Progress"
 			load_progress_button.addEventListener("click", () => load_progress_selector.click())
+			
+			var save_progress_button = document.createElement("button")
+			save_progress_button.setAttribute("class", "library-footer-control")
+			save_progress_button.textContent = "Save Progress"
+			save_progress_button.addEventListener("click", save_progress_event)
 		}
 		
 		if (this.root_q) {
+			library_footer.appendChild(save_progress_button)
+			library_footer.appendChild(load_progress_selector)
 			library_footer.appendChild(load_progress_button)
 			
 			doc_parent.appendChild(library_footer)

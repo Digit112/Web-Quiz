@@ -381,7 +381,7 @@
 								"In Linux, what command is used to execute a command as another user, typically root?": "`sudo`",
 								"What is the default package manager for Ubuntu and Debian (among others)?": ["`apt`", "`apt-get`"],
 								"What is the default package manager for Fedora and RHEL (among others)?": "`dnf`",
-								"What package manager used to be the default in RHEl before being succeeded by `dnf`?": "`yum`",
+								"What package manager used to be the default in RHEL before being succeeded by `dnf`?": "`yum`",
 								"In Linux, what command is used to show and manipulate network routing, devices, and tunnels?": "`ip`",
 								"In Linux, what command is used to display information about the filesystem disk space usage?": "`df`",
 								"In Linux, what command is used to search and filter text for a given pattern?": "`grep`",
@@ -604,7 +604,7 @@
 				},
 				"Power Events": {
 					"What term refers to a brief increase in the amount of voltage provided?": "Surge",
-					"What term refers to a temporary decrease in the amount of voltage provided?": "Under-Voltage Event",
+					"What term refers to a temporary decrease in the amount of voltage provided?": ["Under-Voltage Event", "Sag"],
 					"What term refers to a complete loss of power?": ["Power Failure", "Blackout"]
 				},
 				"Protected Information": {

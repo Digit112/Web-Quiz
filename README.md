@@ -358,7 +358,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
-- Progress Export & Import
+- Further testing required on progress save/load
 - Implement hidden groups
 	- Auto-hide empty groups
 - Fix type-to-select underlines.

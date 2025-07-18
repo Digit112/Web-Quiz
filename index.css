@@ -51,6 +51,15 @@ body {
 		}
 	}
 	
+	.attempt-indicator {
+		margin: 0.3em 0;
+	}
+	
+	#correct-indicator {
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+	
 	/* For the div containing a collapsible button & checkbox */
 	.collapsible_header {
 		padding: 0.5em;

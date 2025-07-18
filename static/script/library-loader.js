@@ -196,7 +196,7 @@ function generate_next_question() {
 	if (active_question != null) {
 		// Save the player's progress
 		attempts_since_last_save++
-		if (attempts_since_last_save == 1) {
+		if (attempts_since_last_save == 16) {
 			attempts_since_last_save = 0
 			let save_start = performance.now()
 			
@@ -216,12 +216,19 @@ function generate_next_question() {
 		let answer = answer_text.value.trim()
 		if (answer == "") return false // Do nothing if no answer provided.
 		
-		let correct = active_question.attempt(answer)
+		let attempt_result = active_question.attempt(answer)
 		console.log("  Question now has a remainder of " + (active_question.get_remainder() * 100).toFixed(1) + "%")
 		
-		if (correct) {
-			correct_indicator.textContent = "Correct"
-			correct_indicator.style.color = "#070"
+		if (attempt_result.is_correct) {
+			if (attempt_result.is_exactly_correct) {
+				correct_indicator.textContent = "Correct"
+				correct_indicator.style.color = "#070"
+			}
+			else {
+				correct_indicator.textContent = "Correct (Typo)"
+				correct_indicator.style.color = "#470"
+			}
+			
 			if (am_quiz) quiz_score++
 		}
 		else {

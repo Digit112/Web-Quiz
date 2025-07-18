@@ -169,7 +169,7 @@
 									"In Windows, what flag allows you to specify the number of queries per hop for the `pathping` command?": ["`-q`", "`pathping -q`"]
 								},
 								"Other": {
-									"In Windows, what flag is typically used to display the correct way to use a command?": "`/?`"
+									"In Windows, what flag is typically used to display a command's help page?": "`/?`"
 								}
 							}
 						}

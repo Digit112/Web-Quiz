@@ -2,6 +2,13 @@ function lerp(a, b, t) {
 	return (b - a) * t + a
 }
 
+class AttemptResult {
+	constructor(is_correct, is_exactly_correct) {
+		this.is_correct = is_correct
+		this.is_exactly_correct = is_exactly_correct
+	}
+}
+
 class Question {
 	constructor(q_data, q, parent_group) {
 		if (!(parent_group instanceof QuestionGroup)) throw new Error("A Question must have a parent QuestionGroup.")
@@ -403,14 +410,16 @@ class Question {
 		// Check if this is exactly correct (This is typically >20,000 times faster than Levenshtein, according to preliminary tests!)
 		if (this.is_exactly_correct(response)) {
 			console.log("  '" + response + "' is exactly correct")
-			return true
+			return new AttemptResult(true, true)
 		}
 		
 		if (!this.case_sensitive) response = response.toLowerCase()
 		
 		// Check if typo forgiveness is enabled. We already know the answer is not exactly correct.
 		let typo_divisor = this.get_typo_divisor()
-		if (typo_divisor == Infinity) return false
+		if (typo_divisor == Infinity) {
+			return new AttemptResult(false, false)
+		}
 		
 		for (let answer of this.a.map((a) => a.as_text())) {
 			if (!this.case_sensitive) answer = answer.toLowerCase()
@@ -418,7 +427,7 @@ class Question {
 			let act_distance = Levenshtein(response, answer, max_distance)
 			if (act_distance <= max_distance) {
 				console.log("  '" + response + "' is inexactly correct, matching '" + answer + "' with " + act_distance + " of " + max_distance + " typo(s).")
-				return true
+				return new AttemptResult(true, false)
 			}
 		}
 		
@@ -428,12 +437,12 @@ class Question {
 			let act_distance = Levenshtein(response, answer, max_distance)
 			if (act_distance <= max_distance) {
 				console.log("  '" + response + "' is inexactly correct, matching '" + answer + "' with " + act_distance + " of " + max_distance + " typo(s).")
-				return true
+				return new AttemptResult(true, false)
 			}
 		}
 		
 		console.log("  '" + response + "' is incorrect.")
-		return false
+		return new AttemptResult(false, false)
 	}
 	
 	// Invalidates the cache of all ancestors
@@ -472,14 +481,14 @@ class Question {
 		this.previous_mastery_level = this.mastery_level
 		
 		// Determine whether the answer is correct.
-		let correct = this.is_correct(response)
+		let attempt_result = this.is_correct(response)
 		
 		// Causes the earlier attempts to have much higher weight than later attempts.
 		// Because of this, the actual adaptation rate will always be slightly above the specified constant.
 		let altered_adaptation_rate = lerp(my_library.ADAPTATION_RATE, 1, 0.7 * Math.pow(0.7, this.num_attempts))
-		this.mastery_level = this.mastery_level * (1 - altered_adaptation_rate) + correct * altered_adaptation_rate
+		this.mastery_level = this.mastery_level * (1 - altered_adaptation_rate) + attempt_result.is_correct * altered_adaptation_rate
 		
-		let invalid_mastery_equ = this.previous_mastery_level + " * (1 - " + altered_adaptation_rate + ") + " + correct + " * " + altered_adaptation_rate
+		let invalid_mastery_equ = this.previous_mastery_level + " * (1 - " + altered_adaptation_rate + ") + " + attempt_result.is_correct  + " * " + altered_adaptation_rate
 		console.assert(!isNaN(this.mastery_level), invalid_mastery_equ)
 		console.assert(this.mastery_level != 0, invalid_mastery_equ)
 		console.assert(this.mastery_level != 1, invalid_mastery_equ)
@@ -488,7 +497,7 @@ class Question {
 
 		this.was_asked_last = true
 		this.num_attempts++
-		return correct
+		return attempt_result
 	}
 	
 	// Undoes the result of the last call to attempt(), but leaves was_asked_last unmodified.

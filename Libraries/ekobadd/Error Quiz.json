@@ -13,7 +13,7 @@
 			"Question": {
 				"mode-of-presentation": "multiple-choice",
 				"answers": "correct",
-				"incorrect-answers": ["corner", "carrot", 3]
+				"incorrect-answers": ["corner", "carrot", "3"]
 			}
 		},
 		"MarkDown":  {

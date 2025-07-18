@@ -170,6 +170,7 @@ class QuestionGroup {
 		// Values which are loaded from file
 		let children = []
 		this.incorrect_answers = null
+		this.is_hidden = false
 		
 		this.descendants_give_incorrect_answers = null
 		this.case_sensitive = null
@@ -226,6 +227,17 @@ class QuestionGroup {
 				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'correct-answer-source' must be one of 'primary' or 'random'.")
 			
 			/* ---- Read Non-Inheritables ---- */
+			
+			// Read hidden
+			if (qg_data["hidden"]) {
+				if (typeof qg_data["hidden"] != "boolean")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'hidden' must be boolean.")
+				
+				this.is_hidden = qg_data["hidden"]
+			}
+			else {
+				this.is_hidden = false
+			}
 			
 			// Read incorrect-answers
 			if (qg_data["incorrect-answers"]) {
@@ -307,6 +319,7 @@ class QuestionGroup {
 			this.correct_answer_source = this.parent_group.correct_answer_source
 			
 			// Default all non-inheritables
+			this.is_hidden = false
 			this.incorrect_answers = []
 			
 			// Attempt interpretation as list of implicit and embedded-explicit questions.
@@ -366,6 +379,7 @@ class QuestionGroup {
 		console.assert(this.correct_answer_source != null, "Failed to obtain correct-answer-source")
 		
 		console.assert(this.incorrect_answers != null, "Failed to obtain incorrect-answers.")
+		console.assert(this.is_hidden != null, "Failed to obtain hidden.")
 		
 		for (let i = 0; i < this.incorrect_answers.length; i++) {
 			this.incorrect_answers[i] = new MarkDown(this.incorrect_answers[i])
@@ -401,6 +415,20 @@ class QuestionGroup {
 			.join('')
 		
 		return hash_hex
+	}
+	
+	// Returns whether this group appears in the library hierarchy (with editing disabled)
+	// If editing is enabled, hidden groups do appear.
+	// TODO: Implement function to determine whether a group is visible and whether its children are visible, as a proxy to determine whether check_elem and collapsible_elem are valid.
+	get_hidden() {
+		if (this.is_hidden || this.children.length == 0) return true
+		
+		if (this.am_root) {
+			return false
+		}
+		else {
+			return this.parent_group.get_hidden()
+		}
 	}
 	
 	// Recursively reset all questions to their default state.
@@ -830,11 +858,26 @@ class QuestionGroup {
 		this.cache_valid = true
 	}
 	
+	// Returns true if at least one child is an unhidden group, false otherwise.
+	children_are_all_hidden() {
+		if (this.children_are_groups) {
+			for (let child of this.children) {
+				if (!child.get_hidden()) {
+					return false
+				}
+			}
+		}
+		
+		return true
+	}
+	
 	// Create HTML that represents this QuestionGroup so that users can interact with the objects.
 	// This function is recursive and only needs to be called once on the root.
 	// Generated HTML is automatically appended to the node that is passed.
 	// If editing_pane is not null, the user will be able to toggle editing with a button. If they toggle it on, editing controls will be added which retain references to the pane.
 	generate_HTML(doc_parent, editing_pane = null, currently_editing = false) {
+		if (!currently_editing && this.get_hidden()) return
+		
 		// Save the container so that this group can regenerate its own HTML when changes occur.
 		this.html_container = doc_parent
 		this.html_edit_container = editing_pane
@@ -853,8 +896,10 @@ class QuestionGroup {
 		let text_node = document.createElement("text")
 		text_node.textContent = this.label
 		
+		let do_generate_children = !this.children_are_all_hidden() || (currently_editing && this.children_are_groups && this.children.length > 0)
+		
 		// Generate child collapsibles.
-		if (this.children_are_groups) {
+		if (do_generate_children) {
 			var content = document.createElement("div")
 			content.setAttribute("class", "collapsible_content")
 			
@@ -907,7 +952,8 @@ class QuestionGroup {
 			}
 		}
 			
-		if (this.children_are_groups) { this.expand_elem = header.appendChild(expand_node) }
+		if (do_generate_children) this.expand_elem = header.appendChild(expand_node)
+			
 		this.check_elem = header.appendChild(check_node)
 		this.html_label_element = header.appendChild(text_node)
 		if (editing_pane && currently_editing) {
@@ -916,12 +962,12 @@ class QuestionGroup {
 				header.appendChild(move_up_node)
 				header.appendChild(move_down_node)
 			}
-			if (this.children_are_groups) { header.appendChild(new_group_node) }
+			if (this.children_are_groups) header.appendChild(new_group_node)
 		}
 		
 		this.html_header_root = doc_parent.appendChild(header)
-		if (this.children_are_groups) { this.html_content_root = doc_parent.appendChild(content) }
-		else { this.html_content_root = null }
+		if (do_generate_children) this.html_content_root = doc_parent.appendChild(content)
+		else this.html_content_root = null
 	}
 	
 	// Regenerates the HTML representing this object.
@@ -968,7 +1014,7 @@ class QuestionGroup {
 	// in order to make it match the value of this.is_expanded.
 	// These can desync when regenerating HTML.
 	reset_expansion() {
-		if (this.children_are_groups) {
+		if (this.children_are_groups && !this.children_are_all_hidden()) {
 			if (this.expand_elem.classList.contains("active") != this.is_expanded) {
 				this.expand_elem.click()
 			}
@@ -1063,7 +1109,10 @@ class QuestionGroup {
 	// Triggers check_event callback
 	disable_and_uncheck() {
 		this.is_enabled = false
-		this.check_elem.checked = false
+		if (!this.get_hidden()) {
+			console.assert(this.check_elem != null)
+			this.check_elem.checked = false
+		}
 	}
 	
 	// Enables this element and then checks the corresponding HTML.
@@ -1071,15 +1120,21 @@ class QuestionGroup {
 	// Triggers check_event callback
 	enable_and_check() {
 		this.is_enabled = true
-		this.check_elem.checked = true
+		if (!this.get_hidden()) {
+			console.assert(this.check_elem != null)
+			this.check_elem.checked = true
+		}
 	}
 	
 	// Called by the checkbox event listener to recursively enable all child checkboxes.
 	check_all_descendents() {
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].check_elem.checked = true
-				this.children[i].check_all_descendents()
+				if (!this.children[i].get_hidden()) {
+					console.assert(this.children[i].check_elem != null)
+					this.children[i].check_elem.checked = true
+					this.children[i].check_all_descendents()
+				}
 			}
 		}
 	}
@@ -1114,8 +1169,11 @@ class QuestionGroup {
 	reset_all_descendents() {
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].check_elem.checked = this.children[i].get_enabled() // TODO: this call is unnecessary.
-				this.children[i].reset_all_descendents()
+				if (!this.children[i].get_hidden()) {
+					console.assert(this.children[i].check_elem != null)
+					this.children[i].check_elem.checked = this.children[i].get_enabled() // TODO: this call is unnecessary.
+					this.children[i].reset_all_descendents()
+				}
 			}
 		}
 	}

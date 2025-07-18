@@ -358,13 +358,11 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
-- Further testing required on progress save/load
-- Implement hidden groups
-	- Auto-hide empty groups
 - Fix type-to-select underlines.
 	- Requires tagging support in MarkDown.js
 - Worried about consequences of the asynchronous save procedure.
 - API serves quizzes
+	- API auto-assigns question/group ID numbers to assist in the correct loading of progress objects at a later time.
 - Library tagging
 - **Editing Support**
 	- Query Params control editing availability

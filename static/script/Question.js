@@ -274,7 +274,6 @@ class Question {
 		this.mastery_level = obj["ml"]
 		this.num_attemptes = obj["na"]
 		this.windowed = obj["iw"]
-		if (this.windowed !== false) console.log(obj["iw"])
 	}
 	
 	// Returns the library that this Question ultimately descends from.

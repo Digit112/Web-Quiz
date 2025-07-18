@@ -119,7 +119,7 @@ class QuestionGroup {
 		// The total number of enabled questions which descend from this group.
 		this.enabled_weight = 0
 		
-		// The total number of windowed questions which descend from this group.
+		// The total number of enabled windowed questions which descend from this group.
 		this.windowed_weight = 0
 		
 		// The sum of get_adaptive_weight() of all active descended questions.
@@ -1110,17 +1110,12 @@ class QuestionGroup {
 	}
 	
 	// Called by the checkbox event listener to recursively disable all child checkboxes.
-	// Children are only actually reset if they hadn't been previously checked manually.
+	// Questions are not modified
 	reset_all_descendents() {
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].check_elem.checked = this.children[i].get_enabled() // TODO: this and the other get_enabled() call are both unnecessary.
+				this.children[i].check_elem.checked = this.children[i].get_enabled() // TODO: this call is unnecessary.
 				this.children[i].reset_all_descendents()
-			}
-		}
-		else {
-			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].windowed &&= this.children[i].get_enabled()
 			}
 		}
 	}
@@ -1169,18 +1164,21 @@ class QuestionGroup {
 	}
 	
 	// Prints the weight of this node and all descendants.
-	debug_weights(depth = 0) {
+	debug_weights(depth = 0, is_any_ancestor_enabled = false) {
+		let is_enabled = this.is_enabled || is_any_ancestor_enabled
+		
+		if (depth == 0) console.log("label: (enabled?) num questions / enabled / windowed / adaptive; difficulty")
+		
 		let str = ""
 		for (let i = 0; i < depth; i++) str += ". "
 		
-		str += this.label + ": " + this.weight + "/" + this.enabled_weight + "/" + this.windowed_weight + "/" + this.adaptive_weight + "; " + this.difficulty
+		str += this.label + ": (" + (is_enabled ? "Y" : "N") + ") " + this.weight + "/" + this.enabled_weight + "/" + this.windowed_weight + "/" + this.adaptive_weight + "; " + this.difficulty
 		
-		if (depth == 0) console.log("label: num questions / enabled / windowed / adaptive / difficulty")
 		console.log(str)
 		
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].debug_weights(depth + 1)
+				this.children[i].debug_weights(depth + 1, is_enabled)
 			}
 		}
 	}

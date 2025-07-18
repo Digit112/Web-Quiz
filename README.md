@@ -358,7 +358,6 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
-- Pass button
 - Progress Export & Import
 - Implement hidden groups
 	- Auto-hide empty groups

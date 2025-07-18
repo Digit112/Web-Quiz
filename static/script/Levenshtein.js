@@ -20,51 +20,57 @@ class LevenshteinMatrix {
 		}
 		
 		// The last row which we finished calculating.
+		// We only store two (partial) rows at a time.
 		this.last_full_row = 0
-		
 		this.row_pair = [null, []]
 		
-		let rmin = 1
-		let rmax = this.get_max_r(this.b.length)
-		for (let r = rmin; r <= rmax; r++) {
-			let cmin = this.get_min_c(r)
-			let cmax = this.get_max_c(r)
-			
-//			console.log("Calculating [" + r + ", " + cmin + "] to [" + r + ", " + cmax + "]...")
-			for (let c = cmin; c <= cmax; c++) {
-				let a_char = this.a[r - 1]
-				let b_char = this.b[c - 1]
+		if (a.length > 0 && b.length > 0) {
+			let rmin = 1
+			let rmax = this.get_max_r(this.b.length)
+			for (let r = rmin; r <= rmax; r++) {
+				let cmin = this.get_min_c(r)
+				let cmax = this.get_max_c(r)
 				
-				let substitution_cost = 1
-				if (a_char == b_char) {
-					substitution_cost = 0
+	//			console.log("Calculating [" + r + ", " + cmin + "] to [" + r + ", " + cmax + "]...")
+				for (let c = cmin; c <= cmax; c++) {
+					let a_char = this.a[r - 1]
+					let b_char = this.b[c - 1]
+					
+					let substitution_cost = 1
+					if (a_char == b_char) {
+						substitution_cost = 0
+					}
+					
+					let lev_ins = this.get(r,   c-1) + 1
+					let lev_del = this.get(r-1, c  ) + 1
+					let lev_sub = this.get(r-1, c-1) + substitution_cost
+					
+					console.assert(!isNaN(lev_ins), "ins: " + lev_ins + ", del: " + lev_del + ", sub: " + lev_sub)
+					console.assert(!isNaN(lev_del), "ins: " + lev_ins + ", del: " + lev_del + ", sub: " + lev_sub)
+					console.assert(!isNaN(lev_sub), "ins: " + lev_ins + ", del: " + lev_del + ", sub: " + lev_sub)
+					
+					this.row_pair[1].push(Math.min(lev_ins, lev_del, lev_sub))
 				}
 				
-				let lev_ins = this.get(r,   c-1) + 1
-				let lev_del = this.get(r-1, c  ) + 1
-				let lev_sub = this.get(r-1, c-1) + substitution_cost
-				
-				console.assert(!isNaN(lev_ins), "ins: " + lev_ins + ", del: " + lev_del + ", sub: " + lev_sub)
-				console.assert(!isNaN(lev_del), "ins: " + lev_ins + ", del: " + lev_del + ", sub: " + lev_sub)
-				console.assert(!isNaN(lev_sub), "ins: " + lev_ins + ", del: " + lev_del + ", sub: " + lev_sub)
-				
-				this.row_pair[1].push(Math.min(lev_ins, lev_del, lev_sub))
+				this.advance_rows()
 			}
 			
-			this.advance_rows()
+			if (this.debug) console.log(this.debug_str)
+			
+			this.value = this.row_pair[0][this.row_pair[0].length-1]
+			
+			// Account for unused columns
+			if (this.debug) console.log("Adjusting for extra columns gives: max(0, " + this.b.length + " - " + this.get_max_c(this.a.length) + ") = " + Math.max(0, this.b.length - this.get_max_c(this.a.length)))
+			this.value += Math.max(0, this.b.length - this.get_max_c(this.a.length))
+			
+			// Account for unused rows
+			if (this.debug) console.log("Adjusting for extra rows gives: max(0, " + this.a.length + " - " + this.get_max_r(this.b.length) + ") = " + Math.max(0, this.a.length - this.get_max_r(this.b.length)))
+			this.value += Math.max(0, this.a.length - this.get_max_r(this.b.length))
 		}
-		
-		if (this.debug) console.log(this.debug_str)
-		
-		this.value = this.row_pair[0][this.row_pair[0].length-1]
-		
-		// Account for unused columns
-		if (this.debug) console.log("Adjusting for extra columns gives: max(0, " + this.b.length + " - " + this.get_max_c(this.a.length) + ") = " + Math.max(0, this.b.length - this.get_max_c(this.a.length)))
-		this.value += Math.max(0, this.b.length - this.get_max_c(this.a.length))
-		
-		// Account for unused rows
-		if (this.debug) console.log("Adjusting for extra rows gives: max(0, " + this.a.length + " - " + this.get_max_r(this.b.length) + ") = " + Math.max(0, this.a.length - this.get_max_r(this.b.length)))
-		this.value += Math.max(0, this.a.length - this.get_max_r(this.b.length))
+		else {
+			// Special case where one or both strings are empty.
+			this.value = Math.max(a.length, b.length)
+		}
 		
 		if (this.debug) console.log("Final value is " + this.value)
 		if (this.value > this.max) this.value = Infinity

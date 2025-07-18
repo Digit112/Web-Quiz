@@ -24,6 +24,7 @@ let shuffle_explanation = document.getElementById("shuffle_explanation")
 let reset_progress = document.getElementById("reset_progress")
 
 let begin_button = document.getElementById("begin-button")
+let pass_button = document.getElementById("pass-button")
 
 let verbatim_field = document.getElementById("verbatim-field")
 let multiple_choice_field = document.getElementById("multiple-choice-field")
@@ -167,11 +168,15 @@ reset_progress.addEventListener("click", () => {
 	my_library.reset_progress()
 })
 
-// Secretly the same as next-question
 begin_button.addEventListener("click", () => {
 	if (generate_next_question()) {
 		begin_button.style.display = "none"
+		pass_button.style.display = "block"
 	}
+})
+
+pass_button.addEventListener("click", () => {
+	generate_next_question(true)
 })
 
 // Add Event Listener for the next question button.
@@ -183,7 +188,8 @@ answer_text.addEventListener("keydown", (e) => {
 })
 
 // Generate a new question.
-function generate_next_question() {
+// Grades the answer to the current question if it exists and updates the Library structure accordingly.
+function generate_next_question(did_pass = false) {
 	// Cache values to prevent them from being changed while the function is running.
 	let am_adaptive = adapt_gen.checked
 	let am_quiz = quiz_gen.checked
@@ -214,7 +220,7 @@ function generate_next_question() {
 		
 		// Check the answer.
 		let answer = answer_text.value.trim()
-		if (answer == "") return false // Do nothing if no answer provided.
+		if (!did_pass && answer == "") return false // Do nothing if no answer provided.
 		
 		let attempt_result = active_question.attempt(answer)
 		console.log("  Question now has a remainder of " + (active_question.get_remainder() * 100).toFixed(1) + "%")
@@ -232,8 +238,14 @@ function generate_next_question() {
 			if (am_quiz) quiz_score++
 		}
 		else {
-			correct_indicator.textContent = "Incorrect"
-			correct_indicator.style.color = "#700"
+			if (did_pass) {
+				correct_indicator.textContent = "Passed"
+				correct_indicator.style.color = "#710"
+			}
+			else {
+				correct_indicator.textContent = "Incorrect"
+				correct_indicator.style.color = "#700"
+			}
 		}
 		
 		last_question.replaceChildren(active_question.q[0].as_html())

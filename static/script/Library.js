@@ -21,7 +21,7 @@ class LibraryLoadingError extends Error {
 function import_event(e) {
 	const file = e.target.files[0]; // Get the first selected file
 	e.target.value = ""
-	if (!file) { return }
+	if (!file) return
 	
 	// File object is now available for further processing
 	console.log("Loading '", file.name + "', (" + file.size + " Bytes, " + file.type + ")");
@@ -69,7 +69,36 @@ function import_event(e) {
 		
 		active_question = null
 		quiz_score = 0
-	};
+	}
+	
+	reader.readAsText(file)
+}
+
+function load_progress_event(e) {
+	const file = e.target.files[0]; // Get the first selected file
+	e.target.value = ""
+	if (!file) return
+	
+	// File object is now available for further processing
+	console.log("Loading Progress '", file.name + "', (" + file.size + " Bytes, " + file.type + ")");
+	
+	const reader = new FileReader();
+	reader.onload = async (e) => {
+		try {
+			await my_library.load_save_string(reader.result)
+		}
+		catch (e) {
+			if (e instanceof DOMException) {
+				let error_line_span = document.createElement("span")
+				error_line_span.textContent = "Encountered error while attempting to parse save file."
+				my_library.library_loading_error_label.appendChild(error_line_span)
+				my_library.library_loading_error_label.style.display = "block"
+			}
+			else {
+				throw e
+			}
+		}
+	}
 	
 	reader.readAsText(file)
 }
@@ -158,12 +187,12 @@ class Library {
 		import_button.textContent = "Import"
 		import_button.addEventListener("click", () => import_file_selector.click())
 		
-		if (this.root_q) {
+		if (this.root_q != null) {
 			var export_button = document.createElement("button")
 			export_button.setAttribute("class", "library-header-control")
 			export_button.textContent = "Export"
 			
-			if (editing_pane) {
+			if (editing_pane != null) {
 				var editing_controls_toggle = document.createElement("button")
 				editing_controls_toggle.setAttribute("class", "library-header-control")
 				editing_controls_toggle.textContent = currently_editing ? "Disable Editing" : "Enable Editing"
@@ -179,7 +208,7 @@ class Library {
 		library_header.appendChild(import_button)
 		library_header.appendChild(import_file_selector)
 		
-		if (this.root_q) {
+		if (this.root_q != null) {
 			library_header.appendChild(export_button)
 			
 			if (editing_pane) {
@@ -190,7 +219,33 @@ class Library {
 		library_header.appendChild(this.library_loading_error_label)
 			
 		doc_parent.appendChild(library_header)
+		
+		/* ---- Generate Body ---- */
 		if (this.root_q) { this.root_q.generate_HTML(doc_parent, editing_pane, currently_editing) }
+		
+		if (this.root_q) {
+			var library_footer = document.createElement("div")
+			library_footer.setAttribute("class", "library-footer")
+			
+			// Create save/load buttons and another invisible file selector.
+			// This is the only thing the user will see if the library is empty.
+			var load_progress_selector = document.createElement("input")
+			load_progress_selector.setAttribute("type", "file")
+			load_progress_selector.setAttribute("id", "progress-upload")
+			load_progress_selector.style.display = "none"
+			load_progress_selector.addEventListener("change", load_progress_event)
+			
+			var load_progress_button = document.createElement("button")
+			load_progress_button.setAttribute("class", "library-header-control")
+			load_progress_button.textContent = "Load Progress"
+			load_progress_button.addEventListener("click", () => load_progress_selector.click())
+		}
+		
+		if (this.root_q) {
+			library_footer.appendChild(load_progress_button)
+			
+			doc_parent.appendChild(library_footer)
+		}
 	}
 	
 	regenerate_HTML() {

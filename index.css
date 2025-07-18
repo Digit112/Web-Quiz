@@ -5,12 +5,12 @@ body {
 		text-align: center;
 	}
 	
-	.library-header {
+	.library-header, .library-footer {
 		margin: 0.5em 0;
 	}
 	
 	.library-header-control {
-		margin: 0 0.5em;
+		margin: 0.2em 0.5em;
 		
 		border: 1px solid black;
 	}

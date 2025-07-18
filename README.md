@@ -359,12 +359,12 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 ### Must-Have
 
 - Pass button
-- Notification of correct answer with typos
 - Progress Export & Import
 - Implement hidden groups
 	- Auto-hide empty groups
 - Fix type-to-select underlines.
 	- Requires tagging support in MarkDown.js
+- Worried about consequences of the asynchronous save procedure.
 - API serves quizzes
 - Library tagging
 - **Editing Support**

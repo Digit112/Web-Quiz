@@ -31,6 +31,7 @@ let multiple_choice_field = document.getElementById("multiple-choice-field")
 let current_mode = null
 
 let question_text = document.getElementById("question-text")
+let question_notes_field = document.getElementById("question-notes-field")
 let answer_text = document.getElementById("answer-text")
 let next_question = document.getElementById("next-question")
 
@@ -369,6 +370,15 @@ function generate_next_question(did_pass = false) {
 	
 	// Display the question.
 	question_text.replaceChildren(active_question.q[0].as_html())
+	
+	if (active_question.case_sensitive) {
+		question_notes_field.style.display = "block"
+		question_notes_field.textContent = "(Case Sensitive)"
+	}
+	else {
+		question_notes_field.style.display = "none"
+		question_notes_field.textContent = ""
+	}
 	
 	if (active_question.mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"

@@ -358,32 +358,47 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
-- Fix type-to-select underlines.
-	- Requires tagging support in MarkDown.js
-- Worried about consequences of the asynchronous save procedure.
+#### Initial Release (No Editing)
+
+- Wipe question on library reload
+- More feedback.
+	- Feedback that loading progress was successful.
+	- Progress indicators are **vital**. Show relevant mastery levels.
+	- Quiz progress indicator.
+		- A proper quiz result readout (num correct, incorrect, passed, percent score)
 - API serves quizzes
-	- API auto-assigns question/group ID numbers to assist in the correct loading of progress objects at a later time.
+
+#### Editing Release
+
+- Refactor Library loading to a LibraryFactory.
+	- Potentially make a LibraryRenderer as well?
+- Implement `question-importance`
 - Library tagging
 - **Editing Support**
 	- Query Params control editing availability
 	- QuestionGroup export
 	- Advanced QuestionGroup Editing features
+	- API auto-assigns question/group ID numbers to assist in the correct loading of progress objects at a later time.
 
 ### Should-Have
 
+- Reset Question Window Button
+- Identifier for no typo forgiveness.
+- Worried about consequences of the asynchronous save procedure.
 - Library loader should actually conform to the spec....
-- Warn the user about case-sensitive questions.
 - Show the number of questions and number of questions selected while rendering groups.
 - Presentation type negotiation (between Library and User Preferences)
-- Arrow-key multiple-choice selection.
 - Dark mode.
-- Localization Support
 
 ### Could-Have
 
-- Ability to specify totally separate question sets depending on a group's negotiated mode of presentation.
+- Fix type-to-select underlines.
+	- Requires tagging support in MarkDown.js
+- Arrow-key multiple-choice selection.
 - Warnings for unrecognized values in JSON.
 - Question Inversion
 - "Put the pieces in order" question type.
 - "Select all that apply" question type.
+- Localization Support
 - `"auto"` setting for typo forgiveness.
+- Ability to specify totally separate question sets depending on a group's negotiated mode of presentation.

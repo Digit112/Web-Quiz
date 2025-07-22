@@ -340,6 +340,7 @@ class Question {
 			let incorrect_answer = this.get_incorrect_answer_by_index(incorrect_answer_index)
 			//console.log("Got '" + incorrect_answer + "'")
 			
+			// TODO: Now that incorrect answers are MarkDown objects, the includes() call no longer excludes duplicates!
 			if (!ret.includes(incorrect_answer) && !this.is_exactly_correct(incorrect_answer.as_text())) {
 				ret.push(incorrect_answer)
 				if (ret.length == num_answers) return ret
@@ -381,7 +382,6 @@ class Question {
 	
 	// Returns whether this question can be picked as the next question the user will see.
 	get_active(am_windowed) {
-		if (this.windowed && !this.get_enabled()) throw new Error("Cannot be windowed and disabled at once.")
 		return am_windowed ? this.windowed : this.get_enabled()
 	}
 	

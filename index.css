@@ -24,6 +24,17 @@ body {
 		}
 	}
 	
+	#question-text {
+		margin: 0;
+		font-size: 2em;
+	}
+	
+	#question-notes-field {
+		margin: 0;
+		color: #444;
+		font-style: italic;
+	}
+	
 	#multiple-choice-field {
 		display: flex;
 		flex-wrap: wrap;

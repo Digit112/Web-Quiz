@@ -57,13 +57,13 @@ function import_event(e) {
 			error_line_span.textContent = "Encountered error while attempting to parse Library file!"
 			
 			my_library.library_loading_error_label.appendChild(error_line_span)
-			my_library.library_loading_error_label.appendChild(document.createElement("br"))
+			my_library.library_loading_error_label.appendChild(document.createElement("hr"))
 			
 			for (let i = 0; i < error_lines.length; i++) {
 				let error_line_span = document.createElement("span")
 				error_line_span.textContent = error_lines[i]
 				
-				my_library.library_loading_error_label.appendChild(document.createElement("br"))
+				if (i > 0) my_library.library_loading_error_label.appendChild(document.createElement("br"))
 				my_library.library_loading_error_label.appendChild(error_line_span)
 			}
 			
@@ -165,7 +165,7 @@ class Library {
 		this.editing_pane = null
 		this.currently_editing = false
 		
-		// Returned for callbacks.
+		// Used to display errors caught while attempting to load a library.
 		this.library_loading_error_label = null
 		
 		if (library_data) { this.initialize(library_data) }
@@ -226,6 +226,7 @@ class Library {
 		
 		this.library_loading_error_label = document.createElement("p")
 		this.library_loading_error_label.style.display = "none"
+		this.library_loading_error_label.setAttribute("class", "library-loading-errpr")
 		
 		library_header.appendChild(import_button)
 		library_header.appendChild(import_file_selector)

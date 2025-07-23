@@ -1,4 +1,13 @@
 body {
+	--correct-col: #070;
+	--correct-typo-col: #470;
+	--error-passed-col: #710;
+	--error-col: #700;
+	
+	--error-box-fg: #900;
+	--error-box-hr: #933;
+	--error-box-bg: #FFE4E4;
+	
 	font-family: Calibri, sans-serif;
 	
 	h1 {
@@ -12,6 +21,18 @@ body {
 	.library-header-control, .library-footer-control {
 		margin: 0.3em 0.5em;
 		border: 1px solid black;
+	}
+	
+	.library-loading-errpr {
+		padding: 0.5em;
+		margin: 0.5em 1em;
+		border: 2px solid var(--error-box-fg);
+		background-color: var(--error-box-bg);
+		
+		hr {
+			border: 1px solid var(--error-box-hr);
+			margin: 0.2em 0;
+		}
 	}
 	
 	.library-options {

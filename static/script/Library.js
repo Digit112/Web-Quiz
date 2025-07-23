@@ -23,6 +23,9 @@ function import_event(e) {
 	e.target.value = ""
 	if (!file) return
 	
+	// Defined in library-loader.js
+	reset_interface()
+	
 	// File object is now available for further processing
 	console.log("Loading '", file.name + "', (" + file.size + " Bytes, " + file.type + ")");
 

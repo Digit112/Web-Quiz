@@ -8,7 +8,7 @@
 	"adaptive-weight-bias": 12,
 	"ideal-overall-difficulty": 0.27,
 	
-	"comment": ["assigned access", "diskmgmt.msc", "VPN"],
+	"comment": ["assigned access", "diskmgmt.msc", "VPN", "Metered Connection"],
 	
 	"question-root": {
 		"typo-forgiveness-level": "medium",
@@ -359,7 +359,12 @@
 						}
 					},
 					"Networking Features (1.6)": {
-						
+						"hidden": true,
+						"descendants-give-incorrect-answers": true,
+						"questions": {
+							"In Windows, a *public* network": ["Is Untrusted", "Disallows Discovery", "Disallows Printer Sharing"],
+							"In Windows, a *private* network is": ["Is Trusted", "Allows Discovery", "Allows Printer Sharing"]
+						}
 					},
 					"Other Windows Concepts": {
 						"block 1": {
@@ -451,7 +456,7 @@
 					},
 					"MBR vs GPT": {
 						"mode-of-presentation": "multiple-choice",
-						"incorrect-answers": ["MBR", "GPT"]
+						"incorrect-answers": ["MBR", "GPT"],
 						"questions": {
 							"Which partitioning scheme is newer and offers improved capabilities including corruption-tolerance?": "GPT",
 							"Which partitioning scheme is obsoleted and mostly replaced by the other?": "MBR",

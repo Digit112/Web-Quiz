@@ -360,13 +360,13 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 #### Initial Release (No Editing)
 
-- Wipe question on library reload
 - More feedback.
 	- Feedback that loading progress was successful.
 	- Progress indicators are **vital**. Show relevant mastery levels.
 	- Quiz progress indicator.
 		- A proper quiz result readout (num correct, incorrect, passed, percent score)
 - API serves quizzes
+- Handle TODOs!
 
 #### Editing Release
 

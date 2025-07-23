@@ -28,7 +28,6 @@ let pass_button = document.getElementById("pass-button")
 
 let verbatim_field = document.getElementById("verbatim-field")
 let multiple_choice_field = document.getElementById("multiple-choice-field")
-let current_mode = null
 
 let question_text = document.getElementById("question-text")
 let question_notes_field = document.getElementById("question-notes-field")
@@ -51,6 +50,22 @@ let quiz_score = 0
 
 // Used to deteermine when to save progress.
 let attempts_since_last_save = 0
+
+function reset_interface() {
+	// Reset Question area
+	question_text.textContent = "?"
+	question_notes_field.textContent = ""
+	question_notes_field.style.display = ""
+	verbatim_field.style.display = "none"
+	multiple_choice_field.style.display = "none"
+	
+	// Reset Response area
+	begin_button.style.display = "block"
+	pass_button.style.display = "none"
+	
+	// Reset type-to-select
+	type_select_handler.attempt_set_value("")
+}
 
 // These listeners are used to allow users to select multiple-choice questions by typing them.
 // Allows the user to submit their selection and also use backspace.

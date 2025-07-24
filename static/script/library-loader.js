@@ -40,9 +40,9 @@ let your_response = document.getElementById("your-response")
 let correct_answer_label = document.getElementById("correct-answer-label")
 let correct_answer = document.getElementById("correct-answer")
 
+let progress_div = document.getElementById("progress-div")
 let progress_expand = document.getElementById("progress-expand")
 let progress_div_body = document.getElementById("progress-div-body")
-let windowed_progress = document.getElementById("windowed-progress")
 let selected_progress = document.getElementById("selected-progress")
 let library_progress = document.getElementById("library-progress")
 
@@ -68,8 +68,8 @@ function reset_interface() {
 	// Reset Response area
 	begin_button.style.display = "block"
 	pass_button.style.display = "none"
+	progress_div.style.display = "none"
 	
-	windowed_progress.textContent = "N/A"
 	selected_progress.textContent = "N/A"
 	library_progress.textContent = "N/A"
 	
@@ -84,20 +84,19 @@ function reset_interface() {
 function update_progress_bars() {
 	let am_adaptive = adapt_gen.checked
 	
-	my_library.cache_weights(am_adaptive, true)
-	let win_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
-	
+	// Cache weights with windowing disabled to get difficulty of all enabled questions.
 	my_library.cache_weights(am_adaptive, false)
+	console.log("Selected diff: " + my_library.root_q.difficulty)
 	let sel_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
 	
 	// Enable the root to get the difficulty of the entire library.
-	let orig_root_enabled = my_library.root_q.enabled
-	my_library.root_q.enabled = true
+	let orig_root_enabled = my_library.root_q.is_enabled
+	my_library.root_q.is_enabled = true
 	my_library.cache_weights(am_adaptive, false)
+	console.log("Library diff: " + my_library.root_q.difficulty)
 	let lib_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
-	my_library.root_q.enabled = orig_root_enabled
+	my_library.root_q.is_enabled = orig_root_enabled
 	
-	windowed_progress.textContent = (win_prog * 100).toFixed(1) + "%"
 	selected_progress.textContent = (sel_prog * 100).toFixed(1) + "%"
 	library_progress.textContent = (lib_prog * 100).toFixed(1) + "%"
 }
@@ -222,7 +221,9 @@ reset_progress.addEventListener("click", () => {
 begin_button.addEventListener("click", () => {
 	if (generate_next_question()) {
 		begin_button.style.display = "none"
+		
 		pass_button.style.display = "block"
+		progress_div.style.display = "block"
 	}
 })
 
@@ -240,10 +241,10 @@ answer_text.addEventListener("keydown", (e) => {
 
 progress_expand.addEventListener("click", () => {
 	if (progress_div_body.style.display === "block") {
-		progress_div_body.style.display == "none"
+		progress_div_body.style.display = "none"
 	}
 	else {
-		progress_div_body.style.display == "block"
+		progress_div_body.style.display = "block"
 	}
 })
 

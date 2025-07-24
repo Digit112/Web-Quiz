@@ -69,6 +69,10 @@ function import_event(e) {
 			
 			my_library.library_loading_error_label.style.display = "block"
 		}
+		else {
+			console.assert(my_library.root_q != null)
+			update_progress_bars()
+		}
 		
 		active_question = null
 		quiz_score = 0

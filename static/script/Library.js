@@ -54,7 +54,7 @@ function import_event(e) {
 			let error_lines = error.message.split("\n")
 			
 			let error_line_span = document.createElement("span")
-			error_line_span.textContent = "Encountered error while attempting to parse Library file!"
+			error_line_span.textContent = "Encountered an error while attempting to parse the library file."
 			
 			my_library.library_loading_error_label.appendChild(error_line_span)
 			my_library.library_loading_error_label.appendChild(document.createElement("hr"))
@@ -97,7 +97,7 @@ function load_progress_event(e) {
 		catch (e) {
 			if (e instanceof DOMException) {
 				let error_line_span = document.createElement("span")
-				error_line_span.textContent = "Encountered error while attempting to parse save file."
+				error_line_span.textContent = "Encountered an error while attempting to parse the save file."
 				my_library.library_loading_error_label.appendChild(error_line_span)
 				my_library.library_loading_error_label.style.display = "block"
 			}

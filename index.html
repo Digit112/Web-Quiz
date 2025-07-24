@@ -53,8 +53,8 @@
 			<div id="multiple-choice-field" style="display: none;">
 			</div>
 			
-			<button id="begin-button" type="button">Begin</button>
-			<button id="pass-button" style="display: none; margin: 0.3em 0;" type="button">Pass</button>
+			<button class="interface-button" id="begin-button" type="button">Begin</button>
+			<button class="interface-button" id="pass-button" style="display: none; margin: 0.3em 0;" type="button">Pass</button>
 			
 			<p class="attempt-indicator" id="correct-indicator" style="font-size: 1.3em;">N/A</p>
 			<p class="attempt-indicator">Last Question Was: <span id="last-question">N/A</span></p>
@@ -63,18 +63,21 @@
 			
 			<div id="progress-div" style="display: none;">
 				<div>
-					<button id="progress-expand" type="button">+</button>
+					<button class="interface-button" id="progress-expand" type="button">+</button>
 					<span>Progress on this Library</span>
 				</div>
 				<div id="progress-div-body" style="display: none;">
 					<p>
-						<span>Mastery over selected questions:</span><span id="selected-progress">N/A</span>
+						<span>Mastery over selected questions: </span><span id="selected-progress">N/A</span>
 						<br>
-						<span>Mastery over entire library:</span><span id="library-progress">N/A</span>
+						<span>Mastery over entire library: </span><span id="library-progress">N/A</span>
 					</p>
 				</div>
 			</div>
 		</article>
+		
+		<!-- Spacer -->
+		<div style="height: 300px;"></div>
 		
 		<script src="static/script/TypingEventHandler.js"></script>
 		<script src="static/script/MarkDown.js"></script>

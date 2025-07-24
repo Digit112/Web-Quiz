@@ -8,6 +8,8 @@ body {
 	--error-box-hr: #933;
 	--error-box-bg: #FFE4E4;
 	
+	--collapsible-check-checked: gray;
+	
 	font-family: Calibri, sans-serif;
 	
 	h1 {
@@ -149,7 +151,7 @@ body {
 		background-color: #B35;
 	}
 
-	/* For the buttons, on hover*/
+	/* For the buttons, on hover */
 	.active, .library-header-control:hover, .library-footer-control:hover {
 		background-color: #ccc;
 		cursor: pointer;
@@ -166,7 +168,7 @@ body {
 	}
 
 	.collapsible_check:checked {
-		background-color: gray;
+		background-color: var(--collapsible-check-checked);
 	}
 
 	/* For the content that is hidden by default. */
@@ -180,6 +182,24 @@ body {
 		margin: 0.4em 0em;
 		font-size: 0.8em;
 		color: #666;
+	}
+	
+	#progress-div-body {
+		margin-left: 2em;
+		
+		p {
+			margin: 0.3em 0;
+		}
+	}
+	
+	button.interface-button {
+		border-radius: 4px;
+		border: 1px solid black;
+	}
+	
+	button.interface-button:hover {
+		background-color: #ccc;
+		cursor: pointer;
 	}
 
 	/* td, th { */

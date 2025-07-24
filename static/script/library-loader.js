@@ -86,14 +86,12 @@ function update_progress_bars() {
 	
 	// Cache weights with windowing disabled to get difficulty of all enabled questions.
 	my_library.cache_weights(am_adaptive, false)
-	console.log("Selected diff: " + my_library.root_q.difficulty)
 	let sel_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
 	
 	// Enable the root to get the difficulty of the entire library.
 	let orig_root_enabled = my_library.root_q.is_enabled
 	my_library.root_q.is_enabled = true
 	my_library.cache_weights(am_adaptive, false)
-	console.log("Library diff: " + my_library.root_q.difficulty)
 	let lib_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
 	my_library.root_q.is_enabled = orig_root_enabled
 	

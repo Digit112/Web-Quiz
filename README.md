@@ -392,9 +392,12 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Could-Have
 
+- Allow different starting masteries for each question.
+	- STARTING_MASTERY will be replaced by an inheritable group property. This will impact many many things.
 - Fix type-to-select underlines.
 	- Requires tagging support in MarkDown.js
 - Arrow-key multiple-choice selection.
+- Rename "enabled" questions to "selected" questions"
 - Warnings for unrecognized values in JSON.
 - Question Inversion
 - "Put the pieces in order" question type.

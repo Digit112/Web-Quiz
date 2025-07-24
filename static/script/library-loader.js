@@ -40,6 +40,12 @@ let your_response = document.getElementById("your-response")
 let correct_answer_label = document.getElementById("correct-answer-label")
 let correct_answer = document.getElementById("correct-answer")
 
+let progress_expand = document.getElementById("progress-expand")
+let progress_div_body = document.getElementById("progress-div-body")
+let windowed_progress = document.getElementById("windowed-progress")
+let selected_progress = document.getElementById("selected-progress")
+let library_progress = document.getElementById("library-progress")
+
 let my_library = new Library()
 my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_pane)
 
@@ -63,8 +69,37 @@ function reset_interface() {
 	begin_button.style.display = "block"
 	pass_button.style.display = "none"
 	
+	windowed_progress.textContent = "N/A"
+	selected_progress.textContent = "N/A"
+	library_progress.textContent = "N/A"
+	
 	// Reset type-to-select
 	type_select_handler.attempt_set_value("")
+}
+
+// Fucks up the library caching.
+// TODO: This is *very* inefficient and should be a function on the library itself)
+// TODO: Also, this is just the raw mastery level which is not an excellant measure of true progress,
+//       it'd be better if it measured the deviation from starting mastery.
+function update_progress_bars() {
+	let am_adaptive = adapt_gen.checked
+	
+	my_library.cache_weights(am_adaptive, true)
+	let win_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
+	
+	my_library.cache_weights(am_adaptive, false)
+	let sel_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
+	
+	// Enable the root to get the difficulty of the entire library.
+	let orig_root_enabled = my_library.root_q.enabled
+	my_library.root_q.enabled = true
+	my_library.cache_weights(am_adaptive, false)
+	let lib_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
+	my_library.root_q.enabled = orig_root_enabled
+	
+	windowed_progress.textContent = (win_prog * 100).toFixed(1) + "%"
+	selected_progress.textContent = (sel_prog * 100).toFixed(1) + "%"
+	library_progress.textContent = (lib_prog * 100).toFixed(1) + "%"
 }
 
 // These listeners are used to allow users to select multiple-choice questions by typing them.
@@ -203,6 +238,15 @@ answer_text.addEventListener("keydown", (e) => {
 	}
 })
 
+progress_expand.addEventListener("click", () => {
+	if (progress_div_body.style.display === "block") {
+		progress_div_body.style.display == "none"
+	}
+	else {
+		progress_div_body.style.display == "block"
+	}
+})
+
 // Generate a new question.
 // Grades the answer to the current question if it exists and updates the Library structure accordingly.
 function generate_next_question(did_pass = false) {
@@ -286,6 +330,8 @@ function generate_next_question(did_pass = false) {
 		correct_answers.push("'")
 		correct_answer.replaceChildren(...correct_answers)
 	}
+	
+	update_progress_bars()
 	
 	// Update weights.
 	my_library.cache_weights(am_adaptive, am_windowed)

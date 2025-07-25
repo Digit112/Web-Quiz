@@ -524,7 +524,6 @@ class Question {
 	}
 	
 	// Calculates the adaptive weight of this question, for use in choosing random questions with adaptive mode enabled.
-	// Note that the actual weight will be this or the reciprocal of the number of questions, whichever is higher.
 	get_adaptive_weight() {
 		let my_library = this.get_library()
 		let raw_weight = 1 / Math.pow(my_library.ADAPTIVE_WEIGHT_BIAS, this.get_mastery())
@@ -574,6 +573,21 @@ class Question {
 		if (this.windowed) throw new Error("Cannot activate a windowed question.")
 		this.windowed = true
 		return this
+	}
+	
+	debug_questions(depth, is_enabled) {
+		let q_stmt = this.q[0].as_text()
+		if (q_stmt.length > 60) {
+			q_stmt = q_stmt.slice(0, 57) + "..."
+		}
+		
+		let str = ""
+		for (let i = 0; i < depth; i++) str += ". "
+		
+		str += "(" + (is_enabled ? "Y" : "N") + ") (" + (this.was_asked_last ? "Y" : "N") + ") " + this.num_attempts + " / " + this.get_adaptive_weight().toFixed(2) + "; " + this.mastery_level.toFixed(4) + " ('"
+		+ q_stmt + "')\n"
+		
+		return str
 	}
 	
 	/* ---- Do-nothing functions called by recursive QuestionGroup functions ---- */

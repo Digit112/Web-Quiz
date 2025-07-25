@@ -324,6 +324,14 @@ class Library {
 		this.root_q.cache_weights(am_adaptive, am_windowed)
 	}
 	
+	debug_groups() {
+		this.root_q.debug_groups()
+	}
+	
+	debug_questions() {
+		this.root_q.debug_questions()
+	}
+	
 	get_random(am_adaptive, am_windowed, last_asked) {
 		return this.root_q.get_random(am_adaptive, am_windowed, last_asked)
 	}

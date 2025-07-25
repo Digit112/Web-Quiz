@@ -1222,38 +1222,43 @@ class QuestionGroup {
 	}
 	
 	// Prints the weight of this node and all descendants.
-	debug_weights(depth = 0, is_any_ancestor_enabled = false) {
+	debug_groups(depth = 0, is_any_ancestor_enabled = false) {
 		let is_enabled = this.is_enabled || is_any_ancestor_enabled
 		
-		if (depth == 0) console.log("label: (enabled?) num questions / enabled / windowed / adaptive; difficulty")
+		if (depth == 0) console.log("label: (enabled?) (last asked?) quantity / enabled / windowed / adaptive; difficulty")
 		
 		let str = ""
 		for (let i = 0; i < depth; i++) str += ". "
 		
-		str += this.label + ": (" + (is_enabled ? "Y" : "N") + ") " + this.weight + "/" + this.enabled_weight + "/" + this.windowed_weight + "/" + this.adaptive_weight + "; " + this.difficulty
+		str += this.label + ": (" + (is_enabled ? "Y" : "N") + ") (" + (this.was_asked_last ? "Y" : "N") + ") " + this.weight + "/" + this.enabled_weight + "/" + this.windowed_weight + "/" + this.adaptive_weight.toFixed(2) + "; " + this.difficulty.toFixed(4)
 		
 		console.log(str)
 		
 		if (this.children_are_groups) {
 			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].debug_weights(depth + 1, is_enabled)
+				this.children[i].debug_groups(depth + 1, is_enabled)
 			}
 		}
 	}
 	
-	// Prints was_asked_last of this node and all descendants.
-	debug_was_asked_last(depth = 0) {
+	debug_questions(depth = 0, is_any_ancestor_enabled = false) {
+		let is_enabled = this.is_enabled || is_any_ancestor_enabled
+		
+		if (depth == 0) console.log("(enabled?) (last asked?) num attempts / adaptive; difficulty ('question statement')")
+		
 		let str = ""
 		for (let i = 0; i < depth; i++) str += ". "
+		str += this.label + "(" + this.weight + " questions)\n"
 		
-		str += this.label + ": " + this.was_asked_last
+		for (let i = 0; i < this.children.length; i++) {
+			str += this.children[i].debug_questions(depth + 1, is_enabled)
+		}
 		
-		console.log(str)
-		
-		if (this.children_are_groups) {
-			for (let i = 0; i < this.children.length; i++) {
-				this.children[i].debug_was_asked_last(depth + 1)
-			}
+		if (depth == 0) {
+			console.log(str)
+		}
+		else {
+			return str
 		}
 	}
 }

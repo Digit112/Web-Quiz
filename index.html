@@ -71,6 +71,10 @@
 						<span>Mastery over selected questions: </span><span id="selected-progress">N/A</span>
 						<br>
 						<span>Mastery over entire library: </span><span id="library-progress">N/A</span>
+						<br>
+						<span>Total Questions answered: </span><span id="num-questions-answered">N/A</span>
+						<br>
+						<span>Total 
 					</p>
 				</div>
 			</div>
@@ -87,5 +91,59 @@
 		<script src="static/script/QuestionGroup.js"></script>
 		<script src="static/script/Library.js"></script>
 		<script src="static/script/library-loader.js"></script>
+		
+		<script>
+			function help() {
+				let str = ""
+				str += "Welcome to the EWQD Console!\n"
+				str += "- help() Displays this message.\n"
+				str += "- what() Displays an explanation of some system internals.\n"
+				str += "- debug_library_groups() Displays the status of all QuestionGroups based on the current settings.\n"
+				
+				console.log(str)
+			}
+			
+			function what() {
+				let str = ""
+				str += "A 'Library' is a container for a QuestionGroup (called the 'root') and some metadata.\n"
+				str += "A QuestionGroup may have other QuestionGroups for children, or it may have Questions.\n"
+				str += "When you browse the GUI tree of collapsible selections, each line is a QuestionGroup.\n"
+				str += "A QuestionGroup has weights, which are the sum of its children's weights.\n"
+				str += "The weights determine the relative probabilities of differnt questions being chosen. These weights include:\n"
+				str += "- adaptive: An adjusted weight which is higher for Questions which the user frequently gets wrong.\n"
+				str += "- selected: The number of questions the user selected (in the tree), which they would like to see and practice.\n"
+				str += "- windowed: The number of selected questions which are in the question window.\n"
+				str += "'difficulty' is the estimated probability that the user will incorrectly answer a question randomly chosen from this group.\n"
+				str += "The mastery level, another frequently used term, is 1 - difficulty. In the context of Questions, 'difficulty' is called 'remainder'.\n"
+				str += "Which weight is used while choosing the next question depends on the selected settings.\n"
+				str += "The question window artificially resstricts the questions available to the user.\n"
+				str += "The window size is dynamically expanded to hold the difficulty of the root QuestionGroup approximately constant.\n"
+				str += "For more information, check out the README at https://github.com/digit112/Web-Quiz."
+				
+				console.log(str)
+			}
+			
+			function debug_library_groups() {
+				if (my_library.root_q == null) {
+					console.error("Must import a library to debug!")
+				}
+				else {
+					my_library.cache_weights(adapt_gen.checked, use_window.checked)
+					my_library.debug_groups()
+				}
+			}
+			
+			function debug_library_questions() {
+				if (my_library.root_q == null) {
+					console.error("Must import a library to debug!")
+				}
+				else {
+					my_library.cache_weights(adapt_gen.checked, use_window.checked)
+					my_library.debug_questions()
+				}
+			}
+			
+			help()
+		</script>
 	</body>
 </html>

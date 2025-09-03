@@ -656,7 +656,34 @@
 			}
 			"Acronyms": {
 				"A thru D": {
-					"What does 'AAA' (the cybersecruity concept) stand for?": {"answers": "Authentication Authorization Accounting", "hidden-answers": ["Authentication, Authorization, Accounting", "Authentication Authorization and Accounting", "Authentication, Authorization, and Accounting"]
+					"What does 'AAA' (the cybersecruity concept) stand for?": {"answers": "Authentication Authorization Accounting", "hidden-answers": ["Authentication, Authorization, Accounting", "Authentication Authorization and Accounting", "Authentication, Authorization, and Accounting"]},
+					"What does 'AC' (the electrical engineering concept) stand for?": "Alternating Current",
+					"What does 'ACL' (the cybersecruity concept) stand for?": "Access Contrtol List",
+					"What does 'ADF' (the concept) stand for?": "Alternating",
+					"What does 'AES' (the concept) stand for?": "Alternating",
+					"What does 'AP' (the concept) stand for?": "Alternating",
+					"What does 'APFS' (the concept) stand for?": "Alternating",
+					"What does 'APIPA' (the concept) stand for?": "Alternating",
+					"What does 'APK' (the concept) stand for?": "Alternating",
+					"What does 'ARM' (the concept) stand for?": "Alternating",
+					"What does 'ARP' (the concept) stand for?": "Alternating",
+					"What does 'ATA' (the concept) stand for?": "Alternating",
+					"What does 'ATM' (the concept) stand for?": "Alternating",
+					"What does 'ATX' (the concept) stand for?": "Alternating",
+					"What does 'AUP' (the concept) stand for?": "Alternating",
+					"What does 'BIOS' (the concept) stand for?": "Alternating",
+					"What does 'BSOD' (the concept) stand for?": "Alternating",
+					"What does 'BYOD' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
+					"What does 'AC' (the concept) stand for?": "Alternating",
 						
 		}
 	}

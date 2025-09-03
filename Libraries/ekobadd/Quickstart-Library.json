@@ -1,0 +1,12 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "Quickstart Library",
+	"question-root": {
+		"What comes after 'Hello'?": {
+			"answers": "Worldddd",
+			"case-sensitive": true,
+			"typo-forgiveness-level": "none"
+		}
+	}
+}

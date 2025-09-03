@@ -23,6 +23,7 @@ class Question {
 		
 		this.hidden_answers = null
 		this.incorrect_answers = null
+		this.typo_blacklist = null
 		
 		let q_name = q ? q : "" // Used in reporting an error before acquiring a proper label.
 		
@@ -40,6 +41,7 @@ class Question {
 			// Default all non-inheritables
 			this.hidden_answers = []
 			this.incorrect_answers = []
+			this.typo_blacklist = []
 			
 			// Question
 			this.q = [q]
@@ -89,12 +91,14 @@ class Question {
 			
 			// This function is used to handle the repetitive process of attempting to read or inherit a field.
 			let attempt_read_inherit = (key) => {
-				if (q_data[key]) return q_data[key] // read
+				console.log("Grabbing '" + key + "' from q_data, getting '" + q_data[key] + "'")
+				if (q_data[key] != null) return q_data[key] // read
 				else return this.parent_group[key.replaceAll("-", "_")] // inherit
 			}
 			
 			// case-sensitive
 			this.case_sensitive = attempt_read_inherit("case-sensitive")
+			console.log("case-sensitive: " + this.case_sensitive)
 			if (typeof this.case_sensitive != "boolean")
 				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'case-sensitive' must be a boolean.")
 			
@@ -186,6 +190,26 @@ class Question {
 			else {
 				this.incorrect_answers = []
 			}
+			
+			// Read typo-blacklist
+			if (q_data["typo-blacklist"]) {
+				if (typeof q_data["typo-blacklist"] == "string") {
+					this.typo_blacklist = [q_data["typo-blacklist"]]
+				}
+				else if (Array.isArray(q_data["typo-blacklist"])) {
+					for (let blacklist_entry of q_data["typo-blacklist"]) {
+						if (typeof blacklist_entry != "string" || blacklist_entry.length == 0)
+							throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'typo-blacklist' must be either a non-empty string or array of non-empty strings.")
+					}
+					this.typo_blacklist = q_data["typo-blacklist"]
+				}
+				else {
+					throw new LibraryLoadingError("Question", this.q[0], parent_group, "parameter 'typo-blacklist' must be either string or array of non-empty strings.")
+				}
+			}
+			else {
+				this.typo_blacklist = []
+			}
 		}
 		else {
 			throw new LibraryLoadingError("Question", q_name, parent_group, "value must be string, array of strings, or valid Question object, not '" + typeof q_data + "'")
@@ -200,8 +224,9 @@ class Question {
 		console.assert(this.a, "Failed to obtain answers")
 		console.assert(this.hidden_answers, "Failed to obtain hidden-answers")
 		console.assert(this.incorrect_answers, "Failed to obtain incorrect-answers")
+		console.assert(this.typo_blacklist, "Failed to obtain typo-blacklist")
 		
-		// Convert questions and answers into MarkDown entities.
+		// Convert questions, answers, and incorrect-answers into MarkDown entities.
 		for (let i = 0; i < this.q.length; i++) {
 			this.q[i] = new MarkDown(this.q[i], Library.token_map)
 		}
@@ -389,6 +414,7 @@ class Question {
 	// Despite the name, this does respect the case-sensitive setting on this question,
 	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
 	is_exactly_correct(response) {
+		console.log("case-sensitive: " + this.case_sensitive)
 		if (!this.case_sensitive) response = response.toLowerCase()
 			
 		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.
@@ -408,8 +434,21 @@ class Question {
 		return false
 	}
 	
-	// Returns true if the passed response is within the typo forgiveness threshold
-	// For at least one available answer or hidden-answer.
+	// Returns true if the answer exactly matches a value in this question's typo blacklist.
+	// Respects this question's case-sensitivity.
+	is_blacklisted(response) {
+		if (!this.case_sensitive) response = response.toLowerCase()
+			
+		for (let answer of this.typo_blacklist) {
+			if (!this.case_sensitive) answer = answer.toLowerCase()
+			if (answer == response) {
+				return true
+			}
+		}
+	}
+	
+	// Returns an AttemptResult which records whether the response was correct and whether it is *exactly* correct, i.e. correct without typos.
+	// Respects case-sensitivity, typo-forgiveness, and the typo blacklist.
 	is_correct(response) {
 		// Check if this is exactly correct (This is typically >20,000 times faster than Levenshtein, according to preliminary tests!)
 		if (this.is_exactly_correct(response)) {
@@ -422,6 +461,13 @@ class Question {
 		// Check if typo forgiveness is enabled. We already know the answer is not exactly correct.
 		let typo_divisor = this.get_typo_divisor()
 		if (typo_divisor == Infinity) {
+			console.log("  '" + response + "' is incorrect, typo forgiveness is disabled.")
+			return new AttemptResult(false, false)
+		}
+		
+		// Check that this answer isn't blacklisted.
+		if (this.is_blacklisted(response)) {
+			console.log("  '" + response + "' is a blacklisted answer.")
 			return new AttemptResult(false, false)
 		}
 		
@@ -477,6 +523,7 @@ class Question {
 	
 	// Checks whether the given answer is correct.
 	// Updates responses and recalculates the response_score.
+	// TODO: In multiple-choice, we should ignore typo forgiveness and the typo blacklist.
 	attempt(response) {
 		let my_library = this.get_library()
 		

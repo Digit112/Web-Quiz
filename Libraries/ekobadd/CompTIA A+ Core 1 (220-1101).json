@@ -36,7 +36,7 @@
 			},
 			"Mobile Device RAM": {
 				"What form-factor of DDR RAM is most often found in laptops?": {"answers": "SODIMM", "hidden-answers": ["SO-DIMM", "SODIMMs", "SO-DIMMs"]},
-				"What form-factor of DDR RAM is most often found in desktop computerd?": {"answers": "DIMM", "hidden-answers": "DIMMs"},
+				"What form-factor of DDR RAM is most often found in desktop computers?": {"answers": "DIMM", "hidden-answers": "DIMMs"},
 				"How many pins does SODIMM DDR3 have?": "204",
 				"How many pins does SODIMM DDR4 have?": "260",
 				"How many pins does SODIMM DDR5 have?": "262"
@@ -79,10 +79,10 @@
 					},
 					"Secure Ports": {
 						"What is the newer, secure port number typically used by HTTP?": "443",
-						"What is a newer, secure port number typically used by SMTP?": {"answers": ["465", "587"], "correct-answers-source": "random"},
+						"What is a newer, secure port number typically used by SMTP?": {"answers": ["465", "587"], "correct-answer-source": "random"},
 						"What is the newer, secure port number typically used by POP3?": "995",
 						"What is the newer, secure port number typically used by IMAP?": "993",
-						"What is a newer, secure port number typically used by FTP?": {"answers": ["989", "990"], "correct-answers-source": "random"},
+						"What is a newer, secure port number typically used by FTP?": {"answers": ["989", "990"], "correct-answer-source": "random"},
 						"What is the newer, secure port number typically used by LDAP?": "636"
 					}
 				},

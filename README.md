@@ -43,11 +43,34 @@ Whenever a question is displayed in multiple-choice presentation, a sufficient n
 
 Libraries are saved as plain JSON. The root node is a Library object.
 
+### Object Form
+
+Entities are specified in the form of an unnamed object appearing individually or inside of a list. The objects have the fields which are specified below.
+Because all the values are given with the field names as in `{"field1": "value1", "field2": "value2", ...etc}`, this is called *explicit form*. Often, though, you only need to specifiy two of the fields on an object.
+In this case, the entire object can be specified as a name-value pair which appears inside of a larger object instead of in a list, like `"value1": "value2"`.
+Because the field names are implied by the spec, this is called *implicit form*.
+A list of items in implicit form can include an individual with extra fields, which would look like `"value1": {"field2": "value2", "field3": "value3", ...etc}`.
+Because this object is mostly in explicit form except for the first field, and it is found in an object which is a list of items that are mostly in implicit form, this is called *embedded-explicit form*.
+
+For example, the following pair of questions are found in a *QuestionList* object. The former is *embedded-explicit* so that the `hidden-answers` field can be specified. The latter is *implicit*.
+The spec informs us that `"field1"` and `field2`, for the implicit question, are `"question"` and `"answers"`.
+
+```
+{
+	...
+	"What form-factor of DDR RAM is most often found in desktop computers?": {"answers": "DIMM", "hidden-answers": "DIMMs"},
+	"How many pins does SODIMM DDR3 have?": "204",
+	...
+}
+```
+
 ### Library
 
 The Library object is the root JSON object. It has the following properties:
 
 - `version`: Should always be `1`.
+- `author`: Name or other identifier for the author.
+- `title`: Identifier for the library.
 - `adaptation-rate` (optional; default 0.15): The amount that the mastery level of a question changes to reflect recent answers to a given question. A higher value makes the mastery level more responsive to user progress, but reduces its accuracy as a measure of user comprehension. Ranges from 0 to 1. Note that the mastery level is used to control windowing.
 - `starting-mastery` (optional; default 0.5): The starting mastery level of new questions which the user has not answered. Ranges from 0 - 1.
 - `adaptive-weight-bias` (optional; default 4.5): The degree to which unmastered questions are preferred over mastered ones during random question generation with adaptivity enabled. Ranges from 1 to infinity, with 1 being equivalent to having no adaptivity at all. Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.
@@ -83,6 +106,7 @@ A question represents the association between a *question statement* and one or 
 - `question`: A list of question statements which the user can see. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
 - `answers`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
 - `hidden-answers`: A string or list of strings which are considered correct, but which will not be shown to the user either in the correct answer list or as a possible correct answer in multiple-choice presentation. This is meant to account for slight spelling variations in an answer, for example, "Light-Emitting Diode" and "Light Emitting Diode"
+- `typo-blacklist`: (optional): A list of answers that will be marked correct even if typo forgiveness would normally let them slide.
 - `incorrect-answers` (optional): A list of incorrect answers which may be displayed to the user as options in multiple-choice presentation.
 
 **The following traits may be inherited:**

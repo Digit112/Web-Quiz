@@ -1,8 +1,10 @@
 # Quiz Authorship Quickstart
 
-This document is designed to teach you the basics of writing quiz files. Quiz files have advanced features that will be mentioned but not covered in this document. To learn about them, look at the "Library Save Format" specification in the readme.
+This document is designed to teach you the basics of writing quiz files. Quiz files have advanced features that will be mentioned but not covered in this document. To learn about them, look at the "Library Save Format" specification in the readme, which goes into excruciating detail.
 
-These files are written in JSON syntax, and can be imported into the Web-Quiz page. The format is currently subject to change in the future.
+This document asumes you are familiar with the user interface and its basic features.
+
+A hierarchical organization of questions into groups with unique properties is called a "Library". Library files are written in JSON and can be imported into the Web-Quiz page. The format is currently subject to change in the future.
 
 ## The Library Object
 
@@ -19,13 +21,13 @@ The root object is called a library, it looks like this:
 
 Only the `version` and `question-root` fields are required. This quickstart will use version 1. Additional fields allow you to tweak the default behavior of the quiz, such as how quickly it adapts to user progress or how difficult it is. These won't be covered in the quickstart, however.
 
-## The `question-root`
+### The `question-root`
 
 The `question-root` must be a `QuestionGroup` object. QuestionGroup objects are a collection of other `QuestionGroup`s or of `Question`s, but never both. It is the root of a hierarchy of groups that the user can select or deselect.
 A user cannot toggle individual questions, only QuestionGroups, so they should be used to organize questions into small blocks that the user may want to include or omit as a whole unit.
 For now, however, we will merely place all our questions directly into this group.
 
-### The Question Object
+## Question Objects
 
 Here's an example where the `question-root` contains only three brief questions:
 
@@ -118,8 +120,79 @@ The following question requires the user to submit "World" *exactly*, any deviat
 
 ## Multiple Choice Questions
 
-Trying to create a large library of multiple choice questions with the syntax I'm about to introduce would be quite grueling, so don't do that! Once we've fleshed out the Question object, we can move on to the Group object. This is where the format will really open up for us.
+Trying to create a large library of multiple choice questions with the syntax I'm about to introduce would be quite grueling, so don't do that! Instead practice on individual questions. Once we've fleshed out the Question object, we can move on to the QuestionGroup object. This is where the format will really open up for us.
 
-### `mode-of-presentation`
+### `mode-of-presentation` & `incorrect-answers`
 
 The `mode-of-presentation` determines how the user will answer the question. The default, where the user enters the answer into a text box, is called "verbatim". The other options are "flash-card", where the user *isn't* asked for an answer, they merely reveal it, and "multiple-choice", where the user is prompted to select one of many answers.
+
+In addition to setting the type of the question to "multiple-choice", we also must provide some incorrect answers.
+This can done with the `incorrect-answers` field, but this is not the only source of incorrect answers (nor the best in most cases).
+
+```
+"What comes after 'Hello'?": {
+	"answers": "World",
+	"mode-of-presentation": "multiple-choice",
+	"incorrect-answers": ["Planet", "Moon", "Universe"]
+}
+```
+
+![Sample multiple-choice question with four options.](quickstart-images/multiple-choice.png)
+
+#### Format Negotiation
+
+When `mode-of-presentation` is an array of values, these are considered to be the author's list of presentations which are acceptable.
+In the future, users will be able to set their preferences for question formats, which will filter and alter these lists, allowing the user to alter the presentation of your questions according to the formats that you list as acceptable.
+
+`mode-of-presentation` currently accepts an array of values, but in practice only the first will ever be used until format negotiation is implemented.
+
+### `max-choices` & `correct-answer-source`
+
+If we add more incorrect answers, three will be chosen at random every time the question is generated, so four answers will be shown total.
+If you prefer that more answers are shown, you can set `max-choices` to something over 4 (it's default). You can also set it to something lower than 4 for fewer options. If you set it to 1, only the correct answer will ever show, and the user willl be unable to submit an incorrect one.
+
+You might also wonder, what correct answer is shown to the user when there are multiple answers? For starters, entries in `hidden-answers` are never shown. As for which of the normal answers are shown, this is governed by the `correct-answer-source`, which is "random" by default, picking a random answer each time the multiple choice question is generated. Alternatively, you can set it to "primary" to always show the *first* answer.
+
+```
+"What comes after 'Hello'?": {
+	"answers": ["Web-Quiz", "World"],
+	"mode-of-presentation": "multiple-choice",
+	"incorrect-answers": ["Planet", "Moon", "Universe"],
+	"max-choices": 2,
+	"correct-answer-source": "primary"
+}
+```
+
+Below, you can see that with a `max-choices` of 2, only two options are available. Additionally, although it isn't apparent in the image, the "correct" option will always be shown as "Web-Quiz" instead of "World" because `correct-answer-source` is "primary".
+
+![Sample multiple-choice question with two options.](quickstart-images/multiple-choice-max-choices.png)
+
+Honestly though, if you're using `"correct-answer-source": "primary"`, in all likelihood you should just move the non-primary answers to `hidden-answers`. At first these actions might sound identical, but this is not true because of format negotiation. Format negotiation allows the user to change the presentation of a question.
+
+## Markdown Support
+
+To round out our study of `Question` objects, I'll finish by mentioning markdown support. All text displayed to the user supports markdown, except the Library `title` and `author` fields. This includes the `question`, `answers` and `incorrect-answers` fields. Also the `label` field on QuestionGroup objects. You can use '\*' for italics, '\*\*' for bold, '\`' for code (monospace), and '__' for underlines. Be careful with that last one, since the underlines will conflict with the underlines that appear when using type-to-select on multiple choice questions (been meaning to fix that).
+
+Below, note that the double reverse-solidus is in essence our escape character, since the single reverse solidus is a special character in JSON, and therefore must be escaped.
+
+```
+"Question with ***__`MARKDOWN`__***!": {
+	"mode-of-presentation": "multiple-choice",
+	"answers": ["\\**bold\\** -> **bold**"],
+	"incorrect-answers": [
+		"\\*italics\\* -> *italics*",
+		"\\`code\\` -> `code`",
+		"\\__underline\\__ -> __underline__"
+	]
+}
+```
+
+![Markdown preview.](quickstart-images/markdown.png)
+
+I'm hoping to really expand and improve the markdown system in the future.
+
+## QuestionGroup Objects
+
+QuestionGroup objects are containers for other QuestionGroups or for other Questions, but never both. They allow the Library to be arranged in a cascading, hierarchical fashion, and many of their properties trickle down into the questions they contain. These properties are called "inheritables". They are really the core feature that makes EWQ Libraries so powerful.
+
+For now, we'll build a **flat** library - that's a library where all the QuestionGroups contain Questions (except the `question-root`). What we were doing before, where we don't have any QuestionGroups at all (again, except the `question-root`) is called a **simple** Library. Eventually, we'll move on to a **cascading** Library by looking at the way QuestionGroups and their child QuestionGroups behave.

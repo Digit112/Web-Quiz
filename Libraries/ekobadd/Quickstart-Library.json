@@ -3,10 +3,14 @@
 	"author": "ekobadd",
 	"title": "Quickstart Library",
 	"question-root": {
-		"What comes after 'Hello'?": {
-			"answers": "Worldddd",
-			"case-sensitive": true,
-			"typo-forgiveness-level": "none"
+		"Question with ***__`MARKDOWN`__***!": {
+			"mode-of-presentation": "multiple-choice",
+			"answers": ["\\**bold\\** -> **bold**"],
+			"incorrect-answers": [
+				"\\*italics\\* -> *italics*",
+				"\\`code\\` -> `code`",
+				"\\__underline\\__ -> __underline__"
+			]
 		}
 	}
 }

@@ -2,15 +2,10 @@
 	"version": 1,
 	"author": "ekobadd",
 	"title": "Quickstart Library",
-	"question-root": {
-		"Question with ***__`MARKDOWN`__***!": {
-			"mode-of-presentation": "multiple-choice",
-			"answers": ["\\**bold\\** -> **bold**"],
-			"incorrect-answers": [
-				"\\*italics\\* -> *italics*",
-				"\\`code\\` -> `code`",
-				"\\__underline\\__ -> __underline__"
-			]
-		}
-	}
+	"question-root": {"groups": {
+		"group-1": {"questions": {
+			"question-1": "answer-1",
+			"question-2": {"answerd": "<- typo"}
+		}}
+	}}
 }

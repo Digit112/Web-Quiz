@@ -195,4 +195,94 @@ I'm hoping to really expand and improve the markdown system in the future.
 
 QuestionGroup objects are containers for other QuestionGroups or for other Questions, but never both. They allow the Library to be arranged in a cascading, hierarchical fashion, and many of their properties trickle down into the questions they contain. These properties are called "inheritables". They are really the core feature that makes EWQ Libraries so powerful.
 
-For now, we'll build a **flat** library - that's a library where all the QuestionGroups contain Questions (except the `question-root`). What we were doing before, where we don't have any QuestionGroups at all (again, except the `question-root`) is called a **simple** Library. Eventually, we'll move on to a **cascading** Library by looking at the way QuestionGroups and their child QuestionGroups behave.
+For now, we'll build a **flat** library - that's a library where all the QuestionGroups contain Questions (except the `question-root`). What we were doing before, where we don't have any QuestionGroups at all (again, except the `question-root`) is called a **simple** Library. Eventually, we'll move on to a **cascading** Library by looking at the way QuestionGroups and their child QuestionGroups behave together.
+
+Here's a definition of a couple simple groups inside of the `question-root`:
+
+```
+"question-root": {
+	"group-1": {
+		"question-1": "answer-1",
+		"question-2": "answer-2"
+	},
+	"group-2": {
+		"question-3": "answer-3",
+		"question-4": "answer-4"
+	}
+}
+```
+
+If you load a library with the above `question-root`, you'll see that the root item can now be expanded to show our two groups, which can be selected separately.
+
+![Two sub-groups showing in the interface.](quickstart-images/flat-library.png)
+
+These groups are in **implicit form**. Remember, an implicit *Question* allows you to specify only two fields: `question` and `answers`. In order to add more, you need to write that question in **embedded-explicit form**.
+
+An implicit *QuestionGroup* is a bit different. The key always specifies the `label` field. The value specifies either the `questions` field or the `groups` field. The parser infers which by checking the form of the body! Remeber, `question-root` is a QuestionGroup too, and it is also in implicit form (has been for the entirety of this tutorial), except now it has groups for children. So how does the parser figure out what's going on here? To answer that, lets look at the same library, except that all three groups are in embedded-explicit form:
+
+```
+"question-root": {"groups": {
+	"group-1": {"questions": {
+		"question-1": "answer-1",
+		"question-2": "answer-2"
+	}},
+	"group-2": {"questions": {
+		"question-3": "answer-3",
+		"question-4": "answer-4"
+	}}
+}}
+```
+
+Not a lot different, except that the body of each group now explicitly has either the `questions` or `groups` field (just like how our first embedded-explicit Question only had the `answers` field inside). When the parser looked at the implicit version of `question-root`, it saw that both of these `questions` and `groups` fields were missing. At least one of them must be present in a group, so it assumed that `question-root` must be in implicit form. Note that this assumption could produce some unexpected errors if you intended for the group to be in embedded-explicit form but forgot or misspelled a required field.
+
+### Child Type Deduction & The Big Honking Error You Might've Already Seen
+
+After concluding that `question-root` was in implicit form, it knew that the body is *either* going to be a list of groups or a list of questions. It started by assuming that the list was a list of questions. If so, then `group-1` must be in embedded-explicit form, since an implicit question would have a *string* for a body, not an *object* like `group-1` has. It looked inside that body and saw that the required `answers` field is missing. If indeed this is question, it concluded, it is malformed. It backtracked and tried to re-interpret the body of `question-root` as a list of QuestionGroups instead. Then it went through the whole process again with group 1. It saw the missing `questions` and `groups` fields, concluded that `group-1` was in implicit form, attempted to interpret its key-value pairs as questions, and succeeded! The key-value pairs are both Question objects in implicit form, as the human-readable names imply. If it had been unsuccessful in both interpretations, it would've had an error code for each failure. These errors codes are combined into a big error code like the one shown below.
+
+![3 Errors from 1 typo](quickstart-images/godless-error.png)
+
+If we look at the code that caused this mess, we see that the issue is really quite simple:
+
+```
+"question-root": {
+	"group-1": {
+		"question-1": "answer-1",
+		"question-2": {"answerd": "<- typo"}
+	}
+}
+```
+
+The second question is suppposed to be in embeded-explicit form but the required field has a typo. If it weren't for the first question's existince, the parser would interpret `question-2` as a group with a single implicit question.
+
+The three lines at the bottom are our actual errors. Look at the bottom one. It begins:
+
+> "While interpreting **Question** ... group-1 ..."
+
+We, the human authors, can read the title and infer that "group-1" is very clearly meant to be a group, not a question. This error was generated while the parser was attempting to interpret "group-1" the wrong way. We can ignore it completely. Now look at the next error up from the bottom.
+
+> "While interpreting **QuestionGroup** ... question-1 ..."
+
+Again, the parser was on the wrong track when it generated this error. It was trying to interpret "group-1" as a group of groups. Way off! This error gets thrown out too. Now for the next one up.
+
+> "While interpreting **Question** ... question-2 ..."
+
+Now we're on to something! The parser failed to interpret our question while actually trying to interpret it the way we meant it to. The error continues: "required parameter 'answers' is missing." Upon a not-so-close inspection, we can confirm that this is true.
+
+If you're ever stuck on one of these, convert the suspect groups into embedded-explicit form by explicitly specifying whether its children are Questions or QuestionGroups. Then the parser will not have any guesswork and can give you only the error that matters to you.
+
+```
+"question-root": {"groups": {
+	"group-1": {"questions": {
+		"question-1": "answer-1",
+		"question-2": {"answerd": "<- typo"}
+	}}
+}}
+```
+
+![A single, relevant error.](quickstart-images/god-fearing-error.png)
+
+Library files aren't the epitome of nuance and complexity but they aren't simple either! Practice will make you quite skilled at picking these errors apart.
+
+### Inheritables
+
+Most inheritables aree fields we've already learned, like `max-choices` and `incorrect-answers`. You can add these on a group. They don't affect the group itself. Instead, they trickle down and are *inherited* by the group's children.

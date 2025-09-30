@@ -91,14 +91,12 @@ class Question {
 			
 			// This function is used to handle the repetitive process of attempting to read or inherit a field.
 			let attempt_read_inherit = (key) => {
-				console.log("Grabbing '" + key + "' from q_data, getting '" + q_data[key] + "'")
 				if (q_data[key] != null) return q_data[key] // read
 				else return this.parent_group[key.replaceAll("-", "_")] // inherit
 			}
 			
 			// case-sensitive
 			this.case_sensitive = attempt_read_inherit("case-sensitive")
-			console.log("case-sensitive: " + this.case_sensitive)
 			if (typeof this.case_sensitive != "boolean")
 				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'case-sensitive' must be a boolean.")
 			
@@ -381,7 +379,7 @@ class Question {
 	// If the index is greater than the number of answers in this question plus all ancestors,
 	// begins iterating over children which can provide answers.
 	// These would be children of the nearest ancestor to this question which has
-	// descendants-give-incorrect-answers set to true.
+	// descendants-share-incorrect-answers set to true.
 	// see get_num_available_incorrect_answers() to obtain the maximum index.
 	get_incorrect_answer_by_index(i) {
 		if (i < 0 || i > this.get_num_available_incorrect_answers())
@@ -414,7 +412,6 @@ class Question {
 	// Despite the name, this does respect the case-sensitive setting on this question,
 	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
 	is_exactly_correct(response) {
-		console.log("case-sensitive: " + this.case_sensitive)
 		if (!this.case_sensitive) response = response.toLowerCase()
 			
 		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.

@@ -151,7 +151,7 @@ class Library {
 		this.IDEAL_OVERALL_DIFFICULTY = 0.3
 		
 		// Default values that child groups and questions will inherit
-		this.descendants_give_incorrect_answers = false
+		this.descendants_share_incorrect_answers = false
 		this.case_sensitive = false
 		this.mode_of_presentation = "verbatim"
 		this.max_choices = 4

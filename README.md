@@ -35,7 +35,7 @@ Verbatim questions must be typeable. Verbatim questions may have case-sensitivit
 
 The user is asked a question and presented with multiple possible answers which can be selected, only one of which is correct. As with "verbatim" questions, an internal data structure can be updated to reflect the result.
 
-Multiple Choice questions have the unique problem of needing to generate incorrect answers to display. To facilitate this, Questions and QuestionGroups have the `incorrect-answers` property, which allows explicitly specifying a list of wrong answers to be displayed for a question or for all descendants of a QuestionGroup. In addition, QuestionGroups have the property `descendants-give-incorrect-answers`, allowing the descendants of a QuestionGroup to use the correct answers of other descendants as incorrect answers to their own questions. This last option is enabled by default and is the simplest method.
+Multiple Choice questions have the unique problem of needing to generate incorrect answers to display. To facilitate this, Questions and QuestionGroups have the `incorrect-answers` property, which allows explicitly specifying a list of wrong answers to be displayed for a question or for all descendants of a QuestionGroup. In addition, QuestionGroups have the property `descendants-share-incorrect-answers`, allowing the descendants of a QuestionGroup to use the correct answers of other descendants as incorrect answers to their own questions. This last option is enabled by default and is the simplest method.
 
 Whenever a question is displayed in multiple-choice presentation, a sufficient number of incorrect answers are drawn from all available sources.
 
@@ -87,7 +87,8 @@ A QuestionGroup object represents either a collection of questions OR of other Q
 - `label`: The name of this group which will be visible to users.
 - `questions` OR `groups` (never both): The children of this QuestionGroup, either a list of Question objects or QuestionnGroup objects. The two may not be mixed together.
 - `incorrect-answers` (optional): A list of incorrect answers which can be used by all children in addition to their own `incorrect-answers` lists and the lists on any intermediate groups.
-- `descendants-give-incorrect-answers` (optional; default `false`): If `true`, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice.
+- `descendants-share-incorrect-answers` (optional; default `false`): If `true`, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice.
+- `hidden` (optional; default `false`): If `true`, this group and its children will not be displayed and cannot be selected by the user. Use for groups with structural/logical purposes within a library. The questions can still be selected if a parent of the hidden group is enabled.
 
 **The following traits may be inherited, and only effect a QuestionGroup's descendant Questions, not the QuestionGroup itself.** They may also be specified on individual Question objects, and their meanings are clarified below.
 
@@ -95,7 +96,7 @@ A QuestionGroup object represents either a collection of questions OR of other Q
 - `mode-of-presentation` (optional)
 - `max-choices` (optional)
 - `typo-forgiveness-level` (optional)
-- `correct-answer-source` (optional
+- `correct-answer-source` (optional)
 
 ### Question
 
@@ -264,7 +265,7 @@ Question Groups allow a hierarchical organization of questions for a reason: to 
 
 Incorrect answers can be specified on a question or its ancestors, or can be received from the correct answers to sibling or cousin questions.
 
-A Group can be queried for the number of available incorrect answers it has. A kind of group called a claimant accepts answers donated by its descendant questions. An answer can only be claimed by a single claimant, which is always the nearest ancestor that has the `descendants-give-incorrect-answers` property set to `true`. These can only appear as incorrect answers to descendants of the claimant, so a claimant should really be thought of as a partition. Answers flow freely within the subtree at a claimant's root, but can never enter or exit through that root.
+A Group can be queried for the number of available incorrect answers it has. A kind of group called a claimant accepts answers donated by its descendant questions. An answer can only be claimed by a single claimant, which is always the nearest ancestor that has the `descendants-share-incorrect-answers` property set to `true`. These can only appear as incorrect answers to descendants of the claimant, so a claimant should really be thought of as a partition. Answers flow freely within the subtree at a claimant's root, but can never enter or exit through that root.
 
 Incorrect answers can also come from the `incorrect-answers` property of a question or any of its ancestors. The entries in `incorrect-answers` on the root can appear on any question in the library, and claimants do not effect this. The two systems are completely separate.
 
@@ -391,6 +392,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 		- A proper quiz result readout (num correct, incorrect, passed, percent score)
 - API serves quizzes
 - Handle TODOs!
+- Disable typo forgiveness on multiple-choice questions
 
 #### Editing Release
 

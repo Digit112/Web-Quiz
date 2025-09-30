@@ -136,7 +136,7 @@ class QuestionGroup {
 		
 		// The number of incorrect answers offered to this group by its descendants.
 		// Excludes answers claimed by groups descending from this group.
-		// Groups claim all offered answers by setting descendants-give-incorrect-answers to true.
+		// Groups claim all offered answers by setting descendants-share-incorrect-answers to true.
 		// Unclaimed answers propagate up.
 		this.num_offered_incorrect_answers = null
 		
@@ -172,7 +172,7 @@ class QuestionGroup {
 		this.incorrect_answers = null
 		this.is_hidden = false
 		
-		this.descendants_give_incorrect_answers = null
+		this.descendants_share_incorrect_answers = null
 		this.case_sensitive = null
 		this.mode_of_presentation = null
 		this.max_choices = null
@@ -188,10 +188,10 @@ class QuestionGroup {
 				else return this.parent_group[key.replaceAll("-", "_")] // inherit
 			}
 			
-			// descendants-give-incorrect-answers
-			this.descendants_give_incorrect_answers = attempt_read_inherit("descendants-give-incorrect-answers")
-			if (typeof this.descendants_give_incorrect_answers != "boolean")
-				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'descendants-give-incorrect-answers' must be a boolean.")
+			// descendants-share-incorrect-answers
+			this.descendants_share_incorrect_answers = attempt_read_inherit("descendants-share-incorrect-answers")
+			if (typeof this.descendants_share_incorrect_answers != "boolean")
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'descendants-share-incorrect-answers' must be a boolean.")
 			
 			// case-sensitive
 			this.case_sensitive = attempt_read_inherit("case-sensitive")
@@ -311,7 +311,6 @@ class QuestionGroup {
 		// Interpret as implicit QuestionGroup.
 		else {
 			// Inherit all inheritable properties
-			this.descendants_give_incorrect_answers = this.parent_group.descendants_give_incorrect_answers
 			this.case_sensitive = this.parent_group.case_sensitive
 			this.mode_of_presentation = this.parent_group.mode_of_presentation
 			this.max_choices = this.parent_group.max_choices
@@ -319,6 +318,7 @@ class QuestionGroup {
 			this.correct_answer_source = this.parent_group.correct_answer_source
 			
 			// Default all non-inheritables
+			this.descendants_share_incorrect_answers = false
 			this.is_hidden = false
 			this.incorrect_answers = []
 			
@@ -371,7 +371,7 @@ class QuestionGroup {
 		
 		console.assert(typeof this.children_are_groups == "boolean", "Failed to determine child type.")
 		
-		console.assert(this.descendants_give_incorrect_answers != null, "Failed to obtain descendants-give-incorrect-answers")
+		console.assert(this.descendants_share_incorrect_answers != null, "Failed to obtain descendants-share-incorrect-answers")
 		console.assert(this.case_sensitive != null, "Failed to obtain case-sensitive")
 		console.assert(this.mode_of_presentation != null, "Failed to obtain mode-of-presentation")
 		console.assert(this.max_choices != null, "Failed to obtain max-choices")
@@ -502,7 +502,7 @@ class QuestionGroup {
 				
 				// If this child passed on the incorrect answers which it sees,
 				// include them in the count of available answers for this question.
-				if (!child.descendants_give_incorrect_answers) {
+				if (!child.descendants_share_incorrect_answers) {
 					this.num_offered_incorrect_answers += child.num_offered_incorrect_answers
 				}
 			}
@@ -522,7 +522,7 @@ class QuestionGroup {
 	// This function is called by its descendant, recursively, to locate that ancestor,
 	// and ultimately to obtain the number of incorrect answers available to a particular question.
 	get_num_claimed_incorrect_answers() {
-		if (this.descendants_give_incorrect_answers) {
+		if (this.descendants_share_incorrect_answers) {
 			return this.num_offered_incorrect_answers
 		}
 		else if (this.am_root()) {
@@ -542,7 +542,7 @@ class QuestionGroup {
 	// Converts an index into an incorrect-answer.
 	get_incorrect_answer_by_index(i, had_encountered_answer_claimant = false) {
 		// NOTE the two very similarly named variables!!
-		let have_encountered_answer_claimant = had_encountered_answer_claimant || this.descendants_give_incorrect_answers
+		let have_encountered_answer_claimant = had_encountered_answer_claimant || this.descendants_share_incorrect_answers
 		
 		// Check if the index is into this group.
 		if (i < this.incorrect_answers.length) {
@@ -569,7 +569,7 @@ class QuestionGroup {
 					have_encountered_answer_claimant
 				)
 				
-				if (typeof res == "string") {
+				if (res instanceof MarkDown) {
 					// An ancestor had the indexed incorrect answer.
 					return res
 				}
@@ -607,11 +607,11 @@ class QuestionGroup {
 	get_claimed_incorrect_answer_by_index(i) {
 		// console.log("Getting incorrect answer " + i + " from '" + this.label + "'")
 		if (this.children_are_groups) {
-			console.assert(i < num_offered_incorrect_answers, "Illegal state. Error should have been thrown before the first call to this recursive functions.")
+			console.assert(i < this.num_offered_incorrect_answers, "Illegal state. Error should have been thrown before the first call to this recursive functions.")
 			
 			for (let child of this.children) {
 				// Ignore children which are claimants; they block our access to their descendants.
-				if (!child.descendants_give_incorrect_answers) {
+				if (!child.descendants_share_incorrect_answers) {
 					if (i >= child.num_offered_incorrect_answers) {
 						i -= child.num_offered_incorrect_answers
 					}

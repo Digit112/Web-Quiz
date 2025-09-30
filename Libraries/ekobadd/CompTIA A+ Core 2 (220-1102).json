@@ -78,7 +78,7 @@
 											"descendants-give-incorrect-answers": true,
 											"incorrect-answers": ["`cd`", "`chdir`"],
 											"questions": {
-												"In Windows, what command would change the working directory to the root of the current drive?": "`cd /`",
+												"In Windows, what command would change the working directory to the root of the current drive?": {"answers": "`cd \\\\`", "hidden-answers": "cd /"},
 												"In Windows, what command would change the working directory to the parent of the current working directory?": "`cd ..`"
 											}
 										},
@@ -653,7 +653,7 @@
 					"What is the file extension most commonly used to save JavaScript scripts?": {"answers": ".js", "hidden-answers": "js"},
 					"What is the file extension most commonly used to save Python scripts?": {"answers": ".py", "hidden-answers": "py"}
 				}
-			}
+			},
 			"Acronyms": {
 				"A thru D": {
 					"What does 'AAA' (the cybersecruity concept) stand for?": {"answers": "Authentication Authorization Accounting", "hidden-answers": ["Authentication, Authorization, Accounting", "Authentication Authorization and Accounting", "Authentication, Authorization, and Accounting"]},
@@ -683,8 +683,9 @@
 					"What does 'AC' (the concept) stand for?": "Alternating",
 					"What does 'AC' (the concept) stand for?": "Alternating",
 					"What does 'AC' (the concept) stand for?": "Alternating",
-					"What does 'AC' (the concept) stand for?": "Alternating",
-						
+					"What does 'AC' (the concept) stand for?": "Alternating"
+				}
+			}			
 		}
 	}
 }

@@ -12,10 +12,10 @@ The root object is called a library, it looks like this:
 
 ```
 {
-	"version": 1,
-	"author": "ekobadd",
-	"title": "CompTIA A+ Certification 220-1101 (Core 1)",
-	"question-root": ...
+    "version": 1,
+    "author": "ekobadd",
+    "title": "CompTIA A+ Certification 220-1101 (Core 1)",
+    "question-root": ...
 }
 ```
 
@@ -33,9 +33,9 @@ Here's an example where the `question-root` contains only three brief questions:
 
 ```
 "question-root": {
-	"What comes after hello?": "World",
-	"What kind of object am I?": "Question",
-	"What kind of object is my parent?": "QuestionGroup"
+    "What comes after hello?": "World",
+    "What kind of object am I?": "Question",
+    "What kind of object is my parent?": "QuestionGroup"
 }
 ```
 
@@ -75,8 +75,8 @@ As you can see in the example, the `answers` are now explicitly labeled as such 
 
 ```
 "What kind of object is my parent?": {
-	"answers": "QuestionGroup",
-	"hidden-answers": "Question Group"
+    "answers": "QuestionGroup",
+    "hidden-answers": "Question Group"
 }
 ```
 
@@ -94,8 +94,8 @@ For this purpose, we use the `typo-blacklist` field, which accepts a single entr
 
 ```
 "What kind of object is my parent?": {
-	"answers": "QuestionGroup",
-	"typo-blacklist": "Question Group"
+    "answers": "QuestionGroup",
+    "typo-blacklist": "Question Group"
 }
 ```
 
@@ -112,9 +112,9 @@ These are both *inheritable* fields closely related to the interpretation of a u
 The following question requires the user to submit "World" *exactly*, any deviation will be marked incorrect.
 ```
 "What comes after 'Hello'?": {
-	"answers": "World",
-	"case-sensitive": true,
-	"typo-forgiveness-level": "none"
+    "answers": "World",
+    "case-sensitive": true,
+    "typo-forgiveness-level": "none"
 }
 ```
 
@@ -131,9 +131,9 @@ This can done with the `incorrect-answers` field, but this is not the only sourc
 
 ```
 "What comes after 'Hello'?": {
-	"answers": "World",
-	"mode-of-presentation": "multiple-choice",
-	"incorrect-answers": ["Planet", "Moon", "Universe"]
+    "answers": "World",
+    "mode-of-presentation": "multiple-choice",
+    "incorrect-answers": ["Planet", "Moon", "Universe"]
 }
 ```
 
@@ -155,11 +155,11 @@ You might also wonder, what correct answer is shown to the user when there are m
 
 ```
 "What comes after 'Hello'?": {
-	"answers": ["Web-Quiz", "World"],
-	"mode-of-presentation": "multiple-choice",
-	"incorrect-answers": ["Planet", "Moon", "Universe"],
-	"max-choices": 2,
-	"correct-answer-source": "primary"
+    "answers": ["Web-Quiz", "World"],
+    "mode-of-presentation": "multiple-choice",
+    "incorrect-answers": ["Planet", "Moon", "Universe"],
+    "max-choices": 2,
+    "correct-answer-source": "primary"
 }
 ```
 
@@ -177,13 +177,13 @@ Below, note that the double reverse-solidus is in essence our escape character, 
 
 ```
 "Question with ***__`MARKDOWN`__***!": {
-	"mode-of-presentation": "multiple-choice",
-	"answers": ["\\**bold\\** -> **bold**"],
-	"incorrect-answers": [
-		"\\*italics\\* -> *italics*",
-		"\\`code\\` -> `code`",
-		"\\__underline\\__ -> __underline__"
-	]
+    "mode-of-presentation": "multiple-choice",
+    "answers": ["\\**bold\\** -> **bold**"],
+    "incorrect-answers": [
+        "\\*italics\\* -> *italics*",
+        "\\`code\\` -> `code`",
+        "\\__underline\\__ -> __underline__"
+    ]
 }
 ```
 
@@ -201,14 +201,14 @@ Here's a definition of a couple simple groups inside of the `question-root`:
 
 ```
 "question-root": {
-	"group-1": {
-		"question-1": "answer-1",
-		"question-2": "answer-2"
-	},
-	"group-2": {
-		"question-3": "answer-3",
-		"question-4": "answer-4"
-	}
+    "Group 1": {
+        "question-1": "answer-1",
+        "question-2": "answer-2"
+    },
+    "Group 2": {
+        "question-3": "answer-3",
+        "question-4": "answer-4"
+    }
 }
 ```
 
@@ -222,14 +222,14 @@ An implicit *QuestionGroup* is a bit different. The key always specifies the `la
 
 ```
 "question-root": {"groups": {
-	"group-1": {"questions": {
-		"question-1": "answer-1",
-		"question-2": "answer-2"
-	}},
-	"group-2": {"questions": {
-		"question-3": "answer-3",
-		"question-4": "answer-4"
-	}}
+    "Group 1": {"questions": {
+        "question-1": "answer-1",
+        "question-2": "answer-2"
+    }},
+    "Group 2": {"questions": {
+        "question-3": "answer-3",
+        "question-4": "answer-4"
+    }}
 }}
 ```
 
@@ -237,7 +237,7 @@ Not a lot different, except that the body of each group now explicitly has eithe
 
 ### Child Type Deduction & The Big Honking Error You Might've Already Seen
 
-After concluding that `question-root` was in implicit form, it knew that the body is *either* going to be a list of groups or a list of questions. It started by assuming that the list was a list of questions. If so, then `group-1` must be in embedded-explicit form, since an implicit question would have a *string* for a body, not an *object* like `group-1` has. It looked inside that body and saw that the required `answers` field is missing. If indeed this is question, it concluded, it is malformed. It backtracked and tried to re-interpret the body of `question-root` as a list of QuestionGroups instead. Then it went through the whole process again with group 1. It saw the missing `questions` and `groups` fields, concluded that `group-1` was in implicit form, attempted to interpret its key-value pairs as questions, and succeeded! The key-value pairs are both Question objects in implicit form, as the human-readable names imply. If it had been unsuccessful in both interpretations, it would've had an error code for each failure. These errors codes are combined into a big error code like the one shown below.
+After concluding that `question-root` was in implicit form, it knew that the body is *either* going to be a list of groups or a list of questions. It started by assuming that the list was a list of questions. If so, then `Group 1` must be in embedded-explicit form, since an implicit question would have a *string* for a body, not an *object* like `Group 1` has. It looked inside that body and saw that the required `answers` field is missing. If indeed this is question, it concluded, it is malformed. It backtracked and tried to re-interpret the body of `question-root` as a list of QuestionGroups instead. Then it went through the whole process again with group 1. It saw the missing `questions` and `groups` fields, concluded that `Group 1` was in implicit form, attempted to interpret its key-value pairs as questions, and succeeded! The key-value pairs are both Question objects in implicit form, as the human-readable names imply. If it had been unsuccessful in both interpretations, it would've had an error code for *each* failure. These errors codes are combined into a big error code like the one shown below.
 
 ![3 Errors from 1 typo](quickstart-images/godless-error.png)
 
@@ -245,10 +245,10 @@ If we look at the code that caused this mess, we see that the issue is really qu
 
 ```
 "question-root": {
-	"group-1": {
-		"question-1": "answer-1",
-		"question-2": {"answerd": "<- typo"}
-	}
+    "Group 1": {
+        "question-1": "answer-1",
+        "question-2": {"answerd": "<- typo"}
+    }
 }
 ```
 
@@ -256,13 +256,13 @@ The second question is suppposed to be in embeded-explicit form but the required
 
 The three lines at the bottom are our actual errors. Look at the bottom one. It begins:
 
-> "While interpreting **Question** ... group-1 ..."
+> "While interpreting **Question** ... Group 1 ..."
 
-We, the human authors, can read the title and infer that "group-1" is very clearly meant to be a group, not a question. This error was generated while the parser was attempting to interpret "group-1" the wrong way. We can ignore it completely. Now look at the next error up from the bottom.
+We, the human authors, can read the title and infer that "Group 1" is very clearly meant to be a group, not a question. This error was generated while the parser was attempting to interpret "Group 1" the wrong way. We can ignore it completely. Now look at the next error up from the bottom.
 
 > "While interpreting **QuestionGroup** ... question-1 ..."
 
-Again, the parser was on the wrong track when it generated this error. It was trying to interpret "group-1" as a group of groups. Way off! This error gets thrown out too. Now for the next one up.
+Again, the parser was on the wrong track when it generated this error. It was trying to interpret "Group 1" as a group of groups. Way off! This error gets thrown out too. Now for the next one up.
 
 > "While interpreting **Question** ... question-2 ..."
 
@@ -272,10 +272,10 @@ If you're ever stuck on one of these, convert the suspect groups into embedded-e
 
 ```
 "question-root": {"groups": {
-	"group-1": {"questions": {
-		"question-1": "answer-1",
-		"question-2": {"answerd": "<- typo"}
-	}}
+    "Group 1": {"questions": {
+        "question-1": "answer-1",
+        "question-2": {"answerd": "<- typo"}
+    }}
 }}
 ```
 
@@ -285,4 +285,172 @@ Library files aren't the epitome of nuance and complexity but they aren't simple
 
 ### Inheritables
 
-Most inheritables aree fields we've already learned, like `max-choices` and `incorrect-answers`. You can add these on a group. They don't affect the group itself. Instead, they trickle down and are *inherited* by the group's children.
+Most inheritables are fields we've already learned, like `max-choices` and `incorrect-answers`. You can add these on a group. They don't affect the group itself. Instead, they trickle down and are *inherited* by the group's children. This allows us to label many questions at once! And we can use groups to apply different properties to different problem sets. The other inheritables we know are `typo-forgiveness-level`, `case-sensitive`, and `correct-answer-source`.
+
+
+```
+"Group 1": {
+    "mode-of-presentation": "multiple-choice",
+    "max-choices": 3,
+    "incorrect-answers": ["incorrect-1", "incorrect-2", "incorrect-3"],
+    
+    "questions": {
+        "question-1": "answer-1",
+        "question-2": {"answers": "answer-2", "max-choices": 2}
+    }
+}
+```
+
+Here, we've specified "Group 1" in embedded-explicit form, with the `questions` parameter, so we can add additional parameters.
+The `mode-of-presentation` and `max-choices` options are inherited by the children. The second child, however, overrides the value of `max-choices`. This question will have two choices (one correct, one incorrect). The other will have three. Remember, the default (if `max-choices` isn't specified anywhere in the hierarchy) is 4.
+
+You can also see that they share a source of incorrect answers. The `incorrect-answers` field doesn't get inherited the same way as other fields. Instead of being overridden, it gets *concatenated* - the contributions of the question and all its ancestors are all combined into one big list of available incorrect answers.
+
+The "ancestors" of a question are its containing group, its group's containing group, its group's group's group, all the way up to the root. Conversly, the "descendants" of a group include all its children, grandchildren, and so on down to all the questions.
+
+Another source of incorrect answers exists and is very powerful: The *correct* answers to *other* questions. In order to use these, we set the `descendants-share-incorrect-answers` field to true. This field doesn't get inherited. A more apt word might be "masked", but we won't delve into that until we're building cascading libraries. Instead, just observe the magic:
+
+```
+"group-1": {
+    "mode-of-presentation": "multiple-choice",
+    "descendants-share-incorrect-answers": true,
+    
+    "questions": {
+        "question-1": "answer-1",
+        "question-2": "answer-2",
+        "question-3": "answer-3",
+        "question-4": "answer-4"
+    }
+}
+```
+
+![A question whose incorrect answers come from its siblng questions.](quickstart-images/shared-incorrect-answers.png)
+
+It is often a good idea to group questions by the kind of answer they ask for in the first place. Often, a library designed with only "verbatim" presentation in mind is easily converted to a library that supports "multiple-choice" presentation, with the help of the `descendants-share-incorrect-answers` field. These options will be concatenated to any provided in an `incorrect-answers` field.
+
+If the exact same incorrect answer is available via mutliple sources, for example if multiple questions have the same answer in a group with `"descendants-share-incorrect-answers": true`, then this incorrect answer will be *more likely* to appear than others, but they will never both appear at the same time. Also, the system will never accidentally pick a correct answer and display it as an incorrect answer. These issues are prevented by a sanity check performed on the randomly generated incorrect answers right before they're displayed. If it finds that one of the "incorrect" answers would actually be graded as correct, it throws it out and generates a new one.
+
+## Cascading Libraries
+
+As previously mentioned, groups can have groups for children, not just questions. This structure allows a user to vary the amount of granularity with which they control their own experience. They can check the first box and leave it all up to the author, or expand out each individual group and inspect them one at a time, and everything in between.
+
+In order to create cascading libraries, the first thing you must understand is that inheritance can occure *through* groups.
+
+```
+{
+    "version": 1,
+    "author": "ekobadd",
+    "title": "Quickstart Library",
+    "question-root": {
+        "Outer Group": {
+            "mode-of-presentation": "multiple-choice",
+            "incorrect-answers": ["incorrect-1", "incorrect-2"],
+            "max-choices": 3,
+            
+            "groups": {
+                "Inner Group 1": {
+                    "question-1": "answer-1",
+                    "question-2": "answer-2"
+                },
+                
+                "Inner Group 2": {
+                    "incorrect-answers": "incorrect-3",
+                    "max-choices": 4,
+                    
+                    "questions": {
+                        "question-3": "answer-3",
+                        "question-4": "answer-4"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+Not including the `question-root` itself, we have three groups. "Outer Group" has the `groups` field within it, so we know right away that it is in embedded-explict form and has groups for children. "Inner Group 2" has the `questions` field so we know that it's in embedded-explicit form and has questions for children. "Inner Group 1" has neither so we know that it's in implicit form. We can tell by the names of the keys that they are questions, the parser can tell they are questions in implicit form because the values ("answer-1" and "answer-2") are strings.
+
+The Outer Group specifies the `mode-of-presentation` for the entire library, since it's not overridden by either of the inner groups or any of the questions. `max-choices` is 3 for the first two questions, it's inherited the same way as `mode-of-presentation`. For the last two questions, they *would* inherit the same way, if not for the fact that "Inner Group 2" - an intermediary - overrides that value and sets it to 4. "Inner Group 2" also specifies a single incorrect answer. But remember that `incorrect-answers` is not inherited normally. The `incorrect-answers` field in Inner Group 2 does not override the existing incorrect answers, but appends to it. The last two questions both have three available incorrect answers.
+
+Since inheritance can pull through groups, you can set default settings on the entire library by setting them on the root.
+
+### `descendants-share-incorrect-answers` on a Cascading Library
+
+It can help a lot to understand how this field works in bigger libraries. It is not inherited. Instead, answers are shared between questions whose nearest anscestor with `"descendants-share-incorrect-answers": true` are the same.
+
+Maybe that's confusing. Think about groups as "scooping up" all the answers of the questions that descend from them.
+This is the same language, conceptually, that the program's code uses to reference this field. A group with this field set to true is called an **answer claimant**.
+
+Once the answers have been claimed, they can't be claimed again - and subsequently shared by - the ancestors of the claimant. Here's an example:
+
+```
+"Outer Group": {
+    "mode-of-presentation": "multiple-choice",
+    "descendants-share-incorrect-answers": true,
+    
+    "groups": {
+        "Inner Group 1": {
+            "question-1": "answer-1",
+            "question-2": "answer-2"
+        },
+        
+        "Inner Group 2": {
+            "question-3": "answer-3",
+            "question-4": "answer-4"
+        },
+        
+        "Inner Group 3": {
+            "descendants-share-incorrect-answers": true,
+            
+            "questions": {
+                "question-5": "answer-5",
+                "question-6": "answer-6"
+            }
+        }
+    }
+}
+```
+
+Here, the "Outer Group" has `"descendants-share-incorrect-answers": true`, it's an answer claimant. So, you might think that all of the answers to these questions can appear as incorrect answers to all the other questions, but this is not the case. The answers to questions 5 and 6 have been claimed by Inner Group 3, which is also an answer claimant. They are not available to be claimed by the Outer Group and therefore will not be present on the questions outside of this group; only to each other.
+
+![Question 1 has incorrect answers 2-4.](quickstart-images/available-answers-1.png)
+
+In the above image, you can see the options available to question-1. No other options are available.
+
+In addition, when searching for an ancestor who is an answer claimant from which to generate incorrect answers, a question will only search until the first answer claimant it finds. So question-6, for example, will grab it's incorrect answers from the first answer claimant it finds which also happens to be its immediate parent: Inner Group 3. It will not see the answers claimed by the Outer group. The only incorrect answer on question-6 is answer-5.
+
+![Question 6 only has incorrect answer 5.](quickstart-images/available-answers-2.png)
+
+
+### `hidden`
+
+The `hidden` field is handy for logically organizing groups internally in a way that is handy for the author but more-or-less meaningless for the user. A hidden group is not visible or selectable by the user. It's not inherited *per se*, but a hidden group's children will not be rendered either. A hidden group will still be selected if any of its ancestors are selected.
+
+An excellent example can be found in the CompTIA A+ Core 2 Library:
+
+```
+"Navigation": {
+	"cd": {
+		"hidden": true,
+		"descendants-give-incorrect-answers": true,
+		"incorrect-answers": ["`cd`", "`chdir`"],
+		"questions": {
+			"In Windows, what command would change the working directory to the root of the current drive?": {"answers": "`cd \\\\`", "hidden-answers": "cd /"},
+			"In Windows, what command would change the working directory to the parent of the current working directory?": "`cd ..`"
+		}
+	},
+	"other": {
+		"hidden": true,
+		"questions": {
+			"In Windows, what command is used to change the working directory?": ["`cd`", "`chdir`"],
+			"In Windows, what command is used to get a list of files and folders in the current working directory?": "`dir`",
+			"In Windows, what command is used to make a directory?": ["`md`", "`mkdir`"],
+			"In Windows, what command is used to remove a directory?": ["`rd`", "`rmdir`"]
+		}
+	}
+},
+```
+
+You can't see it, but the parent of the "Navigation" group is an answer claimant, so the hidden "cd" group was made to prevent the incorrect answers of that group from appearing on those questions. The "other" group is just a container for the rest of the questions in this group which should still inherit the normal settings. The groups are hidden because users aren't gonna want to learn *only* `cd \` and `cd ..` to the exclusion of `cd` and the other navigation commands. To give them that option would be arbitrary and would only introduce clutter.
+
+Oh, the quadruple backslash? A single backslash would begin a JSON escape sequence which would cause an error. A double backslash would resolve to a single backslash which would escape the backtick markdown character. We need the quadruple backslash in this case only because it just so happens to appear right before a markdown token...

@@ -22,10 +22,16 @@ def homepage():
 		authors_libraries = os.listdir(f"Libraries/{author}")
 		
 		for library in authors_libraries:
-			libraries.append(Library(author, library))
+			if library.endswith(".json"):
+				libraries.append(Library(author, library[:-5]))
 	
 	return render_template("homepage.html", libraries=libraries)
 
 @app.route("/library")
 def library():
 	return render_template("library.html")
+
+@app.route("/libraries/<author>/<library>")
+def libraries(author, library):
+	print(author, library)
+	return send_from_directory("Libraries", f"{author}/{library}.json")

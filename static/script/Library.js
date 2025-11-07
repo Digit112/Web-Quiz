@@ -49,7 +49,7 @@ function import_event(e) {
 		}
 
 		// Generate collapsibles HTML
-		my_library.generate_HTML( document.getElementById("collapsibles_root"), document.getElementById("editing-pane"))
+		my_library.generate_HTML( document.getElementById("collapsibles_root"), document.getElementById("editing-pane"), import_export_enabled)
 		if (error != null) { // Display the error.
 			let error_lines = error.message.split("\n")
 			
@@ -181,7 +181,8 @@ class Library {
 	// If an editing pane is supplied, and currently_editing is true, then editing options will be displayed.
 	// If currently_editing is false, however, the user will merely be shown a button that allows editing and the editing pane will be hidden until they click it.
 	// If editing_pane is null, currently_editing is ignored. A button to edit is not generated.
-	generate_HTML(doc_parent, editing_pane = null, currently_editing = false) {
+	// If include_import_export is false, don't render buttons for importing and exporting the library. Users will still be able to save and load progress.
+	generate_HTML(doc_parent, editing_pane = null, currently_editing = false, include_import_export = true) {
 		// Delete HTML on existing elements if we are generating onto a new element.
 		if (this.doc_parent && this.doc_parent != doc_parent) {
 			this.doc_parent.replaceChildren()
@@ -194,6 +195,7 @@ class Library {
 		this.doc_parent = doc_parent
 		this.editing_pane = editing_pane
 		this.currently_editing = currently_editing
+		this.include_import_export = include_import_export
 		
 		doc_parent.replaceChildren()
 		
@@ -208,16 +210,20 @@ class Library {
 		import_file_selector.style.display = "none"
 		import_file_selector.addEventListener("change", import_event)
 		
-		let import_button = document.createElement("button")
-		import_button.setAttribute("class", "library-header-control")
-		import_button.textContent = "Import"
-		import_button.addEventListener("click", () => import_file_selector.click())
+		if (include_import_export) {
+			var import_button = document.createElement("button")
+			import_button.setAttribute("class", "library-header-control")
+			import_button.textContent = "Import"
+			import_button.addEventListener("click", () => import_file_selector.click())
+			
+			if (this.root_q != null) {
+				var export_button = document.createElement("button")
+				export_button.setAttribute("class", "library-header-control")
+				export_button.textContent = "Export"
+			}
+		}
 		
 		if (this.root_q != null) {
-			var export_button = document.createElement("button")
-			export_button.setAttribute("class", "library-header-control")
-			export_button.textContent = "Export"
-			
 			if (editing_pane != null) {
 				var editing_controls_toggle = document.createElement("button")
 				editing_controls_toggle.setAttribute("class", "library-header-control")
@@ -232,15 +238,17 @@ class Library {
 		this.library_loading_error_label.style.display = "none"
 		this.library_loading_error_label.setAttribute("class", "library-loading-errpr")
 		
-		library_header.appendChild(import_button)
-		library_header.appendChild(import_file_selector)
-		
-		if (this.root_q != null) {
-			library_header.appendChild(export_button)
+		if (include_import_export) {
+			library_header.appendChild(import_button)
+			library_header.appendChild(import_file_selector)
 			
-			if (editing_pane) {
-				library_header.appendChild(editing_controls_toggle)
+			if (this.root_q != null) {
+				library_header.appendChild(export_button)
 			}
+		}
+			
+		if (this.root_q != null && editing_pane != null) {
+			library_header.appendChild(editing_controls_toggle)
 		}
 		
 		library_header.appendChild(this.library_loading_error_label)
@@ -284,7 +292,7 @@ class Library {
 	
 	regenerate_HTML() {
 		if (!this.doc_parent) throw new Error("Cannot regenerate HTML, HTML has not yet been generated.")
-		this.generate_HTML(this.doc_parent, this.editing_pane, this.currently_editing)
+		this.generate_HTML(this.doc_parent, this.editing_pane, this.currently_editing, this.include_import_export)
 	
 		this.root_q.reset_expansion()
 		this.root_q.check_elem.checked = this.root_q.get_enabled()

@@ -46,9 +46,6 @@ let progress_div_body = document.getElementById("progress-div-body")
 let selected_progress = document.getElementById("selected-progress")
 let library_progress = document.getElementById("library-progress")
 
-let my_library = new Library()
-my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_pane)
-
 let active_question = null
 
 // Number of correctly answered questions since the last quiz cycle.
@@ -56,6 +53,29 @@ let quiz_score = 0
 
 // Used to deteermine when to save progress.
 let attempts_since_last_save = 0
+
+// Collect query params
+const url_params = new URLSearchParams(window.location.search);
+const author = url_params.get("author")
+const name = url_params.get("name")
+
+const editing_enabled = url_params.get("editing_enabled") === "" ? true : false
+const import_export_enabled = url_params.get("import_export_enabled") === "" ? true : false
+
+let my_library = new Library()
+
+// Attempt to load library from query params
+if (author != null && name != null) {
+	fetch(`/libraries/${author}/${name}`)
+		.then(response => response.json())
+		.then(data => {
+			my_library = new Library(data)
+			my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_enabled ? editing_pane : null, false, import_export_enabled)
+		})
+}
+else {
+	my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_enabled)
+}
 
 function reset_interface() {
 	// Reset Question area

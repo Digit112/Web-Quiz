@@ -464,11 +464,7 @@ class Library {
 		this.IDEAL_OVERALL_DIFFICULTY = library_data["ideal-overall-difficulty"]
 		if (!this.IDEAL_OVERALL_DIFFICULTY) this.IDEAL_OVERALL_DIFFICULTY = 0.3
 		
-		console.log("Initializing Library...")
-		console.log("Adaptation Rate: " + this.ADAPTATION_RATE.toString())
-		console.log("Starting Mastery: " + this.STARTING_MASTERY.toString())
-		console.log("Adaptive Weight Bias: " + this.ADAPTIVE_WEIGHT_BIAS.toString())
-		console.log("Ideal Overall Difficulty: " + this.IDEAL_OVERALL_DIFFICULTY.toString())
+		console.log(`Initializing Library... Adaptation Rate: ${this.ADAPTATION_RATE.toString()}, Starting Mastery: ${this.STARTING_MASTERY.toString()}, Adaptive Weight Bias: ${this.ADAPTIVE_WEIGHT_BIAS.toString()}, Ideal Overall Difficulty: ${this.IDEAL_OVERALL_DIFFICULTY.toString()}`)
 		
 		let root_qg_data = library_data["question-root"]
 		if (!root_qg_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")

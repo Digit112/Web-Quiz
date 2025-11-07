@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Evening Web Quiz</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+	</head>
+	<body>
+		<article>
+			<span style="float: left;">
+				<i><a href="/">Homepage</a></i>
+			</span>
+			<span style="float: right;">
+				<i><a href="https://github.com/digit112/Web-Quiz">On Github</a></i>
+			</span>
+			<h1><i>Evening Web Quiz Database</i></h1>
+			<hr>
+			
+			<p>The Evening Web Quiz Database allows you to practice different styles of rote memorization with a blazing pace by showing you the questions you want, in the format you want, and adapting to your progress as you go.</p>
+			
+			<h2>Libraries</h2>
+			
+			<ul>
+				{% for library in libraries %}
+					<li><a href="{{ library.link }}"><b>{{ library.name }}</b> by <b>{{ library.author }}</b></a></li>
+				{% endfor %}
+			</ul>
+			
+			<h2>FAQ</h2>
+			
+			<h3>What is a Library?</h3>
+			
+			<p>A Library is written in a special JSON dialect described in the <a href="https://github.com/digit112/Web-Quiz">GitHub repository</a>. It groups questions into a hierarchical structure to allow the greatest flexibility in both design and use. The libraries you see above can all be found in the GitHub as well. If you read the quickstart or just look at a file closely, you can get started in writing your own. There are plenty of features but you don't need many for a powerful library.</p>
+			
+			<h3>What do all the settings mean?</h3>
+			
+			<p>The defaults are pretty good. <b>Random</b> mode shows you all available question at the same frequency. <b>Adaptive</b> mode prefers to show you questions that you often get wrong, reducing the amount of time you spend on questions you've already learned. <b>Quiz</b> mode shows you all of the questions, then scores you, and shows them again on a loop.</p>
+			
+			<p><b>Windowing</b> prevents you from being overwhelmed early on by limiting how many questions you see. It slowly adds more questions as you master old ones to hold the difficulty about constant. <b>Shuffling</b> just randomizes the order questions are asked (in quiz mode) or the order in which they are added to the window (with windowing).</p>
+			
+			<h3>Have you considered making the site not shit?</h3>
+			
+			<p>My greatest hope would be to fully incorporate a library editor into the site and host people's submissions! Then nobody would ever have to learn my esoteric JSON dialect, and people could use this site to make all kinds of funky learning utilities and share them. There's a lot you can't do with rote memorization, but there's hardly anything you can do without it. A resource that makes the process as simple and easy as possible would - I think - help a great many people trying to learn all kinds of interesting things!</p>
+			
+			<h3>Any tips?</h3>
+			
+			Just a couple for now...
+			
+			<ul>
+				<li>You can type to select multiple-choice answers instead of clicking.</li>
+				<li>Questions sometimes forgive you for making a typo or two - depending on the nature of the question and the length of the answer.</li>
+			</ul>
+		</article>
+	</body>
+</html>

@@ -156,26 +156,55 @@
 			},
 			
 			"Countries": {
-				"にほん": "japan",
-				"かんこく": "korea",
-				"ちゅうごく": "china",
-				"アメリカ": ["america", "usa"],
-				"メキシコ": "mexico",
-				"イギリス": ["england", "britain"],
-				"ロシア": "russia",
-				"インドネシア": "indonesia",
-				"インド": "india",
-				"フイリピン": "philippines",
-				"カナダ": "canada",
-				"エジプト": "egypt",
-				"オーストラリア": "australia"
+				"にほん": "Japan",
+				"かんこく": "Korea",
+				"ちゅうごく": "China",
+				"アメリカ": ["America", "USA"],
+				"メキシコ": "Mexico",
+				"イギリス": ["England", "Britain"],
+				"ロシア": "Russia",
+				"インドネシア": "Indonesia",
+				"インド": "India",
+				"フイリピン": "Philippines",
+				"カナダ": "Canada",
+				"エジプト": "Egypt",
+				"オーストラリア": "Australia"
 			},
 			
 			"Jobs": {
-				"いしゃ": "doctor",
-				"かいしゃいん": "office worker",
-				"かんごし": "nurse",
-				"べんごし": "lawyer"
+				"いしゃ": "Doctor",
+				"かいしゃいん": "Office Worker",
+				"かんごし": "Nurse",
+				"べんごし": "Lawyer"
+			}
+		},
+		
+		"Adjectives": {
+			"no-Adjectives": {
+				"Colors": {
+					"あか": "Red",
+					"あお": ["Blue-Green", "Teal", "Blue", "Green"],
+					"きいろ": "Yellow",
+					"しろ": "White",
+					"くろ": "Black",
+					"こん": "Dark Blue",
+					"みずいろ": "Light Blue",
+					"みどり": "Green",
+					"むらさき": ["Violet", "Purple"],
+					"オレンジ": "Orange",
+					"ピンク": "Pink",
+					"ちゃいろ": "Brown",
+					"はいいろ": {"answers": "Gray", "hidden-answers": "Grey"},
+					"きんいろ": "Gold",
+					"ぎんいろ": "Silver"
+				},
+				
+				"Alternate Colors": {
+					"レンジいろ": "Orange",
+					"だいだいいろ": "Dark Orange",
+					"ももいろ": ["Peach", "Pink"],
+					"ねずみいろ": {"answers": ["Gray", "Dark Gray"], "hidden-answers": ["Grey", "Dark Grey"]}
+				}
 			}
 		},
 	

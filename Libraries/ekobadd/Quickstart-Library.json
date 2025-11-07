@@ -1,0 +1,33 @@
+{
+    "version": 1,
+    "author": "ekobadd",
+    "title": "Quickstart Library",
+    "question-root": {
+        "Outer Group": {
+            "mode-of-presentation": "multiple-choice",
+			"descendants-share-incorrect-answers": true,
+			"typo-forgiveness-level": "none",
+            
+            "groups": {
+                "Inner Group 1": {
+                    "question-1": "answer-1",
+                    "question-2": "answer-2"
+                },
+                
+                "Inner Group 2": {
+					"question-3": "answer-3",
+					"question-4": "answer-4"
+                },
+                
+                "Inner Group 3": {
+					"descendants-share-incorrect-answers": true,
+					
+                    "questions": {
+                        "question-5": "answer-5",
+                        "question-6": "answer-6"
+                    }
+                }
+            }
+        }
+    }
+}

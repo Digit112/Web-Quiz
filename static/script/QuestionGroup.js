@@ -200,10 +200,19 @@ class QuestionGroup {
 			
 			// mode-of-presentation
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
-			if (typeof this.mode_of_presentation != "string")
-				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string.")
-			if (!["verbatim", "multiple-choice", "flash-card"].includes(this.mode_of_presentation))
-				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
+			if (typeof this.mode_of_presentation == "string")
+				this.mode_of_presentation = [this.mode_of_presentation]
+			if (!Array.isArray(this.mode_of_presentation))
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string or array of strings.")
+			if (this.mode_of_presentation.length == 0)
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string or array of strings, not empty array.")
+			
+			for (let mode of this.mode_of_presentation) {
+				if (typeof mode != "string")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string or array of strings.")
+				if (!["verbatim", "multiple-choice", "flash-card"].includes(mode))
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, `'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card', not ${mode}`)
+			}
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
@@ -254,8 +263,6 @@ class QuestionGroup {
 			}
 			
 			for (let incorrect_answer of this.incorrect_answers) {
-				if (typeof incorrect_answer != "string")
-					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 				if (typeof incorrect_answer != "string")
 					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 			}

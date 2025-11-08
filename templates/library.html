@@ -36,6 +36,14 @@
 					<input id="do_shuffle" type="checkbox" checked="true"><text>Shuffle Questions</text>
 					<p id="shuffle_explanation" style="margin-top: 2px">Questions will become available in a random order.</p>
 					
+					<label>Select your preferred format:</label>
+					<select id="mode_of_presentation_select">
+						<option value="">Default</option>
+						<option value="verbatim">Verbatim</option>
+						<option value="multiple-choice">Multiple Choice</option>
+					</select>
+					<p style="margin-top: 0;"> A question might not support your selected format, in which case it will use its default.</p>
+					
 					<button id="reset_progress" type="button">Reset Progress</button>
 				</div>
 				<div id="editing-pane">

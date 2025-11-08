@@ -21,6 +21,8 @@ let window_explanation = document.getElementById("window_explanation")
 let do_shuffle = document.getElementById("do_shuffle")
 let shuffle_explanation = document.getElementById("shuffle_explanation")
 
+let mode_of_presentation_select = document.getElementById("mode_of_presentation_select")
+
 let reset_progress = document.getElementById("reset_progress")
 
 let begin_button = document.getElementById("begin-button")
@@ -46,6 +48,11 @@ let progress_div_body = document.getElementById("progress-div-body")
 let selected_progress = document.getElementById("selected-progress")
 let library_progress = document.getElementById("library-progress")
 
+let before_unload_handler = ev => {
+	event.preventDefault();
+	ev.returnValue = true; // Legacy support
+}
+
 let active_question = null
 
 // Number of correctly answered questions since the last quiz cycle.
@@ -65,10 +72,14 @@ const import_export_enabled = url_params.get("import_export_enabled") === "" ? t
 let my_library = new Library()
 
 // Attempt to load library from query params
+// TODO: This does not appropriately handle JSON errors in any way. Some sort of error-reporting function should handle this situation.
 if (author != null && name != null) {
 	fetch(`/libraries/${author}/${name}`)
-		.then(response => response.json())
-		.then(data => {
+		.then(response => {
+			data = response.json()
+			return data
+		}).then(data => {
+			console.log("constructing")
 			my_library = new Library(data)
 			my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_enabled ? editing_pane : null, false, import_export_enabled)
 		})
@@ -233,7 +244,9 @@ do_shuffle.addEventListener("input", () => {
 })
 
 reset_progress.addEventListener("click", () => {
-	my_library.reset_progress()
+	if (confirm("Reset all progress and start over?")) {
+		my_library.reset_progress()
+	}
 })
 
 begin_button.addEventListener("click", () => {
@@ -281,20 +294,10 @@ function generate_next_question(did_pass = false) {
 	if (active_question != null) {
 		// Save the player's progress
 		attempts_since_last_save++
-		if (attempts_since_last_save == 16) {
-			attempts_since_last_save = 0
-			let save_start = performance.now()
-			
-			// TODO: Entering slippery slope
-			my_library.get_id().then((library_id) => {
-				my_library.get_save_string().then((save_str) => {
-					let cookie_str = library_id + "-progress=" + save_str
-					document.cookie = cookie_str
-					
-					let save_end = performance.now()
-					console.log("Saved progress in " + (save_end - save_start) + "ms")
-				})
-			})
+
+		// Warn user of unsaved changes.
+		if (attempts_since_last_save == 5) {
+			window.addEventListener("beforeunload", before_unload_handler);
 		}
 		
 		// Check the answer.
@@ -460,13 +463,15 @@ function generate_next_question(did_pass = false) {
 		question_notes_field.textContent = ""
 	}
 	
-	if (active_question.mode_of_presentation == "verbatim") {
+	let mode_of_presentation = active_question.get_mode_of_presentation(mode_of_presentation_select.value)
+	
+	if (mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"
 		multiple_choice_field.style.display = "none"
 		
 		answer_text.focus()
 	}
-	else if (active_question.mode_of_presentation == "multiple-choice") {
+	else if (mode_of_presentation == "multiple-choice") {
 		verbatim_field.style.display = "none"
 		multiple_choice_field.style.display = "flex"
 		

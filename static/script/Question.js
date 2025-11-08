@@ -102,10 +102,19 @@ class Question {
 			
 			// mode-of-presentation
 			this.mode_of_presentation = attempt_read_inherit("mode-of-presentation", "verbatim")
-			if (typeof this.mode_of_presentation != "string")
-				throw new LibraryLoadingError("Question", this.q[0], parent_group, "'mode-of-presentation' must be a string.")
-			if (!["verbatim", "multiple-choice", "flash-card"].includes(this.mode_of_presentation))
-				throw new LibraryLoadingError("Question", this.label, parent_group, "'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card'.")
+			if (typeof this.mode_of_presentation == "string")
+				this.mode_of_presentation = [this.mode_of_presentation]
+			if (!Array.isArray(this.mode_of_presentation))
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string or array of strings.")
+			if (this.mode_of_presentation.length == 0)
+				throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string or array of strings, not empty array.")
+			
+			for (let mode of this.mode_of_presentation) {
+				if (typeof mode != "string")
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "'mode-of-presentation' must be a string or array of strings.")
+				if (!["verbatim", "multiple-choice", "flash-card"].includes(mode))
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, `'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card', not ${mode}`)
+			}
 			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
@@ -279,6 +288,17 @@ class Question {
 	// Returns a saveable and loadable object representing the uer's progress.
 	async get_progress_object() {
 		return {"id": await this.get_id(), "ml": this.mastery_level, "na": this.num_attempts, "iw": this.windowed}
+	}
+	
+	// Returns the passed mode if it is allowed, otherwise return the author's preferred mode.
+	// TODO: Allow more detailed choices, like with a ranked list.
+	get_mode_of_presentation(suggested_mode) {
+		if (this.mode_of_presentation.includes(suggested_mode)) {
+			return suggested_mode
+		}
+		else {
+			return this.mode_of_presentation[0]
+		}
 	}
 	
 	load_progress_object(obj) {

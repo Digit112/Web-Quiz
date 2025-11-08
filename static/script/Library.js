@@ -1,19 +1,19 @@
 class LibraryLoadingError extends Error {
-  constructor(entity_type, label, parent_group, message, allow_recurse = 2) {
-	let identifier = "null identifier"
-	
-	if (parent_group instanceof QuestionGroup) {
-		identifier = parent_group.get_ancestors_as_string()
-		if (label != null) identifier += " -> " + label
+	constructor(entity_type, label, parent_group, message, allow_recurse = 2) {
+		let identifier = "null identifier"
+
+		if (parent_group instanceof QuestionGroup) {
+			identifier = parent_group.get_ancestors_as_string()
+			if (label != null) identifier += " -> " + label
+		}
+		else if (label != null) {
+			identifier = label
+		}
+
+		super("While interpreting " + entity_type + " '" + identifier + "'; " + message);
+		this.allow_recurse = allow_recurse
+		this.name = "LibraryLoadingError";
 	}
-	else if (label != null) {
-		identifier = label
-	}
-	
-    super("While interpreting " + entity_type + " '" + identifier + "'; " + message);
-	this.allow_recurse = allow_recurse
-    this.name = "LibraryLoadingError";
-  }
 }
 
 // NOTE: Accesses global my_library!
@@ -110,6 +110,7 @@ function load_progress_event(e) {
 	reader.readAsText(file)
 }
 
+// TODO: Make attempts_since_last_save a Library variable instead of a global
 async function save_progress_event() {
 	function sanitize_filename(fn) {
 		return fn.replace(/[<>:"/\\|?*]+/g, '_').replace(/[\x00-\x1F]+/g, '').replace(/\.$/, '')
@@ -127,6 +128,9 @@ async function save_progress_event() {
 	a.click();
 	document.body.removeChild(a); // Remove the element after clicking
 	URL.revokeObjectURL(url); // Release the object URL
+	
+	attempts_since_last_save = 0
+	window.removeEventListener("beforeunload", before_unload_handler);
 }
 
 // A library serves as an explicit root to a QuestionGroup tree, wrapping its children and questions.

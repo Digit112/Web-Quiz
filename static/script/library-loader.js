@@ -224,7 +224,7 @@ quiz_gen.addEventListener("input", () => {
 	quiz_score = 0
 })
 
-use_window.addEventListener("input", () => {
+use_window.addEventListener("input", function() {
 	if (this.checked) {
 		window_explanation.textContent = windowing_expl
 	}
@@ -233,7 +233,7 @@ use_window.addEventListener("input", () => {
 	}
 })
 
-do_shuffle.addEventListener("input", () => {
+do_shuffle.addEventListener("input", function() {
 	if (this.checked) {
 		shuffle_explanation.textContent = shuffle_expl
 	}

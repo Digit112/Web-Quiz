@@ -25,7 +25,7 @@
 			
 			<ul>
 				{% for library in libraries %}
-					<li><a href="{{ library.link }}"><b>{{ library.name }}</b> by <b>{{ library.author }}</b></a> <i>(<a href="{{ library.raw_link }}">source</a>)</i></li>
+					<li><a href="{{ library.link }}"><b>{{ library.name }}</b></a> by <b>{{ library.author }}</b> <i>(<a href="{{ library.raw_link }}">source</a>)</i></li>
 				{% endfor %}
 			</ul>
 			
@@ -33,13 +33,21 @@
 			
 			<h3>What is a Library?</h3>
 			
-			<p>A Library is written in a special JSON dialect described in the <a href="https://github.com/digit112/Web-Quiz">GitHub repository</a>. It groups questions into a hierarchical structure to allow the greatest flexibility in both design and use. The libraries you see above can all be found in the GitHub as well. If you read the quickstart or just look at a file closely, you can get started in writing your own. There are plenty of features but you don't need many for a powerful library.</p>
+			<p>A Library is written in a special JSON dialect described in the <a href="https://github.com/digit112/Web-Quiz">GitHub repository</a>. It groups questions into a hierarchical structure for flexibility in both design and use. If you read the quickstart or just look at a file closely, you can get started at writing your own. There are plenty of features but you don't need many for a powerful library.</p>
+			
+			<p>The defaults settings are pretty good. By default, questions are chosen to keep you challenged but without overwhelming you, and are presented in the manner the author recommends.</p>
+			
+			<h3>How do I use this tool?</h3>
+			
+			<p>Click on one of the links above to load a library. You'll see the name of the library next to a "+" button and check box. You can use the "+" buttons to expand categories and explore what you can learn with the library! Check the box next to any groups you want. Don't care about the nuances? Just click the checkbox next to the library name and get everything. You can customize the settings if you wish then click "Begin" for the first question.</p>
 			
 			<h3>What do all the settings mean?</h3>
 			
-			<p>The defaults are pretty good. <b>Random</b> mode shows you all available question at the same frequency. <b>Adaptive</b> mode prefers to show you questions that you often get wrong, reducing the amount of time you spend on questions you've already learned. <b>Quiz</b> mode shows you all of the questions, then scores you, and shows them again on a loop.</p>
+			<b>Random</b> mode shows you all available question at the same frequency. <b>Adaptive</b> mode prefers to show you questions that you often get wrong, reducing the amount of time you spend on questions you've already learned. <b>Quiz</b> mode shows you all of the questions, then scores you, and shows them again on a loop.</p>
 			
 			<p><b>Windowing</b> prevents you from being overwhelmed early on by limiting how many questions you see. It slowly adds more questions as you master old ones to hold the difficulty about constant. <b>Shuffling</b> just randomizes the order questions are asked (in quiz mode) or the order in which they are added to the window (with windowing).</p>
+			
+			<p><b>Preferred Format</b> is the way you'd like to see the questions, either multiple-choice or verbatim (free text). If a question doesn't support your preferred format, it will be displayed using its default format. Don't get the impression that this will affect the difficulty of the experience. If you have windowing enabled, the difficulty will be the same no matter what! You will progress a bit faster with multiple-choice but it won't <i>feel</i> easier.</p>
 			
 			<h3>Have you considered making the site not shit?</h3>
 			

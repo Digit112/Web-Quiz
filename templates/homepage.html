@@ -25,7 +25,7 @@
 			
 			<ul>
 				{% for library in libraries %}
-					<li><a href="{{ library.link }}"><b>{{ library.name }}</b> by <b>{{ library.author }}</b></a></li>
+					<li><a href="{{ library.link }}"><b>{{ library.name }}</b> by <b>{{ library.author }}</b></a> <i>(<a href="{{ library.raw_link }}">source</a>)</i></li>
 				{% endfor %}
 			</ul>
 			

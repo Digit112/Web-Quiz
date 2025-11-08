@@ -3,7 +3,7 @@
 	"author": "ekobadd",
 	"title": "Toki Pona",
 	
-	"adaptation-rate": 0.15,
+	"adaptation-rate": 0.13,
 	"starting-mastery": 0.5,
 	"adaptive-weight-bias": 4.5,
 	"ideal-overall-difficulty": 0.3,

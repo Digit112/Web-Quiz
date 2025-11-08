@@ -1,14 +1,16 @@
 from flask import Flask, render_template, send_from_directory, url_for
+from werkzeug.security import safe_join
 
 import os
-import urllib.parse
+from urllib.parse import quote_plus, unquote_plus
 
 class Library:
 	def __init__(self, author, name):
 		self.author = author
 		self.name = name
 		
-		self.link = url_for("library", author=urllib.parse.quote_plus(author), name=urllib.parse.quote_plus(name))
+		self.link = url_for("library", author=quote_plus(author), name=quote_plus(name))
+		self.raw_link = url_for("libraries", author=quote_plus(author), name=quote_plus(name))
 
 app = Flask(__name__)
 
@@ -31,7 +33,7 @@ def homepage():
 def library():
 	return render_template("library.html")
 
-@app.route("/libraries/<author>/<library>")
-def libraries(author, library):
-	print(author, library)
-	return send_from_directory("Libraries", f"{author}/{library}.json")
+@app.route("/libraries/<author>/<name>")
+def libraries(author, name):
+	library_slug = f"{unquote_plus(author)}/{unquote_plus(name)}.json"
+	return send_from_directory("Libraries", library_slug)

@@ -36,6 +36,7 @@ let verbatim_field = document.getElementById("verbatim-field")
 let multiple_choice_field = document.getElementById("multiple-choice-field")
 
 let question_text = document.getElementById("question-text")
+let question_free_answer_field = document.getElementById("question-free-answer-field")
 let question_notes_field = document.getElementById("question-notes-field")
 let answer_text = document.getElementById("answer-text")
 let next_question = document.getElementById("next-question")
@@ -114,20 +115,19 @@ function reset_interface() {
 
 // Fucks up the library caching.
 // TODO: This is *very* inefficient and should be a function on the library itself)
-// TODO: Also, this is just the raw mastery level which is not an excellant measure of true progress,
-//       it'd be better if it measured the deviation from starting mastery.
+// TODO: Probably we should implement a separate recursive functions to average the selected questions' mastery, weighting questions with few attempts lower
 function update_progress_bars() {
 	let am_adaptive = adapt_gen.checked
 	
 	// Cache weights with windowing disabled to get difficulty of all enabled questions.
 	my_library.cache_weights(am_adaptive, false)
-	let sel_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
+	let sel_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0) / (1 - my_library.STARTING_MASTERY)
 	
 	// Enable the root to get the difficulty of the entire library.
 	let orig_root_enabled = my_library.root_q.is_enabled
 	my_library.root_q.is_enabled = true
 	my_library.cache_weights(am_adaptive, false)
-	let lib_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0)
+	let lib_prog = Math.max((1 - my_library.root_q.difficulty) - my_library.STARTING_MASTERY, 0) / (1 - my_library.STARTING_MASTERY)
 	my_library.root_q.is_enabled = orig_root_enabled
 	
 	selected_progress.textContent = (sel_prog * 100).toFixed(1) + "%"
@@ -356,15 +356,7 @@ function generate_next_question(did_pass = false) {
 			correct_answer_label.textContent = "Correct Answers Include: " 
 		}
 		
-		let correct_answers = ["'", active_question.a[0].as_html()]
-		for (let i = 1; i < active_question.a.length; i++) {
-			let separator = document.createElement("i")
-			separator.textContent = "', '"
-			correct_answers.push(separator)
-			
-			correct_answers.push(active_question.a[i].as_html())
-		}
-		correct_answers.push("'")
+		let correct_answers = active_question.get_correct_answers_html()
 		correct_answer.replaceChildren(...correct_answers)
 	}
 	
@@ -394,6 +386,8 @@ function generate_next_question(did_pass = false) {
 			
 			let difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - my_library.get_difficulty())
 			let theoretical_difficulty_offset = Math.abs(my_library.IDEAL_OVERALL_DIFFICULTY - theoretical_difficulty)
+			
+			//console.log("  Difficulty Offset: " + difficulty_offset + ", Theoretical Difficulty Offset: " + theoretical_difficulty_offset)
 			
 			// If adding a question would make the quiz both harder and closer to the ideal difficulty, add it.
 			if (theoretical_difficulty > my_library.get_difficulty() && theoretical_difficulty_offset < difficulty_offset) {
@@ -469,6 +463,7 @@ function generate_next_question(did_pass = false) {
 	// Display the question.
 	question_text.replaceChildren(active_question.q[0].as_html())
 	
+	// Warn the user of case-sensitive questions
 	if (active_question.case_sensitive) {
 		question_notes_field.style.display = "block"
 		question_notes_field.textContent = "(Case Sensitive)"
@@ -478,9 +473,25 @@ function generate_next_question(did_pass = false) {
 		question_notes_field.textContent = ""
 	}
 	
+	// Except in quiz mode, give the user an answer.
+	if (active_question.num_attempts == 0 && !am_quiz) {
+		question_free_answer_field.style.display = "block"
+		let correct_answers_html = active_question.get_correct_answers_html()
+		
+		if (active_question.a.length == 1)
+			question_free_answer_field.replaceChildren("New Question! The answer is ", ...correct_answers_html)
+		else
+			question_free_answer_field.replaceChildren("New Question! Correct answers include ", ...correct_answers_html)
+		
+		active_question.nullify_next_answer() // Don't count the next answer as correct since we gave the user the answer.
+	}
+	else {
+		question_free_answer_field.style.display = "none"
+		question_free_answer_field.textContent = ""
+	}
+	
 	let mode_of_presentation = active_question.get_mode_of_presentation(mode_of_presentation_select.value)
 	
-	console.log(mode_of_presentation)
 	if (mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"
 		multiple_choice_field.style.display = "none"

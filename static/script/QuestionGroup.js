@@ -1191,10 +1191,8 @@ class QuestionGroup {
 	}
 	
 	// Sets was_asked_last to true for self and all ancestors.
-	// Automatically clears was_asked_last if it is set on any other groups or questions on the same tree, by calling reset_was_asked_last() on the root.
 	set_was_asked_last() {
-		if (this.am_root()) this.reset_was_asked_last()
-		else this.parent_group.set_was_asked_last()
+		if (!this.am_root()) this.parent_group.set_was_asked_last()
 		this.was_asked_last = true
 	}
 	

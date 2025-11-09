@@ -259,6 +259,9 @@ class Question {
 		// The number of times attempt() has been called on this question
 		this.num_attempts = 0
 		
+		// Set to true to not count the user's next answer. Used when the user is given freebie questions.
+		this.next_answer_nullified = false
+		
 		// Whether this question is within the question window.
 		// A question is enabled if any of its ancestor QuestionGroups were checked in the menu.
 		// However, if windowing is enabled, it cannot appear until it is windowed.
@@ -269,6 +272,10 @@ class Question {
 	reset_progress() {
 		this.mastery_level = 0.5
 		this.num_attemptes = 0
+	}
+	
+	nullify_next_answer() {
+		this.next_answer_nullified = true
 	}
 	
 	// Returns a promise for a hash of the primary question statement.
@@ -293,8 +300,6 @@ class Question {
 	// Returns the passed mode if it is allowed, otherwise return the author's preferred mode.
 	// TODO: Allow more detailed choices, like with a ranked list.
 	get_mode_of_presentation(suggested_mode) {
-		console.log(this.mode_of_presentation)
-		console.log(suggested_mode)
 		if (this.mode_of_presentation.includes(suggested_mode)) {
 			return suggested_mode
 		}
@@ -317,7 +322,7 @@ class Question {
 			throw new Error("Cannot load progress object with missing or invalid property 'is-windowed' (iw).")
 		
 		this.mastery_level = obj["ml"]
-		this.num_attemptes = obj["na"]
+		this.num_attempts = obj["na"]
 		this.windowed = obj["iw"]
 	}
 	
@@ -330,6 +335,21 @@ class Question {
 	// Returns the number of incorrect answers available for this question.
 	get_num_available_incorrect_answers() {
 		return this.incorrect_answers.length + this.parent_group.get_num_available_incorrect_answers()
+	}
+	
+	// Returns a sequence of HTML items representing the available answers to this quesiton.
+	get_correct_answers_html() {
+		let correct_answers = ["'", active_question.a[0].as_html()]
+		for (let i = 1; i < active_question.a.length; i++) {
+			let separator = document.createElement("i")
+			separator.textContent = "', '"
+			correct_answers.push(separator)
+			
+			correct_answers.push(active_question.a[i].as_html())
+		}
+		correct_answers.push("'")
+		
+		return correct_answers
 	}
 	
 	// Obtains a correct answer to be displayed in multiple-choice presentation.
@@ -548,24 +568,29 @@ class Question {
 		
 		this.invalidate_cache()
 		this.set_was_asked_last()
-		this.previous_mastery_level = this.mastery_level
 		
 		// Determine whether the answer is correct.
 		let attempt_result = this.is_correct(response)
 		
-		// Causes the earlier attempts to have much higher weight than later attempts.
-		// Because of this, the actual adaptation rate will always be slightly above the specified constant.
-		let altered_adaptation_rate = lerp(my_library.ADAPTATION_RATE, 1, 0.7 * Math.pow(0.7, this.num_attempts))
-		this.mastery_level = this.mastery_level * (1 - altered_adaptation_rate) + attempt_result.is_correct * altered_adaptation_rate
+		if (!this.next_answer_nullified) {
+			// Causes the earlier attempts to have much higher weight than later attempts.
+			// Because of this, the actual adaptation rate will always be slightly above the specified constant.
+			let altered_adaptation_rate = lerp(my_library.ADAPTATION_RATE, 1, 0.7 * Math.pow(0.7, this.num_attempts))
+			
+			this.previous_mastery_level = this.mastery_level
+			this.mastery_level = this.mastery_level * (1 - altered_adaptation_rate) + attempt_result.is_correct * altered_adaptation_rate
+			
+			let invalid_mastery_equ = this.previous_mastery_level + " * (1 - " + altered_adaptation_rate + ") + " + attempt_result.is_correct  + " * " + altered_adaptation_rate
+			console.assert(!isNaN(this.mastery_level), invalid_mastery_equ)
+			console.assert(this.mastery_level != 0, invalid_mastery_equ)
+			console.assert(this.mastery_level != 1, invalid_mastery_equ)
+		}
+		else {
+			this.next_answer_nullified = false
+		}
 		
-		let invalid_mastery_equ = this.previous_mastery_level + " * (1 - " + altered_adaptation_rate + ") + " + attempt_result.is_correct  + " * " + altered_adaptation_rate
-		console.assert(!isNaN(this.mastery_level), invalid_mastery_equ)
-		console.assert(this.mastery_level != 0, invalid_mastery_equ)
-		console.assert(this.mastery_level != 1, invalid_mastery_equ)
-		
-//		console.log(this.mastery_level)
+		console.assert(this.was_asked_last)
 
-		this.was_asked_last = true
 		this.num_attempts++
 		return attempt_result
 	}
@@ -619,6 +644,8 @@ class Question {
 	
 	// Sets was_asked_last to true for self and all ancestors.
 	set_was_asked_last() {
+		this.parent_group.get_library().root_q.reset_was_asked_last()
+		
 		this.was_asked_last = true
 		this.parent_group.set_was_asked_last()
 	}

@@ -5,7 +5,7 @@
 	
 	"adaptation-rate": 0.13,
 	"starting-mastery": 0.5,
-	"adaptive-weight-bias": 4.5,
+	"adaptive-weight-bias": 6,
 	"ideal-overall-difficulty": 0.3,
 	
 	"question-root": {
@@ -264,7 +264,7 @@
 						"Which of the following is a valid interpretation of 'loje'?": ["red", "magenta", "scarlet", "pink", "rust-colored", "reddish orange"],
 						"Which of the following is a valid interpretation of 'lon'?": ["existing", "real", "true", "located at", "in", "during", "in the context of"],
 						"Which of the following is a valid interpretation of 'luka'?": ["hand", "arm", "tactile limb", "grasping limb", "to grasp", "interact with", "feel using touch", "five"],
-						"Which of the following is a valid interpretation of 'lukin'?": ["see", "look", "view", "examine", "read", "watch", "visual", "eye", "seeing organ", "try to"],
+						"Which of the following is a valid interpretation of 'lukin'?": {"answers": ["see", "look", "view", "examine", "read", "watch", "visual", "eye", "seeing organ", "try to"], "hidden-answers": ["pay attention to"]},
 						"Which of the following is a valid interpretation of 'lupa'?": ["hole", "pit", "cave", "doorway", "window", "portal"]
 					},
 					"Set 3 (M thru O)": {
@@ -285,6 +285,7 @@
 						"Which of the following is a valid interpretation of 'nena'?": ["protuberances", "bump", "button", "hill", "nose"],
 						"Which of the following is a valid interpretation of 'ni'?": ["this", "that", "these", "those"],
 						"Which of the following is a valid interpretation of 'nimi'?": ["word", "name"],
+						"Which of the following is a valid interpretation of 'o'?": ["should"],
 						"Which of the following is a valid interpretation of 'noka'?": ["foot", "leg", "organ of locomotion", "roots"],
 						"Which of the following is a valid interpretation of 'olin'?": ["affection", "appreciation", "compassion", "respect", "relationship"],
 						"Which of the following is a valid interpretation of 'ona'?": ["he", "she", "it", "they"],
@@ -347,7 +348,7 @@
 					"Which of the following is a valid interpretation of 'meli'?": ["woman", "female", "feminine person", "wife", "girlfriend"],
 					"Which of the following is a valid interpretation of 'mije'?": ["man", "male", "masculine person", "husband", "boyfriend"],
 					"Which of the following is a valid interpretation of 'misikeke'?": ["medical item", "prescriptions", "meditation", "exercise", "bandages", "therapy"],
-					"Which of the following is a valid interpretation of 'monsuta'?": ["fear", "nervousness", "dread", "scary", "frightening", "scary thing predator", "threat", "danger"],
+					"Which of the following is a valid interpretation of 'monsuta'?": ["fear", "nervousness", "dread", "scary", "frightening", "scary thing", "predator", "threat", "danger"],
 					"Which of the following is a valid interpretation of 'namako'?": ["spice", "ornament", "adornment", "extra", "additional"],
 					"Which of the following is a valid interpretation of 'soko'?": ["mushroom", "fungus", "lichen"],
 					"Which of the following is a valid interpretation of 'tonsi'?": ["nonbinary", "gender nonconforming", "genderqueer", "transgender"]

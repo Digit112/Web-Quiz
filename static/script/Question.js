@@ -293,6 +293,8 @@ class Question {
 	// Returns the passed mode if it is allowed, otherwise return the author's preferred mode.
 	// TODO: Allow more detailed choices, like with a ranked list.
 	get_mode_of_presentation(suggested_mode) {
+		console.log(this.mode_of_presentation)
+		console.log(suggested_mode)
 		if (this.mode_of_presentation.includes(suggested_mode)) {
 			return suggested_mode
 		}

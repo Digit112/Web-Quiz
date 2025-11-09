@@ -11,6 +11,10 @@ const no_shuffle_expl = "Questions will become available in a predefined order. 
 
 // Get elements and add event listeners
 let editing_pane = document.getElementById("editing-pane")
+
+let library_settings_toggle = document.getElementById("library-settings-toggle")
+let library_settings = document.getElementById("library-settings")
+
 let gen_explanation = document.getElementById("gen_explanation")
 let random_gen = document.getElementById("random_gen")
 let adapt_gen = document.getElementById("adapt_gen")
@@ -207,6 +211,17 @@ function attempt_to_apply_new_selecting_string(new_selecting_string) {
 		}
 	}
 }
+
+library_settings_toggle.addEventListener("click", function() {
+	if (library_settings.style.display == "none") {
+		library_settings.style.display = "block"
+		library_settings_toggle.textContent = "Hide Settings"
+	}
+	else {
+		library_settings.style.display = "none"
+		library_settings_toggle.textContent = "Show Settings"
+	}
+})
 
 random_gen.addEventListener("input", () => {
 	gen_explanation.textContent = random_gen_expl
@@ -465,6 +480,7 @@ function generate_next_question(did_pass = false) {
 	
 	let mode_of_presentation = active_question.get_mode_of_presentation(mode_of_presentation_select.value)
 	
+	console.log(mode_of_presentation)
 	if (mode_of_presentation == "verbatim") {
 		verbatim_field.style.display = "block"
 		multiple_choice_field.style.display = "none"
@@ -510,7 +526,7 @@ function generate_next_question(did_pass = false) {
 		}
 	}
 	else {
-		throw new Error("Question has invalid mode-of-presentation '" + active_question.mode_of_presentation + "'.")
+		throw new Error("Question has invalid mode-of-presentation '" + mode_of_presentation + "'.")
 	}
 	
 	return true

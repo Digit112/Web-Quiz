@@ -157,7 +157,7 @@ class Library {
 		// Default values that child groups and questions will inherit
 		this.descendants_share_incorrect_answers = false
 		this.case_sensitive = false
-		this.mode_of_presentation = "verbatim"
+		this.mode_of_presentation = ["verbatim"]
 		this.max_choices = 4
 		this.typo_forgiveness_level = "low"
 		this.correct_answer_source = "random"
@@ -175,7 +175,6 @@ class Library {
 		
 		// Used to display errors caught while attempting to load a library.
 		this.library_loading_error_label = null
-		
 		if (library_data) { this.initialize(library_data) }
 	}
 	

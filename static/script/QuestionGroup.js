@@ -214,6 +214,8 @@ class QuestionGroup {
 					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, `'mode-of-presentation' must be one of 'verbatim', 'multiple-choice', or 'flash-card', not ${mode}`)
 			}
 			
+			console.assert(Array.isArray(this.mode_of_presentation))
+			
 			// max-choices
 			this.max_choices = attempt_read_inherit("max-choices")
 			if (typeof this.max_choices != "number")
@@ -320,6 +322,7 @@ class QuestionGroup {
 			// Inherit all inheritable properties
 			this.case_sensitive = this.parent_group.case_sensitive
 			this.mode_of_presentation = this.parent_group.mode_of_presentation
+			
 			this.max_choices = this.parent_group.max_choices
 			this.typo_forgiveness_level = this.parent_group.typo_forgiveness_level
 			this.correct_answer_source = this.parent_group.correct_answer_source
@@ -387,6 +390,8 @@ class QuestionGroup {
 		
 		console.assert(this.incorrect_answers != null, "Failed to obtain incorrect-answers.")
 		console.assert(this.is_hidden != null, "Failed to obtain hidden.")
+		
+		console.assert(Array.isArray(this.mode_of_presentation))
 		
 		for (let i = 0; i < this.incorrect_answers.length; i++) {
 			this.incorrect_answers[i] = new MarkDown(this.incorrect_answers[i])

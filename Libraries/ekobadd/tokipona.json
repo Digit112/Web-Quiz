@@ -121,7 +121,7 @@
 						"big, heavy, large, long, tall, wide; important, relevant": "suli",
 						"light, shine, glow, radiance; sun, light source; brightness": "suno",
 						"flat horizontal surface, especially to put or rest things on e.g. bed, floor, desk, plate, table, platform, stage": "supa",
-						"sweet, fragrant; cute, adorable": "suwi",
+						"sweet, fragrant; cute, adorable": "suwi"
 					},
 					"Set 5 (T thru W)": {
 						"(preposition) from, because of; cause, origin": "tan",
@@ -228,14 +228,14 @@
 						"Which of the following is a valid interpretation of 'ali'?": ["all", "every", "everything", "entirety", "universe", "one hundred"],
 						"Which of the following is a valid interpretation of 'anpa'?": ["bottom", "underside", "below", "beneath", "defeated", "humble", "lowly"],
 						"Which of the following is a valid interpretation of 'ante'?": ["different", "altered", "modify", "change", "other", "difference"],
-						"Which of the following is a valid interpretation of 'awen'?": ["stay", "remain", "wait", "pause", "protect", "keep safe", "continue"],
+						"Which of the following is a valid interpretation of 'awen'?": {"answers": ["stay", "remain", "wait", "pause", "protect", "keep safe", "continue"], "hidden-answers": "hold"},
 						"Which of the following is a valid interpretation of 'esun'?": ["trade", "barter", "exchange", "swap", "buy", "sell", "market", "shop", "fair", "bazaar", "place of bussiness"],
 						"Which of the following is a valid interpretation of 'ijo'?": ["thing", "object", "entity", "being", "matter", "phenomenon"],
 						"Which of the following is a valid interpretation of 'ike'?": ["negative quality", "bad", "unpleasant", "harmful", "unneeded"],
 						"Which of the following is a valid interpretation of 'ilo'?": ["tool", "implement", "machine", "device"],
 						"Which of the following is a valid interpretation of 'insa'?": ["inside", "center", "between", "middle", "midpoint", "internal"],
 						"Which of the following is a valid interpretation of 'jaki'?": ["disgusting", "unclean", "unsanitary", "toxic", "repulsive", "rotten"],
-						"Which of the following is a valid interpretation of 'jan'?": ["human being", "person", "somebody"],
+						"Which of the following is a valid interpretation of 'jan'?": {"answers": ["human being", "person", "somebody"], "hidden-answers": ["masculine person", "feminine person"]},
 						"Which of the following is a valid interpretation of 'jelo'?": ["yellow", "amber", "golden", "lime yellow", "yellowish orange"],
 						"Which of the following is a valid interpretation of 'jo'?": ["hold", "carry", "possess", "contain", "own"]
 					},
@@ -349,7 +349,7 @@
 					"Which of the following is a valid interpretation of 'misikeke'?": ["medical item", "prescriptions", "meditation", "exercise", "bandages", "therapy"],
 					"Which of the following is a valid interpretation of 'monsuta'?": ["fear", "nervousness", "dread", "scary", "frightening", "scary thing predator", "threat", "danger"],
 					"Which of the following is a valid interpretation of 'namako'?": ["spice", "ornament", "adornment", "extra", "additional"],
-					"Which of the following is a valid interpretation of 'soko'?": "mushroom", "fungus", "lichen"],
+					"Which of the following is a valid interpretation of 'soko'?": ["mushroom", "fungus", "lichen"],
 					"Which of the following is a valid interpretation of 'tonsi'?": ["nonbinary", "gender nonconforming", "genderqueer", "transgender"]
 				},
 				"Uncommon": {
@@ -378,7 +378,7 @@
 					"Which of the following is a valid interpretation of 'nja'?": ["cat sound"],
 					"Which of the following is a valid interpretation of 'oke'?": ["acknowledgement", "acceptance"],
 					"Which of the following is a valid interpretation of 'omekapo'?": ["goodbye", "farewell", "see you later"],
-					"Which of the following is a valid interpretation of 'owe'?": ["totalitarian"", ""Orwellian"],
+					"Which of the following is a valid interpretation of 'owe'?": ["totalitarian", "Orwellian"],
 					"Which of the following is a valid interpretation of 'pake'?": ["stop", "cease", "halt", "to block the way", "to interrupt", "to prevent"],
 					"Which of the following is a valid interpretation of 'pika'?": ["electric", "electronic", "conductive", "mechanical", "online", "electricity", "lightning", "thunder", "network"],
 					"Which of the following is a valid interpretation of 'po'?": ["four"],
@@ -393,7 +393,7 @@
 					"Which of the following is a valid interpretation of 'to'?": ["close quote"],
 					"Which of the following is a valid interpretation of 'unu'?": ["purple", "violet"],
 					"Which of the following is a valid interpretation of 'usawi'?": ["magic", "sorcery", "enchant", "magical", "supernatural", "occult", "incomprehensible"],
-					"Which of the following is a valid interpretation of 'wa'?": ["wow"", ""woah"],
+					"Which of the following is a valid interpretation of 'wa'?": ["wow", "woah"],
 					"Which of the following is a valid interpretation of 'wekama'?": ["leave and come back", "be temporarily absent"]
 				}
 			}

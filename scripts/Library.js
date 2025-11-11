@@ -459,7 +459,7 @@ class Library {
 			let reference = this.see_also[reference_i]
 			
 			if (typeof reference == "string")
-				this.see_also[reference_i] = [reference, reference]
+				this.see_also[reference_i] = [reference, reference] 
 			
 			if (reference.length != 2)
 				throw new LibraryLoadingError("Library", this.title, null, `references within (members of) parameter 'see-also' must be string or array of length 2, not length ${reference.length}`)

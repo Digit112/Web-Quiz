@@ -36,4 +36,9 @@ def library():
 @app.route("/libraries/<author>/<name>")
 def libraries(author, name):
 	library_slug = f"{unquote_plus(author)}/{unquote_plus(name)}.json"
+	mimetype = "text/plain"
 	return send_from_directory("Libraries", library_slug)
+
+@app.route('/scripts/<filename>')
+def scripts(filename):
+	return send_from_directory(os.path.abspath('scripts'), filename, mimetype="text/javascript")

@@ -3,6 +3,13 @@
 	"author": "ekobadd",
 	"title": "Toki Pona",
 	
+	"description": ["Use this library to memorize the definitions and, loosely, the semantic ranges of 128 commonly used toki pona words plus 50 lesser-known words! These definitions were pulled from lipu linku and categorized accordingly, to be used as a supplement for learners of the language of good.", "While toki pona is a relatively easy language to learn, it is a myth that becoming conversational in it takes little effort or requires only rote memorization. *This tool is supposed to teach you how to translate individual words fairly quickly without needing to constantly cross-reference a dictionary, and that's it!*"],
+	
+	"see-also": [
+		["Additional learning resources", "https://sona.pona.la/wiki/Recommended_learning_resources"],
+		["Lipu Linku", "https://linku.la"]
+	],
+	
 	"adaptation-rate": 0.13,
 	"starting-mastery": 0.5,
 	"adaptive-weight-bias": 6,
@@ -110,6 +117,7 @@
 						"hot, warm; heat, fire, flame; burn": "seli",
 						"outer layer, e.g. skin, peel, shell, bark; outer shape, outer form, boundary": "selo",
 						"(particle) [indicate a question by marking missing info in a sentence]; what, which, who": "seme",
+						"up, top, above, highest part; divine, sacred, supernatural; awesome, inspiring, excelling": "sewi",
 						"body, shape, physical state, torso, substance, form": "sijelo",
 						"circle, sphere, spiral, round thing e.g. ball, wheel; repeating thing e.g. cycle, orbit, loop": "sike",
 						"new, fresh, update; repeat, do again": "sin",
@@ -251,6 +259,7 @@
 						"Which of the following is a valid interpretation of 'sama'?": ["same", "similar", "alike", "peer", "fellow", "each other", "similar to", "same as"],
 						"Which of the following is a valid interpretation of 'seli'?": ["hot", "warm", "heat", "fire", "flame", "burn"],
 						"Which of the following is a valid interpretation of 'selo'?": ["outer layer", "skin", "peel", "shell", "bark", "outer shape", "outer form", "boundary"],
+						"Which of the following is a valid interpretation of 'sewi'?": ["up", "top", "above", "highest part", "divine", "sacred", "supernatural", "awesome", "inspiring", "excelling"],
 						"Which of the following is a valid interpretation of 'sijelo'?": ["body", "shape", "physical state", "torso", "substance", "form"],
 						"Which of the following is a valid interpretation of 'sike'?": ["circle", "sphere", "spiral", "round thing", "ball", "wheel", "repeating thing", "cycle", "orbit", "loop"],
 						"Which of the following is a valid interpretation of 'sin'?": ["new", "fresh", "update", "repeat", "do again"],

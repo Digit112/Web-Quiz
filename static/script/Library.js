@@ -415,12 +415,61 @@ class Library {
 	// library_data should be the unmodified output of JSON.parse() called on a valid library object,
 	// such as that which would routinely be retrieved from a file or the library API.
 	initialize(library_data) {
+		this.title = library_data["title"]
+		if (this.title != null && typeof this.title != "string")
+			throw new LibraryLoadingError("Library", null, null, "parameter 'title' must be string.")
+		
 		this.version = library_data["version"]
-		if (this.version == null) throw new Error("While interpreting Library object; required parameter 'version' is missing.")
-		if (this.version != 1) throw new Error("While interpreting Library object; unsupported version '" + this.version + "'")
+		if (this.version == null) throw new LibraryLoadingError("Library", this.title, null, "required parameter 'version' is missing.")
+		if (this.version != 1) throw new LibraryLoadingError("Library", this.title, null, "unsupported version '" + this.version + "'")
 		
 		this.author = library_data["author"]
-		this.title = library_data["title"]
+		if (this.author != null && typeof this.author != "string")
+			throw new LibraryLoadingError("Library", this.title, null, "parameter 'author' must be string.")
+		
+		// Description
+		this.description = library_data["description"]
+		
+		if (this.description == null)
+			this.description = []
+		
+		else if (typeof this.description == "string")
+			this.description = [this.description]
+		
+		if (!Array.isArray(this.description))
+			throw new LibraryLoadingError("Library", this.title, null, "parameter 'description' must be string or array of strings.")
+		
+		for (let paragraph of this.description) {
+			if (typeof paragraph != "string")
+				throw new LibraryLoadingError("Library", this.title, null, "parameter 'description' must be string or array of strings.")
+			if (paragraph == "")
+				throw new LibraryLoadingError("Library", this.title, null, "parameter 'description' must not be an empty string or an array containing the empty string.")
+		}
+		
+		// References
+		this.see_also = library_data["see-also"]
+		
+		if (this.see_also == null)
+			this.see_also = []
+		
+		if (!Array.isArray(this.see_also))
+			throw new LibraryLoadingError("Library", this.title, null, "parameter 'see-also' must be an array of strings or arrays.")
+		
+		for (let reference_i = 0; reference_i < this.see_also.length; reference_i++) {
+			let reference = this.see_also[reference_i]
+			
+			if (typeof reference == "string")
+				this.see_also[reference_i] = [reference, reference]
+			
+			if (reference.length != 2)
+				throw new LibraryLoadingError("Library", this.title, null, `references within (members of) parameter 'see-also' must be string or array of length 2, not length ${reference.length}`)
+			
+			if (typeof reference[0] != "string" || typeof reference[1] != "string")
+				throw new LibraryLoadingError("Library", this.title, null, "references within (members of) parameter 'see-also' must be string.")
+			
+			if (reference[0] == "" || reference[1] == "")
+				throw new LibraryLoadingError("Library", this.title, null, "references within (members of) parameter 'see-also' must not be or contain an empty string.")
+		}
 		
 		// A Desmos graph showing some of the variables and their nature:
 		// https://www.desmos.com/calculator/l9vuo1di6l
@@ -470,7 +519,7 @@ class Library {
 		console.log(`Initializing Library... Adaptation Rate: ${this.ADAPTATION_RATE.toString()}, Starting Mastery: ${this.STARTING_MASTERY.toString()}, Adaptive Weight Bias: ${this.ADAPTIVE_WEIGHT_BIAS.toString()}, Ideal Overall Difficulty: ${this.IDEAL_OVERALL_DIFFICULTY.toString()}`)
 		
 		let root_qg_data = library_data["question-root"]
-		if (!root_qg_data) throw new Error("While interpreting Library; required parameter 'question-root' is missing")
+		if (!root_qg_data) throw new LibraryLoadingError("Library", this.title, null, "required parameter 'question-root' is missing.")
 		
 		this.root_q = new QuestionGroup(root_qg_data, this.title ? this.title : "All Questions", this)
 		this.root_q.recalc_available_incorrect_answers()

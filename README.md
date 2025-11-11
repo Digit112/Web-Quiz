@@ -69,8 +69,10 @@ The spec informs us that `"field1"` and `field2`, for the implicit question, are
 The Library object is the root JSON object. It has the following properties:
 
 - `version`: Should always be `1`.
-- `author`: Name or other identifier for the author.
-- `title`: Identifier for the library.
+- `author` (optional): Name or other identifier for the author.
+- `title` (optional): Identifier for the library.
+- `description` (optional): Will be displayed above the library. Put anything you'd like the user to see. Supports markdown. You can set this to an array of strings, in which case every string will be its own paragraph.
+- `see-also` (optional): A list of references. Each reference can be a string - in which case it is interpreted as a hyperlink to be shown to the user - or an array of exactly two strings, in which case the first string is text to be shown and the second string is the hyperlink.
 - `adaptation-rate` (optional; default 0.15): The amount that the mastery level of a question changes to reflect recent answers to a given question. A higher value makes the mastery level more responsive to user progress, but reduces its accuracy as a measure of user comprehension. Ranges from 0 to 1. Note that the mastery level is used to control windowing.
 - `starting-mastery` (optional; default 0.5): The starting mastery level of new questions which the user has not answered. Ranges from 0 - 1.
 - `adaptive-weight-bias` (optional; default 4.5): The degree to which unmastered questions are preferred over mastered ones during random question generation with adaptivity enabled. Ranges from 1 to infinity, with 1 being equivalent to having no adaptivity at all. Totally unmastered questions are ADAPTIVE_WEIGHT_BIAS times more likely to be chosen than totally mastered questions.

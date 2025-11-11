@@ -1,9 +1,9 @@
 {
 	"version": 1,
-	"author": "ekobadd",
-	"title": "Toki Pona",
+	"author": "jan Ekopa",
+	"title": "toki pona",
 	
-	"description": ["Use this library to memorize the definitions and, loosely, the semantic ranges of 128 commonly used toki pona words plus 50 lesser-known words! These definitions were pulled from lipu linku and categorized accordingly, to be used as a supplement for learners of the language of good.", "While toki pona is a relatively easy language to learn, it is a myth that becoming conversational in it takes little effort or requires only rote memorization. *This tool is supposed to teach you how to translate individual words fairly quickly without needing to constantly cross-reference a dictionary, and that's it!*"],
+	"description": ["Use this library to memorize the definitions and, loosely, the semantic ranges of 128 commonly used toki pona words plus 50 lesser-known words! These definitions were pulled from lipu linku and categorized accordingly, to be used as a supplement for learners of the language of good.", "While toki pona is a relatively easy language to learn, it is a myth that becoming conversational in it takes little effort or requires only rote memorization. This tool is supposed to teach you how to translate individual words fairly quickly without needing to constantly cross-reference a dictionary, and that's it!"],
 	
 	"see-also": [
 		["Additional learning resources", "https://sona.pona.la/wiki/Recommended_learning_resources"],

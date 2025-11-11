@@ -16,6 +16,16 @@ body {
 		text-align: center;
 	}
 	
+	.library-title {
+		margin-bottom: 0;
+	}
+	
+	.library-subtitle {
+		font-style: italic;
+		font-size: 0.9em;
+		margin-top: 0.1em;
+	}
+	
 	.library-header, .library-footer {
 		margin: 0.5em 0;
 	}

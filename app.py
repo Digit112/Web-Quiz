@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, url_for
+from flask import Flask, render_template, request, send_from_directory, url_for
 from werkzeug.security import safe_join
 
 import os
@@ -33,10 +33,15 @@ def homepage():
 def library():
 	return render_template("library.html")
 
-@app.route("/libraries/<author>/<name>")
-def libraries(author, name):
-	library_slug = f"{unquote_plus(author)}/{unquote_plus(name)}.json"
-	mimetype = "text/plain"
+@app.route("/librarysource")
+def libraries():
+	author_raw = request.args.get("author")
+	name_raw = request.args.get("name")
+	
+	if author_raw is None or name_raw is None:
+		abort(404)
+	
+	library_slug = f"{author_raw}/{name_raw}.json"
 	return send_from_directory("Libraries", library_slug)
 
 @app.route('/scripts/<filename>')

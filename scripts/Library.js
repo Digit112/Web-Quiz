@@ -148,6 +148,9 @@ class Library {
 		this.title = null
 		this.version = null
 		
+		this.description = null
+		this.see_also = null
+		
 		this.root_q = null
 		this.ADAPTATION_RATE = 0.15
 		this.STARTING_MASTERY = 0.5
@@ -205,6 +208,48 @@ class Library {
 		let library_header = document.createElement("div")
 		library_header.setAttribute("class", "library-header")
 		
+		// Add title, description, and references
+		if (this.root_q != null) {
+			let header_elem = document.createElement("h2")
+			header_elem.textContent = this.title
+			header_elem.setAttribute("class", "library-title")
+			library_header.appendChild(header_elem)
+			
+			if (this.author != null && this.author != "") {
+				let author_elem = document.createElement("subtitle")
+				author_elem.textContent = "by " + this.author
+				author_elem.setAttribute("class", "library-subtitle")
+				library_header.appendChild(author_elem)
+			}
+			
+			console.assert(this.description != null, "Library converts description to empty array on load if it is unspecified")
+			if (this.description.length > 0) {
+				for (let paragraph of this.description) {
+					let paragraph_elem = document.createElement("p")
+					paragraph_elem.textContent = paragraph
+					library_header.appendChild(paragraph_elem)
+				}
+			}
+			
+			console.assert(this.see_also != null, "Library converts description to empty array on load if it is unspecified")
+			if (this.see_also.length > 0) {
+				let references_list_elem = document.createElement("ul")
+				
+				for (let reference of this.see_also) {
+					let reference_elem = document.createElement("li")
+					let references_link_elem = document.createElement("a")
+					
+					references_link_elem.textContent = reference[0]
+					references_link_elem.href = reference[1]
+					
+					reference_elem.appendChild(references_link_elem)
+					references_list_elem.appendChild(reference_elem)
+				}
+				
+				library_header.appendChild(references_list_elem)
+			}
+		}
+		
 		// Create import button and associated invisible file selector.
 		// This is the only thing the user will see if the library is empty.
 		let import_file_selector = document.createElement("input")
@@ -250,8 +295,10 @@ class Library {
 			}
 		}
 			
-		if (this.root_q != null && editing_pane != null) {
-			library_header.appendChild(editing_controls_toggle)
+		if (this.root_q != null) {
+			if (editing_pane != null) {
+				library_header.appendChild(editing_controls_toggle)
+			}
 		}
 		
 		library_header.appendChild(this.library_loading_error_label)
@@ -428,6 +475,7 @@ class Library {
 			throw new LibraryLoadingError("Library", this.title, null, "parameter 'author' must be string.")
 		
 		// Description
+		// TODO: Add markup support.
 		this.description = library_data["description"]
 		
 		if (this.description == null)

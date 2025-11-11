@@ -79,7 +79,9 @@ let my_library = new Library()
 // Attempt to load library from query params
 // TODO: This does not appropriately handle JSON errors in any way. Some sort of error-reporting function should handle this situation.
 if (author != null && name != null) {
-	fetch(`/libraries/${author}/${name}`)
+	let library_url = `/librarysource?author=${author}&name=${name}`
+	console.log(`fetching... ${library_url}`)
+	fetch(library_url)
 		.then(response => {
 			data = response.json()
 			return data
@@ -87,10 +89,12 @@ if (author != null && name != null) {
 			console.log("constructing")
 			my_library = new Library(data)
 			my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_enabled ? editing_pane : null, false, import_export_enabled)
+			my_library.root_q.expand_elem.click()
 		})
 }
 else {
 	my_library.generate_HTML(document.getElementById("collapsibles_root"), editing_enabled)
+	my_library.root_q.expand_elem.click()
 }
 
 function reset_interface() {

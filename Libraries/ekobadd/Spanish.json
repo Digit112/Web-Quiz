@@ -1,0 +1,404 @@
+{
+	"version": 1,
+	"author": "jan Ekopa",
+	"title": "toki pona",
+	
+	"description": ["Use this library to memorize a variety of Spanish nouns, verbs, and adjectives, as well as gender and conjugation.", "Nouns are always prefixed by a definite article (\"the\" in english or \"el\" and \"la\" in Spanish). When answering in English, the \"the\" may be omitted, but in Spanish you must always supply the appropriately-gendered definite article: \"el\" for masculine nouns and \"la\" for feminine nouns.", "All verbs are presented in their unconjugated, dictionary form and in English they are prefixed with \"to\"."],
+	
+	"adaptation-rate": 0.17,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 6,
+	"ideal-overall-difficulty": 0.3,
+	
+	"question-root": {
+		"Most Common Phrases, Greetings": {
+			"mode-of-presentation": ["verbatim", "multiple-choice"],
+			"descendants-share-incorrect-answers": true,
+			"max-choices": 6,
+			
+			"substitutions": {
+				"á": "a",
+				"é": "e",
+				"í": "i",
+				"ó": "o",
+				"ú": "u",
+				"ü": "u",
+				"ñ": "n"
+			},
+			
+			"groups": {
+				"Greetings, Introductions, Valedictions": {
+					"Greetings": {
+						"Hola": ["Hello", "Hi"],
+						"Buenos dias": "Good morning",
+						"Buenos tardes": "Good afternoon",
+						"Buenos noches": "Good night"
+					},
+					"Introductions": {
+						"Me llamo": "My name is",
+						"Soy": "I am",
+						"Mi nombre es": "My name is"
+					},
+					"Meeting Others": {
+						"¿Cómo se llama?": {"answers": "What is your name?", "hidden-answers": "What is your name"},
+						"mucho gusto": {"answers": "It's nice to meet you.", "hidden-answers": "It is nice to meet you"}
+					},
+					"Valedictions": {
+					}
+				}
+			}
+		},
+		"Nouns": {
+			"Spanish to English": {
+				"mode-of-presentation": ["verbatim", "multiple-choice"],
+				"descendants-share-incorrect-answers": true,
+				"max-choices": 6,
+				
+				"substitutions": {"_the_": ""},
+				
+				"groups": {
+					"Family": {
+						"el abuelo": "the grandfather",
+						"la abuela": "the grandmother",
+						
+						"la madre": "the mother",
+						"la mamá": "the mom",
+						"el padre": "the father",
+						"el papá": "the dad",
+						"la tía": "the aunt",
+						"la tío": "the uncle",
+						
+						"la hermana": "the sister",
+						"el hermano": "the brother",
+						"la esposa": "the wife",
+						"el esposo": "the husband",
+						"la sobrina": "the cousin",
+						"el sobrino": "the cousin",
+						
+						"la hija": "the daughter",
+						"el hijo": "the son",
+						"la sabrina": "the niece",
+						"el sabrino": "the nephew",
+						
+						"la nieta": "the granddaughter",
+						"el nieto": "the grandson"
+					},
+					"Family (in-laws, step relatives)": {
+						"la suegra": {"answers": "the mother-in-law", "hidden-answers": ["the mother in-law", "the mother in law"]},
+						"el suegro": {"answers": "the father-in-law", "hidden-answers": ["the father in-law", "the father in law"]},
+						"la madrasta": {"answers": "the stepmother", "hidden-answers": ["the step-mother", "the step mother"]},
+						"el padrasto": {"answers": "the stepfather", "hidden-answers": ["the step-father", "the step father"]},
+						
+						"la cuñada": {"answers": "the sister-in-law", "hidden-answers": ["the sister in-law", "the sister in law"]},
+						"el cuñado": {"answers": "the brother-in-law", "hidden-answers": ["the brother in-law", "the brother in law"]},
+						"la hermanastra": {"answers": "the stepsister", "hidden-answers": ["the step-sister", "the step sister"]},
+						"el hermanastro": {"answers": "the stepbrother", "hidden-answers": ["the step-brother", "the step brother"]},
+						
+						"la hijastra": {"answers": "the stepdaughter", "hidden-answers": ["the step-daughter", "the step daughter"]},
+						"el hijastro": {"answers": "the stepson", "hidden-answers": ["the step-son", "the step son"]}
+					},
+					"100 Most Common Nouns not in Other Categories": {
+						"el acuerdo": "the deal",
+						"la amiga": "the friend", "el amigo": "the friend",
+						"el año": "the year",
+						"la aqua": "the water",
+						"el auto": "the car", "el coche": "the car",
+						"el bebé": "the baby",
+						"la bebida": "the drink",
+						"la cabeza": "the head",
+						"el cambio": "the change",
+						"el camino": ["the way", "the path", "the road"],
+						"la cara": "the face",
+						"la carrera": ["the career", "the race", "the run"],
+						"la casa": "the house",
+						"el cheque": "the check",
+						"la chica": "the girl",
+						"el chico": "the guy",
+						"el cierre": "the closure",
+						"la ciudad": "the city",
+						"la confianza": "the trust",
+						"el conjunto": "the set",
+						"el corazón": "the heart",
+						"el corte": "the cut",
+						"la cosas": "the stuff",
+						"el cuerpo": "the body",
+						"el curso": "the course",
+						"la dama": "the lady",
+						"la derecha": "the right",
+						"el descanso": "the rest",
+						"el deseo": ["the wish", "the desire"],
+						"el día": "the day",
+						"el dinero": "the money",
+						"el disparo": "the shot",
+						"la diversión": ["the fun", "the diversion"],
+						"la escuela": "the school",
+						"la esperanza": "the hope",
+						"la excusa": "the excuse",
+						"la familia": "the family",
+						"la fiesta": "the party",
+						"el fin": "the end",
+						"el fuego": "the fire",
+						"la gente": "the people",
+						"el golpe": "the hit",
+						"la guerra": "the war",
+						"la habitación": "the room",
+						"la historia": "the story",
+						"el hogar": "the home",
+						"el hombre": "the man",
+						"la idea": "the idea",
+						"el inicio": "the start",
+						"el interior": ["the interior", "the inside"],
+						"la izquierda": "the left",
+						"el juego": "the game",
+						"el lado": "the side",
+						"la llamada": "the call",
+						"el lugar": "the place",
+						"la mano": "the hand",
+						"la materia": ["the matter", "the material", "the topic"],
+						"el médico": "the doctor",
+						"la menta": "the mind",
+						"la mía": "mine", "el mío": "mine",
+						"el minuto": "the minute",
+						"el momento": "the moment",
+						"la muerte": "the death",
+						"la mujer": "the woman",
+						"el mundo": "the world",
+						"la musica": "the music",
+						"el negocio": "the business",
+						"la niña": "the girl", "el niño": "the boy",
+						"la noche": "the night",
+						"el nombre": "the name",
+						"el número": "the number",
+						"la oportunidad": "the chance",
+						"el pago": ["the payment", "the pay", "the fee"],
+						"la palabra": "the word",
+						"la parte": "the part",
+						"el paseo": "the walk",
+						"el pedazo": ["the bit", "the piece"],
+						"la pelea": "the fight",
+						"el pensamiento": "the thought",
+						"la persona": "the person",
+						"la policía": "the police",
+						"la preocupación": ["the worry", "the concern"],
+						"el problema": ["the problem", "the trouble"],
+						"el pueblo": "the town",
+						"la puerta": "the door",
+						"el punto": ["the point", "the spot"],
+						"la razón": "the reason",
+						"el reloj": ["the clock", "the watch"],
+						"la ruptura": ["the rupture", "the breakdown"],
+						"la sangre": "the blood",
+						"el segundo": "the second",
+						"la semana": "the week",
+						"el sentimiento": ["the feeling", "the emotion"],
+						"el soporte": ["the stand", "the support"],
+						"el sueño": "the sleep",
+						"el teléfono": ["the phone", "the telephone"],
+						"el tiempo": "the time",
+						"el trabajo": ["the job", "the work"],
+						"el turno": "the turn",
+						"la vida": "the life"
+					}
+				}
+			},
+			"English to Spanish": {
+				"mode-of-presentation": ["verbatim", "multiple-choice"],
+				"descendants-share-incorrect-answers": true,
+				"max-choices": 6,
+				
+				"groups": {
+					"Family": {
+						"the grandfather": "el abuelo",
+						"the grandmother": "la abuela",
+						
+						"the mother": "la madre",
+						"the mom": "la mamá",
+						"the father": "el padre",
+						"the dad": "el papá",
+						"the aunt": "la tía",
+						"the uncle": "la tío",
+						
+						"the sister": "la hermana",
+						"the brother": "el hermano",
+						"the wife": "la esposa",
+						"the husband": "el esposo",
+						"the cousin": "la sobrina",
+						"the cousin": "el sobrino",
+						
+						"the daughter": "la hija",
+						"the son": "el hijo",
+						"the niece": "la sabrina",
+						"the nephew": "el sabrino",
+						
+						"the granddaughter": "la nieta",
+						"the grandson": "el nieto"
+					},
+					"Family (in-laws, step relatives)": {
+						"the mother-in-law": "la suegra",
+						"the father-in-law": "el suegro",
+						"the stepmother": "la madrasta",
+						"the stepfather": "el padrasto",
+						
+						"the sister-in-law": "la cuñada",
+						"the brother-in-law": "el cuñado",
+						"the mother-in-law": "la hermanastra",
+						"the mother-in-law": "el hermanastro",
+						
+						"the stepdaughter": "la hijastra",
+						"the stepson": "el hijastro"
+					},
+					"100 Most Common Nouns not in Other Categories": {
+						"the deal": "el acuerdo",
+						"the friend": ["la amiga", "el amigo"],
+						"the year": "el año", 
+						"the water": "la aqua", 
+						"the car": ["el auto", "el coche"],
+						"the baby": "el bebé", 
+						"the drink": "la bebida", 
+						"the head": "la cabeza", 
+						"the change": "el cambio", 
+						"the road": "el camino",
+						"the face": "la cara", 
+						"the career": "la carrera", 
+						"the house": "la casa", 
+						"the check": "el cheque", 
+						"the girl": ["la chica", "la niña"],
+						"the guy": "el chico", 
+						"the closure": "el cierre",
+						"the city": "la ciudad",
+						"the trust": "la confianza",
+						"the set": "el conjunto", 
+						"the heart": "el corazón", 
+						"the cut": "el corte",
+						"the stuff": "la cosas", 
+						"the body": "el cuerpo", 
+						"the course": "el curso", 
+						"the lady": "la dama",
+						"the right": "la derecha", 
+						"the rest": "el descanso", 
+						"the wish": "el deseo", 
+						"the day": "el día", 
+						"the money": "el dinero", 
+						"the shot": "el disparo",
+						"the diversion": "la diversión", 
+						"the school": "la escuela", 
+						"the hope": "la esperanza", 
+						"the excuse": "la excusa", 
+						"the family": "la familia", 
+						"the party": "la fiesta", 
+						"the end": "el fin", 
+						"the fire": "el fuego", 
+						"the people": "la gente", 
+						"the hit": "el golpe", 
+						"the war": "la guerra",
+						"the room": "la habitación", 
+						"the story": "la historia",
+						"the home": "el hogar", 
+						"the man": "el hombre", 
+						"the idea": "la idea", 
+						"the start": "el inicio", 
+						"the inside": "el interior", 
+						"the left": "la izquierda", 
+						"the game": "el juego", 
+						"the side": "el lado",
+						"the call": "la llamada", 
+						"the place": "el lugar", 
+						"the hand": "la mano", 
+						"the matter": "la materia", 
+						"the doctor": "el médico", 
+						"the mind": "la menta", 
+						"the mine": ["la mía", "el mío"],
+						"the minute": "el minuto",
+						"the moment": "el momento", 
+						"the death": "la muerte", 
+						"the woman": "la mujer", 
+						"the world": "el mundo", 
+						"the music": "la musica", 
+						"the business": "el negocio", 
+						"the girl": "la niña","the boy": "el niño", 
+						"the night": "la noche", 
+						"the name": "el nombre", 
+						"the number": "el número", 
+						"the chance": "la oportunidad", 
+						"the payment": "el pago", 
+						"the word": "la palabra", 
+						"the part": "la parte", 
+						"the walk": "el paseo",
+						"the piece": "el pedazo", 
+						"the fight": "la pelea", 
+						"the thought": "el pensamiento", 
+						"the person": "la persona", 
+						"the police": "la policía", 
+						"the concern": "la preocupación", 
+						"the problem": "el problema", 
+						"the town": "el pueblo",
+						"the door": "la puerta", 
+						"the point": "el punto", 
+						"the reason": "la razón",
+						"the clock": "el reloj", 
+						"the rupture": "la ruptura",
+						"the blood": "la sangre",
+						"the second": "el segundo", 
+						"the week": "la semana",
+						"the feeling": "el sentimiento", 
+						"the support": "el soporte",
+						"the sleep": "el sueño", 
+						"the phone": "el teléfono", 
+						"the time": "el tiempo", 
+						"the job": "el trabajo", 
+						"the turn": "el turno", 
+						"the life": "la vida"
+					}
+				}
+			}
+		},
+		"Adjectives": {
+			"Spanish to English": {
+				"mode-of-presentation": ["verbatim", "multiple-choice"],
+				"descendants-share-incorrect-answers": true,
+				"max-choices": 6,
+				
+				"groups": {
+					"Colors": {
+						"morado": "purple",
+						"rosa": "pink",
+						"rojo": "red",
+						"naranja": "orange",
+						"marrón": "brown",
+						"amarillo": "yellow",
+						"verde": "green",
+						"azul": "blue",
+						"violeta": "violet",
+						
+						"blanco": "white",
+						"gris": {"answers": "gray", "hidden-answers": "grey"},
+						"negro": "black"
+					}
+				}
+			},
+			"English to Spanish": {
+				"mode-of-presentation": ["verbatim", "multiple-choice"],
+				"descendants-share-incorrect-answers": true,
+				"max-choices": 6,
+				
+				"groups": {
+					"Colors": {
+						"purple": "morado",
+						"pink": ["rosa", "rosado"],
+						"red": "rojo",
+						"orange": ["naranja", "anaranjado"],
+						"brown": ["marrón", "café"],
+						"yellow": "amarillo",
+						"green": "verde",
+						"blue": "azul",
+						"violet": ["violeta", "púrpura"],
+						
+						"white": "blanco",
+						"gray": "gris",
+						"black": "negro"
+					}
+				}
+			}
+		}
+	}
+}

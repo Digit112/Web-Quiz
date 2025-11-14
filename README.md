@@ -392,9 +392,12 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 	- Progress indicators are **vital**. Show relevant mastery levels.
 	- Quiz progress indicator.
 		- A proper quiz result readout (num correct, incorrect, passed, percent score)
-- API serves quizzes
+	- Switch to ignore punctuation.
+- Progress saves to local space.
 - Handle TODOs!
 - Disable typo forgiveness on multiple-choice questions
+- Try centering the UI?
+- Add Image and Audio Resources.
 
 #### Editing Release
 
@@ -411,6 +414,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 ### Should-Have
 
 - Reset Question Window Button
+- Option to toggle showing correct answer on new question.
 - Identifier for no typo forgiveness.
 - Worried about consequences of the asynchronous save procedure.
 - Library loader should actually conform to the spec....
@@ -430,6 +434,8 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 - Question Inversion
 - "Put the pieces in order" question type.
 - "Select all that apply" question type.
+- Common substitutions e.g. conjunctions: It's <-> It is, British/American English: centre <-> center
+	- Flag to disable substitutions on a question or group.
 - Localization Support
 - `"auto"` setting for typo forgiveness.
 - Ability to specify totally separate question sets depending on a group's negotiated mode of presentation.

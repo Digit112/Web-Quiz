@@ -16,15 +16,15 @@
 			"descendants-share-incorrect-answers": true,
 			"max-choices": 6,
 			
-			"substitutions": {
-				"á": "a",
-				"é": "e",
-				"í": "i",
-				"ó": "o",
-				"ú": "u",
-				"ü": "u",
-				"ñ": "n"
-			},
+			"substitutions": [
+				["á", "a"],
+				["é", "e"],
+				["í", "i"],
+				["ó", "o"],
+				["ú", "u"],
+				["ü", "u"],
+				["ñ", "n"]
+			],
 			
 			"groups": {
 				"Greetings, Introductions, Valedictions": {
@@ -54,7 +54,7 @@
 				"descendants-share-incorrect-answers": true,
 				"max-choices": 6,
 				
-				"substitutions": {"_the_": ""},
+				"substitutions": [["\\bthe\\b", ""]],
 				
 				"groups": {
 					"Family": {

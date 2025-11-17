@@ -91,6 +91,7 @@ A QuestionGroup object represents either a collection of questions OR of other Q
 - `incorrect-answers` (optional): A list of incorrect answers which can be used by all children in addition to their own `incorrect-answers` lists and the lists on any intermediate groups.
 - `descendants-share-incorrect-answers` (optional; default `false`): If `true`, the answers to descendants of this group can appear as incorrect responses to other descendants of this group, when those other descendants are presented as multiple-choice.
 - `hidden` (optional; default `false`): If `true`, this group and its children will not be displayed and cannot be selected by the user. Use for groups with structural/logical purposes within a library. The questions can still be selected if a parent of the hidden group is enabled.
+- `substitutions` (optional): A dictionary specifying keys to be found and replaced for the purpose of checking correct answers, without affecting how the answers are displayed. Useful for applying minor transformations to large groups of questions. The search-and-replace is applied to a user's submission as well as to the answers of the current question prior to comparison. See [Substitution](#substitution).
 
 **The following traits may be inherited, and only effect a QuestionGroup's descendant Questions, not the QuestionGroup itself.** They may also be specified on individual Question objects, and their meanings are clarified below.
 
@@ -109,15 +110,15 @@ A question represents the association between a *question statement* and one or 
 - `question`: A list of question statements which the user can see. The first is the primary and the only one which the user will be asked. The other questions in the list may be shown as alternative allowable answers if the questions are inverted.
 - `answers`: A list of allowable answers to this question. The first answer is considered the primary answer which will be presented to the user as a question if question inversion is enabled. If the value is not an array, the value is considered the only valid answer.
 - `hidden-answers`: A string or list of strings which are considered correct, but which will not be shown to the user either in the correct answer list or as a possible correct answer in multiple-choice presentation. This is meant to account for slight spelling variations in an answer, for example, "Light-Emitting Diode" and "Light Emitting Diode"
-- `typo-blacklist`: (optional): A list of answers that will be marked correct even if typo forgiveness would normally let them slide.
-- `incorrect-answers` (optional): A list of incorrect answers which may be displayed to the user as options in multiple-choice presentation.
+- `typo-blacklist`: (optional): A list of answers that will be marked incorrect even if typo forgiveness would normally allow them.
+- `incorrect-answers` (optional): A list of incorrect answers which may be displayed to the user as options in multiple-choice presentation. If an incorrect-answer appears 
 
 **The following traits may be inherited:**
 
 - `case-sensitive` (optional; inherits by default): Whether a response with the same text but wrong letter casing counts as correct. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `false`.
 - `mode-of-presentation` (optional; inherits by default): Whether this question requires a `verbatim` response from the user, or a `multiple-choice` selection. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `verbatim`.
 - `max-choices` (optional; inherits by default): How many options should be shown to the user by default in `multiple-choice` presentation. Fewer options may be displayed if an insufficient number of incorrect answers can be found by the system. By default, inherits from the parent QuestionGroup. If inheriting is impossible (because all ancestors also inherit), defaults to `4`.
-- `typo-forgiveness-level` (optional; inherits by default): The level of typo forgiveness, with higher levels being more likely to grade an answer correct despite small errors including insertions, deletions, and substitutions. Must be one of `"none"`, `"low"`, `"medium"`, or `"high"`. If inheriting is impossible (because all ancestors also inherit), defaults to `low`. See [link](#typo-forgiveness) for details on this.
+- `typo-forgiveness-level` (optional; inherits by default): The level of typo forgiveness, with higher levels being more likely to grade an answer correct despite small errors. Must be one of `"none"`, `"low"`, `"medium"`, or `"high"`. If inheriting is impossible (because all ancestors also inherit), defaults to `low`. See [Typo Forgiveness](#typo-forgiveness) for details on this.
 - `correct-answer-source` (optional; inherits by default): Where to obtain the correct response to a question which will be shown to the user in multiple-choice mode. If `"random"`, chooses a random (non-hidden) answer. If `"primary"`, always uses the primary (first) answer. If inheriting is impossible (because all ancestors also inherit), defaults to `random`. Naturally, this makes no difference unless a questions has multiple answers.
 
 ### QuestionList
@@ -160,8 +161,8 @@ A QuestionGroupProgress always appears within a QuestionProgressList and corresp
 
 A QuestionGroupProgress has the following properties:
 
-- `mastery-level`: The mastery level of the question in progress.
-- `num_attempts`: The number of times this question has been attempted
+- `ml` (mastery level): The mastery level of the question in progress.
+- `na` (number of attempts): The number of times this question has been attempted
 
 ### QuestionProgressList
 
@@ -272,6 +273,25 @@ A Group can be queried for the number of available incorrect answers it has. A k
 Incorrect answers can also come from the `incorrect-answers` property of a question or any of its ancestors. The entries in `incorrect-answers` on the root can appear on any question in the library, and claimants do not effect this. The two systems are completely separate.
 
 There is no concept of statistical weight assigned to incorrect answers which would cause some to appear more often than others, HOWEVER, duplicates WILL have a higher chance of appearing as incorrect answers since they count as distinct incorrect answers logically. Don't worry, before displaying them, the system does a sanity check to remove duplicate answers and, of course, to ensure that none of the "incorrect" answers would be graded as correct had they been entered verbatim.
+
+## Substitution
+
+Substitution works by replacing all matches to a regular expression with some replacement string. This technique allows the normalization of many answers into a canonical form. The replacement does not affect how the answers appear to the user, but are applied to both the answers and a user's submission prior to comparing them.
+
+substitutions take the form of an array of pairs of strings. The former will be interpreted as regex to be matched, the latter its replacement. For example, the Spanish learning library uses:
+
+```
+"substitutions": [
+	["á", "a"], ["é", "e"], ["í", "i"], ["ó", "o"],
+	["ú", "u"], ["ü", "u"], ["ñ", "n"]
+],
+```
+
+This replaces all accented letters with their English counterparts so they can be more easily typed on an English keyboard while still allowing us to write and display the answers with appropriate diacritics.
+
+All the substitutions of the groups containing a question are combined to generate the final set of substitutions for that question. The more distant groups (e.g. the root) are applied first, and always in the order they are specified on the library.
+
+The submission is not checked against the typo blacklist or processed for typo forgiveness until after the substitutions are performed. The matches are flagged as case-insensitive if and only if the question being answered is case-insensitive.
 
 ## Typo Forgiveness
 
@@ -421,6 +441,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 - Show the number of questions and number of questions selected while rendering groups.
 - Presentation type negotiation (between Library and User Preferences)
 - Dark mode.
+- Implement typo-blacklist
 
 ### Could-Have
 

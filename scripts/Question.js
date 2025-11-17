@@ -450,21 +450,33 @@ class Question {
 		return am_windowed ? this.windowed : this.get_enabled()
 	}
 	
+	// Returns a normal form of the passed text.
+	// TODO: Add Unicode normalization
+	// Normalized text is all lowercase and has its groups' substitutions applied.
+	get_normal_form(str) {
+		if (!this.case_sensitive) str = str.toLowerCase()
+		str = this.parent_group.apply_substitutions(str, this.case_sensitive)
+	
+		return str
+	}
+	
 	// Returns true if the passed response is correct without using typo forgiveness.
-	// Despite the name, this does respect the case-sensitive setting on this question,
+	// Despite the name, this does respect the case-sensitivity and substitutions on a question.
 	// whether it is true or false. This function is ONLY ambivalent to typo forgiveness...
 	is_exactly_correct(response) {
-		if (!this.case_sensitive) response = response.toLowerCase()
+		response = this.get_normal_form(response)
 			
 		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.
-			if (!this.case_sensitive) answer = answer.toLowerCase()
+			answer = this.get_normal_form(answer)
+		
 			if (answer == response) {
 				return true
 			}
 		}
 		
 		for (let answer of this.hidden_answers) {
-			if (!this.case_sensitive) answer = answer.toLowerCase()
+			answer = this.get_normal_form(answer)
+			
 			if (answer == response) {
 				return true
 			}
@@ -476,10 +488,11 @@ class Question {
 	// Returns true if the answer exactly matches a value in this question's typo blacklist.
 	// Respects this question's case-sensitivity.
 	is_blacklisted(response) {
-		if (!this.case_sensitive) response = response.toLowerCase()
+		response = get_normal_form(response)
 			
 		for (let answer of this.typo_blacklist) {
-			if (!this.case_sensitive) answer = answer.toLowerCase()
+			answer = this.get_normal_form(answer)
+			
 			if (answer == response) {
 				return true
 			}
@@ -489,13 +502,13 @@ class Question {
 	// Returns an AttemptResult which records whether the response was correct and whether it is *exactly* correct, i.e. correct without typos.
 	// Respects case-sensitivity, typo-forgiveness, and the typo blacklist.
 	is_correct(response) {
-		// Check if this is exactly correct (This is typically >20,000 times faster than Levenshtein, according to preliminary tests!)
+		// Check if this is exactly correct
 		if (this.is_exactly_correct(response)) {
 			console.log("  '" + response + "' is exactly correct")
 			return new AttemptResult(true, true)
 		}
 		
-		if (!this.case_sensitive) response = response.toLowerCase()
+		response = get_normal_form(response)
 		
 		// Check if typo forgiveness is enabled. We already know the answer is not exactly correct.
 		let typo_divisor = this.get_typo_divisor()
@@ -511,7 +524,8 @@ class Question {
 		}
 		
 		for (let answer of this.a.map((a) => a.as_text())) {
-			if (!this.case_sensitive) answer = answer.toLowerCase()
+			answer = this.get_normal_form(answer)
+			
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
 			let act_distance = Levenshtein(response, answer, max_distance)
 			if (act_distance <= max_distance) {
@@ -521,7 +535,8 @@ class Question {
 		}
 		
 		for (let answer of this.hidden_answers) {
-			if (!this.case_sensitive) answer = answer.toLowerCase()
+			answer = this.get_normal_form(answer)
+			
 			let max_distance = Math.min(Math.round(answer.length / typo_divisor), 6)
 			let act_distance = Levenshtein(response, answer, max_distance)
 			if (act_distance <= max_distance) {

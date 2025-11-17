@@ -171,12 +171,14 @@ class QuestionGroup {
 		let children = []
 		this.incorrect_answers = null
 		this.is_hidden = false
+		this.substitutions = null
 		
 		this.descendants_share_incorrect_answers = null
 		this.case_sensitive = null
 		this.mode_of_presentation = null
 		this.max_choices = null
 		this.typo_forgiveness_level = null
+		this.correct_answer_source = null
 		
 		// Attempt to interpret as an explicit QuestionGroup.
 		if (qg_data["questions"] || qg_data["groups"]) {
@@ -269,6 +271,55 @@ class QuestionGroup {
 					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group, "parameter 'incorrect-answers' must be either string or array of strings.")
 			}
 			
+			if (qg_data["substitutions"]) {
+				if (!Array.isArray(qg_data["substitutions"]))
+					throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
+						`parameter 'substitutions' must be an array of pairs of strings, not ${typeof qg_data["substitutions"]}`
+					)
+				
+				let compiled_substitutions = []
+				
+				for (let substitution in qg_data["substitutions"]) {
+					if (!Array.isArray(substitution))
+						throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
+							`parameter 'substitutions' must be an array of pairs of strings, not have '${substitution}'.`
+						)
+					
+					if (substitution.length != 2)
+						throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
+							`parameter 'substitutions' must be an array of pairs of strings, not have array of length '${substitution.length}'.`
+						)
+					
+					if (typeof substitution[0] != "string")
+						throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
+							`parameter 'substitutions' must be an array of pairs of strings, entries must not contain '${substitution[0]}'.`
+						)
+					
+					if (typeof substitution[1] != "string")
+						throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
+							`parameter 'substitutions' must be an array of pairs of strings, entries must not contain '${substitution[1]}'.`
+						)
+					
+					try {
+						compiled_substitutions.push([new RegExp(substitution[0]), substitution[1]]
+					}
+					catch (err) {
+						if (err instanceof SyntaxError)
+							throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
+								`parameter 'substitutions' must not have invalid regex '${substitution[0]}' (Regex error is '${err.message}').`
+							)
+						
+						else
+							throw err
+					}
+				}
+				
+				this.substitutions = compiled_substitutions
+			}
+			else {
+				this.substitutions = []
+			}
+			
 			/* ---- Instantiate Children ---- */
 			
 			// Read and instantiate children
@@ -329,8 +380,9 @@ class QuestionGroup {
 			
 			// Default all non-inheritables
 			this.descendants_share_incorrect_answers = false
-			this.is_hidden = false
 			this.incorrect_answers = []
+			this.is_hidden = false
+			this.substitutions = []
 			
 			// Attempt interpretation as list of implicit and embedded-explicit questions.
 			let q_error = null
@@ -390,6 +442,7 @@ class QuestionGroup {
 		
 		console.assert(this.incorrect_answers != null, "Failed to obtain incorrect-answers.")
 		console.assert(this.is_hidden != null, "Failed to obtain hidden.")
+		console.assert(this.substitutions != null, "Failed to obtain substitutions.")
 		
 		console.assert(Array.isArray(this.mode_of_presentation))
 		
@@ -499,6 +552,25 @@ class QuestionGroup {
 				child.reset_progress()
 			}
 		}
+	}
+	
+	// Apply the substitutions of all ancestors, followed by this group's substitutions.
+	apply_substitutions(str, case_sensitive) {
+		if (!this.am_root()) {
+			str = this.parent_group.apply_substitutions(str, case_sensitive)
+		}
+		
+		for (let substitution of this.substitutions) {
+			let reg = substitution[0]
+			
+			// Optionally make it a case-insensitive match.
+			// TODO: Is this inefficient? Surely this doesn't trigger some kind of recompilation...
+			if (!case_sensitive) reg = new RegExp(reg, "i")
+				
+			str = str.replaceAll(reg, substitution[1])
+		}
+		
+		return str;
 	}
 	
 	// Recalculates terms used in indexing incorrect answers. Recursively recalculates for children.

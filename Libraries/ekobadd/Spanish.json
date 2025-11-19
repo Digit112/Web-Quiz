@@ -1,7 +1,7 @@
 {
 	"version": 1,
-	"author": "jan Ekopa",
-	"title": "toki pona",
+	"author": "Ekobadd",
+	"title": "Spanish",
 	
 	"description": ["Use this library to memorize a variety of Spanish nouns, verbs, and adjectives, as well as gender and conjugation.", "Nouns are always prefixed by a definite article (\"the\" in english or \"el\" and \"la\" in Spanish). When answering in English, the \"the\" may be omitted, but in Spanish you must always supply the appropriately-gendered definite article: \"el\" for masculine nouns and \"la\" for feminine nouns.", "All verbs are presented in their unconjugated, dictionary form and in English they are prefixed with \"to\"."],
 	
@@ -15,16 +15,6 @@
 			"mode-of-presentation": ["verbatim", "multiple-choice"],
 			"descendants-share-incorrect-answers": true,
 			"max-choices": 6,
-			
-			"substitutions": [
-				["á", "a"],
-				["é", "e"],
-				["í", "i"],
-				["ó", "o"],
-				["ú", "u"],
-				["ü", "u"],
-				["ñ", "n"]
-			],
 			
 			"groups": {
 				"Greetings, Introductions, Valedictions": {
@@ -205,6 +195,16 @@
 				"mode-of-presentation": ["verbatim", "multiple-choice"],
 				"descendants-share-incorrect-answers": true,
 				"max-choices": 6,
+			
+				"substitutions": [
+					["á", "a"],
+					["é", "e"],
+					["í", "i"],
+					["ó", "o"],
+					["ú", "u"],
+					["ü", "u"],
+					["ñ", "n"]
+				],
 				
 				"groups": {
 					"Family": {
@@ -380,6 +380,16 @@
 				"mode-of-presentation": ["verbatim", "multiple-choice"],
 				"descendants-share-incorrect-answers": true,
 				"max-choices": 6,
+			
+				"substitutions": [
+					["á", "a"],
+					["é", "e"],
+					["í", "i"],
+					["ó", "o"],
+					["ú", "u"],
+					["ü", "u"],
+					["ñ", "n"]
+				],
 				
 				"groups": {
 					"Colors": {

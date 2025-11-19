@@ -279,7 +279,7 @@ class QuestionGroup {
 				
 				let compiled_substitutions = []
 				
-				for (let substitution in qg_data["substitutions"]) {
+				for (let substitution of qg_data["substitutions"]) {
 					if (!Array.isArray(substitution))
 						throw new LibraryLoadingError("QuestionGroup", this.label, parent_group,
 							`parameter 'substitutions' must be an array of pairs of strings, not have '${substitution}'.`
@@ -301,7 +301,7 @@ class QuestionGroup {
 						)
 					
 					try {
-						compiled_substitutions.push([new RegExp(substitution[0]), substitution[1]]
+						compiled_substitutions.push([new RegExp(substitution[0], "g"), substitution[1]])
 					}
 					catch (err) {
 						if (err instanceof SyntaxError)
@@ -556,6 +556,7 @@ class QuestionGroup {
 	
 	// Apply the substitutions of all ancestors, followed by this group's substitutions.
 	apply_substitutions(str, case_sensitive) {
+		console.log(`  (${this.name}) Normalizing ${str}.`)
 		if (!this.am_root()) {
 			str = this.parent_group.apply_substitutions(str, case_sensitive)
 		}
@@ -565,9 +566,10 @@ class QuestionGroup {
 			
 			// Optionally make it a case-insensitive match.
 			// TODO: Is this inefficient? Surely this doesn't trigger some kind of recompilation...
-			if (!case_sensitive) reg = new RegExp(reg, "i")
-				
+			if (!case_sensitive) reg = new RegExp(reg, "ig")
+			
 			str = str.replaceAll(reg, substitution[1])
+			console.log(`  Applying Substitution ${reg} -> '${substitution}' yields '${str}'.`)
 		}
 		
 		return str;

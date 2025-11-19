@@ -457,7 +457,7 @@ class Question {
 		if (!this.case_sensitive) str = str.toLowerCase()
 		str = this.parent_group.apply_substitutions(str, this.case_sensitive)
 	
-		return str
+		return str.trim()
 	}
 	
 	// Returns true if the passed response is correct without using typo forgiveness.
@@ -468,6 +468,7 @@ class Question {
 			
 		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.
 			answer = this.get_normal_form(answer)
+			console.log(`Got normal answer and response ${response} == ${answer}`)
 		
 			if (answer == response) {
 				return true
@@ -488,7 +489,7 @@ class Question {
 	// Returns true if the answer exactly matches a value in this question's typo blacklist.
 	// Respects this question's case-sensitivity.
 	is_blacklisted(response) {
-		response = get_normal_form(response)
+		response = this.get_normal_form(response)
 			
 		for (let answer of this.typo_blacklist) {
 			answer = this.get_normal_form(answer)
@@ -508,7 +509,7 @@ class Question {
 			return new AttemptResult(true, true)
 		}
 		
-		response = get_normal_form(response)
+		response = this.get_normal_form(response)
 		
 		// Check if typo forgiveness is enabled. We already know the answer is not exactly correct.
 		let typo_divisor = this.get_typo_divisor()

@@ -451,9 +451,10 @@ class Question {
 	}
 	
 	// Returns a normal form of the passed text.
-	// TODO: Add Unicode normalization
 	// Normalized text is all lowercase and has its groups' substitutions applied.
 	get_normal_form(str) {
+		str = str.normalize()
+		
 		if (!this.case_sensitive) str = str.toLowerCase()
 		str = this.parent_group.apply_substitutions(str, this.case_sensitive)
 	
@@ -468,7 +469,7 @@ class Question {
 			
 		for (let answer of this.a.map((a) => a.as_text())) { // TODO: Implement iterator for raw text of answers.
 			answer = this.get_normal_form(answer)
-			console.log(`Got normal answer and response ${response} == ${answer}`)
+			//console.log(`Got normal answer and response ${response} == ${answer}`)
 		
 			if (answer == response) {
 				return true

@@ -39,6 +39,18 @@ Multiple Choice questions have the unique problem of needing to generate incorre
 
 Whenever a question is displayed in multiple-choice presentation, a sufficient number of incorrect answers are drawn from all available sources.
 
+## Answer-checking process.
+
+Immediately following a user's submission, their answer is *normalized* first by applying unicode normalization, then by converting all cased characters to lower case if the question is case-insensitive. All substitutions from all groups containing the question are applied, beginning with the outermost group and in the order they are specified within their arrays. The regex will be marked as case-insensitive if the question is case-insensitive. Afterwards, it is trimmed of leading and trailing whitespace.
+
+The `answers` are interpreted as markdown strings. This markdown is rendered for display to the user. The raw text, with markdown delimiters removed, is normalized in exactly the same fashion as the user's response. `hidden-answers` are not shown to the user and therefore are never interpreted as markdown, markdown delimiters in this text will not be removed and do not need to be escaped. These are also normalized in exactly the same way as the submission.
+
+After normalization, if the user's submission exactly matched any answer or hidden-answer, they are marked as exactly correct. Otherwise, the submission is processed for typo forgiveness.
+
+If the submission exactly matches any normalized value in the question's typo-blacklist, they are marked incorrect. Otherwise, We use the Levenshtein algorithm to check whether the difference between the user's submission and any correct answer is below a certain threshhold dependent on the typo forgiveness level and the length of the (normalized) answer in question.
+
+If they pass typo forgiveness, they are marked correct with a typo, which internally is identical to being correct. Otherwise, they are marked as incorrect.
+
 ## Library Save Format
 
 Libraries are saved as plain JSON. The root node is a Library object.

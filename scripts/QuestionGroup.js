@@ -556,7 +556,7 @@ class QuestionGroup {
 	
 	// Apply the substitutions of all ancestors, followed by this group's substitutions.
 	apply_substitutions(str, case_sensitive) {
-		console.log(`  (${this.name}) Normalizing ${str}.`)
+		//console.log(`  (${this.name}) Normalizing ${str}.`)
 		if (!this.am_root()) {
 			str = this.parent_group.apply_substitutions(str, case_sensitive)
 		}
@@ -569,7 +569,7 @@ class QuestionGroup {
 			if (!case_sensitive) reg = new RegExp(reg, "ig")
 			
 			str = str.replaceAll(reg, substitution[1])
-			console.log(`  Applying Substitution ${reg} -> '${substitution}' yields '${str}'.`)
+			//console.log(`  Applying Substitution ${reg} -> '${substitution[1]}' yields '${str}'.`)
 		}
 		
 		return str;

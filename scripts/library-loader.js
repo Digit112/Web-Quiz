@@ -323,8 +323,9 @@ function generate_next_question(did_pass = false) {
 		let answer = answer_text.value.trim()
 		if (!did_pass && answer == "") return false // Do nothing if no answer provided.
 		
+		let check_start = performance.now()
 		let attempt_result = active_question.attempt(answer)
-		console.log("  Question now has a remainder of " + (active_question.get_remainder() * 100).toFixed(1) + "%")
+		let check_end = performance.now()
 		
 		if (attempt_result.is_correct) {
 			if (attempt_result.is_exactly_correct) {
@@ -348,6 +349,12 @@ function generate_next_question(did_pass = false) {
 				correct_indicator.style.color = "#700"
 			}
 		}
+		
+		console.log(`  Marked ${correct_indicator.textContent} in ${
+			(check_end - check_start).toFixed(1)
+		}ms. Question now has a remainder of ${
+			(active_question.get_remainder() * 100).toFixed(1)
+		}%`)
 		
 		last_question.replaceChildren(active_question.q[0].as_html())
 		your_response.textContent = answer

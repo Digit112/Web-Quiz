@@ -1,0 +1,156 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "NCBI Taxonomy of Metazoa",
+	"description": "Used to study for Metazooa games and as such, the taxonomy is trimmed down quite a lot. The structure of the questions match the structure of the taxonomy so they should probably be hidden for integrity in testing!",
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"descendants-share-incorrect-answers": true,
+		"mode-of-presentation": ["multiple-choice", "verbatim"],
+		
+		"groups": {
+			"Kingdom": {
+				"Eumetazoa": {
+					"Eumetazoa": {"hidden": true, "questions": {
+						"What is the parent of Eumetazoa?": "Metazoa",
+						"What is a direct child of Eumetazoa?": ["Bilateria", "Cnidaria"]
+					}},
+					"Bilateria": {
+						"Bilateria": {"hidden": true, "questions": {
+							"What is the parent of Bilateria?": "Eumetazoa",
+							"What is a direct child of Bilateria?": ["Deuterostomia", "Protostomia"]
+						}},
+						"Deuterostomia": {
+							"Deuterostomia": {"hidden": true, "questions": {
+								"What is the parent of Deuterostomia?": "Bilateria",
+								"What is a direct child of Deuterostomia?": ["Deuterostomia", "Protostomia"]
+							}},
+						},
+						"Protostomia": {
+							"Protostomia": {"hidden": true, "questions": {
+								"What is the parent of Protostomia?": "Bilateria",
+								"What is a direct child of Protostomia?": ["Ecdysozoa", "Spiralia"]
+							}},
+							"Ecdysozoa": {
+								"Ecdysozoa": {"hidden": true, "questions": {
+									"What is the parent of Ecdysozoa?": "Protostomia",
+									"What is a direct child of Ecdysozoa?": ["Nematoda", "Panarthropoda"]
+								}
+							}},
+							"Spiralia": {
+								"Spiralia": {"hidden": true, "questions": {
+									"What is the parent of Spiralia?": "Protostomia",
+									"What is a direct child of Spiralia?": ["Gnathifera", "Lophotrochozoa"]
+								},
+								"Lophotrochozoa": {
+									"What is the parent of Lophotrochozoa?": "Spiralia",
+									"What is a direct child of Lophotrochozoa?": ["Annelida", "Mollusca"],
+									"What is a species belonging to Lophotrochozoa?": {
+										"mode-of-presentation": "multiple-choice",
+										"answers": ["Earthworm", "Leech", "Tapeworm", "Clam", "Octopus", "Squid"],
+										"incorrect-answers": ["Heartworm", "Velvet Worm"]
+									}
+								}
+							}}
+						},
+					}
+					"Cnidaria": {
+						"Cnidaria": {"hidden": true, "questions": {
+							"What is the parent of Cnidaria?": "Eumetazoa",
+							"What is a child of Cnidaria?": ["Hexacorallia", "Semaeostomeae"]
+						}},
+						"Hexacorallia": {
+							"What is a parent of Hexacorallia?": "Cnidaria",
+							"What is a species belonging to Semaeostomeae?": {
+								"mode-of-presentation": "multiple-choice",
+								"answers": ["Coral", "Anemone"]
+							}
+						},
+						"Semaeostomeae": {
+							"What is a parent of Semaeostomeae?": "Cnidaria",
+							"What is a species belonging to Semaeostomeae?": {
+								"mode-of-presentation": "multiple-choice",
+								"answers": ["Jellyfish", "Lions Mane Jellyfish"]
+							}
+						}
+					}
+				},
+				"Porifera": {
+					"What is the parent of Porifera?": "Metazoa",
+					"What is a species belonging to Porifera?": {
+						"mode-of-presentation": "multiple-choice",
+						"answers": "Sponge", "hidden-answers": "Sponges"
+					}
+				}
+			},
+			"Phylums and Classes": {
+				"Annelida": {
+					"What is the parent of Annelida?": "Lophotrochozoa",
+					"What is a direct child of Annelida?": "Clitellata",
+					"What is a species belonging to Annelida?": {
+						"mode-of-presentation": "multiple-choice",
+						"answers": ["Earthworm", "Leech"],
+						"incorrect-answers": ["Tapeworm", "Heartworm", "Velvet Worm"]
+					},
+					"What is a species belonging to Clitellata?": {
+						"mode-of-presentation": "multiple-choice",
+						"answers": ["Earthworm", "Leech"],
+						"incorrect-answers": ["Tapeworm", "Heartworm", "Velvet Worm"]
+					}
+				},
+				"Mollusca": {
+					"Mollusca": {"hidden": true, "questions": {
+						"What is the parent of Mollusca?": "Lophotrochozoa",
+						"What is a direct child of Mollusca?": ["Cephalopoda", "Bivalvia", "Gastropoda"]
+					}},
+					"Cephalopoda": {
+						"Cephalopoda": {"hidden": true, "questions": {
+							"What is the parent of Cephalopoda?": "Mollusca",
+							"What is a direct child of Cephalopoda?": ["Coleoidea", "Nautiloidea"]
+						}},
+						"Coleoidea": {
+							"Coleoidea": {"hidden": true, "questions": {
+								"What is the parent of Coleoidea?": "Cephalopoda",
+								"What is a direct child of Coleoidea?": ["Decapodiformes", "Octopodiformes"]
+							}},
+							"Decapodiformes": {
+								"What is the parent of Decapodiformes?": "Coleoidea",
+								"What is a species belonging of Decapodiformes?": ["Bigfin Squid", "Giant Squid"]
+							},
+							"Octopodiformes": {
+								"What is the parent of the Octopodiformes?": "Coleoidea",
+								"What is a direct child of the Octopodiformes?": ["Octopodidae", "Vampyromorpha"],
+								"What is a species belonging to the Octopodiformes?": ["Vampire Squid", "Blue-Ringed Octopus", "Giant Octopus"],
+								"What is a species belonging to the Octopodidae?": {"answers": ["Blue-Ringed Octopus", "Giant Octopus"], "incorrect-answers": "Vampire Squid"}
+							}
+						},
+						"Nautiloidea": {
+							"What is the parent of the Nautiloidea?": "Cephalopoda",
+							"What is a species belonging to the Nautiloidea?": "Nautilus"
+						}
+					},
+					"Bivalvia": {
+						"What is the parent of Bivalvia?": "Mollusca",
+						"What is the parent of Autobranchia?": "Bivalvia",
+						"What is a direct child of Bivalvia?": "Autobranchia",
+						"What is a direct child of Autobranchia?": "Pteriomorphia",
+						"What is a species belonging to Bivalvia?": ["Sea Clam", "Mussel", "Oyster", "Scallop"],
+						"What is a species belonging to Autobranchia?": ["Sea Clam", "Mussel", "Oyster", "Scallop"],
+						"What is a species belonging to Pteriomorphia?": ["Mussel", "Oyster", "Scallop"]
+					},
+					"Gastropoda": {
+						"What is the parent of Gastropoda?": "Mollusca",
+						"What is a child of Gastropoda?": "Helicina",
+						"What is a species belonging to Gastropoda?": ["Snail", "Banana Slug"],
+						"What is a species belonging to Helicina?": ["Snail", "Banana Slug"]
+					}
+				}
+			}
+		}
+	}
+}

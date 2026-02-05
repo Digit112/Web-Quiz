@@ -20,7 +20,6 @@ def homepage():
 	
 	authors = os.listdir("Libraries")
 	for author in authors:
-		print(author)
 		authors_libraries = os.listdir(f"Libraries/{author}")
 		
 		for library in authors_libraries:

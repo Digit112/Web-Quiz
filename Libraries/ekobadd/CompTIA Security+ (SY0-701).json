@@ -1,0 +1,126 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "CompTIA Security+ Certification SY0-701",
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"typo-forgiveness-level": "medium",
+		"groups": {
+			"Lesson 1: Fundamental Security Concepts": {
+				"Information Security & The CIA Triad": {
+					"descendants-share-incorrect-answers": true,
+					"mode-of-presentation": ["verbatim", "multiple-choice"],
+					"questions": {
+						"What term refers to the protection of data resources from unauthorized access, attack, theft, or damage?": "Information Security",
+						"What is the first element of the CIA triad?": "Confidentiality",
+						"What is the second element of the CIA triad?": "Integrity",
+						"What is the third element of the CIA triad?": "Availability",
+						"What property of a secure system ensures that information is inaccessible to unauthorized parties?": "Confidentiality",
+						"What property of a secure system ensures that information is delivered in its correct, unaltered form?": "Integrity",
+						"What property of a secure system ensures that information is accessible to authorized parties?": "Availability",
+						"What property of a secure system ensures that a party cannot deny taking a certain action?": "Non-Repudiation"
+					}
+				},
+				"Cybersecurity Functions": {
+					"descendants-share-incorrect-answers": true,
+					"mode-of-presentation": ["verbatim", "multiple-choice"],
+					"questions": {
+						"Which of the following is a function of the NIST Cybersecurity Framework (CSF)?": {
+							"mode-of-presentation": "multiple-choice",
+							"answers": ["Identify", "Protect", "Detect", "Respond", "Recover"],
+							"incorrect-answers": ["Secure", "Monitor", "Ensure", "Install", "Confidentiality", "Integrity", "Availability", "Identification", "Authentication", "Authorization", "Accounting"]
+						},
+						"What function of the NIST Cybersecurity Framework encourages the development of policy, evaluation of risks, and the recommendation of security controls?": "Identify",
+						"What function of the NIST Cybersecurity Framework encourages the security-conscious lifecycle management of assets and the implementation of security policies and training?": "Protect",
+						"What function of the NIST Cybersecurity Framework encourages understanding the impact of vulnerabilities and the monitoring of protected systems?": "Detect",
+						"What function of the NIST Cybersecurity Framework encourages the following of mitigation procedures and the management of communication with stakeholders after an incident?": "Respond",
+						"What function of the NIST Cybersecurity Framework encourages the prompt restoration of data and services?": "Recover"
+					}
+				},
+				"Gap Analysis": {
+					"What is the process of measuring the difference between current and desired states in order to help assess the scope of work included in a project?": "Gap Analysis"
+				},
+				"Access Control": {
+					"descendants-share-incorrect-answers": true,
+					"incorrect-answers": [
+						"Identify", "Protect", "Detect", "Respond", "Recover", "Detective", "Corrective", "Directive",
+						"Confidentiality", "Integrity", "Availability", "Managerial", "Operational", "Technical", "Physical",
+						"Secure", "Test", "Discuss", "Reliability"
+					],
+					"questions": {
+						"What component of identity and access management involves the creation of accounts to represent parties that may access a system?": "Identification",
+						"What component of identity and access management involves rigorously verifying the identities of parties accessing a system?": "Authentication",
+						"What component of identity and access management involves the enforcement of restrictions on the actions that a given party can perform within a system?": "Authorization",
+						"What component of identity and access management involves auditing the actions of parties accessing a system?": "Accounting",
+						"Which of the following is a principle of identity and access management (IAM)?": {
+							"mode-of-presentation": "multiple-choice",
+							"answers": ["Authentication", "Authentication", "Authorization", "Accounting"]
+						}
+					}
+				},
+				"Security Controls": {
+					"Definitions": {
+						"descendants-share-incorrect-answers": true,
+						"incorrect-answers": [
+							"Identify", "Protect", "Detect", "Respond", "Recover",
+							"Confidentiality", "Integrity", "Availability", "Identification", "Authentication", "Authorization", "Accounting",
+							"Secure", "Test", "Discuss", "Reliability"
+						],
+						"questions": {
+							"What term refers to a technology or procedure put in place to mitigate vulnerabilities and risk and to uphold the CIA triad?": "Security Control",
+							"What category of security control provides high-level oversight of an information system or a review of other security controls?": "Managerial",
+							"What category of security control provides security through the actions of people such as through posted guards or security training?": "Operational",
+							"What category of security control provides security through the implementation of a software or hardware system such as a firewall or antivirus?": "Technical",
+							"What category of security control provides security against in-person threats such as intrusion onto restricted premises?": "Physical",
+							"What functional type of security control acts before an incident and to reduce the likelihood of incidents?": "Preventative",
+							"What functional type of security control acts to identify when a security incident has occurred?": "Detective",
+							"What functional type of security control acts to remediate an incident which has already occurred?": "Corrective",
+							"What functional type of security control enforces a rule of behavior?": "Directive",
+							"What functional type of security control discourages intrusion attemtps?": "Deterrent",
+							"What functional type of security control mitigates the risks associated with an otherwise insecure system?": "Compensating",
+							"Which of the following is an example of a security control category?": {
+								"mode-of-presentation": "multiple-choice",
+								"answers": ["Managerial", "Operational", "Technical", "Physical"]
+							},
+							"Which of the following is an example of a security control functional type?": {
+								"mode-of-presentation": "multiple-choice",
+								"answers": ["Preventative", "Detective", "Corrective", "Directive", "Deterrent", "Compensating"]
+							}
+						}
+					},
+					"Examples": {
+						"What category of security control includes personnel screening?": "Operational",
+						"What category of security control includes security training?": "Operational",
+						"What category of security control includes antivirus?": "Technical",
+						"What category of security control includes firewalls?": "Technical",
+						"What category of security control includes file-level permissions?": "Technical",
+						"What category of security control includes locks?": "Physical",
+						"What category of security control includes cameras?": "Physical",
+						"What category of security control includes gates?": "Physical",
+						
+						"What functional type of security control includes access control lists?": "Preventative",
+						"What functional type of security control includes antivirus?": "Preventative",
+						"What functional type of security control includes logs?": "Detective",
+						"What functional type of security control includes an IDS?": "Detective",
+						"What functional type of security control includes an IPS?": "Corrective",
+						"What functional type of security control includes a backup system?": "Corrective",
+						
+						"What functional type of security control includes an employee contract specifying restrictions on system usage?": "Directive",
+						"What functional type of security control includes warning signs of legal repercussions for trespassing?": "Deterrent",
+						"What functional type of security control includes shunting a critical legacy system into an isolated subnet?": "Compensating"
+					}
+				},
+				"Security Roles": {
+					"What company officer holds the primary responsibility for management of information technology assets and procedures?": ["Chief Information Officer", "CIO"],
+					"What company officer holds the primary responsibility for making effective use of new and emerging computing platforms and innovations?": ["Chief Technical Officer", "CTO"],
+					"What company officer typically holds the primary responsibility for information assurance and systems security?": ["Chief Security Officer", "CSO"]
+				}
+			}
+		}
+	}
+}

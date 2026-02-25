@@ -1,0 +1,33 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "Computer Networking: A Top Down Approach",
+	
+	"description": [
+		"This quiz contains questions ripped from Computer Networking: A Top Down Approach, and arranged according to the arrangement of the matereeial in the book, to serve as a study guide."
+	],
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"typo-forgiveness-level": "medium",
+		"groups": {
+			"Chapter 1: Computer Networks and the Internet": {
+				"descendants-share-incorrect-answers": true,
+				"groups": {
+					"Section 2: The Network Edge": {
+						"Which kind of home internet access utilizes existing telephone lines?":
+							{"answers": ["Digital Subscriber Line", "DSL"], "hidden-answers": ["Dial-Up", "Dialup", "Dial up"]},
+						"Which kind of home internet access utilizes existing cable lines?": "Cable",
+						"What term describes an internet delivery network consisting of optical fiber lines terminated at a neighborhood-level junction, from which coaxial cable lines run to hundreds or thousands of homes?": ["Hybrid Fiber Coax", "HFC"],
+						"What device, commonly found in residences, serves as the point of termination for internet-providing cable run into a home?": {"answers": "Modem", "hidden-answers": "Cable Modem", "DSL Modem"]},
+						"What device residing within a Telephone company's central office serves as the termination point for cable providing DSL internet?": {"answers": ["DSL Access Multiplexer", "DSLAM"], "hidden-answers": "Digital Subscriber Line Access Multiplexer"}
+					}
+				}
+			}
+		}
+	}
+}

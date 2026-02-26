@@ -445,6 +445,7 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Should-Have
 
+- Require clicking on the answer to questions which are given the first time a question is picked.
 - Reset Question Window Button
 - Option to toggle showing correct answer on new question.
 - Identifier for no typo forgiveness.

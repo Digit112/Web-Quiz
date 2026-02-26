@@ -120,6 +120,28 @@
 					"What company officer holds the primary responsibility for making effective use of new and emerging computing platforms and innovations?": ["Chief Technical Officer", "CTO"],
 					"What company officer typically holds the primary responsibility for information assurance and systems security?": ["Chief Security Officer", "CSO"]
 				}
+			},
+			"Lesson 2.0: Threat Types": {
+				"Vulnerability, Threat, and Risk": {
+					"What term refers to a weakness that could be triggered accidentally or exploited intentionally to cause a security breach?": "Vulnerability",
+					"What term refers to a potential for an entity to exercise a vulnerability?": "Threat",
+					"What is the term for a person or thing that poses a threat?": ["Threat Actor", "Threat Agent"],
+					"What is the term for the path or tool used by a malicious actor?": "Threat Vector",
+					"What term refers to the likelihood and impact of a threat actor exercising a vulnerability?": "Risk"
+				},
+				"Attributes & Motivations of Threat Actors": {
+					"What term refers to a kind of threat actor with no authorized access to a target system?": {"answers": "External", "hidden-answers": "External Threat Actor"},
+					"What term refers to a kind of threat actor with no authorized access to a target system?": {"answers": ["Internal", "Insider"], "hidden-answers": ["Internal Threat Actor", "Insider Threat Actor"]},
+					"What term refers to a type of attack that compromises the availability of an asset or business process?": "Service Disruption",
+					"What term refers to a type of attack that takes data that is stored inside of a private network and moves it to an external network?": "Data Exfiltration",
+					"What term refers to a type of attack that falsifies an information resource that is normally trusted by others?": "Disinformation",
+					
+					"What form of financially-motivated attack demands payment to prevent the release of information?": "Blackmail",
+					"What form of financially-motivated attack demands payment to prevent or halt some kind of attack?": "Extortion",
+					"What form of financially-motivated attack is centered around the falsification of records?": "Fraud",
+					
+					"What term refers to a threat actor that is motivated by a social issue or political cause?": "Hacktivist"
+				}
 			}
 		}
 	}

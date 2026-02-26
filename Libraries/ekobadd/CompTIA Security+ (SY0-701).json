@@ -120,6 +120,68 @@
 					"What company officer holds the primary responsibility for making effective use of new and emerging computing platforms and innovations?": ["Chief Technical Officer", "CTO"],
 					"What company officer typically holds the primary responsibility for information assurance and systems security?": ["Chief Security Officer", "CSO"]
 				}
+			},
+			"Lesson 2.0: Threat Types": {
+				"Attack Surface": {
+					"What term refers to all the points at which a malicious threat actor could try to exploit a vulnerability?": "Attack Surface",
+					"What term refers to a specific path by which a threat actor gains unauthorized access to a system?": "Threat vector",
+					"What term refers to an exploit technique which does not depend on an authenticated session?": "Remote",
+					"What term refers to an exploit technique which depends on an authenticated session?": "Local",
+					"What term refers to an attack type that will entice a victim into using or opening a removable device, document, image, or program that conceals malware?": "Lure"
+				},
+				"Social Engineering": {
+					"What term refers to the use of persuasion, manipulation, or intimidation to make the victim violate a security policy?": "Social Engineering",
+					"What term refers to the social engineering technique of crafting a detailed story or contextual details to legitimize a request violating security policy?": "Pretexting",
+					"What term refers to an email-based social engineering attack in which the attacker sends email from a supposedly reputable source to try to elicit private information?": "Phishing",
+					"What term refers to a variant of phishing conducted over voice channel?": "Vishing",
+					"What term refers to a variant of phishing conducted over SMS?": "SMiShing",
+					"What term refers to an impersonation attack in which a request for a website, typically an e-commerce site, is redirected to a similar-looking, but fake, website?": "Pharming",
+					"What term refers to an attack in which an attacker registers a domain name with a common misspelling of an existing domain, so that a user who misspells a URL they enter into a browser is taken to the attacker's website?": {
+						"answers": "Typosquatting",
+						"hidden-answers": ["Typo Squatting", "Typo-Squatting"]
+					},
+					"What term refers to an attack in which an attacker targets specific groups or organizations, discovers which websites they frequent, and injects malicious code into those sites?": ["Watering Hole", "Watering Hold Attack"]
+				}
+			},
+			"Lesson 3: Cryptographic Solutions": {
+				"Foundational Concepts": {
+					"What term refers to the science and practice of altering data to make it unintelligible to unauthorized parties?": "Cryptography",
+					"In cryptography, what term refers to the unencrypted message?": "Plaintext",
+					"In cryptography, what term refers to the encrypted message?": "Ciphertext",
+					"In cryptography, what term refers to the science, art, and practice of breaking codes and ciphers?": "Cryptanalysis",
+					"What kind of cryptographic algorithm scrambles a message in such a way that it is indecipherable except to the holders of a special key?": ["Encryption", "Cipher"],
+					"What kind of cryptographic algorithm converts an arbitrary-length string input to a fixed-length string output?": {
+						"answers": ["Hash", "Hashing"],
+						"hidden-answers": ["Hash Algorithm", "Hashing Algorithm"]
+					},
+					"What term refers to an encryption scheme in which encryption and decryption are both performed with the same key?": {
+						"answers": ["Symmetric", "Shared-Key"],
+						"hidden-answers": ["Shared Key", "Symmetric Encryption", "Shared-Key Encryption", "Shared Key Encryption"]
+					},
+					"What term refers to an encryption scheme in which encryption and decryption are both performed with seperate keys?": {
+						"answers": "Asymmetric",
+						"hidden-answers": "Asymmetric Encryption"
+					},
+					"What property of a cryptographic system refers to the range of possible keys?": "Key Space",
+					"What property of a cryptographic system refers to the size of the key(s) in use?": "Key Length",
+					"Which of the following is typically less computationally expensive?": {
+						"mode-of-presentation": "multiple-choice", "max-choices": 2,
+						"answers": "Symmetric Encryption", "incorrect-answers": "Asymmetric Encryption"
+					}
+				},
+				"Public Key Infrastructure": {
+					"In cryptography, what term refers to a framework of certificate authorities, digital certificates, software, services, and other cryptographic components deployed for the purpose of validating subject identities?": ["Public Key Infrastructure", "PKI"],
+					"In cryptography, what term refers to a server that guarantees subject identities by issuing signed digital certificate wrappers for their public keys?": ["Certificate Authority", "CA"],
+					"In cryptography, what term refers to identification and authentication information presented in the X.509 format and issued as a guarantee that a key pair is valid for a particular subject?": ["Digital Certificate", "Certificate"],
+					"In cryptography, what term refers to a Base64 ASCII file that a subject sends to a CA to get a certificate?": ["Certificate Signing Request", "CSR"],
+					"Which certificate attribute expresses a host or username, and is also used as the subject identifier for a digital certificate?": ["Common Name", "CN"],
+					"Which certificate attribute allows a host to be identified by multiple host names/subdomains?": ["Subject Alternative Name", "SAN"],
+					"In cryptography, what term refers to a list of certificates that were revoked before their expiration date?": ["Certificate Revocation List", "CRL"],
+					"In cryptography, what protocol allows clients to request the status of a digital certificate, to check whether it is revoked?": ["Online Certificate Status Protocol", "OCSP"],
+					"What kind of cryptoprocessor is implemented as a hardware module of a discrete computer platform?": ["Trusted Platform Module", "TPM"],
+					"What kind of cryptoprocessor is implemented as a dedicated appliance or removeable media?": ["Hardware Security Module", "HSM"],
+					"In cryptography, what term refers to CPU extensions that protect data stored in system memory so that an untrusted process cannot read it?": "Secure Enclave"
+				}
 			}
 		}
 	}

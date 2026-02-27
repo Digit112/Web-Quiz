@@ -200,7 +200,14 @@
 					"In cryptography, what protocol allows clients to request the status of a digital certificate, to check whether it is revoked?": ["Online Certificate Status Protocol", "OCSP"],
 					"What kind of cryptoprocessor is implemented as a hardware module of a discrete computer platform?": ["Trusted Platform Module", "TPM"],
 					"What kind of cryptoprocessor is implemented as a dedicated appliance or removeable media?": ["Hardware Security Module", "HSM"],
-					"In cryptography, what term refers to CPU extensions that protect data stored in system memory so that an untrusted process cannot read it?": "Secure Enclave"
+					"In cryptography, what term refers to CPU extensions that protect data stored in system memory so that an untrusted process cannot read it?": "Secure Enclave",
+					"In key management, what term refers to the storage of a backup key with a third party, potentially with pieces held by multiple parties?": "Key Escrow"
+				},
+				"Cryptographic Solutions": {
+					"What term refers to a product that encrypts the whole contents of a storage device, including metadata areas not normally accessible using ordinary OS file explorer tools?": {
+						"answers": "Full Disk Encryption",
+						"hidden-answers": "Full-Disk Encryption"
+					}
 				}
 			}
 		}

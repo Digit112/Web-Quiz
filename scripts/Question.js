@@ -687,8 +687,8 @@ class Question {
 	
 	debug_questions(depth, is_enabled) {
 		let q_stmt = this.q[0].as_text()
-		if (q_stmt.length > 60) {
-			q_stmt = q_stmt.slice(0, 57) + "..."
+		if (q_stmt.length > 73) {
+			q_stmt = q_stmt.slice(0, 35) + "..." + q_stmt.slice(-35, q_stmt.length)
 		}
 		
 		let str = ""

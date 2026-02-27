@@ -198,7 +198,7 @@ Their are a few core principle which inform the development of this platform, an
 
 1. Facilitate Engagement
 
-	From a UX standpoint, this means building questions and answers which are not antogonistic, and minimizing the odds that the users feels like the questions are "unfair". The library's answers should be correct and fairly obvious for verbatim questions. If the question is multiple choice, they should be the *only* correct choice. The questions should not have multiple interpretations. Questions should account for multiple ways of spelling their correct answer *in addition* to utilizing typo forgiveness. In a nutshell, don't make the questions frustrating.
+	From a UX standpoint, this means building questions and answers which are not antagonistic, and minimizing the odds that the users feels like the questions are "unfair". The library's answers should be correct and fairly obvious for verbatim questions. If the question is multiple choice, they should be the *only* correct choice. The questions should not have multiple interpretations. Questions should account for multiple ways of spelling their correct answer *in addition* to utilizing typo forgiveness. In a nutshell, don't make the questions frustrating.
 
 2. Rapid-Fire Response
 

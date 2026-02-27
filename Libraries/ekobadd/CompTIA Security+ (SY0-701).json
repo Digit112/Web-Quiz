@@ -154,19 +154,23 @@
 						"answers": ["Hash", "Hashing"],
 						"hidden-answers": ["Hash Algorithm", "Hashing Algorithm"]
 					},
-					"What term refers to an encryption scheme in which encryption and decryption are both performed with the same key?": {
+					"What term refers to an encryption scheme in which encryption and decryption are both performed with the **same** key?": {
 						"answers": ["Symmetric", "Shared-Key"],
 						"hidden-answers": ["Shared Key", "Symmetric Encryption", "Shared-Key Encryption", "Shared Key Encryption"]
 					},
-					"What term refers to an encryption scheme in which encryption and decryption are both performed with seperate keys?": {
+					"What term refers to an encryption scheme in which encryption and decryption are performed with **seperate** keys?": {
 						"answers": "Asymmetric",
 						"hidden-answers": "Asymmetric Encryption"
 					},
 					"What property of a cryptographic system refers to the range of possible keys?": "Key Space",
 					"What property of a cryptographic system refers to the size of the key(s) in use?": "Key Length",
-					"Which of the following is typically less computationally expensive?": {
+					"Which of the following is typically **less** computationally expensive?": {
 						"mode-of-presentation": "multiple-choice", "max-choices": 2,
 						"answers": "Symmetric Encryption", "incorrect-answers": "Asymmetric Encryption"
+					},
+					"Which of the following is typically **more** computationally expensive?": {
+						"mode-of-presentation": "multiple-choice", "max-choices": 2,
+						"answers": "Asymmetric Encryption", "incorrect-answers": "Symmetric Encryption"
 					}
 				},
 				"Public Key Infrastructure": {
@@ -181,6 +185,44 @@
 					"What kind of cryptoprocessor is implemented as a hardware module of a discrete computer platform?": ["Trusted Platform Module", "TPM"],
 					"What kind of cryptoprocessor is implemented as a dedicated appliance or removeable media?": ["Hardware Security Module", "HSM"],
 					"In cryptography, what term refers to CPU extensions that protect data stored in system memory so that an untrusted process cannot read it?": "Secure Enclave"
+				},
+				"Cryptographic Solutions": {
+					"Cryptography": {
+						"What term refers to the encryption of an entire storage device?": {
+							"answers": ["Full-Disk Encryption", "Full-Disk"], "hidden-answers": ["Full Disk Encryption", "Full Disk"]
+						},
+						
+						"What term refers to data which is held idly in non-volatile storage?": ["Data at Rest", "at Rest"],
+						"What term refers to data which is being sent between devices?": {
+							"answers": ["Data in Transit", "in Transit"], "hidden-answers": ["Data in Motion", "in Motion"]
+						},
+						"What term refers to data which is held in volatile storage or within a processing unit?": {
+							"answers": ["Data in Use", "in Use"], "hidden-answers": ["Data in Processing", "in Processing"]
+						},
+						
+						"Which of the following is an encryption scheme designed to preserve the **Confidentiality** of data in transit?": {
+							"mode-of-presentation": "multiple-choice",
+							"answers": ["WPA", "IPsec", "TLS"],
+							"incorrect-answers": ["SHA1", "MD5", "HMAC"]
+						},
+						
+						"Which of the following is an encryption scheme designed to preserve the **Integrity** of data in transit?": {
+							"mode-of-presentation": "multiple-choice",
+							"answers": ["SHA1", "MD5", "HMAC"],
+							"incorrect-answers": ["WPA", "IPsec", "TLS"]
+						},
+						
+						"In cryptography, what term refers to a characteristic of transport encryption that ensures if a key is compromised, the compromise will only affect a single session and not facilitate recovery of plaintext data from other sessions?": ["Perfect Forward Secrecy", "PFS"],
+						
+						"What term refers to an expanding list of transactional records listed in a public ledger which is secured using cryptography?": "Blockchain"
+					},
+					"Obfuscation": {
+						"In cryptography, what term refers to a technique for obscuring the presence of a message, often by embedding information within a file or other entity?": "Steganography",
+						"In cryptography, what term refers to a de-identification method where generic or placeholder labels are substituted for real data while preserving the structure or format of the original data?": {
+							"answers": ["Data Masking", "Masking"], "hidden-answers": ["Data Obfuscation", "Obfuscation"]
+						},
+						"In cryptography, what term refers to a de-identification method where a unique token is substituted for real data?": "Tokenization"
+					}
 				}
 			}
 		}

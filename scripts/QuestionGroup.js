@@ -1332,7 +1332,7 @@ class QuestionGroup {
 		
 		let str = ""
 		for (let i = 0; i < depth; i++) str += ". "
-		str += this.label + "(" + this.weight + " questions)\n"
+		str += this.label + " (" + this.weight + " questions)\n"
 		
 		for (let i = 0; i < this.children.length; i++) {
 			str += this.children[i].debug_questions(depth + 1, is_enabled)

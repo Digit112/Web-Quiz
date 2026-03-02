@@ -121,7 +121,27 @@
 					"What company officer typically holds the primary responsibility for information assurance and systems security?": ["Chief Security Officer", "CSO"]
 				}
 			},
-			"Lesson 2.0: Threat Types": {
+			"Lesson 2: Threat Types": {
+				"Vulnerability, Threat, and Risk": {
+					"What term refers to a weakness that could be triggered accidentally or exploited intentionally to cause a security breach?": "Vulnerability",
+					"What term refers to a potential for an entity to exercise a vulnerability?": "Threat",
+					"What is the term for a person or thing that poses a threat?": ["Threat Actor", "Threat Agent"],
+					"What is the term for the path or tool used by a malicious actor?": "Threat Vector",
+					"What term refers to the likelihood and impact of a threat actor exercising a vulnerability?": "Risk"
+				},
+				"Attributes & Motivations of Threat Actors": {
+					"What term refers to a kind of threat actor with no authorized access to a target system?": {"answers": "External", "hidden-answers": "External Threat Actor"},
+					"What term refers to a kind of threat actor with no authorized access to a target system?": {"answers": ["Internal", "Insider"], "hidden-answers": ["Internal Threat Actor", "Insider Threat Actor"]},
+					"What term refers to a type of attack that compromises the availability of an asset or business process?": "Service Disruption",
+					"What term refers to a type of attack that takes data that is stored inside of a private network and moves it to an external network?": "Data Exfiltration",
+					"What term refers to a type of attack that falsifies an information resource that is normally trusted by others?": "Disinformation",
+					
+					"What form of financially-motivated attack demands payment to prevent the release of information?": "Blackmail",
+					"What form of financially-motivated attack demands payment to prevent or halt some kind of attack?": "Extortion",
+					"What form of financially-motivated attack is centered around the falsification of records?": "Fraud",
+					
+					"What term refers to a threat actor that is motivated by a social issue or political cause?": "Hacktivist"
+				},
 				"Attack Surface": {
 					"What term refers to all the points at which a malicious threat actor could try to exploit a vulnerability?": "Attack Surface",
 					"What term refers to a specific path by which a threat actor gains unauthorized access to a system?": "Threat vector",
@@ -158,7 +178,8 @@
 						"answers": ["Symmetric", "Shared-Key"],
 						"hidden-answers": ["Shared Key", "Symmetric Encryption", "Shared-Key Encryption", "Shared Key Encryption"]
 					},
-					"What term refers to an encryption scheme in which encryption and decryption are performed with **seperate** keys?": {
+					
+					"What term refers to an encryption scheme in which encryption and decryption are performed with **separate** keys?": {
 						"answers": "Asymmetric",
 						"hidden-answers": "Asymmetric Encryption"
 					},
@@ -183,11 +204,13 @@
 					"In cryptography, what term refers to a list of certificates that were revoked before their expiration date?": ["Certificate Revocation List", "CRL"],
 					"In cryptography, what protocol allows clients to request the status of a digital certificate, to check whether it is revoked?": ["Online Certificate Status Protocol", "OCSP"],
 					"What kind of cryptoprocessor is implemented as a hardware module of a discrete computer platform?": ["Trusted Platform Module", "TPM"],
-					"What kind of cryptoprocessor is implemented as a dedicated appliance or removeable media?": ["Hardware Security Module", "HSM"],
-					"In cryptography, what term refers to CPU extensions that protect data stored in system memory so that an untrusted process cannot read it?": "Secure Enclave"
+					"What kind of cryptoprocessor is implemented as a dedicated appliance or removeable media?": ["Hardware Security Module", "HSM"]
 				},
 				"Cryptographic Solutions": {
 					"Cryptography": {
+						"In key management, what term refers to the storage of a backup key with a third party, potentially with pieces held by multiple parties?": "Key Escrow",
+						"In cryptography, what term refers to CPU extensions that protect data stored in system memory so that an untrusted process cannot read it?": "Secure Enclave",
+						
 						"What term refers to the encryption of an entire storage device?": {
 							"answers": ["Full-Disk Encryption", "Full-Disk"], "hidden-answers": ["Full Disk Encryption", "Full Disk"]
 						},
@@ -227,9 +250,13 @@
 			},
 			"Lesson 4: Identity and Access Management": {
 				"Authentication": {
+					"What term refers to an entity which may wish to authenticate, such as a user or service?": "Principal",
 					"What term refers to software that can suggest and store site and app passwords to reduce risks from poor user choices and behavior?": "Password Manager",
-					"What term reters to an authentication scheme that requires the user to present at least two different factors as credentials?": "MFA",
-					"What term reters to an authentication scheme that requires the user to present two credentials of the same factor type?": {
+					"What term refers to an authentication scheme that requires the user to present at least two different factors as credentials?": {
+						"answers": ["Multi-Factor Authentication", "MFA"],
+						"hidden-answers": ["Multi Factor Authentication", "Multifactor Authentication"]
+					},
+					"What term refers to an authentication scheme that requires the user to present two credentials of the same factor type?": {
 						"answers": ["Two-Step Authentication", "Two-Step"],
 						"hidden-answers": ["Two Step Authentication", "Two Step", "2-Step Authentication", "2 Step Authentication", "2-Step", "2 Step"]
 					},
@@ -242,7 +269,7 @@
 					"Which combinations of factors constitute multi-factor authentication?": {
 						"mode-of-presentation": "multiple-choice",
 						"answers": ["Password + Auth App OTP", "Password + Face Scan", "Fingerprint + Email Code"],
-						"incorrect-answers": ["Password + Security Questions", "Email Code + Auth App OTP", "Fingerprint + Face Scan", "Password + PIN"]
+						"incorrect-answers": ["Security Questions + Password", "Email Code + Auth App OTP", "Face Scan + Fingerprint", "PIN + Password"]
 					},
 					
 					"What sort of token is generated by a cryptoprocessor on a dedicated hardware device?": ["Hard Authentication Token", "Hard Token", "Hardware"],
@@ -254,7 +281,7 @@
 				"Authorization": {
 					"What term refers to an access control model where each resource is protected by an access control list (ACL) managed by the resource's owner?": ["Discretionary Access Control", "Discretionary", "DAC"],
 					"What term refers to an access control model where resources are protected by inflexible, system-defined rules applied to labeled entities?": ["Mandatory Access Control", "Mandatory", "MAC"],
-					"What term refers to a nondiscretionary access control technique that is based on a set of operational rules or restrictions to enforce a least privileges permissions policy?": {
+					"What term refers to a non-discretionary access control technique that is based on a set of operational rules or restrictions to enforce a least privileges permissions policy?": {
 						"answers": ["Rule-Based Access Control", "Rule-Based"],
 						"hidden-answers": ["Rule Based Access Control", "Rule Based"]
 					},
@@ -276,7 +303,22 @@
 						"answers": "MAC", "incorrect-answers": "DAC"
 					},
 					
-					"What is the basic principle of security stating that something should be allocated the minimum necessary rights, privileges, or information to perform its role?": ["The Principle of Least Privilege", "Least Privilege"]
+					"What is the basic principle of security stating that something should be allocated the minimum necessary rights, privileges, or information to perform its role?": ["The Principle of Least Privilege", "Least Privilege"],
+					"What term refers to policies, procedures, and support software for managing accounts and credentials with administrative permissions?": ["Privileged Access Management", "PAM"]
+				},
+				"Identity Management": {
+					"What term refers to a network service that stores identity information about all the objects in a particular network?": "Directory Service",
+					"What term refers to a collection of attributes that define a unique identifier for any given resource within an X.500-like directory?": ["Distinguished Name", "DN"],
+					"What term refers to an authentication technology that enables a user to authenticate once and receive authorizations for multiple services?": {
+						"answers": ["Single Sign-On", "SSO"], "hidden-answers": "Single Sign On"
+					},
+					
+					"What term refers to a process that provides a shared login capability across multiple systems and enterprises?": "Federation",
+					"What term refers to an XML-based data format used to exchange authentication information between a client and a service?": ["Security Assertion Markup Language", "SAML"]
+				},
+				"Kerberos": {
+					"What single sign-on authentication and authorization service is widely used due to its implementation in Microsoft's AD service?": "Kerberos",
+					"What intermediary component of Kerberos authenticates users and issues tickets?": ["Key Distribution Center", "KDC"]
 				},
 				"Biometric Efficacy": {
 					"In biometrics, what metric measures the number of **valid** subjects who are **denied** access?": ["False Rejection Rate", "FRR"],

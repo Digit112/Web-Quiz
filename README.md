@@ -276,6 +276,8 @@ Question Groups allow a hierarchical organization of questions for a reason: to 
 
 - For better or for worse, the interpreter ignores unrecognized values in the JSON. Feel free to add `"comment"` keys with TODO items or design choice explanations to guide continuing work on the library.
 
+- Set `max-choices` correctly even if the question will display correctly anyways. It can curtail unpredictable behavior in the future and improve performance slightly.
+
 ## Incorrect Answer Generation
 
 Incorrect answers can be specified on a question or its ancestors, or can be received from the correct answers to sibling or cousin questions.

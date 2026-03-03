@@ -1,0 +1,39 @@
+CREATE TABLE accounts (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	created_on TIMESTAMP NOT NULL,
+	updated_on TIMESTAMP NOT NULL,
+	
+	uuid BINARY(16) NOT NULL,
+	email VARCHAR(320) NOT NULL UNIQUE,
+	is_verified BOOLEAN NOT NULL DEFAULT FALSE,
+	
+	username VARCHAR(64) NOT NULL UNIQUE,
+	password VARCHAR(64)
+);
+
+CREATE TABLE libraries (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	created_on TIMESTAMP NOT NULL,
+	updated_on TIMESTAMP NOT NULL,
+	
+	uuid BINARY(16) NOT NULL,
+	owner_id INTEGER NOT NULL,
+	
+	title VARCHAR(72) NOT NULL,
+	description VARCHAR(2048) NOT NULL,
+	
+	FOREIGN KEY (owner_id) REFERENCES accounts(id)
+);
+
+CREATE TABLE library_progress (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	created_on TIMESTAMP NOT NULL,
+	updated_on TIMESTAMP NOT NULL,
+	
+	uuid BINARY(16) NOT NULL,
+	account_id INTEGER NOT NULL,
+	library_id INTEGER NOT NULL,
+	
+	FOREIGN KEY (account_id) REFERENCES accounts(id),
+	FOREIGN KEY (library_id) REFERENCES libraries(id)
+);

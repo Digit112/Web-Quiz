@@ -14,6 +14,26 @@ class Library:
 
 app = Flask(__name__)
 
+# Instance database
+if not os.path.exists("database.db"):
+	import sqlite3
+	
+	print("Instancing schema.")
+	
+	# Connect to database and instance the schema.
+	with app.open_resource("schema.sql", "r") as fin:
+		sql_script = fin.read()
+	
+	conn = sqlite3.connect("database.db")
+	cursor = conn.cursor()
+	cursor.executescript(sql_script)
+	
+	conn.commit()
+	conn.close()
+	
+else:
+	print("Schema already instanced.")
+
 @app.route("/")
 def homepage():
 	libraries = []

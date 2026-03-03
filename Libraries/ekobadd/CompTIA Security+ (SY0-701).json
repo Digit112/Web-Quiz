@@ -13,17 +13,28 @@
 		"groups": {
 			"Lesson 1: Fundamental Security Concepts": {
 				"Information Security & The CIA Triad": {
-					"descendants-share-incorrect-answers": true,
-					"mode-of-presentation": ["verbatim", "multiple-choice"],
-					"questions": {
-						"What term refers to the protection of data resources from unauthorized access, attack, theft, or damage?": "Information Security",
-						"What is the first element of the CIA triad?": "Confidentiality",
-						"What is the second element of the CIA triad?": "Integrity",
-						"What is the third element of the CIA triad?": "Availability",
-						"What property of a secure system ensures that information is inaccessible to unauthorized parties?": "Confidentiality",
-						"What property of a secure system ensures that information is delivered in its correct, unaltered form?": "Integrity",
-						"What property of a secure system ensures that information is accessible to authorized parties?": "Availability",
-						"What property of a secure system ensures that a party cannot deny taking a certain action?": "Non-Repudiation"
+					"verbatim block": {
+						"descendants-share-incorrect-answers": true,
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"questions": {
+							"What term refers to the protection of data resources from unauthorized access, attack, theft, or damage?": "Information Security",
+							"What is the first element of the CIA triad?": "Confidentiality",
+							"What is the second element of the CIA triad?": "Integrity",
+							"What is the third element of the CIA triad?": "Availability",
+							"What property of a secure system ensures that information is inaccessible to unauthorized parties?": "Confidentiality",
+							"What property of a secure system ensures that information is delivered in its correct, unaltered form?": "Integrity",
+							"What property of a secure system ensures that information is accessible to authorized parties?": "Availability",
+							"What property of a secure system ensures that a party cannot deny taking a certain action?": "Non-Repudiation"
+						}
+					},
+					"multiple-choice block": {
+						"mode-of-presentation": "multiple-choice",
+						"descendants-share-incorrect-answers": true,
+						"questions": {
+							"Which of the following predominantly upholds Confidentiality?": ["Encryption", "Network Segmentation"],
+							"Which of the following predominantly upholds Integrity?": ["Digital Signatures", "Backups"],
+							"Which of the following predominantly upholds Availability?": ["Load Balancers", "Redundant Servers"]
+						}
 					}
 				},
 				"Cybersecurity Functions": {
@@ -73,46 +84,47 @@
 						],
 						"questions": {
 							"What term refers to a technology or procedure put in place to mitigate vulnerabilities and risk and to uphold the CIA triad?": "Security Control",
-							"What category of security control provides high-level oversight of an information system or a review of other security controls?": "Managerial",
-							"What category of security control provides security through the actions of people such as through posted guards or security training?": "Operational",
-							"What category of security control provides security through the implementation of a software or hardware system such as a firewall or antivirus?": "Technical",
-							"What category of security control provides security against in-person threats such as intrusion onto restricted premises?": "Physical",
-							"What functional type of security control acts before an incident and to reduce the likelihood of incidents?": "Preventative",
-							"What functional type of security control acts to identify when a security incident has occurred?": "Detective",
-							"What functional type of security control acts to remediate an incident which has already occurred?": "Corrective",
-							"What functional type of security control enforces a rule of behavior?": "Directive",
-							"What functional type of security control discourages intrusion attemtps?": "Deterrent",
-							"What functional type of security control mitigates the risks associated with an otherwise insecure system?": "Compensating",
-							"Which of the following is an example of a security control category?": {
+							"What **category** of security control provides high-level oversight of an information system or a review of other security controls?": "Managerial",
+							"What **category** of security control provides security through the actions of people such as through posted guards or security training?": "Operational",
+							"What **category** of security control provides security through the implementation of a software or hardware system such as a firewall or antivirus?": "Technical",
+							"What **category** of security control provides security against in-person threats such as intrusion onto restricted premises?": "Physical",
+							"What **functional type** of security control acts before an incident and to reduce the likelihood of incidents?": {"answers": "Preventative", "hidden-answers": "Preventive"},
+							"What **functional type** of security control acts to identify when a security incident has occurred?": "Detective",
+							"What **functional type** of security control acts to remediate an incident which has already occurred?": "Corrective",
+							"What **functional type** of security control enforces a rule of behavior?": "Directive",
+							"What **functional type** of security control discourages intrusion attemtps?": "Deterrent",
+							"What **functional type** of security control mitigates the risks associated with an otherwise insecure system?": "Compensating",
+							"Which of the following is an example of a security control **category**?": {
 								"mode-of-presentation": "multiple-choice",
 								"answers": ["Managerial", "Operational", "Technical", "Physical"]
 							},
-							"Which of the following is an example of a security control functional type?": {
+							"Which of the following is an example of a security control **functional type**?": {
 								"mode-of-presentation": "multiple-choice",
 								"answers": ["Preventative", "Detective", "Corrective", "Directive", "Deterrent", "Compensating"]
 							}
 						}
 					},
 					"Examples": {
-						"What category of security control includes personnel screening?": "Operational",
-						"What category of security control includes security training?": "Operational",
-						"What category of security control includes antivirus?": "Technical",
-						"What category of security control includes firewalls?": "Technical",
-						"What category of security control includes file-level permissions?": "Technical",
-						"What category of security control includes locks?": "Physical",
-						"What category of security control includes cameras?": "Physical",
-						"What category of security control includes gates?": "Physical",
+						"What **category** of security control includes personnel screening?": "Operational",
+						"What **category** of security control includes security training?": "Operational",
+						"What **category** of security control includes onboarding policy?": "Managerial",
+						"What **category** of security control includes antivirus?": "Technical",
+						"What **category** of security control includes firewalls?": "Technical",
+						"What **category** of security control includes file-level permissions?": "Technical",
+						"What **category** of security control includes locks?": "Physical",
+						"What **category** of security control includes cameras?": "Physical",
+						"What **category** of security control includes gates?": "Physical",
 						
-						"What functional type of security control includes access control lists?": "Preventative",
-						"What functional type of security control includes antivirus?": "Preventative",
-						"What functional type of security control includes logs?": "Detective",
-						"What functional type of security control includes an IDS?": "Detective",
-						"What functional type of security control includes an IPS?": "Corrective",
-						"What functional type of security control includes a backup system?": "Corrective",
+						"What **functional type** of security control includes access control lists?": "Preventative",
+						"What **functional type** of security control includes antivirus?": "Preventative",
+						"What **functional type** of security control includes logs?": "Detective",
+						"What **functional type** of security control includes an IDS?": "Detective",
+						"What **functional type** of security control includes an IPS?": "Corrective",
+						"What **functional type** of security control includes a backup system?": "Corrective",
 						
-						"What functional type of security control includes an employee contract specifying restrictions on system usage?": "Directive",
-						"What functional type of security control includes warning signs of legal repercussions for trespassing?": "Deterrent",
-						"What functional type of security control includes shunting a critical legacy system into an isolated subnet?": "Compensating"
+						"What **functional type** of security control includes an employee contract specifying restrictions on system usage?": "Directive",
+						"What **functional type** of security control includes warning signs of legal repercussions for trespassing?": "Deterrent",
+						"What **functional type** of security control includes shunting a critical legacy system into an isolated subnet?": "Compensating"
 					}
 				},
 				"Security Roles": {
@@ -169,27 +181,30 @@
 					"In cryptography, what term refers to the unencrypted message?": "Plaintext",
 					"In cryptography, what term refers to the encrypted message?": "Ciphertext",
 					"In cryptography, what term refers to the science, art, and practice of breaking codes and ciphers?": "Cryptanalysis",
+					
 					"What kind of cryptographic algorithm scrambles a message in such a way that it is indecipherable except to the holders of a special key?": ["Encryption", "Cipher"],
 					"What kind of cryptographic algorithm converts an arbitrary-length string input to a fixed-length string output?": {
 						"answers": ["Hash", "Hashing"],
 						"hidden-answers": ["Hash Algorithm", "Hashing Algorithm"]
 					},
+					
 					"What term refers to an encryption scheme in which encryption and decryption are both performed with the **same** key?": {
 						"answers": ["Symmetric", "Shared-Key"],
 						"hidden-answers": ["Shared Key", "Symmetric Encryption", "Shared-Key Encryption", "Shared Key Encryption"]
 					},
-					
 					"What term refers to an encryption scheme in which encryption and decryption are performed with **separate** keys?": {
 						"answers": "Asymmetric",
 						"hidden-answers": "Asymmetric Encryption"
 					},
+					
 					"What property of a cryptographic system refers to the range of possible keys?": "Key Space",
 					"What property of a cryptographic system refers to the size of the key(s) in use?": "Key Length",
-					"Which of the following is typically **less** computationally expensive?": {
+					
+					"Which of the following is typically less computationally expensive?": {
 						"mode-of-presentation": "multiple-choice", "max-choices": 2,
 						"answers": "Symmetric Encryption", "incorrect-answers": "Asymmetric Encryption"
 					},
-					"Which of the following is typically **more** computationally expensive?": {
+					"Which of the following does not require a shared secret?": {
 						"mode-of-presentation": "multiple-choice", "max-choices": 2,
 						"answers": "Asymmetric Encryption", "incorrect-answers": "Symmetric Encryption"
 					}
@@ -225,14 +240,14 @@
 						
 						"Which of the following is an encryption scheme designed to preserve the **Confidentiality** of data in transit?": {
 							"mode-of-presentation": "multiple-choice",
-							"answers": ["WPA", "IPsec", "TLS"],
+							"answers": ["WPA", "TLS"],
 							"incorrect-answers": ["SHA1", "MD5", "HMAC"]
 						},
 						
 						"Which of the following is an encryption scheme designed to preserve the **Integrity** of data in transit?": {
 							"mode-of-presentation": "multiple-choice",
 							"answers": ["SHA1", "MD5", "HMAC"],
-							"incorrect-answers": ["WPA", "IPsec", "TLS"]
+							"incorrect-answers": ["WPA", "TLS"]
 						},
 						
 						"In cryptography, what term refers to a characteristic of transport encryption that ensures if a key is compromised, the compromise will only affect a single session and not facilitate recovery of plaintext data from other sessions?": ["Perfect Forward Secrecy", "PFS"],
@@ -328,84 +343,91 @@
 				}
 			},
 			"Lesson 5": {
-				"Enterprise Network Architecture": {
+				"Foundations & Terminology": {
 					"What security control uses an ACL to limit access to a switch or access point so that only clients with approved MAC addresses can connect to it?": ["MAC Filtering", "MAC Limiting"],
-					"What 802.1X-compliant protocol is a framework for negotiating authentication methods that enable systems to use hardware-based identifiers?": ["Extensible Authentication Protocol", "EAP"],
-					"What 802.1X-compliant protocol is an AAA system for managing remote and wireless authentication infrastructures?": ["Remote Authentication Dial-In User Service", "RADIUS"],
-					"What term refers to a host which is not physically connected to a network?": {"answers": "Air Gapped", "hidden-answers": "Air-Gapped"}
+					"What term refers to a host which is not physically connected to a network?": {"answers": "Air Gapped", "hidden-answers": "Air-Gapped"},
+					
+					"What term refers to an area of a network where the security configuration is the same for all hosts within it?": "Security Zone",
+					"What term refers to a security strategy that positions the layers of diverse security control categories and functions as opposed to relying on perimeter controls?": "Defense in Depth",
+					"What term describes a security control that analyzes only intercepted network traffic rather than sending probes or interacting with a target?": ["Passive Security Control", "Passive"],
+					"What term describes a security control that uses an agent or network configuration to monitor hosts?": ["Active Security Control", "Active"],
+					
+					"Which sort of security control lacks an addressable interface?": {
+						"mode-of-presentation": "multiple-choice", "max-choices": 2,
+						"answers": "Passive", "incorrect-answers": "Active"
+					},
+					"Which sort of security control may be detected by threat actors?": {
+						"mode-of-presentation": "multiple-choice", "max-choices": 2,
+						"answers": "Active", "incorrect-answers": "Passive"
+					},
+					
+					"What term refers to a hardware device inserted into a cable run to copy frames for analysis?": ["Test Access Point", "TAP"],
+					"What term refers to a hardware device that copies ingress and/or egress communications from one or more switch ports to another port?": ["Switched Port Analyzer", "SPAN", "Mirror Port"],
+					"What term refers to a configuration where a device prefers to preserve network availability over confidentiality and integrity during failure conditions?": "Fail-Open",
+					"What term refers to a configuration where a device prefers to preserve network integrity and confidentiality over availability during failure conditions?": "Fail-Closed"
 				},
-				"Network Security Appliances": {
-					"Foundations & Terminology": {
-						"What term refers to a security strategy that positions the layers of diverse security control categories and functions as opposed to relying on perimeter controls?": "Defense in Depth",
-						"What term describes a security control that analyzes only intercepted network traffic rather than sending probes or interacting with a target?": ["Passive Security Control", "Passive"],
-						"What term describes a security control that uses an agent or network configuration to monitor hosts?": ["Active Security Control", "Active"],
-						
-						"Which sort of security control lacks an addressable interface?": {
-							"mode-of-presentation": "multiple-choice", "max-choices": 2,
-							"answers": "Passive", "incorrect-answers": "Active"
-						},
-						"Which sort of security control may be detected by threat actors?": {
-							"mode-of-presentation": "multiple-choice", "max-choices": 2,
-							"answers": "Active", "incorrect-answers": "Passive"
-						},
-						
-						"What term refers to a hardware device inserted into a cable run to copy frames for analysis?": ["Test Access Point", "TAP"],
-						"What term refers to a hardware device that copies ingress and/or egress communications from one or more switch ports to another port?": ["Switched Port Analyzer", "SPAN", "Mirror Port"],
-						"What term refers to a configuration where a device prefers to preserve network availability over confidentiality and integrity during failure conditions?": "Fail-Open",
-						"What term refers to a configuration where a device prefers to preserve network integrity and confidentiality over availability during failure conditions?": "Fail-Closed"
+				"802.1X: RADIUS and EAP": {
+					"verbatim block": {"hidden": true, "questions": {
+						"What 802.1X-compliant protocol is a framework for negotiating authentication methods that enable systems to use hardware-based identifiers?": ["Extensible Authentication Protocol", "EAP"],
+						"What 802.1X-compliant protocol is an AAA system for managing remote and wireless authentication infrastructures?": ["Remote Authentication Dial-In User Service", "RADIUS"]
+					}},
+					"multiple-choice block": {"hidden": true, "max-choices": 2, "incorrect-answers": ["EAP", "RADIUS"], "questions": {
+						"Which 802.X standard performs authentication?": "RADIUS",
+						"Which 802.X standard determines authorization?": "RADIUS",
+						"Which 802.X standard negotiates an authentication method?": "EAP"
+					}
+				},
+				"Firewalls": {
+					"What term refers to a firewall designed specifically to protect software running on web servers and their back-end databases from code injection and DoS attacks?": ["Web Application Firewall", "WAF"],
+					
+					"Which of the following types of firewall lacks an IP address?": {
+						"mode-of-presentation": "multiple-choice", "max-choices": 2,
+						"answers": ["Bridged", "Inline", "Transparent", "Layer-1", "Layer-2"],
+						"incorrect-answers": ["Routed", "Layer-3"]
 					},
-					"Fireewalls": {
-						"What term refers to a firewall designed specifically to protect software running on web servers and their back-end databases from code injection and DoS attacks?": ["Web Application Firewall", "WAF"],
-						
-						"Which of the following types of firewall lacks an IP address?": {
-							"mode-of-presentation": "multiple-choice", "max-choices": 2,
-							"answers": ["Bridged", "Inline", "Transparent", "Layer-1", "Layer-2"],
-							"incorrect-answers": ["Routed", "Layer-3"]
-						},
-						
-						"What kind of firewall examines TCP packet headers and tracks TCP session state but not the contents of those packets?": {
-							"answers": ["Layer 4", "Transport"], "hidden-answers": ["Layer-4", "Layer Four", "Transport Lyaer"]
-						},
-						"What kind of firewall examines TCP packet payloads in addition to headers?": {
-							"answers": ["Layer 7", "Application"], "hidden-answers": ["Layer-7", "Layer Seven", "Application Layer"]
-						},
-						
-						"What feature of firewalls allows the session-aware analysis of packets on the application layer?": {
-							"answers": "Stateful Inspection", "hidden-answers": "Stateful Packet Inspection"
-						}
+					
+					"What kind of firewall examines TCP packet headers and tracks TCP session state but not the contents of those packets?": {
+						"answers": ["Layer 4", "Transport"], "hidden-answers": ["Layer-4", "Layer Four", "Transport Layer"]
 					},
-					"IDS & IPS": {
-						"What term refers to a security appliance or software that analyzes data from a packet sniffer to identify traffic that violates policies or rules?": ["Intrusion Detection System", "IDS"],
-						"What term refers to a security appliance or software that combines detection capabilities with functions that can actively block attacks?": ["Intrusion Prevention System", "IPS"]
+					"What kind of firewall examines TCP packet payloads in addition to headers?": {
+						"answers": ["Layer 7", "Application"], "hidden-answers": ["Layer-7", "Layer Seven", "Application Layer"]
 					},
-					"Proxies & Load Balancing": {
-						"What type of proxy server protects servers from direct contact with client requests by intercepting inbound traffic?": ["Reverse Proxy", "Reverse"],
-						"What type of switch, router, or software distributes client requests between different resources for fault tolerance and to improve throughput?": "Load Balancer",
-						"What term refers to a scheduling approach used by load balancers to route traffic to devices that have already established connections with the client in question?": ["Source IP Affinity", "Session Affinity"]
+					
+					"What feature of firewalls allows the session-aware analysis of packets on the application layer?": {
+						"answers": "Stateful Inspection", "hidden-answers": "Stateful Packet Inspection"
+					}
+				},
+				"IDS & IPS": {
+					"What term refers to a security appliance or software that analyzes data from a packet sniffer to identify traffic that violates policies or rules?": ["Intrusion Detection System", "IDS"],
+					"What term refers to a security appliance or software that combines detection capabilities with functions that can actively block attacks?": ["Intrusion Prevention System", "IPS"]
+				},
+				"Proxies & Load Balancing": {
+					"What type of proxy server protects servers from direct contact with client requests by intercepting inbound traffic?": ["Reverse Proxy", "Reverse"],
+					"What type of switch, router, or software distributes client requests between different resources for fault tolerance and to improve throughput?": "Load Balancer",
+					"What term refers to a scheduling approach used by load balancers to route traffic to devices that have already established connections with the client in question?": ["Source IP Affinity", "Session Affinity"]
+				},
+				"VPNs": {
+					"What remote access technology allows a secure tunnel to be created between two endpoints connected via an insecure transport network?": ["Virtual Private Network", "VPN"]
+				},
+				"IP Security": {
+					"What network-layer protocol suite is used to secure data through authentication and encryption?": {
+						"answers": ["IP Security", "IPSec"], "hidden-answwers": "Internet Protocol Security"
 					},
-					"VPNs": {
-						"What remote access technology allows a secure tunnel to be created between two endpoints connected via an unsecure transport network?": ["Virtual Private Network", "VPN"]
-					},
-					"IP Security": {
-						"What network-layer protocol suite is used to secure data through authentication and encryption?": {
-							"answers": ["IP Security", "IPSec"], "hidden-answwers": "Internet Protocol Security"
-						},
-						
-						"What IPSec protocol ensures integrity using a digital signature?": ["Authenticated Header", "AH"],
-						"What IPSec protocol ensures confidentiality by encrypting the payload?": ["Encapsulating Security Payload", "ESP"],
-						"What framework is used to create a security association (SA) used with IPSec?": ["Internet Key Exchange", "IKE"]
-					},
-					"Remote Access Technologies": {
-						"What Microsoft protocol is commonly used for operating remote connections to a host with a graphical interface?": ["Remote Desktop Protocol", "RDP"],
-						
-						"What protocol is commonly used for secure tunneling and remote terminal emulation?": ["Secure Shell", "SSH"],
-						"What command can be used to generate an SSH key pair?": "`ssh-keygen`",
-						"What command can be used to install a remote key on a remote server?": "`ssh-copy-id`",
-						"What command can be used to copy files over ssh?": "`scp`",
-						
-						"What term refers to the accessing of an administrative interface using a separate network from the usual data network?": {
-							"answers": ["Out-of-Band Management", "OOB Management"], "hidden-answers": "Out of Band Management"
-						}
+					
+					"What IPSec protocol ensures integrity using a digital signature?": ["Authenticated Header", "AH"],
+					"What IPSec protocol ensures confidentiality by encrypting the payload?": ["Encapsulating Security Payload", "ESP"],
+					"What framework is used to create a security association (SA) used with IPSec?": ["Internet Key Exchange", "IKE"]
+				},
+				"Remote Access Technologies": {
+					"What Microsoft protocol is commonly used for operating remote connections to a host with a graphical interface?": ["Remote Desktop Protocol", "RDP"],
+					
+					"What protocol is commonly used for secure tunneling and remote terminal emulation?": ["Secure Shell", "SSH"],
+					"What command can be used to generate an SSH key pair?": "`ssh-keygen`",
+					"What command can be used to install a remote key on a remote server?": "`ssh-copy-id`",
+					"What command can be used to copy files over ssh?": "`scp`",
+					
+					"What term refers to the accessing of an administrative interface using a separate network from the usual data network?": {
+						"answers": ["Out-of-Band Management", "OOB Management"], "hidden-answers": "Out of Band Management"
 					}
 				}
 			}

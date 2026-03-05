@@ -296,6 +296,7 @@
 				"Authorization": {
 					"What term refers to an access control model where each resource is protected by an access control list (ACL) managed by the resource's owner?": ["Discretionary Access Control", "Discretionary", "DAC"],
 					"What term refers to an access control model where resources are protected by inflexible, system-defined rules applied to labeled entities?": ["Mandatory Access Control", "Mandatory", "MAC"],
+					"What term refers to an access control model where authorization is typically determined by a combination of data labelling and agent clearance?": ["Mandatory Access Control", "Mandatory", "MAC"],
 					"What term refers to a non-discretionary access control technique that is based on a set of operational rules or restrictions to enforce a least privileges permissions policy?": {
 						"answers": ["Rule-Based Access Control", "Rule-Based"],
 						"hidden-answers": ["Rule Based Access Control", "Rule Based"]
@@ -433,24 +434,39 @@
 			},
 			"Lesson 6: Secure Cloud Network Architecture": {
 				"Cloud Models": {
-					"What cloud deployment model refers to an a general offering of service to cloud consumers who share provider resources?": "Public",
-					"What cloud deployment model refers to a cloud that is deployed for use by a single entity?": "Private",
-					"What cloud deployment model refers to a cloud that is deployed by a number of entities for shared use between them?": "Community",
-					"What term refers to a cloud deployment model where the consumer uses resources from multiple CSPs?": {"answers": "Multi-Cloud", "hidden-answers": "Multi Cloud"},
-					"What term refers to a cloud deployment model simultaneously using public and private infrastructure?": "Hybrid",
-					
-					"What cloud computing architecture provisions dedicated infrastructure per-customer?": {"answers": "Single-Tenant", "hidden-answers": "Single Tenant"},
-					"What cloud computing architecture provisions shared infrastructure for multiple customers?": {"answers": "Multi-Tenant", "hidden-answers": "Multi Tenant"},
-					"What cloud computing architecture provisions infrastructure which is fully managed by the provider and which scales dynamically in response to load?": "Serverless",
-					"What cloud computing architecture provisions units of code to cloud servers dynamically in response to requests, instead of using a central origin server?": "Serverless",
-					
-					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
-					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
-					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"],
-					"What cloud service model allows the execution of units of code in reesponse to events?": ["Function as a Service", "FaaS", "Serverless"]
+					"verbatim block": {"hidden": true, "questions": {
+						"What cloud deployment model refers to an a general offering of service to cloud consumers who share provider resources?": "Public",
+						"What cloud deployment model refers to a cloud that is deployed for use by a single entity?": "Private",
+						"What cloud deployment model refers to a cloud that is deployed by a number of entities for shared use between them?": "Community",
+						"What term refers to a cloud deployment model where the consumer uses resources from multiple CSPs?": {"answers": "Multi-Cloud", "hidden-answers": "Multi Cloud"},
+						"What term refers to a cloud deployment model simultaneously using public and private infrastructure?": "Hybrid",
+						
+						"What cloud computing architecture provisions dedicated infrastructure per-customer?": {"answers": "Single-Tenant", "hidden-answers": "Single Tenant"},
+						"What cloud computing architecture provisions shared infrastructure for multiple customers?": {"answers": "Multi-Tenant", "hidden-answers": "Multi Tenant"},
+						"What cloud computing architecture provisions infrastructure which is fully managed by the provider and which scales dynamically in response to load?": "Serverless",
+						"What cloud computing architecture provisions units of code to cloud servers dynamically in response to requests, instead of using a central origin server?": "Serverless",
+						
+						"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
+						"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
+						"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"],
+						"What cloud service model allows the execution of units of code in response to events?": ["Function as a Service", "FaaS", "Serverless"],
+					}},
+					"multiple-choice block": {"hidden": true, "mode-of-presentation": "multiple-choice", "groups": {
+						"Cloud Service Models": {
+							"incorrect-answers": ["None", "All", "IaaS", "FaaS", "PaaS", "SaaS"],
+							"max-choices": 5,
+							"questions": {
+								"In what model might the client of a CSP be responsible for the security of the physical equipment providing cloud services?": "None",
+								"In what model might the client of a CSP be responsible for the security of the operating system runing on cloud infrastructure?": "IaaS",
+								"In what model might the client of a CSP be responsible for data classification and accountability?": "All"
+							}
+						}
+					}}
 				},
 				"Virtualization": {
-					"What software delivery model runs code on a server and streams it to the client?": "Application Virtualization",
+					"What software delivery model runs code on a server and streams it to the client?": {
+						"answers": ["Application Virtualization", "Virtualization"], "hidden-answers": "App Virtualization"
+					},
 					"What term refers to an operating system virtualization deployment containing everything required to run a service, application, or microservice?": "Container",
 					
 					"What type of hypervisor runs directly on hardware?": {
@@ -467,7 +483,9 @@
 					"Which responsiveness-improving technology dynamically provisions computing resources in response to application load?": {"answers": "Auto-Scaling", "hidden-answers": "Auto Scaling"},
 					
 					"What cloud paradigm emphasizes programmability for network appliances and systems?": {"answers": ["Software-Defined Networking", "SDN"], "hidden-answers": "Software Defined Networking"},
-					"What term refers to the architecture supporting the rapid deployment of virtual networking using general-purpose VMs and containers?": ["Newtwork Functions Virtualization", "NFV"],
+					"What term refers to the interface between SDN applications and an SDN controller?": ["Northbound Interface", "Northbound", "NBI"],
+					"What term refers to the interface between an SDN controller and managed appliances?": ["Southbound Interface", "Southbound", "SBI"],
+					"What term refers to the architecture supporting the rapid deployment of virtual networking using general-purpose VMs and containers?": ["Network Functions Virtualization", "NFV"],
 					
 					"What document defines expected performance, availability, and support commitments between cloud service providers and organizations?": ["Service Level Agreement", "SLA"],
 					"What document defines the security requirements and responsibilities between cloud service providers and organizations?": ["Interconnection Security Agreement", "ISA"],
@@ -477,7 +495,23 @@
 				"Embedded Systems": {
 					"What term refers to an electronic system that is designed to perform a specific, dedicated function?": "Embedded System",
 					"What term refers to a type of OS that prioritizes deterministic execution of operations to ensure consistent response for time-critical tasks?": ["Real-Time Operating System", "RTOS"]
+				},
+				"Internet of Things": {
+					"What refers to an internet-connected network of many functional devices?": ["Internet of Things", "IoT"]
+				},
+				"Deperimeterization and Zero Trust": {
+					"What cybersecurity paradigm requires that every request must be authenticated before being allowed?": ["Zero Trust", "ZT"],
+					"What cybersecurity paradigm moves defenses from static, network-based perimeters to focus on users, assets, and resources?": ["Zero Trust", "ZT"],
+					"Which is considered a **component** of Zero Trust Architecture, as opposed to a benefit?": {
+						"mode-of-presentation": "multiple-choice", "max-choices": 2,
+						"answers": ["Improved Governence", "Improved Access Control", "Improved Compliance"],
+						"incorrect-answers": ["Data Protection", "Cloud Security"]
+					},
+					
+					"What cybersecurity paradigm shifts the focus from defending a network's boundaries to protecting individual resources and data within the network?": "Deperimeterization"
 				}
+			},
+			"Lesson 7: Resiliency and Site Security": {
 			}
 		}
 	}

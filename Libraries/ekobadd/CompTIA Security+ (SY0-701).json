@@ -342,7 +342,7 @@
 					"In biometrics, what metric measures the frequency of incidents in which a user cannot be enrolled?": ["Failure to Enroll Rate", "FER"]
 				}
 			},
-			"Lesson 5": {
+			"Lesson 5: Secure Network Enterprise Architecture": {
 				"Foundations & Terminology": {
 					"What security control uses an ACL to limit access to a switch or access point so that only clients with approved MAC addresses can connect to it?": ["MAC Filtering", "MAC Limiting"],
 					"What term refers to a host which is not physically connected to a network?": {"answers": "Air Gapped", "hidden-answers": "Air-Gapped"},
@@ -375,7 +375,7 @@
 						"Which 802.X standard performs authentication?": "RADIUS",
 						"Which 802.X standard determines authorization?": "RADIUS",
 						"Which 802.X standard negotiates an authentication method?": "EAP"
-					}
+					}}
 				},
 				"Firewalls": {
 					"What term refers to a firewall designed specifically to protect software running on web servers and their back-end databases from code injection and DoS attacks?": ["Web Application Firewall", "WAF"],
@@ -429,6 +429,54 @@
 					"What term refers to the accessing of an administrative interface using a separate network from the usual data network?": {
 						"answers": ["Out-of-Band Management", "OOB Management"], "hidden-answers": "Out of Band Management"
 					}
+				}
+			},
+			"Lesson 6: Secure Cloud Network Architecture": {
+				"Cloud Models": {
+					"What cloud deployment model refers to an a general offering of service to cloud consumers who share provider resources?": "Public",
+					"What cloud deployment model refers to a cloud that is deployed for use by a single entity?": "Private",
+					"What cloud deployment model refers to a cloud that is deployed by a number of entities for shared use between them?": "Community",
+					"What term refers to a cloud deployment model where the consumer uses resources from multiple CSPs?": {"answers": "Multi-Cloud", "hidden-answers": "Multi Cloud"},
+					"What term refers to a cloud deployment model simultaneously using public and private infrastructure?": "Hybrid",
+					
+					"What cloud computing architecture provisions dedicated infrastructure per-customer?": {"answers": "Single-Tenant", "hidden-answers": "Single Tenant"},
+					"What cloud computing architecture provisions shared infrastructure for multiple customers?": {"answers": "Multi-Tenant", "hidden-answers": "Multi Tenant"},
+					"What cloud computing architecture provisions infrastructure which is fully managed by the provider and which scales dynamically in response to load?": "Serverless",
+					"What cloud computing architecture provisions units of code to cloud servers dynamically in response to requests, instead of using a central origin server?": "Serverless",
+					
+					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
+					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
+					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"],
+					"What cloud service model allows the execution of units of code in reesponse to events?": ["Function as a Service", "FaaS", "Serverless"]
+				},
+				"Virtualization": {
+					"What software delivery model runs code on a server and streams it to the client?": "Application Virtualization",
+					"What term refers to an operating system virtualization deployment containing everything required to run a service, application, or microservice?": "Container",
+					
+					"What type of hypervisor runs directly on hardware?": {
+						"answers": ["Type 1", "Bare Metal", "1"], "hidden-answers": ["Type One", "One"]
+					},
+					"What type of hypervisor runs on top of an operating system?": {
+						"answers": ["Type 2", "Hosted", "2"], "hidden-answers": ["Type Two", "Two"]
+					},
+					
+					"What technology provisions and deploys resources through scripted automation and orchestration?": ["Infrastructure as Code", "IaC"],
+					
+					"Which responsiveness-improving technology allows multiple origin servers to effectively share an application's load?": "Load Balancing",
+					"Which responsiveness-improving technology allows requests to be handled by edge servers?": "Edge Computing",
+					"Which responsiveness-improving technology dynamically provisions computing resources in response to application load?": {"answers": "Auto-Scaling", "hidden-answers": "Auto Scaling"},
+					
+					"What cloud paradigm emphasizes programmability for network appliances and systems?": {"answers": ["Software-Defined Networking", "SDN"], "hidden-answers": "Software Defined Networking"},
+					"What term refers to the architecture supporting the rapid deployment of virtual networking using general-purpose VMs and containers?": ["Newtwork Functions Virtualization", "NFV"],
+					
+					"What document defines expected performance, availability, and support commitments between cloud service providers and organizations?": ["Service Level Agreement", "SLA"],
+					"What document defines the security requirements and responsibilities between cloud service providers and organizations?": ["Interconnection Security Agreement", "ISA"],
+					
+					"What term refers to a networking and security architecture that provides secure access to cloud applications and services while reducing complexity?": ["Secure Access Service Edge", "SASE"]
+				},
+				"Embedded Systems": {
+					"What term refers to an electronic system that is designed to perform a specific, dedicated function?": "Embedded System",
+					"What term refers to a type of OS that prioritizes deterministic execution of operations to ensure consistent response for time-critical tasks?": ["Real-Time Operating System", "RTOS"]
 				}
 			}
 		}

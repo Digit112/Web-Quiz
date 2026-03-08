@@ -143,7 +143,7 @@
 				},
 				"Attributes & Motivations of Threat Actors": {
 					"What term refers to a kind of threat actor with no authorized access to a target system?": {"answers": "External", "hidden-answers": "External Threat Actor"},
-					"What term refers to a kind of threat actor with no authorized access to a target system?": {"answers": ["Internal", "Insider"], "hidden-answers": ["Internal Threat Actor", "Insider Threat Actor"]},
+					"What term refers to a kind of threat actor with authorized access to a target system?": {"answers": ["Internal", "Insider"], "hidden-answers": ["Internal Threat Actor", "Insider Threat Actor"]},
 					"What term refers to a type of attack that compromises the availability of an asset or business process?": "Service Disruption",
 					"What term refers to a type of attack that takes data that is stored inside of a private network and moves it to an external network?": "Data Exfiltration",
 					"What term refers to a type of attack that falsifies an information resource that is normally trusted by others?": "Disinformation",
@@ -168,10 +168,7 @@
 					"What term refers to a variant of phishing conducted over voice channel?": "Vishing",
 					"What term refers to a variant of phishing conducted over SMS?": "SMiShing",
 					"What term refers to an impersonation attack in which a request for a website, typically an e-commerce site, is redirected to a similar-looking, but fake, website?": "Pharming",
-					"What term refers to an attack in which an attacker registers a domain name with a common misspelling of an existing domain, so that a user who misspells a URL they enter into a browser is taken to the attacker's website?": {
-						"answers": "Typosquatting",
-						"hidden-answers": ["Typo Squatting", "Typo-Squatting"]
-					},
+					"What term refers to an attack in which an attacker registers a domain name with a common misspelling of an existing domain, so that a user who misspells a URL they enter into a browser is taken to the attacker's website?": {"answers": "Typosquatting", "hidden-answers": ["Typo Squatting", "Typo-Squatting"]},
 					"What term refers to an attack in which an attacker targets specific groups or organizations, discovers which websites they frequent, and injects malicious code into those sites?": ["Watering Hole", "Watering Hold Attack"]
 				}
 			},
@@ -239,13 +236,13 @@
 						},
 						
 						"Which of the following is an encryption scheme designed to preserve the **Confidentiality** of data in transit?": {
-							"mode-of-presentation": "multiple-choice",
+							"mode-of-presentation": "multiple-choice", "max-choices": 3,
 							"answers": ["WPA", "TLS"],
 							"incorrect-answers": ["SHA1", "MD5", "HMAC"]
 						},
 						
 						"Which of the following is an encryption scheme designed to preserve the **Integrity** of data in transit?": {
-							"mode-of-presentation": "multiple-choice",
+							"mode-of-presentation": "multiple-choice", "max-choices": 3,
 							"answers": ["SHA1", "MD5", "HMAC"],
 							"incorrect-answers": ["WPA", "TLS"]
 						},

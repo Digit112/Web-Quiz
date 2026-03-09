@@ -509,6 +509,40 @@
 				}
 			},
 			"Lesson 7: Resiliency and Site Security": {
+				"Redundancy Strategies": {
+					"Resource Availability": {
+						"What policy requires employees to develop skills and knowledge outside their primary roles to mitigate the risk of relying heavily on specific individuals or teams?": {
+							"answers": "Cross-Training", "hidden-answers": "Cross Training"
+						},
+						
+						"What metric expresses the availability requirement for a particular business function?": ["Maximum Tolerable Downtime", "MTD"],
+						
+						"What property of an IT resource describes the capacity to increase resources to meet demand within similar cost ratios?": "Scalability",
+						"What property of an IT resource describes the ability to handle rapid changes to demand in real time?": "Elasticity",
+						"What property of an IT resource describes the ability to continue providing a service after experiencing failures?": {
+							"answers": "Fault Tolerance", "hidden-answers": "Fault Tolerant"
+						},
+						
+						"Which term refers to increaing the quantity of available resources?": {
+							"mode-of-presentation": "multiple-choice", "max-choices": 2,
+							"answers": "Scale Out", "incorrect-answers": "Scale Up"
+						},
+						"Which term refers to increaing the power of existing resources?": {
+							"mode-of-presentation": "multiple-choice", "max-choices": 2,
+							"answers": "Scale Up", "incorrect-answers": "Scale Out"
+						}
+					},
+					"Geographic Dispersion": {
+						"What term refers to the distribution of recovery sites across different geographic locations for disaster recovery (DR) purposes?": "Geographic Dispersion",
+						"What term describes a failover facility that can take over operations almost immediately following a disaster?": ["Hot Site", "Hot"],
+						"What term describes a failover facility that requires extensive configuration to resume operations following a disaster?": ["Cold Site", "Cold"]
+					},
+					"Clustering": {
+						"What term refers to a load balancing technique where a group of servers are configured as a unit and work together to provide network services?": "Clustering",
+						
+						"In what kind of clustering are redundant nodes non-functional until such a time that they are needed?": ["Active/Passive", "A/P"],
+					}
+				}
 			}
 		}
 	}

@@ -541,7 +541,22 @@
 						"What term refers to a load balancing technique where a group of servers are configured as a unit and work together to provide network services?": "Clustering",
 						
 						"In what kind of clustering are redundant nodes non-functional until such a time that they are needed?": ["Active/Passive", "A/P"],
+						"In what kind of clustering are redundant nodes non-functional until such a time that they are needed?": ["Active/Passive", "A/P"],
 					}
+				},
+				"Resiliency": {
+					"What cybersecurity resilience strategy increases attack costs by provisioning multiple types of controls and technologies, often from multiple vendors?": "Platform Diversity",
+					"What cybersecurity term refers to a host designed to lure attackers away from asseets of real value?": {"answers": "Honeypot", "hidden-answers": "Honey Pot"},
+					"What cybersecurity deception strategy returns spoofed data in response to network probes?": "Fake Telemetry",
+					"What cybersecurity term refers to a temporary DNS record that redirects malicious traffic to a controlled IP address?": "DNS Sinkhole",
+					
+					"What kind of test involves running primary and backup systems simultaneously?": ["Parallel Processing Test", "Parallel Processing"],
+					"What kind of test involves simmulating the failure of a primary system?": "Failover"
+				},
+				"Physical Security": {
+					"What term refers to a sturdy post protecting an area from unauthorized vehicular access?": "Bollard",
+					"What term refers to a designated region of physical space with specified entry and exit points": ["Security Zone", "Security"],
+					"What term refers to a small room with two doors that requires security clearance to exit?": ["Access Control Vestibule", "Mantrap"]
 				}
 			}
 		}

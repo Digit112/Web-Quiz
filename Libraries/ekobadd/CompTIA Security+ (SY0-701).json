@@ -446,7 +446,7 @@
 						"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
 						"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
 						"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"],
-						"What cloud service model allows the execution of units of code in response to events?": ["Function as a Service", "FaaS", "Serverless"],
+						"What cloud service model allows the execution of units of code in response to events?": ["Function as a Service", "FaaS", "Serverless"]
 					}},
 					"multiple-choice block": {"hidden": true, "mode-of-presentation": "multiple-choice", "groups": {
 						"Cloud Service Models": {
@@ -512,7 +512,7 @@
 				"Redundancy Strategies": {
 					"Resource Availability": {
 						"What policy requires employees to develop skills and knowledge outside their primary roles to mitigate the risk of relying heavily on specific individuals or teams?": {
-							"answers": "Cross-Training", "hidden-answers": "Cross Training"
+							"answers": "Cross-Training", "hidden-answers": ["Cross Training", "Crosstraining"]
 						},
 						
 						"What metric expresses the availability requirement for a particular business function?": ["Maximum Tolerable Downtime", "MTD"],
@@ -530,6 +530,19 @@
 						"Which term refers to increaing the power of existing resources?": {
 							"mode-of-presentation": "multiple-choice", "max-choices": 2,
 							"answers": "Scale Up", "incorrect-answers": "Scale Out"
+						},
+						
+						"What resiliency term addresses the continuity of critical functions and services during an emergency or disaster?": ["Continuity of Operations", "COOP"],
+						"What resiliency term addresses the resilience, recovery, and continuity of the entire organization?": "Business Continuity",
+						
+						"Which of the following would generally be more concerned with off-site backup management and distaster recovery?": {
+							"mode-of-presentation": "multiple-choice", "max-choices": 2,
+							"answers": "Continuity of Operations", "incorrect-answers": "Business Continuity"
+						},
+						
+						"Which of the following would generally be more concerned with risk assessment and regulatory compliance?": {
+							"mode-of-presentation": "multiple-choice", "max-choices": 2,
+							"answers": "Business Continuity", "incorrect-answers": "Continuity of Operations"
 						}
 					},
 					"Geographic Dispersion": {
@@ -541,22 +554,51 @@
 						"What term refers to a load balancing technique where a group of servers are configured as a unit and work together to provide network services?": "Clustering",
 						
 						"In what kind of clustering are redundant nodes non-functional until such a time that they are needed?": ["Active/Passive", "A/P"],
-						"In what kind of clustering are redundant nodes non-functional until such a time that they are needed?": ["Active/Passive", "A/P"],
+						"In what kind of clustering are redundant nodes functional alongside primary nodes?": ["Active/Active", "A/A"]
 					}
 				},
 				"Resiliency": {
 					"What cybersecurity resilience strategy increases attack costs by provisioning multiple types of controls and technologies, often from multiple vendors?": "Platform Diversity",
-					"What cybersecurity term refers to a host designed to lure attackers away from asseets of real value?": {"answers": "Honeypot", "hidden-answers": "Honey Pot"},
+					"What cybersecurity term refers to a host designed to lure attackers away from assets of real value?": {"answers": "Honeypot", "hidden-answers": "Honey Pot"},
 					"What cybersecurity deception strategy returns spoofed data in response to network probes?": "Fake Telemetry",
 					"What cybersecurity term refers to a temporary DNS record that redirects malicious traffic to a controlled IP address?": "DNS Sinkhole",
 					
 					"What kind of test involves running primary and backup systems simultaneously?": ["Parallel Processing Test", "Parallel Processing"],
-					"What kind of test involves simmulating the failure of a primary system?": "Failover"
+					"What kind of test involves simulating the failure of a primary system?": "Failover",
+					
+					"What device filters fluctuations in power while also typically providing a redundant source of power in the event of outages?": ["Uninterruptible  Power Supply", "UPS"]
 				},
 				"Physical Security": {
 					"What term refers to a sturdy post protecting an area from unauthorized vehicular access?": "Bollard",
-					"What term refers to a designated region of physical space with specified entry and exit points": ["Security Zone", "Security"],
+					"What term refers to a designated region of physical space with specified entry and exit points": ["Security Zone", "Zone"],
 					"What term refers to a small room with two doors that requires security clearance to exit?": ["Access Control Vestibule", "Mantrap"]
+				}
+			},
+			"Lessson 8: Vulnerability Management": {
+				"Device and OS Vulnerabilities": {
+					"What term describes a product that the vendor has declared as being no longer supported?": {"answers": ["End-of-Life", "EOL"], "hidden-answers": "End of Life"},
+					"What term describes a product that represents hardware and software methods that are no longer popular and often incompatible with newer systems?": "Legacy",
+					
+					"What kind of vulnerability effects the foundation code that controls the hardware underpinning a computer?": ["Firmware Vulnerability", "Firmware"]
+				},
+				"Kinds of Vulnerabilities": {
+					"What class of vulnerability allows a program running on a guest VM operating system to execute code on the host?": "VM Escape",
+					"What class of vulnerability is exploited before developers have a chance to fix them?": ["Zero-Day Vulnerabilities", "Zero-Day"],
+					
+					"What term refers to a situation where an outcome of multiple operations depends on their order of execution, and that order is not properly enforced?": "Race Condition",
+					"What class of vulnerability originates with a state change that occurs between the validation and execution phases of an operation?": ["Time-of-Check to Time-of-Urse", "TOCTOU"],
+					"What class of vulnerability involves the introduction of malicious code into a running application's process memory?": "Memory Injection",
+					
+					"What class of vulnerability involves deliberately overfilling a region of memory with unexpectedly large input?": "Buffer Overflow",
+					"What class of vulnerability involves the distribution of malicious code that appears to be a legitimate update or patch?": "Malicious Update"
+				},
+				"Mobile Device System Subversion": {
+					"What term refers to obtaining admin on an android device to install custom ROMs or modify system files?": "Rooting",
+					"What term refers to removing the restrictions on iOS devices to allow customizing their appearance or installing unauthorized apps?": "Jailbreaking",
+					"What term refs to installing applications from sources other than the official app store of a platform?": "Sideloading"
+				},
+				"Evaluation Scope": {
+					"What term describes the produce, system, or service being analyzed for potentional security vulnerabilities?": ["Evaluation Target", "Evaluation Scope"]
 				}
 			}
 		}

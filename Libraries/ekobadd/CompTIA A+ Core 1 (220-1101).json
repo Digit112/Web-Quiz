@@ -87,24 +87,24 @@
 					}
 				},
 				"Descriptions": {
-					"What protocol is typically used to transfer webpages?": ["HTTP", "HTTPS"],
-					"What protocol is used to transmit emails to a mail server?": "SMTP",
-					"What protocol is used to retrieve directory listings and transfer files?": "FTP",
-					"What protocol is used to remotely control computers via a command line?": "SSH",
-					"What protocol dynamically assigns IP addresses to the hosts on a network?": "DHCP",
-					"What protocol allows the translation of domain names into IP addresses?": "DNS",
-					"What protocol allows a user to remotely view and control another host's desktop?": "RDP"
+					"What protocol is typically used to transfer webpages?": ["HyperText Transfer Protocol", "HTTP", "HTTPS"],
+					"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"],
+					"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "FTP"],
+					"What protocol is used to remotely control computers via a command line?": ["Secure Shell", "SSH"],
+					"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"],
+					"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
+					"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
 				}
 			},
 			"Network Hardware": {
 				"Networking Devices & Concepts": {
 					"What device connects many devices by broadcasting all information it receives?": "Hub",
 					"What device connects many devices by forwarding received information to its intended recipient?": "Switch",
-					"What sort of switch allows an administrator to configure it, often via HTTP or SSH?": ["Managed", "Managed Switch"],
-					"What sort of switch does not allow an administrator to configure it?": ["Unmanaged", "Unmanaged Switch"],
+					"What sort of switch allows an administrator to configure it, often via HTTP or SSH?": ["Managed Switch", "Managed"],
+					"What sort of switch does not allow an administrator to configure it?": ["Unmanaged Switch", "Unmanaged"],
 					"What device connects two or more networks into an internetwork?": "Router",
 					"What device is used to filter network traffic by port number?": "Firewall",
-					"What device provide equal distribution of IP traffic to multiple servers?": "Load Balancer"
+					"What device provides equal distribution of IP traffic to multiple servers?": "Load Balancer"
 				},
 				"Networking Tools": {
 					"What is used to cut cable into segments?": {"answers": ["Cable Cutters", "Cable Snips"], "hidden-answers": "Cable Cutter"},
@@ -128,12 +128,21 @@
 					"What is the maximum data rate for 802.11ax (Wi-Fi 6)?": "9.6Gbps"
 				},
 				"Frequencies": {
-					"Does the 802.11a standard use 2.4GHz, 5GHz, or both?": "5GHz",
-					"Does the 802.11b standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
-					"Does the 802.11g standard use 2.4GHz, 5GHz, or both?": "2.4GHz",
-					"Does the 802.11n (Wi-Fi 4) standard use 2.4GHz, 5GHz, or both?": "Both",
-					"Does the 802.11ac (Wi-Fi 5) standard use 2.4GHz, 5GHz, or both?": "5GHz",
-					"Does the 802.11ax (Wi-Fi 6) standard use 2.4GHz, 5GHz, or both?": "Both"
+					"mode-of-presentation": ["multiple-choice", "verbatim"],
+					"incorrect-answers": ["2.4GHz", "5GHz", "Both"],
+					"max-choices": 3,
+					"questions": {
+						"What frequency range(s) does the 802.11a standard use?": "5GHz",
+						"What frequency range(s) does the 802.11b standard use?": "2.4GHz",
+						"What frequency range(s) does the 802.11g standard use?": "2.4GHz",
+						"What frequency range(s) does the 802.11n (Wi-Fi 4) standard use?": {
+							"answers": ["Both", "5GHz and 2.4GHz"], "hidden-answers": ["5GHz & 2.4GHz", "5GHz, 2.4GHz"], "correct-answer-source": "primary"
+						},
+						"What frequency range(s) does the 802.11ac (Wi-Fi 5) standard use?": "5GHz",
+						"What frequency range(s) does the 802.11ax (Wi-Fi 6) standard use?": {
+							"answers": ["Both", "5GHz and 2.4GHz"], "hidden-answers": ["5GHz & 2.4GHz", "5GHz, 2.4GHz"], "correct-answer-source": "primary"
+						}
+					}
 				},
 				"MIMO & MU-MIMO": {
 					"What is the earliest version of the 802.11 standard which supports MIMO?": ["802.11n", "n"],

@@ -419,6 +419,8 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Must-Have
 
+- Option to present answers in a particular order.
+
 #### Initial Release (No Editing)
 
 - More feedback.
@@ -447,6 +449,8 @@ Unless generators or properties must be assigned to Questions and QuestionGroups
 
 ### Should-Have
 
+- Some way to prevent questions ffom inheriting incorrect answers outside a group without also sharing them among themselves.
+	- e.g. "incorrect-answer-sources": ["explicit"]
 - Require clicking on the answer to questions which are given the first time a question is picked.
 - Reset Question Window Button
 - Option to toggle showing correct answer on new question.

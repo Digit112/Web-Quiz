@@ -1,0 +1,124 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "CompTIA A+ Certification 220-1102 (Core 2)",
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"typo-forgiveness-level": "medium",
+		"groups": {
+			"The OSI Model": {
+				"Layers": {
+					"mode-of-presentation": ["verbatim", "multipl-choice"],
+					"max-choices": 7,
+					"questions": {
+						"Which is layer **1** of the OSI Model?": "Physical",
+						"Which is layer **2** of the OSI Model?": "Data Link",
+						"Which is layer **3** of the OSI Model?": "Network",
+						"Which is layer **4** of the OSI Model?": "Transport",
+						"Which is layer **5** of the OSI Model?": "Session",
+						"Which is layer **6** of the OSI Model?": "Presentation",
+						"Which is layer **7** of the OSI Model?": "Application"
+					}
+				},
+				"Protocols": {
+					"Which OSI Layer is IEEE 802.3 Ethernet?": "Data Link",
+					"Which OSI Layer is IEEE 802.11 Wi-Fi?": "Data Link",
+					"Which OSI Layer is Internet Protocol (IP)?": "Network",
+					"Which OSI Layer is Transmission Control Protocol (TCP)?": "Transport",
+					"Which OSI Layer is User Datagram Protocol (UDP)?": "Transport",
+					"Which OSI Layer is Transport Layer Security (TLS)?": ["Session", "Presentation"],
+					"Which OSI Layer is Secure Sockets Layer (SSL)?": ["Session", "Presentation"],
+					"Which OSI Layer is HTTP?": "Application",
+					"Which OSI Layer is FTP?": "Application"
+				}
+			},
+			"Network Devices": {
+				"What security appliance filters traffic with advanced features such as a built-in VPN Concentrator and deep packet inspection?": {
+					"answers": ["Next-Generation Firewall", "NGFW"], "hidden-answers": "Next-Gen Firewall"
+				},
+				"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
+					"answers": ["Wireless Access Point", "WAP"],
+					"hidden-answers": ["Access Point", "AP"]
+				}
+			},
+			"Network Functions": {
+				"Content Delivery": {
+					"What kind of network uses geographically distributed servers and caching to deliver data with minimal latency?": ["Content Delivery Network", "CDN"]
+				},
+				"VPNs": {
+					"What kind of network uses encryption to securely link all communications between two computers over an insecure network such as the internet?": ["Virtual Private Network", "VPN"],
+					"What device serves as the central connection device for a VPN?": ["VPN Concentrator", "Concentrator", "Head-End"]
+				},
+				"Quality of Service": {
+					"What term refers to configuration options allowing the prioritization of certain kinds of traffic?": ["Quality of Service", "QoS"],
+					"What term refers to a hard limit placed on the length of time that a process of some kind can execute for?": ["Time to Live", "TTL"]
+				}
+			},
+			"Cloud Networking": {
+				"Cloud Networking Concepts": {
+					"What term refers to the use of cloud features to replace physical networking devices?": ["Network Function Virtualization", "NFV"],
+					"What term refers to a pool of resources created in the cloud?": ["Virtual Private Cloud", "VPC"],
+					"What term refers to an application instance connecting VPCs?": "Transit Gateway",
+					"What term refers to an application instance allowing virtual servers to form outbound connections as if through a router?": "VPC NAT Gateway",
+					"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint"
+				},
+				"Cloud Service Models": {
+					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
+					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
+					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"]
+				}				
+			},
+			"Protocols": {
+				"Ports": {
+					"mode-of-presentation": ["verbatim", "multiple-choice"],
+					"max-choicces": 5, "descendants-share-incorrect-answers": true,
+					"groups": {
+						"Plain Ports": {
+							"What port number is typically used by HTTP?": "80",
+							"What port number is typically used by SMTP?": "25",
+							"What port number is typically used by POP3?": "110",
+							"What port number is typically used by IMAP?": "143",
+							"What port number is typically used by FTP?": "21",
+							"What port number is typically used by TFTP?": "69",
+							"What port number is typically used by SSH?": "22",
+							"What port number is typically used by a DHCP client?": "68",
+							"What port number is typically used by a DHCP server?": "67",
+							"What port number is typically used by DNS?": "53",
+							"What port number is typically used by NTP?": "123",
+							"What port number is typically used by LDAP?": "389",
+							"What port number is typically used by RDP?": "3389",
+							"What port number is typically used by SMB?": "445",
+							"What port number is typically used by SNMP?": "161",
+							"What port number is typically used by SNMPTRAP?": "162",
+							"What port number is typically used by Telnet?": "23"
+						},
+						"Secure Ports": {
+							"What port number is typically used by HTTPS?": "443",
+							"What port number is typically used by SFTP?": ["989", "990"],
+							"What is a newer, secure port number typically used by SMTP?": ["465", "587"],
+							"What is the newer, secure port number typically used by POP3?": "995",
+							"What is the newer, secure port number typically used by IMAP?": "993",
+							"What is the newer, secure port number typically used by LDAP?": "636"
+						}
+					}
+				},
+				"Descriptions": {
+					"What protocol is typically used to transfer webpages?": ["HyperText Transfer Protocol", "HTTPS", "HTTP"],
+					"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"],
+					"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "SFTP", "FTP"],
+					"What protocol is used to transfer small amounts of information with minimal overhead?": ["Trivial File Transfer Protocol", "TFTP"],
+					"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
+					"What protocol is used to remotely control computers via a command line?": ["Secure Shell", "SSH"],
+					"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"],
+					"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
+					"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
+				}
+			}
+		}
+	}
+}

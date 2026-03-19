@@ -575,11 +575,20 @@
 				}
 			},
 			"Lessson 8: Vulnerability Management": {
-				"Device and OS Vulnerabilities": {
-					"What term describes a product that the vendor has declared as being no longer supported?": {"answers": ["End-of-Life", "EOL"], "hidden-answers": "End of Life"},
-					"What term describes a product that represents hardware and software methods that are no longer popular and often incompatible with newer systems?": "Legacy",
+				"Vulnerability Management Concepts": {
+					"What term describes the produce, system, or service being analyzed for potentional security vulnerabilities?": ["Evaluation Target", "Evaluation Scope"],
+					"What term refers to enterprise management software designed to mediate access to cloud services by users across all types of devices?": ["Cloud Access Security Broker", "CASB"],
 					
-					"What kind of vulnerability effects the foundation code that controls the hardware underpinning a computer?": ["Firmware Vulnerability", "Firmware"]
+					"What term refers to a comprehensive inventory of all components in a software product?": ["Software Bill of Materials", "SBOM"],
+					
+					"What type of vulnerability scan operates with the view provided by the network to any unpriveleged user?": ["Non-Credentialed Scan", "Non-Credentialed"],
+					"What type of vulnerability scan operates with the view of a logged-in user with permissions appropriate for the testing scenario?": ["Credentialed Scan", "Credentialed"],
+					
+					"What type of application vulnerability scan analyzes the code without executing it?": ["Static Analysis", "Static"],
+					"What type of application vulnerability scan analyzes the running software?": ["Dynamic Analysis", "Dynamic"],
+					
+					"What term refers to techniques and tools designed to mitigate risks from application vulnerabilities in third-party code, such as libraries and dependencies?": "Package Monitoring",
+					"What term refers to a continuously updated stream of signatures and pattern-matching rules supplied to analysis platforms?": "Threat Feed"
 				},
 				"Kinds of Vulnerabilities": {
 					"What class of vulnerability allows a program running on a guest VM operating system to execute code on the host?": "VM Escape",
@@ -590,16 +599,25 @@
 					"What class of vulnerability involves the introduction of malicious code into a running application's process memory?": "Memory Injection",
 					
 					"What class of vulnerability involves deliberately overfilling a region of memory with unexpectedly large input?": "Buffer Overflow",
-					"What class of vulnerability involves the distribution of malicious code that appears to be a legitimate update or patch?": "Malicious Update"
+					"What class of vulnerability involves the distribution of malicious code that appears to be a legitimate update or patch?": "Malicious Update",
+					
+					"What class of vulnerability originates with a vendor such as a hardware manufacturer or framework developer?": "Supply Chain"
+				},
+				"Common Attacks": {
+					"What attack involves the injection of malicious code into a trusted website, which is subsequently ran by the victim's browser?": ["Cross-Site Scripting", "XSS"],
+					"What attack involves attack injecting a database query into an improperly-validated input field?": ["SQL Injection", "SQLi"]
+				},
+				"Device and OS Vulnerabilities": {
+					"What term describes a product that the vendor has declared as being no longer supported?": {"answers": ["End-of-Life", "EOL"], "hidden-answers": "End of Life"},
+					"What term describes a product that represents hardware and software methods that are no longer popular and often incompatible with newer systems?": "Legacy",
+					
+					"What kind of vulnerability effects the foundation code that controls the hardware underpinning a computer?": ["Firmware Vulnerability", "Firmware"]
 				},
 				"Mobile Device System Subversion": {
 					"What term refers to obtaining admin on an android device to install custom ROMs or modify system files?": "Rooting",
 					"What term refers to removing the restrictions on iOS devices to allow customizing their appearance or installing unauthorized apps?": "Jailbreaking",
 					"What term refs to installing applications from sources other than the official app store of a platform?": "Sideloading"
 				},
-				"Evaluation Scope": {
-					"What term describes the produce, system, or service being analyzed for potentional security vulnerabilities?": ["Evaluation Target", "Evaluation Scope"]
-				}
 			}
 		}
 	}

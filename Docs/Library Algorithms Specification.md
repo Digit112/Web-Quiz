@@ -16,7 +16,7 @@ The user's submission and the answers must all be brought into their canonical f
 
 Of course, this transformation applies to the raw text of an answer, with any markdown stripped away. This canonization process is used on the user's submission, all `answers`, `hidden-answers`, and `rejected-typo` entries. 
 
-#### Step 2: Comparison
+### Step 2: Comparison
 
 A round of comparisons occurs to check the correctness of the answer in the following order:
 

@@ -68,6 +68,7 @@ A folder has its own params as well as passthru params that only affect the beha
 - `incorrect-answers` (*mdstring[]*; default []) - A set of incorrect answers which may appear on all questions contained by this folder, when they are shown in multiple choice.
 - `hidden` (*bool*; default false) - If true, this folder will not be shown to the user. Allows you to make folders that serve strictly structural purposes. If a folder is hidden, all of its children will be hidden too.
 - `substitutions` (*string\{\}*; default \{\}) A map of literal find-and-replace strings to be applied to submissions and answers before being compared. Useful to remove typographic nuances such as the differences between British and American English, or to replace all hyphens with spaces so that users don't need to remember how to hyphenate a phrase to be marked correctly. If the question is also case-insensitive, the case canonization should be applied before the substitutions.
+- `is-sharing-group` (*bool*; default false) - A question's sharing group is the smallest Folder or QuestionSet (the furthest down the hierarchy) which contains that question and which has `is-sharing-group` set to true. If a question has `share-answers` set to true (the default) then its correct answer can appear as the incorrect answer in a `"multiple-choice"`, `"radio-box"`, or `"checkboxes"` question with the same sharing group whose `incorrect-answer-sources` list contains `"shared"`.
 - `fragment` (*string*; default "") An identifier for a fragment.
 
 #### Passthru Keys
@@ -80,3 +81,44 @@ These parameters do not affect the behavior of the folder at all, instead being 
 - `typo-forgiveness-level`
 - `correct-answer-source`
 - `incorrect-answer-sources`
+- `importance`
+- `share-answers`
+
+### QuestionSet
+
+A QuestionSet is actually *identical* to a Folder with the exception that the `contents` key is replaced by the required `questions` key of type *Question[]*. Just as how a `fragment` key on a folder must refer to a valid Foldere fragment, the `fragment` key on a QuestionSet must refer to a valid QuestionSet fragment.
+
+### Question
+
+The keys are split into categories based on which mode-of-presentation they are specific to.
+
+- `question` (*mdstring*; required) - The question which will be shown to the user.
+- `answers` (*mdstring[]*; required) - A list of valid answers which can be displayed to the user. After they attempt this question, all of these answers will be shown to them.
+- `share-answers` (*bool*; default true) - Whether to share answers with questions in the same sharing group. See `is-sharing-group` on the Folder object definition.
+- `mode-of-presentation` (*string[]*; default \["verbatim"\]) - The ways in which this question can be presented.
+	- `"verbatim"` requires the user to type the answer.
+	- `"multiple-choice"` presents the user with buttons to select. They may also type to select or use arrow keys and enter to select an answer.
+	- `"flash-card"` presents the user with the question text and allows them to click to reveal the answer. They will not be graded.
+	- `"radio-buttons"` Presents the user with selectable radio boxes. Type-to-select is disabled but arrow keys work. Their is a separate submit button.
+	- `"checkboxes"` Is similar to `"radio-buttons"` but allows the user to select multiple answers.
+	- `"true-or-false"` Allows the user to select true or false.
+
+#### `"verbatim"`
+
+- `case-sensitive` (*bool*; default false) - Whether the submission is case-sensitive. An incorrectly-cased letter counts as one typo for typo forgiveness.
+- `substitutions` (*string{}*; default {}) - Find-and-replace keys onto values during submission canonization. Applied in addition to the substitutions on containing Folders.
+- `hidden-answers` (*string[]*; default []) - Answers which will be marked correct if provided but which should not be shown to the user, usually because they are alternative orthographies that would just crowd the `answers` field.
+- `typo-blacklist` (*string[]*; default []) - List of submissions which should be marked as incorrect even if typo forgiveness would normally allow them.
+- `typo-forgiveness-level` (*string*; How strict the typo forgiveness is.
+	- `"none"` disables typo forgiveness. The user must type the answer exactly correctly.
+	- `"low"` gives the user one typo per 15 characters in the correct answer, rounded.
+	- `"medium"` gives the user one typo per 10 characters in the correct answer, rounded.
+	- `"high"` gives the user one typo per 5 characters in the correct answer, rounded.
+
+#### `"multiple-choice"` and `"radio-buttons"`
+
+- `max-choices` (*integer*; default 4) - The number of options the user will be able to choose from. Only one can be correct. Fewer choices can be available if there aren't enough unique incorrect answers available.
+- `correct-answer-source` (*integer*; default -1) - Which answer from the `answers` field to display as the option the user should select. 0 for the first, 1 for the second, and so on. If it is -1, a random answwer will be chosen each time the question is displayed.
+- `incorrect-answer-sources` (*string[]*; default \["inherited"\]) - A list of places from which the incorrect answers to display as options can be retrieved.
+	- `"inherited"` allows incorrect answers to come from the `incorrect-answers` fields of all folders containing this questions.
+	- `"shared"` allows incorrect answerss to come from the `answers` fields on other questions in the same sharing group. See `is-sharing-group` on the Folder object definition.

@@ -118,6 +118,84 @@
 					"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
 					"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
 				}
+			},
+			"Transceivers": {
+				"verbatim block": {
+					"hidden": true,
+					"questions": {
+						"What small, slottable IT device is used in a data center to convert to and from a common transmission format and occasionally to multiplex signals?": ["Transceiver Module", "Transceiver"]
+					}
+				},
+				"multiple-choice block": {
+					"hidden": true,
+					"mode-of-presentation": ["verbatim", "multiple-choice"],
+					"max-choices": 4,
+					"incorrect-answers": ["SFP", "SFP+", "QSFP", "QSFP+"],
+					"questions": {
+						"What type of transceiver commonly provides **1Gbps** throughput?": ["Small Form-factor Pluggable", "SFP"],
+						"What type of transceiver commonly provides **10Gbps** throughput?": ["Enhanced Small Form-factor Pluggable", "SFP+"],
+						"What type of transceiver commonly provides **4Gbps** throughput?": ["Quad Small Form-factor Pluggable", "QSFP"],
+						"What type of transceiver commonly provides **40Gbps** throughput?": ["Enhanced Quad Small Form-factor Pluggable", "QSFP+"]
+					}
+				}
+			},
+			"Connector Types": {
+				"Copper Connectors": {
+					"What type of copper cable connection uses two of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
+					"What type of copper cable connection uses eight of eight available positions within the plug?": ["Registered Jack type 45", "RJ45"],
+					"What type of copper cable connection is commonly used as the input for a cable modem?": "F-Connector"
+				},
+				"Fiber Conenctors": {
+					"What kind of fiber connector snaps in place and can simply be pulled out, and is recognizeable by its rectangular housing?": ["Subscriber Connector", "SC"],
+					"What kind of fiber connector snaps in place with a clip that must be pushed down to release the plug?": ["Local Connector", "Lucent Connector", "LC"],
+					"What kind of fiber connector uses a bayonet connector requiring a slight twist to lock in?": ["Straight Tip", "ST"],
+					"What kind of fiber connector contains 12 fiber lines?": ["Multi-fiber Push On", "MPO"]
+				}
+			},
+			"Network Topologies": {
+				"In what network topology are all devices connected to a central networking device?": ["Hub and Spoke", "Star"],
+				"In what network topology are there many routes between any given pair of devices?": "Mesh",
+				"In what network topology are there two sets of switches where every switch in one set is connected to every switch in the other set?": "Spine and Leaf",
+			},
+			"Network Architecture": {
+				"Three Tier": {
+					"Which tier of the three-tier network model refers to the center of the network?": "Core",
+					"Which tier of the three-tier network model refers to the devices between the center and the edge of the network?": "Distribution",
+					"Which tier of the three-tier network model refers to the edge of the network?": "Access",
+					
+					"Which tier of the three-tier network model contains servers and databases?": "Core",
+					"Which tier of the three-tier network model contains routers and switches?": "Distribution",
+					"Which tier of the three-tier network model contains workstations and printers?": "Access"
+				}
+			},
+			"Subnetting": {
+				"Classful Subnetting": {
+					"What class of subnetwork has subnet mask 255.0.0.0?": ["Class A", "A"],
+					"What class of subnetwork has subnet mask 255.255.0.0?": ["Class B", "B"],
+					"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"]
+				},
+				"IANA Designated Private IP Ranges": {
+					"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],
+					"What CIDR block is an IANA-designated IP range corresponding to 16 contiguous class B network spaces?": ["172.16.0.0/12", "172.16/12"],
+					"What CIDR block is an IANA-designated IP range corresponding to 256 contiguous class C network spaces?": ["192.168.0.0/16", "192.168/16"]
+				},
+				"Reserved Subnet IP Addresses": {
+					"Names": {
+						"What is the name for the first IP address in a subnet?": "Network Address",
+						"What is the name for the last IP address in a subnet?": "Broadcast Address"
+					},
+					"Examples": {
+						"typo-forgiveness-level": "none",
+						"questions": {
+							"What is the network address of the 10/8 block?": "10.0.0.0",
+							"What is the broadcast address of the 10/8 block?": "10.255.255.255",
+							"What is the network address of the 172.16/12 block?": "10.0.0.0",
+							"What is the broadcast address of the 172.16/12 block?": "10.255.255.255",
+							"What is the network address of the 10/8 block?": "10.0.0.0",
+							"What is the broadcast address of the 10/8 block?": "10.255.255.255",
+						}
+					}
+				}
 			}
 		}
 	}

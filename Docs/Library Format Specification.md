@@ -4,7 +4,7 @@ A library is a hierarchical arragement of questions-answer pairs, including a gr
 
 ## Purpose of this Specification
 
-The specification provides a complete list of object types and their relations to one another, including the data held by them which is named and typed. This specification does not dictate the use of the structure or the nature of algorithms which might operate on the structure. It does not dictate a particular method for saving or loading the data.
+The specification provides a complete list of object types and their relations to one another, including the data held by them which is named and typed. This specification does not dictate the use of the structure or the nature of algorithms which might operate on the structure. It does not dictate a particular method for saving or loading the data, or for representing the structure in memory.
 
 This specification defines a JSON dialect. This specification clarifies the intended interpretation of the data held, and explains these design decisions in the context of the structure as an input for a set of algorithms (a tool) that enables fast-paced rote memorization.
 
@@ -41,6 +41,22 @@ The above folder references a fragment. That fragment may have many attributes, 
 
 We have also specified a single subfolder. If a subfolder with the same id (67890) exists in the same part of the imported fragment, then the label on our subfolder will overwrite the label on that subfolder in the fragment. Otherwise, if no folder with that id exists in that location of the fragment, then this folder would be added to its contents - which would be an error, since it lacks required fields. If a subfolder with that id exists elsewhere in the fragment, then it would also be an error, since the added subfolder would not have a unique identifier within the fragment.
 
+### Sharing Groups
+
+A Folder with `is-sharing-group` set to true is - you guessed it - a sharing group. When a multiple-choice question randomly generates incorrect answers to display to the user, the entries in its `incorrect-answer-sources` field determines where they can come from. If one of the entries is `"shared"`, then those answers can come from the `answers` field of other questions in its sharing group which have `share-answers` set to true.
+
+This is very useful. Instead of having to enumerate a long list of incorrect answers, you can simply draw all incorrect answers for questions from the answers of other questions in the group. Plus they're randomized and shuffled every time the question is shown.
+
+A question's sharing group is the smallest Folder or QuestionSet - the furthest down the hierarchy - that contains the question and also has `is-sharing-group` set to true. If this Folder or QuestionSet is the same for two questions, then those questions are in the same sharing group.
+
+### Gathered Folders
+
+Sometimes, you have many questions which are all variants on a common theme and test the same kind of knowledge. Instead of forcing the user to memorize each and every one, you can set that Folder or QuestionSet to be *gathered* by setting `is-gathered` to true. This will ensure that user progress is tracked on the level of the gathered Folder, instead of at the level of individual questions, so that the user is not made to master each and every question.
+
+When quizzed, the user will only be asked a single question from any given gathered group.
+
+If a gathered Folder contains another gathered Folder or QuestionSet, the outer folder has precedence.
+
 ## Enumeration of Objects
 
 ### Library
@@ -65,6 +81,7 @@ A folder has its own params as well as passthru params that only affect the beha
 - `label` (*mdstring*; required) - The name of this folder. Displayed to the user.
 - `id` (*string*; required) - A string of unspecified format which is unique among all ids in this library or fragment.
 - `contents` (*(QuestionSet | Folder)[]*; required) - The contents of this folder.
+- `is-gathered` (*bool*; default false) - If true, the user's progress will be tracked at the level of this folder and not at the level of the individual questions it contains. Useful for if many questions really are about the same topic, so the user doesn't need to master every single one. The folder will still have weight proportional to the number of questions it contains. To counterract this, use the `importance` field.
 - `incorrect-answers` (*mdstring[]*; default []) - A set of incorrect answers which may appear on all questions contained by this folder, when they are shown in multiple choice.
 - `hidden` (*bool*; default false) - If true, this folder will not be shown to the user. Allows you to make folders that serve strictly structural purposes. If a folder is hidden, all of its children will be hidden too.
 - `substitutions` (*string\{\}*; default \{\}) A map of literal find-and-replace strings to be applied to submissions and answers before being compared. Useful to remove typographic nuances such as the differences between British and American English, or to replace all hyphens with spaces so that users don't need to remember how to hyphenate a phrase to be marked correctly. If the question is also case-insensitive, the case canonization should be applied before the substitutions.
@@ -73,7 +90,7 @@ A folder has its own params as well as passthru params that only affect the beha
 
 #### Passthru Keys
 
-These parameters do not affect the behavior of the folder at all, instead being inherited by - and affecting only - the questions within the folder. Their definitions are provided on the Question object definition.
+These parameters do not affect the behavior of the folder at all, instead being inherited by - and affecting only - the questions within the folder. Their definitions are provided on the Question object definition. If two folders containing a certain question both specify a value for one of these fields, the question will inherit the value of the smaller, contained folder and ignore the value from the larger, containing folder.
 
 - `case-sensitive`
 - `mode-of-presentation`
@@ -95,6 +112,7 @@ The keys are split into categories based on which mode-of-presentation they are 
 - `question` (*mdstring*; required) - The question which will be shown to the user.
 - `answers` (*mdstring[]*; required) - A list of valid answers which can be displayed to the user. After they attempt this question, all of these answers will be shown to them.
 - `share-answers` (*bool*; default true) - Whether to share answers with questions in the same sharing group. See `is-sharing-group` on the Folder object definition.
+- `importance` (*float*; default 1) - Multiplier for the weight of this question. Allows the author to add many questions in a group without bogging down the user.
 - `mode-of-presentation` (*string[]*; default \["verbatim"\]) - The ways in which this question can be presented.
 	- `"verbatim"` requires the user to type the answer.
 	- `"multiple-choice"` presents the user with buttons to select. They may also type to select or use arrow keys and enter to select an answer.

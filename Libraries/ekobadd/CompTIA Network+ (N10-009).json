@@ -186,13 +186,24 @@
 					},
 					"Examples": {
 						"typo-forgiveness-level": "none",
-						"questions": {
-							"What is the network address of the 10/8 block?": "10.0.0.0",
-							"What is the broadcast address of the 10/8 block?": "10.255.255.255",
-							"What is the network address of the 172.16/12 block?": "10.0.0.0",
-							"What is the broadcast address of the 172.16/12 block?": "10.255.255.255",
-							"What is the network address of the 10/8 block?": "10.0.0.0",
-							"What is the broadcast address of the 10/8 block?": "10.255.255.255",
+						"importance": 0.3,
+						"groups": {
+							"network addresses": {
+								"is-gathered": true,
+								"questions": {
+									"What is the network address of the 10/8 block?": "10.0.0.0",
+									"What is the network address of the 172.16/12 block?": "172.16.0.0",
+									"What is the network address of the 192.168/16 block?": "192.168.0.0"
+								}
+							},
+							"broadcast addresses": {
+								"is-gathered": true,
+								"questions": {
+									"What is the broadcast address of the 10/8 block?": "10.255.255.255",
+									"What is the broadcast address of the 172.16/12 block?": "172.31.255.255",
+									"What is the broadcast address of the 192.168/16 block?": "192.168.255.255"
+								}
+							}
 						}
 					}
 				}

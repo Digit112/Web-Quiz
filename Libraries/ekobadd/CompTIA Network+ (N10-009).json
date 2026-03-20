@@ -172,7 +172,11 @@
 				"Classful Subnetting": {
 					"What class of subnetwork has subnet mask 255.0.0.0?": ["Class A", "A"],
 					"What class of subnetwork has subnet mask 255.255.0.0?": ["Class B", "B"],
-					"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"]
+					"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"],
+					
+					"What value in the first octet signifies a private Class A address?": "10",
+					"What value in the first octet signifies a private Class B address?": "172",
+					"What value in the first octet signifies a private Class C address?": "192"
 				},
 				"IANA Designated Private IP Ranges": {
 					"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],

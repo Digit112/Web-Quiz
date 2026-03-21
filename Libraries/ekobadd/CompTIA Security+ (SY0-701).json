@@ -501,7 +501,7 @@
 					"What cybersecurity paradigm moves defenses from static, network-based perimeters to focus on users, assets, and resources?": ["Zero Trust", "ZT"],
 					"Which is considered a **component** of Zero Trust Architecture, as opposed to a benefit?": {
 						"mode-of-presentation": "multiple-choice", "max-choices": 2,
-						"answers": ["Improved Governence", "Improved Access Control", "Improved Compliance"],
+						"answers": ["Improved Governance", "Improved Access Control", "Improved Compliance"],
 						"incorrect-answers": ["Data Protection", "Cloud Security"]
 					},
 					
@@ -618,6 +618,28 @@
 					"What term refers to removing the restrictions on iOS devices to allow customizing their appearance or installing unauthorized apps?": "Jailbreaking",
 					"What term refs to installing applications from sources other than the official app store of a platform?": "Sideloading"
 				},
+				"Asset Management": {
+					"What term refers to the critical resources, information, and components that must be protected from potential threats and unauthorized access?": "Asset",
+					"What term refers to an asset that requires specific management procedures to be used to deliver the service?": ["Configuration Item", "CI"],
+					"What term describes describes a system used to collect, store, manage, update, and report information about CIs?": {
+						"answers": ["Configuration Management System", "CMS"], "hidden-answers": "Configuration Management"
+					},
+					"What term describes a data compression technique that optimizes storage space by identifying and eliminating redundant data?": ["Data Deduplication", "Deduplication"],
+					
+					"What kind of backup is not stored in the same physical location as the data?": ["Off-Site Backup", "Backup"],
+					
+					"What term refers to an entire architectural instance/copy of an application, disk, or system at a point in time?": "Snapshot",
+					
+					"What backup technique entails creating and maintaining exact copies of data on different storage systems or locations?": "Replication",
+					"What backup technique entails recording changes to data in a separate, dedicated log?": "Journaling",
+					
+					"What term refers to the process of removing sensitive information from storage media to prevent unauthorized access or data breaches?": "Sanitization",
+					"What term refers to the physical or electronic elimination of information stored on media, rendering it inaccessible and irrecoverable?": "Destruction",
+					"What term refers to the documentation and verification of the data sanitization or destruction process?": "Certification"
+				},
+				"Redundancy Strategies": {
+					"What term refers to the process of ensuring that an organization can maintain or quickly resume its critical functions in the event of a disruption, disaster, or crisis?": ["Continuity of Operations", "COOP"]
+				}
 			}
 		}
 	}

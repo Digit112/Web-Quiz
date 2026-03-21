@@ -1,0 +1,2 @@
+Library Pipelines are built by scripts acting on structured data and can be rebuilt with updated data at a later time.
+This allows truly expansive libraries to be created dynamically with limited upkeep.

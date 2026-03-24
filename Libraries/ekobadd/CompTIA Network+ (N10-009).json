@@ -35,6 +35,74 @@
 					"Which OSI Layer is Secure Sockets Layer (SSL)?": ["Session", "Presentation"],
 					"Which OSI Layer is HTTP?": "Application",
 					"Which OSI Layer is FTP?": "Application"
+				},
+				"Devices": {
+					"Which OSI Layer is a cable?": "Physical",
+					"Which OSI Layer is a switch?": "Data Link",
+					"Which OSI Layer is an access Point?": "Data Link",
+					"Which OSI Layer is a router?": "Network",
+					"Which OSI Layer is a load balancer?": "Transport",
+					"Which OSI Layer is a Next-Gen Firewall?": "Application"
+				}
+			},
+			"Layer 2 Networking": {
+				"Foundational Concepts": {
+					"What type of address is typically used by layer-2 protocols?": ["MAC Address", "MAC"],
+					"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
+				},
+				"Ethernet": {
+					"What layer-2 IEEE protocol facilitates communication between devices connected by a direct link?": {
+						"answers": ["802.3 Ethernet", "802.3", "Ethernet"], "hidden-answers": ["IEEE 802.3 Ethernet", "IEEE 802.3", "IEEE Ethernet"]
+					},
+					"What technique allows Ethernet frames to be larger than defined in the original specification?": "Jumbo Frames"
+				},
+				"Wi-Fi": {
+					"What layer-2 IEEE protocol facilitates communication between devices connected wirelessly?": {
+						"answers": ["802.11 Wi-Fi", "802.11", "Wi-Fi"],
+						"hidden-answers": ["IEEE 802.11 Wi-Fi", "IEEE 802.11", "IEEE Wi-Fi", "802.11 WiFi", "WiFi", "IEEE 802.11 WiFi", "IEEE WiFi"]
+					},
+				},
+				"VLANs": {
+					"What technology allows the logical segmentation of broadcast domains?": {
+						"answers": ["Virtual LAN", "VLAN"], "hidden-answers": ["Virtual Local Area Network", "Virtual LANs", "VLANs"]
+					},
+					
+					"What technology allows traffic from multiple VLANs to use a single cable?": "VLAN Trunking",
+					"What IEEE standard defines VLAN trunking?": {
+						"answers": ["IEEE 802.1Q", "802.1Q"], "hidden-answers": [".1Q", "dot1Q"]
+					},
+					
+					"What term refers to the VLAN automatically assigned to new devices connected to a switch?": ["Default VLAN", "Default"],
+					"What term refers to the VLAN that is sent without a tag over a trunked cable?": ["Native VLAN", "Native"]
+				},
+				"LAGs": {
+					"What technology allows multiple switch interfaces to act as a single large interface?": ["Link Aggregation", "LAG"],
+					"What protocol allows the automatic configuration of LAG interfaces?": ["Link Aggregation Control Protocol", "LACP"]
+				},
+				"Spanning Tree Protocol": {
+					"What IEEE protocol actively prevents layer-2 loops from occurring on a network?": ["Spanning Tree Protocol", "STP"],
+					"In Spanning Tree Protocol, what kind of switch has no root port?": {
+						"answers": ["Root Bridge", "Root"], "hidden-answers": "Root Switch"
+					}
+				}
+			},
+			"Layer 3 Networking": {
+				"IPv4": {
+					"What is the length in octets of an IPv4 address?": {
+						"answers": "4", "hidden-answers": "four"
+					}
+				},
+				"IPv6": {
+					"What is the length in octets of an IPv6 address?": {
+						"answers": "16", "hidden-answers": "sixteen"
+					},
+					
+					"What IPv6 protocol allows the self-assignment of IP addresses?": ["Stateless Address Autoconfiguration", "SLAAC"],
+					"What IPv6 protocol prevents the accidental assignment of an in-use address?": ["Duplicate Address Detection", "DAD"],
+					
+					"What IPv6 protocol allows a device to discover adjacent devices such as a router?": ["Neighbor Discovery Protocol", "NDP"],
+					"In IPv6, what term refers to a multicast used to discover routers?": ["Router Solicitation", "RS"],
+					"In IPv6, what term refers to a message sent by a router so that it can be discovered?": ["Router Advertisement", "RA"]
 				}
 			},
 			"Network Devices": {
@@ -57,6 +125,25 @@
 				"Quality of Service": {
 					"What term refers to configuration options allowing the prioritization of certain kinds of traffic?": ["Quality of Service", "QoS"],
 					"What term refers to a hard limit placed on the length of time that a process of some kind can execute for?": ["Time to Live", "TTL"]
+				}
+			},
+			"Wireless Netwworking": {
+				"Fundamental Concepts": {
+					"What term refers to a direct, wireless connection between devices without a mediator?": "Ad-Hoc",
+					"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal",
+					"What term refers to the name of a wireless network?": ["Service Set Identifier", "SSID"],
+					"What term refers to the name of a wireless device?": ["Basic Service Set Identifier", "BSSID"],
+					"What term refers to a name shared by many access points?": ["Extended Service Set Identifier", "ESSID"],
+				},
+				"Antennas": {
+					"What kind of antenna transmit isn all directions?": ["Omnidirectional Antenna", "Omnidirectional"],
+					"What kind of antenna transmits in a particular directions?": ["Directed Antenna", "Directed"]
+				},
+				"Security Protocols": {
+					"What Wi-Fi security protocol was found to have vulnerabilities and is no longer used?": ["Wired-Equivalent Privacy", "WEP"],
+					"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
+					"What variant of WPA uses a Pre-shared key (PSK)?": "Personal",
+					"What variant of WPA uses RADIUS for authentication?": "Enterprise"
 				}
 			},
 			"Cloud Networking": {
@@ -113,6 +200,7 @@
 					"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "SFTP", "FTP"],
 					"What protocol is used to transfer small amounts of information with minimal overhead?": ["Trivial File Transfer Protocol", "TFTP"],
 					"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
+					"What protocol is used to query device metrics remotely?": ["Simple Network Management Protocol", "SMNP"],
 					"What protocol is used to remotely control computers via a command line?": ["Secure Shell", "SSH"],
 					"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"],
 					"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
@@ -211,6 +299,70 @@
 						}
 					}
 				}
+			},
+			"Network Installation": {
+				"What term refers to an area of the network where you are passively terminating cables?": "Distribution Frame",
+				"What term refers to the primary or central distribution frame in a network?": ["Main Distribution Frame", "MDF"],
+				"What term refers to a secondary distribution frame in a network?": ["Intermediate Distribution Frame", "IDF"],
+				"What unit of measurement is commonly used to communicate vertical space in a rack?": {
+					"answers": ["Rack Unit", "Unit"], "hidden-answer": ["Rack Units", "Units"]
+				}
+			},
+			"Power": {
+				"What device allows equipment to continue working during blackouts or power irregularity by supplenting or replacing the power source?": ["Uninterruptible Power Supply", "UPS"],
+				"What kind of UPS kicks in after a blackout or power irregularity?": ["Offline", "Standby"],
+				"What kind of UPS is always supplying its power from batteries while recharging them when power is available?": ["On-line", "Double-Conversion"],
+				
+				"What device provides multiple power outlets, often allowing remote management and monitoring of power?": ["Power Distribution Unit", "PDU"]
+			},
+			"Network Monitoring": {
+				"SNMP": {
+					"In SNMP, what is used to identify a particular metric or managed object within the system?": ["Object Identifier", "OID"],
+					"In SNMP, what term refers to a database of metrics stored on a device?": ["Management Information Base", "MIB"],
+					"In SNMP, what term refers to a configured threshhold which can trigger an alert when exceeded?": ["SNMP Trap", "Trap"],
+					"In SNMP, what software pulls all available information from a remote MIB?": "MIB Walker",
+					"In SNMP, what term refers to a shared password used to access metrics on a device?": "Community String"
+				},
+				"Monitoring Devices and Software": {
+					"What software allows the detailed inspection of captured packets?": "Protocol Analyzer",
+					"What is the standard for transferring log files?": "Syslog",
+					
+					"What term refers to a central management console which receives logs, events, and metrics from throuoghout a network?": {
+						"answers": ["Security Information and Event Management", "SIEM"],
+						"hidden-answers": ["Security Information and Event Management Console", "SIEM Console"]
+					},
+					
+					"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring"
+				}
+			},
+			"Disaster Recoveery": {
+				"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"]
+				"What term refers to the duration of time needed to recover from an outage?": ["Recovery Time Objective", "RTO"],
+				"What term refers to the duration of time during which data was irrevocably lost during an outage?": ["Recovery Point Objective", "RPO"],
+				
+				"What term refers to the average time taken to resolve a failure or similar issue?": ["Mean Time to Repair", "MTTR"],
+				"What term refers to the average time between consecutive failures?": ["Mean Time Between Failures", "MTBF"],
+				
+				"What term refers to a disaster recovery site which does not have equipment in place?": ["Cold Site", "Cold"],
+				"What term refers to a disaster recovery site which contains pre-installed hardware and may have mirrored data from backups?": ["Hot Site", "Hot"],
+			},
+			"DHCP": {
+				"DORA": {
+					"What is step **1** in the DHCP process?": "Discover",
+					"What is step **2** in the DHCP process?": "Offer",
+					"What is step **3** in the DHCP process?": "Request",
+					"What is step **4** in the DHCP process?": "Acknowledge"
+				},
+				"Features": {
+					"What technology allows a DHCP request to traverse subnets?": ["DHCP Helper", "DHCP Relay"],
+					"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"]
+				}
+			},
+			"DNS": {
+				"What term describes a DNS result coming from the server with the original records?": ["Authoritative Answer", "Authoritative"],
+				"What term describes a DNS result coming from the server with unoriginal, cached records?": ["Non-Authoritative Answer", "Non-Authoritative"],
+				
+				"What term describes the maximum life of a cached DNS record?": ["Time to Live", "TTL"]
 			}
 		}
 	}

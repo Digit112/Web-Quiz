@@ -187,6 +187,7 @@
 						"Secure Ports": {
 							"What port number is typically used by HTTPS?": "443",
 							"What port number is typically used by SFTP?": ["989", "990"],
+							"What port number is typically used by DNS over TLS?": "853",
 							"What is a newer, secure port number typically used by SMTP?": ["465", "587"],
 							"What is the newer, secure port number typically used by POP3?": "995",
 							"What is the newer, secure port number typically used by IMAP?": "993",
@@ -195,16 +196,83 @@
 					}
 				},
 				"Descriptions": {
-					"What protocol is typically used to transfer webpages?": ["HyperText Transfer Protocol", "HTTPS", "HTTP"],
-					"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"],
-					"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "SFTP", "FTP"],
-					"What protocol is used to transfer small amounts of information with minimal overhead?": ["Trivial File Transfer Protocol", "TFTP"],
-					"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
-					"What protocol is used to query device metrics remotely?": ["Simple Network Management Protocol", "SMNP"],
-					"What protocol is used to remotely control computers via a command line?": ["Secure Shell", "SSH"],
-					"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"],
-					"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
-					"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
+					"DHCP": {
+						"Fundamentals": {
+							"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"]
+						},
+						"DORA": {
+							"What is step **1** in the DHCP process?": "Discover",
+							"What is step **2** in the DHCP process?": "Offer",
+							"What is step **3** in the DHCP process?": "Request",
+							"What is step **4** in the DHCP process?": "Acknowledge"
+						},
+						"Features": {
+							"What technology allows a DHCP request to traverse subnets?": ["DHCP Helper", "DHCP Relay"],
+							"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"]
+						}
+					},
+					"DNS": {
+						"Fundamentals": {
+							"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
+						
+							"What term describes a DNS result coming from the server with the original records?": ["Authoritative Answer", "Authoritative"],
+							"What term describes a DNS result coming from the server with unoriginal, cached records?": ["Non-Authoritative Answer", "Non-Authoritative"],
+							
+							"What term describes the maximum life of a cached DNS record?": ["Time to Live", "TTL"]
+						},
+						"Records": {
+							"substitutions": {" Record ": ""},
+							"questions": {
+								"What DNS record type provides information and must be present in every DNS zone?": ["Start of Authority", "SOA"],
+								"What DNS record type provides an IPv4 address?": "A",
+								"What DNS record type provides an IPv6 address?": "AAAA",
+								"What DNS record type maps an alternative name onto an existing domain?": ["Canonical Name", "CNAME"],
+								"What DNS record type specifies the name of a mail server?": ["Mail Exchanger", "MX"],
+								"What DNS record type can contain arbitrary notes?": ["Text", "TXT"],
+								"What DNS record type specifies an authoritative server for a DNS zone?": ["Name Server", "NS"],
+								"What DNS record type provides a mapping from IP address onto a domain name?": ["Pointer", "PTR"]
+							}
+						},
+						"TXT Record Usage": {
+							"What technology uses TXT records to administratively restrict the range of IP addresses that can send mail from a domain?": ["Sender Policy Framework", "SPF"],
+							"What technology uses TXT records to publish public keys that can validate digital signatures on emails?": ["Domain Keys Identified Mail", "DKIM"]
+						}
+					},
+					"FTP/SFTP/TFTP": {
+						"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "SFTP", "FTP"],
+						"What protocol is used to transfer small amounts of information with minimal overhead?": ["Trivial File Transfer Protocol", "TFTP"]
+					},
+					"HTTP/HTTPS": {
+						"What protocol is typically used to transfer webpages?": ["HyperText Transfer Protocol", "HTTPS", "HTTP"]
+					},
+					"NTP": {
+						"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
+						"What protocol ensures the integrity of NTP queries?": ["Network Time Security", "NTS"],
+					},
+					"PTP": {
+						"What protocol provides sub-microsecond precision time synchronization using a dedicated hardware device?": ["Precision Time Protocol", "PTP"]
+					}
+					"RDP": {
+						"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
+					},
+					"SMTP": {
+						"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"]
+					},
+					"SNMP": {
+						"What protocol is used to remotely query device metrics?": ["Simple Network Management Protocol", "SMNP"],
+						
+						"In SNMP, what is used to identify a particular metric or managed object within the system?": ["Object Identifier", "OID"],
+						"In SNMP, what term refers to a database of metrics stored on a device?": ["Management Information Base", "MIB"],
+						"In SNMP, what term refers to a configured threshhold which can trigger an alert when exceeded?": ["SNMP Trap", "Trap"],
+						"In SNMP, what software pulls all available information from a remote MIB?": "MIB Walker",
+						"In SNMP, what term refers to a shared password used to access metrics on a device?": "Community String"
+					},
+					"SSH": {
+						"What protocol is used to securely remotely control computers via a command line?": ["Secure Shell", "SSH"]
+					},
+					"Telnet": {
+						"What outdated protocol provides unencrypted communication with a remote computer?": "Telnet"
+					}
 				}
 			},
 			"Transceivers": {
@@ -316,15 +384,10 @@
 				"What device provides multiple power outlets, often allowing remote management and monitoring of power?": ["Power Distribution Unit", "PDU"]
 			},
 			"Network Monitoring": {
-				"SNMP": {
-					"In SNMP, what is used to identify a particular metric or managed object within the system?": ["Object Identifier", "OID"],
-					"In SNMP, what term refers to a database of metrics stored on a device?": ["Management Information Base", "MIB"],
-					"In SNMP, what term refers to a configured threshhold which can trigger an alert when exceeded?": ["SNMP Trap", "Trap"],
-					"In SNMP, what software pulls all available information from a remote MIB?": "MIB Walker",
-					"In SNMP, what term refers to a shared password used to access metrics on a device?": "Community String"
-				},
 				"Monitoring Devices and Software": {
 					"What software allows the detailed inspection of captured packets?": "Protocol Analyzer",
+					"What common and free protocol analyzer provides deep packet inspection and can be used to diagnose misconfigurations on many levels?": "Wireshark",
+					
 					"What is the standard for transferring log files?": "Syslog",
 					
 					"What term refers to a central management console which receives logs, events, and metrics from throuoghout a network?": {
@@ -332,7 +395,13 @@
 						"hidden-answers": ["Security Information and Event Management Console", "SIEM Console"]
 					},
 					
-					"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring"
+					"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring",
+					
+					"What protocol provides a summary of statistics based on the flowws of traffic traversing a network?": "Netflow"
+				},
+				"Remote Control": {
+					"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"]
+					"What term describes a management interface which must be connected to with different means as the services of that device?": ["Out-of-Band Management", "In-Band"]
 				}
 			},
 			"Disaster Recoveery": {
@@ -346,23 +415,15 @@
 				"What term refers to a disaster recovery site which does not have equipment in place?": ["Cold Site", "Cold"],
 				"What term refers to a disaster recovery site which contains pre-installed hardware and may have mirrored data from backups?": ["Hot Site", "Hot"],
 			},
-			"DHCP": {
-				"DORA": {
-					"What is step **1** in the DHCP process?": "Discover",
-					"What is step **2** in the DHCP process?": "Offer",
-					"What is step **3** in the DHCP process?": "Request",
-					"What is step **4** in the DHCP process?": "Acknowledge"
-				},
-				"Features": {
-					"What technology allows a DHCP request to traverse subnets?": ["DHCP Helper", "DHCP Relay"],
-					"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"]
-				}
-			},
-			"DNS": {
-				"What term describes a DNS result coming from the server with the original records?": ["Authoritative Answer", "Authoritative"],
-				"What term describes a DNS result coming from the server with unoriginal, cached records?": ["Non-Authoritative Answer", "Non-Authoritative"],
+			"VPNs": {
+				"In a VPN, what device accepts authenticated connections from the internet and grants them access to internal devices?": ["VPN Concentrator", "Concentrator"],
+				"What kind of VPN configuration allows individual hosts to connect over the internet?": "Client-to-Site",
+				"What kind of VPN configuration connects two separate networks over the internet?": "Site-to-Site",
 				
-				"What term describes the maximum life of a cached DNS record?": ["Time to Live", "TTL"]
+				"What kind of VPN uses a web API to tunnel communications through a VPN without having to install special software?": ["Clientless VPN", "Web VPN", "Clientless"],
+				
+				"What kind of VPN configuration sends all outbound traffic through the secure tunnel?": ["Full Tunnel", "Full"],
+				"What kind of VPN configuration sends only certain kinds of traffic through the secure tunnel?": ["Split Tunnel", "Split"]
 			}
 		}
 	}

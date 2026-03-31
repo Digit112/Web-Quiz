@@ -21,6 +21,12 @@ Maps from strings onto another type are effectively objects whose keys are not k
 
 All Folders and QuestionSets have an `id` key which must be unique throughout the library but not necessarily throughout any included fragments. This allows these entities to be tracked consistently regardless of whatever else about them might change. The format is not dictated, but it must be understood by the receiving system.
 
+### Tags
+
+Folders and Questions may be tagged. Tags may be shown to the user and allow additionally flexibility for selecting questions. These tags do not have a specified format and do not need to be meaningful to the receiving system.
+
+The library itself may also be tagged, and these generally should be meaaningful to the receiving system.
+
 ### Fragments
 
 A fragment refers to a Folder or QuestionSet which is not defined within the library. The `fragment` keys for the Folder and QuestionSet object allow the user to import a fragment with all its contents into an existing library. By re-creating the structure of the fragment and specifying labels, values in the original fragment can be overwritten.
@@ -64,11 +70,19 @@ If a gathered Folder contains another gathered Folder or QuestionSet, the outer 
 #### Keys
 
 - `title` (*string*; required) - The display name of the library.
-- `description` (*mdstring[]*; default []) - A list of text blurbs. Each is its own paragraph, displayed to the user.
+- `description` (*mdstring[]*; default \[\]) - A list of text blurbs. Each is its own paragraph, displayed to the user.
+- `tags` (*string[]*; default \[\]) - A list of tags. Displayed to the user.
 - `author` (*string*; required) - The UUID of the author. If it is not a valid UUID or the specified UUID is not a known account, displayed as-is to the user.
 - `version` (*integer*; required) - Must be 2.
 - `id` (*string*; default "") - An id for this library. Format defined by the receiving system.
 - `root` (*Folder* | *QuestionSet*; required) - The root of the hierarchy. If it is a question set, the whole library is colloquially called a "Set", "Quiz", or "Deck" depending on its internals.
+
+#### Tag Keys
+
+These are generally used to augment the tag options available to the end user. Typically, they are pointless except for augmenting tags which are brought in on fragments. Do not confuse the tags affected by the below fields with the `tags` field on the library itself, which is just meant to enable searching libraries by tagging.
+
+- `rename-tags` (*string{}*; default {}) - A map from internal tag names for Questions, Folders, and QuestionSets to new display names. The display names must be unique but are strictly for display and must not be referenced internally in any other fields. This is useful specifically to customize how tags are displayed that come from fragments.
+- `hide-tags` (*string*; default \[\]) - The listed tags will not be shown or selectable for the user.
 
 ### Folder
 
@@ -80,6 +94,7 @@ A folder has its own params as well as passthru params that only affect the beha
 
 - `label` (*mdstring*; required) - The name of this folder. Displayed to the user.
 - `id` (*string*; required) - A string of unspecified format which is unique among all ids in this library or fragment.
+- `tags` (*string[]*; default \[\]) - A list of tags for this folder. Displayed to the user and case-sensitive. 
 - `contents` (*(QuestionSet | Folder)[]*; required) - The contents of this folder.
 - `is-gathered` (*bool*; default false) - If true, the user's progress will be tracked at the level of this folder and not at the level of the individual questions it contains. Useful for if many questions really are about the same topic, so the user doesn't need to master every single one. The folder will still have weight proportional to the number of questions it contains. To counterract this, use the `importance` field.
 - `incorrect-answers` (*mdstring[]*; default []) - A set of incorrect answers which may appear on all questions contained by this folder, when they are shown in multiple choice.
@@ -87,6 +102,16 @@ A folder has its own params as well as passthru params that only affect the beha
 - `substitutions` (*string\{\}*; default \{\}) A map of literal find-and-replace strings to be applied to submissions and answers before being compared. Useful to remove typographic nuances such as the differences between British and American English, or to replace all hyphens with spaces so that users don't need to remember how to hyphenate a phrase to be marked correctly. If the question is also case-insensitive, the case canonization should be applied before the substitutions.
 - `is-sharing-group` (*bool*; default false) - A question's sharing group is the smallest Folder or QuestionSet (the furthest down the hierarchy) which contains that question and which has `is-sharing-group` set to true. If a question has `share-answers` set to true (the default) then its correct answer can appear as the incorrect answer in a `"multiple-choice"`, `"radio-box"`, or `"checkboxes"` question with the same sharing group whose `incorrect-answer-sources` list contains `"shared"`.
 - `fragment` (*string*; default "") An identifier for a fragment.
+
+#### Keys for Fragment Management
+
+The following keys can be added to any folder but are generally useless for most cases. They are specifically designed to instead allow proper management of questions from included fragments. The affects of these keys apply after fragment processing and overrides. For example, a fragment's questions' tags might be renamed to allow the broader library to have more consistent naming, or the questions with a given tag could be disabled as a customization.
+
+Note that the receiving system is allowed to augment the tag names from within a fragment in order to prevent them from conflicting with existing tags elsewhere in the library, generally by combing them with the fragment id.
+
+- `suppress-tags` (*string[]*; default \[\]) - Questions within this folder with this tag will not be selectable by selecting the tag. If all questions with this tag are within this folder, the tag will not be visible to the end user.
+- `disable-tags` (*string[]*; derfault \[\]) - Question within this folder with any of the specified tags will be disabled. If all questions with this tag are within this folder, the tag will not be visible to the end user.
+- `enable-tags` (*string[]*; derfault \[\]) - Question within this folder with any of the specified tags will be enabled. overrides `disable-tags`.
 
 #### Passthru Keys
 
@@ -103,7 +128,7 @@ These parameters do not affect the behavior of the folder at all, instead being 
 
 ### QuestionSet
 
-A QuestionSet is actually *identical* to a Folder with the exception that the `contents` key is replaced by the required `questions` key of type *Question[]*. Just as how a `fragment` key on a folder must refer to a valid Foldere fragment, the `fragment` key on a QuestionSet must refer to a valid QuestionSet fragment.
+A QuestionSet is actually *identical* to a Folder with the exception that the `contents` key is replaced by the required `questions` key of type *Question[]*. Just as how a `fragment` key on a folder must refer to a valid Folder fragment, the `fragment` key on a QuestionSet must refer to a valid QuestionSet fragment.
 
 ### Question
 
@@ -111,9 +136,11 @@ The keys are split into categories based on which mode-of-presentation they are 
 
 - `question` (*mdstring*; required) - The question which will be shown to the user.
 - `answers` (*mdstring[]*; required) - A list of valid answers which can be displayed to the user. After they attempt this question, all of these answers will be shown to them.
+- `tags` (*string[]*; default \[\]) - A list of tags for this question. Displayed to the user and case-sensitive. 
+- `disabled` (*bool*; default false) - If true, this question can not be selected.
 - `share-answers` (*bool*; default true) - Whether to share answers with questions in the same sharing group. See `is-sharing-group` on the Folder object definition.
 - `importance` (*float*; default 1) - Multiplier for the weight of this question. Allows the author to add many questions in a group without bogging down the user.
-- `mode-of-presentation` (*string[]*; default \["verbatim"\]) - The ways in which this question can be presented.
+- `mode-of-presentation` (*string[]*; default \["verbatim"\]) - The ways in which this question can be presented. The leftmost option which is not blacklisted by the user is chosen.
 	- `"verbatim"` requires the user to type the answer.
 	- `"multiple-choice"` presents the user with buttons to select. They may also type to select or use arrow keys and enter to select an answer.
 	- `"flash-card"` presents the user with the question text and allows them to click to reveal the answer. They will not be graded.
@@ -125,7 +152,7 @@ The keys are split into categories based on which mode-of-presentation they are 
 
 - `case-sensitive` (*bool*; default false) - Whether the submission is case-sensitive. An incorrectly-cased letter counts as one typo for typo forgiveness.
 - `substitutions` (*string{}*; default {}) - Find-and-replace keys onto values during submission canonization. Applied in addition to the substitutions on containing Folders.
-- `hidden-answers` (*string[]*; default []) - Answers which will be marked correct if provided but which should not be shown to the user, usually because they are alternative orthographies that would just crowd the `answers` field.
+- `hidden-answers` (*string[]*; default []) - Answers which will be marked correct if provided but which should not be shown to the user, usually because they are alternative orthographies that would just crowd the `answers` field. Undergo typo forgiveness.
 - `typo-blacklist` (*string[]*; default []) - List of submissions which should be marked as incorrect even if typo forgiveness would normally allow them.
 - `typo-forgiveness-level` (*string*; How strict the typo forgiveness is.
 	- `"none"` disables typo forgiveness. The user must type the answer exactly correctly.
@@ -136,7 +163,12 @@ The keys are split into categories based on which mode-of-presentation they are 
 #### `"multiple-choice"` and `"radio-buttons"`
 
 - `max-choices` (*integer*; default 4) - The number of options the user will be able to choose from. Only one can be correct. Fewer choices can be available if there aren't enough unique incorrect answers available.
-- `correct-answer-source` (*integer*; default -1) - Which answer from the `answers` field to display as the option the user should select. 0 for the first, 1 for the second, and so on. If it is -1, a random answwer will be chosen each time the question is displayed.
-- `incorrect-answer-sources` (*string[]*; default \["inherited"\]) - A list of places from which the incorrect answers to display as options can be retrieved.
+- `correct-answer-source` (*integer*; default -1) - Which answer to show as the correct one in multiple choice presentations, as a 0-based index into the `answers` field. -1 causes a random answer to be chosen each time.
+- `incorrect-answers` (*mdstring[]*; default \[\]) - A list of options which will be shown to the user as incorrect options in multiple choice presentations. These can be chosen regardless of the value of `incorrect-answer-sources`
+- `incorrect-answer-sources` (*string[]*; default \["inherited", "shared"\]) - A list of places from which the incorrect answers to display as options can be retrieved.
 	- `"inherited"` allows incorrect answers to come from the `incorrect-answers` fields of all folders containing this questions.
 	- `"shared"` allows incorrect answerss to come from the `answers` fields on other questions in the same sharing group. See `is-sharing-group` on the Folder object definition.
+
+#### `"true-or-false"`
+
+The `answers` field must contain exactly one entry - either "true" or "false".

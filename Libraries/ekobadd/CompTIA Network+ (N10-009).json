@@ -3,17 +3,18 @@
 	"author": "ekobadd",
 	"title": "CompTIA A+ Certification 220-1102 (Core 2)",
 	
-	"adaptation-rate": 0.15,
+	"adaptation-rate": 0.18,
 	"starting-mastery": 0.5,
-	"adaptive-weight-bias": 12,
-	"ideal-overall-difficulty": 0.27,
+	"adaptive-weight-bias": 14,
+	"ideal-overall-difficulty": 0.35,
 	
 	"question-root": {
 		"typo-forgiveness-level": "medium",
+		"substitutions": [["Wi-Fi", "WiFi"]],
 		"groups": {
 			"The OSI Model": {
 				"Layers": {
-					"mode-of-presentation": ["verbatim", "multipl-choice"],
+					"mode-of-presentation": ["verbatim", "multiple-choice"],
 					"max-choices": 7,
 					"questions": {
 						"Which is layer **1** of the OSI Model?": "Physical",
@@ -39,15 +40,16 @@
 				"Devices": {
 					"Which OSI Layer is a cable?": "Physical",
 					"Which OSI Layer is a switch?": "Data Link",
-					"Which OSI Layer is an access Point?": "Data Link",
+					"Which OSI Layer is an access point?": "Data Link",
 					"Which OSI Layer is a router?": "Network",
 					"Which OSI Layer is a load balancer?": "Transport",
-					"Which OSI Layer is a Next-Gen Firewall?": "Application"
+					"Which OSI Layer is a next-gen firewall?": "Application"
 				}
 			},
 			"Layer 2 Networking": {
 				"Foundational Concepts": {
 					"What type of address is typically used by layer-2 protocols?": ["MAC Address", "MAC"],
+					"What 
 					"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
 				},
 				"Ethernet": {
@@ -60,14 +62,14 @@
 					"What layer-2 IEEE protocol facilitates communication between devices connected wirelessly?": {
 						"answers": ["802.11 Wi-Fi", "802.11", "Wi-Fi"],
 						"hidden-answers": ["IEEE 802.11 Wi-Fi", "IEEE 802.11", "IEEE Wi-Fi", "802.11 WiFi", "WiFi", "IEEE 802.11 WiFi", "IEEE WiFi"]
-					},
+					}
 				},
 				"VLANs": {
 					"What technology allows the logical segmentation of broadcast domains?": {
 						"answers": ["Virtual LAN", "VLAN"], "hidden-answers": ["Virtual Local Area Network", "Virtual LANs", "VLANs"]
 					},
 					
-					"What technology allows traffic from multiple VLANs to use a single cable?": "VLAN Trunking",
+					"What technology allows traffic from multiple VLANs to use a single cable?": ["VLAN Trunking", "Trunking"],
 					"What IEEE standard defines VLAN trunking?": {
 						"answers": ["IEEE 802.1Q", "802.1Q"], "hidden-answers": [".1Q", "dot1Q"]
 					},
@@ -87,10 +89,15 @@
 				}
 			},
 			"Layer 3 Networking": {
+				"Internet Protocol": {
+					"What term refers to the address which always refers to the local host?": ["Loopback Address", "Loopback"]
+				},
 				"IPv4": {
 					"What is the length in octets of an IPv4 address?": {
 						"answers": "4", "hidden-answers": "four"
-					}
+					},
+					
+					"Which standard specified three ranges of private IPv4 addresses not to be distributed by ISPs?": "RFC1918",
 				},
 				"IPv6": {
 					"What is the length in octets of an IPv6 address?": {
@@ -103,18 +110,123 @@
 					"What IPv6 protocol allows a device to discover adjacent devices such as a router?": ["Neighbor Discovery Protocol", "NDP"],
 					"In IPv6, what term refers to a multicast used to discover routers?": ["Router Solicitation", "RS"],
 					"In IPv6, what term refers to a message sent by a router so that it can be discovered?": ["Router Advertisement", "RA"]
-				}
+				},
+				"Subnetting": {
+					"Classful Subnetting": {
+						"What class of subnetwork has subnet mask 255.0.0.0?": ["Class A", "A"],
+						"What class of subnetwork has subnet mask 255.255.0.0?": ["Class B", "B"],
+						"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"],
+						
+						"What value in the first octet signifies a private Class A address?": "10",
+						"What value in the first octet signifies a private Class B address?": "172",
+						"What value in the first octet signifies a private Class C address?": "192"
+					},
+					"CIDR": {
+						"What term refers to a flexible scheme for IP address allocation that replaces classful routing?": ["Classless Inter-Domain Routing", "CIDR"]
+					},
+					"IANA Designated Private IP Ranges": {
+						"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],
+						"What CIDR block is an IANA-designated IP range corresponding to 16 contiguous class B network spaces?": ["172.16.0.0/12", "172.16/12"],
+						"What CIDR block is an IANA-designated IP range corresponding to 256 contiguous class C network spaces?": ["192.168.0.0/16", "192.168/16"]
+					},
+					"Reserved Subnet IP Addresses": {
+						"Names": {
+							"What is the name for the first IP address in a subnet?": ["Network Address", "Network"],
+							"What is the name for the last IP address in a subnet?": ["Broadcast Address", "Broadcast"]
+						},
+						"Examples": {
+							"typo-forgiveness-level": "none",
+							"importance": 0.3,
+							"groups": {
+								"network addresses": {
+									"is-gathered": true,
+									"questions": {
+										"What is the **network address** of the 10/8 block?": "10.0.0.0",
+										"What is the **network address** of the 172.16/12 block?": "172.16.0.0",
+										"What is the **network address** of the 192.168/16 block?": "192.168.0.0"
+									}
+								},
+								"broadcast addresses": {
+									"is-gathered": true,
+									"questions": {
+										"What is the **broadcast address** of the 10/8 block?": "10.255.255.255",
+										"What is the **broadcast address** of the 172.16/12 block?": "172.31.255.255",
+										"What is the **broadcast address** of the 192.168/16 block?": "192.168.255.255"
+									}
+								}
+							}
+						}
+					}
+				},
+			},
+			"Network Architecture": {
+				"Three Tier": {
+					"Which tier of the three-tier network model refers to the center of the network?": "Core",
+					"Which tier of the three-tier network model refers to the devices between the center and the edge of the network?": "Distribution",
+					"Which tier of the three-tier network model refers to the edge of the network?": "Access",
+					
+					"Which tier of the three-tier network model contains servers and databases?": "Core",
+					"Which tier of the three-tier network model contains routers and switches?": "Distribution",
+					"Which tier of the three-tier network model contains workstations and printers?": "Access"
+				},
+				"Network Topologies": {
+					"In what network topology are all devices connected to a central networking device?": ["Hub and Spoke", "Star"],
+					"In what network topology are there many routes between any given pair of devices?": "Mesh",
+					"In what network topology are multiple topologies joined together?": "Hybrid",
+					"In what network topology is the purpose of the network generally to directly connect a pair of hosts?": "Point-to-Point",
+					"In what network topology are there two sets of switches where every switch in one set is connected to every switch in the other set?": "Spine and Leaf",
+					
+					"In what network topology is the network logically segmented into three functional layers?": "Three-Tier",
+					"In what network topology is the network logically segmented into two functional layers?": "Collapsed Core"
+				},
 			},
 			"Network Devices": {
-				"What security appliance filters traffic with advanced features such as a built-in VPN Concentrator and deep packet inspection?": {
-					"answers": ["Next-Generation Firewall", "NGFW"], "hidden-answers": "Next-Gen Firewall"
+				"Hardware": {
+					"What device forwards IP packets between networks/subnetworks?": "Router",
+					"What device forwards Ethernet frames to their destination?": "Switch",
+					"What device filters packets by IP address or port number?": "Firewall",
+					"What device filters traffic with advanced features such as a built-in VPN Concentrator and deep packet inspection?": {
+						"answers": ["Next-Generation Firewall", "NGFW"], "hidden-answers": "Next-Gen Firewall"
+					},
+					
+					"What device monitors traffic to identify security breaches but does not intervene?": ["Intrusion Detection System", "IDS"],
+					"What device monitors traffic to identify security breaches and intervenes to stop them?": ["Intrusion Prevention System", "IPS"]
+					
+					"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
+						"answers": ["Wireless Access Point", "WAP"],
+						"hidden-answers": ["Access Point", "AP"]
+					},
+					
+					"What device distributes connections among multiple servers?": "Load Balancer",
+					"What device forwards application traffic between an internal and external network, and may provide content filtering and caching services?": ["Forward Proxy", "Proxy"],
+					
+					"What device provides file-level access to storage drives over a network?": ["Network-Attached Storage", "NAS"],
+					"What device provides central management of wireless access points and may provide security monitoring?": "Wireless LAN Controller"
 				},
-				"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
-					"answers": ["Wireless Access Point", "WAP"],
-					"hidden-answers": ["Access Point", "AP"]
+				"Tools": {
+					"What networking tool allows you to locate a wire by sending a signal through a port?": ["Tone Generator", "Toner Probe"],
+					"What networking tool validates that a cable's wires have continuity and aren't crossed?": "Cable Tester",
+					"What networking tool allows you to capture copies of network traffic and duplicate them to a listening device?": ["Port Mirror", "Tap"],
+					"What networking tool allows you to monitor wireless traffic?": {"answers": "Wi-Fi Analyzer", "hidden-answers": "WiFi Analyzer"},
+					"What networking tool allows you to check for breaks in fiber cable?": "Visual Fault Locator"
+				},
+				"Switches": {
+					"Security": {
+						"What common feature of a switch restricts interface access to a fixed-size list of recognized hosts?": "Port Security"
+					},
+					"Common Errors": {
+						"What kind of error has occurred when a checksum fails validation?": "CRC Error",
+						"What kind of error has occurred when an ethernet frame is less than 64 bytes?": "Runts",
+						"What kind of error has occurred when an ethernet frame is greater than 1518 bytes (or the configured maximum)?": "Giants",
+						"What kind of error has occurred when an ethernet frame is ignored, typically due to a full buffer?": "Drop",
+					}
 				}
 			},
 			"Network Functions": {
+				"Concepts": {
+					"What term refers broadly to traffic moving between hosts within a data center?": "East-West",
+					"What term refers broadly to traffic moving in or out of a data center?": "North-South"
+				},
 				"Content Delivery": {
 					"What kind of network uses geographically distributed servers and caching to deliver data with minimal latency?": ["Content Delivery Network", "CDN"]
 				},
@@ -126,39 +238,6 @@
 					"What term refers to configuration options allowing the prioritization of certain kinds of traffic?": ["Quality of Service", "QoS"],
 					"What term refers to a hard limit placed on the length of time that a process of some kind can execute for?": ["Time to Live", "TTL"]
 				}
-			},
-			"Wireless Netwworking": {
-				"Fundamental Concepts": {
-					"What term refers to a direct, wireless connection between devices without a mediator?": "Ad-Hoc",
-					"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal",
-					"What term refers to the name of a wireless network?": ["Service Set Identifier", "SSID"],
-					"What term refers to the name of a wireless device?": ["Basic Service Set Identifier", "BSSID"],
-					"What term refers to a name shared by many access points?": ["Extended Service Set Identifier", "ESSID"],
-				},
-				"Antennas": {
-					"What kind of antenna transmit isn all directions?": ["Omnidirectional Antenna", "Omnidirectional"],
-					"What kind of antenna transmits in a particular directions?": ["Directed Antenna", "Directed"]
-				},
-				"Security Protocols": {
-					"What Wi-Fi security protocol was found to have vulnerabilities and is no longer used?": ["Wired-Equivalent Privacy", "WEP"],
-					"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
-					"What variant of WPA uses a Pre-shared key (PSK)?": "Personal",
-					"What variant of WPA uses RADIUS for authentication?": "Enterprise"
-				}
-			},
-			"Cloud Networking": {
-				"Cloud Networking Concepts": {
-					"What term refers to the use of cloud features to replace physical networking devices?": ["Network Function Virtualization", "NFV"],
-					"What term refers to a pool of resources created in the cloud?": ["Virtual Private Cloud", "VPC"],
-					"What term refers to an application instance connecting VPCs?": "Transit Gateway",
-					"What term refers to an application instance allowing virtual servers to form outbound connections as if through a router?": "VPC NAT Gateway",
-					"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint"
-				},
-				"Cloud Service Models": {
-					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
-					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
-					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"]
-				}				
 			},
 			"Protocols": {
 				"Ports": {
@@ -221,9 +300,9 @@
 							"What term describes the maximum life of a cached DNS record?": ["Time to Live", "TTL"]
 						},
 						"Records": {
-							"substitutions": {" Record ": ""},
+							"substitutions": [[" Record ", ""]],
 							"questions": {
-								"What DNS record type provides information and must be present in every DNS zone?": ["Start of Authority", "SOA"],
+								"What DNS record type provides zone information and must be present in every DNS zone?": ["Start of Authority", "SOA"],
 								"What DNS record type provides an IPv4 address?": "A",
 								"What DNS record type provides an IPv6 address?": "AAAA",
 								"What DNS record type maps an alternative name onto an existing domain?": ["Canonical Name", "CNAME"],
@@ -247,11 +326,11 @@
 					},
 					"NTP": {
 						"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
-						"What protocol ensures the integrity of NTP queries?": ["Network Time Security", "NTS"],
+						"What protocol ensures the integrity of NTP queries?": ["Network Time Security", "NTS"]
 					},
 					"PTP": {
 						"What protocol provides sub-microsecond precision time synchronization using a dedicated hardware device?": ["Precision Time Protocol", "PTP"]
-					}
+					},
 					"RDP": {
 						"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
 					},
@@ -259,7 +338,7 @@
 						"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"]
 					},
 					"SNMP": {
-						"What protocol is used to remotely query device metrics?": ["Simple Network Management Protocol", "SMNP"],
+						"What protocol is used to remotely query device metrics?": ["Simple Network Management Protocol", "SNMP"],
 						
 						"In SNMP, what is used to identify a particular metric or managed object within the system?": ["Object Identifier", "OID"],
 						"In SNMP, what term refers to a database of metrics stored on a device?": ["Management Information Base", "MIB"],
@@ -274,6 +353,44 @@
 						"What outdated protocol provides unencrypted communication with a remote computer?": "Telnet"
 					}
 				}
+			},
+			"Wireless Networking": {
+				"Fundamental Concepts": {
+					"What term refers to a direct, wireless connection between devices without a mediator?": "Ad-Hoc",
+					"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal"
+				},
+				"Wi-Fi Identifiers": {
+					"typo-forgiveness": "none",
+					"questions": {
+						"What term refers to the name of a wireless **network**?": ["Service Set Identifier", "SSID"],
+						"What term refers to the name of a wireless **device**?": ["Basic Service Set Identifier", "BSSID"],
+						"What term refers to a name shared by many access points?": ["Extended Service Set Identifier", "ESSID"]
+					}
+				},
+				"Antennas": {
+					"What kind of antenna transmit isn all directions?": ["Omnidirectional Antenna", "Omnidirectional"],
+					"What kind of antenna transmits in a particular direction?": ["Directed Antenna", "Directed"]
+				},
+				"Security Protocols": {
+					"What Wi-Fi security protocol was found to have vulnerabilities and is no longer used?": ["Wired-Equivalent Privacy", "WEP"],
+					"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
+					"What variant of WPA uses a Pre-shared key (PSK)?": "Personal",
+					"What variant of WPA uses RADIUS for authentication?": "Enterprise"
+				}
+			},
+			"Cloud Networking": {
+				"Cloud Networking Concepts": {
+					"What term refers to the use of cloud features to replace physical networking devices?": ["Network Function Virtualization", "NFV"],
+					"What term refers to a pool of resources created in the cloud?": ["Virtual Private Cloud", "VPC"],
+					"What term refers to an application instance connecting VPCs?": "Transit Gateway",
+					"What term refers to an application instance allowing virtual servers to form outbound connections as if through a router?": "VPC NAT Gateway",
+					"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint"
+				},
+				"Cloud Service Models": {
+					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
+					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
+					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"]
+				}				
 			},
 			"Transceivers": {
 				"verbatim block": {
@@ -295,7 +412,11 @@
 					}
 				}
 			},
-			"Connector Types": {
+			"Cable & Connector Types": {
+				"Cables": {
+					"What cable uses a single metal core with dielectric insulator and metal shielding?": ["Coaxial Cable", "Coaxial", "Coax"],
+					"What cable uses a pair of metal cores with a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"]
+				},
 				"Copper Connectors": {
 					"What type of copper cable connection uses two of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
 					"What type of copper cable connection uses eight of eight available positions within the plug?": ["Registered Jack type 45", "RJ45"],
@@ -306,66 +427,9 @@
 					"What kind of fiber connector snaps in place with a clip that must be pushed down to release the plug?": ["Local Connector", "Lucent Connector", "LC"],
 					"What kind of fiber connector uses a bayonet connector requiring a slight twist to lock in?": ["Straight Tip", "ST"],
 					"What kind of fiber connector contains 12 fiber lines?": ["Multi-fiber Push On", "MPO"]
-				}
-			},
-			"Network Topologies": {
-				"In what network topology are all devices connected to a central networking device?": ["Hub and Spoke", "Star"],
-				"In what network topology are there many routes between any given pair of devices?": "Mesh",
-				"In what network topology are there two sets of switches where every switch in one set is connected to every switch in the other set?": "Spine and Leaf",
-			},
-			"Network Architecture": {
-				"Three Tier": {
-					"Which tier of the three-tier network model refers to the center of the network?": "Core",
-					"Which tier of the three-tier network model refers to the devices between the center and the edge of the network?": "Distribution",
-					"Which tier of the three-tier network model refers to the edge of the network?": "Access",
-					
-					"Which tier of the three-tier network model contains servers and databases?": "Core",
-					"Which tier of the three-tier network model contains routers and switches?": "Distribution",
-					"Which tier of the three-tier network model contains workstations and printers?": "Access"
-				}
-			},
-			"Subnetting": {
-				"Classful Subnetting": {
-					"What class of subnetwork has subnet mask 255.0.0.0?": ["Class A", "A"],
-					"What class of subnetwork has subnet mask 255.255.0.0?": ["Class B", "B"],
-					"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"],
-					
-					"What value in the first octet signifies a private Class A address?": "10",
-					"What value in the first octet signifies a private Class B address?": "172",
-					"What value in the first octet signifies a private Class C address?": "192"
 				},
-				"IANA Designated Private IP Ranges": {
-					"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],
-					"What CIDR block is an IANA-designated IP range corresponding to 16 contiguous class B network spaces?": ["172.16.0.0/12", "172.16/12"],
-					"What CIDR block is an IANA-designated IP range corresponding to 256 contiguous class C network spaces?": ["192.168.0.0/16", "192.168/16"]
-				},
-				"Reserved Subnet IP Addresses": {
-					"Names": {
-						"What is the name for the first IP address in a subnet?": "Network Address",
-						"What is the name for the last IP address in a subnet?": "Broadcast Address"
-					},
-					"Examples": {
-						"typo-forgiveness-level": "none",
-						"importance": 0.3,
-						"groups": {
-							"network addresses": {
-								"is-gathered": true,
-								"questions": {
-									"What is the network address of the 10/8 block?": "10.0.0.0",
-									"What is the network address of the 172.16/12 block?": "172.16.0.0",
-									"What is the network address of the 192.168/16 block?": "192.168.0.0"
-								}
-							},
-							"broadcast addresses": {
-								"is-gathered": true,
-								"questions": {
-									"What is the broadcast address of the 10/8 block?": "10.255.255.255",
-									"What is the broadcast address of the 172.16/12 block?": "172.31.255.255",
-									"What is the broadcast address of the 192.168/16 block?": "192.168.255.255"
-								}
-							}
-						}
-					}
+				"Plenum Space": {
+					"What term refers to an air circulation space in a building, through which cables must have a special rating?": ["Plenum Space", "Plenum"]
 				}
 			},
 			"Network Installation": {
@@ -388,7 +452,7 @@
 					"What software allows the detailed inspection of captured packets?": "Protocol Analyzer",
 					"What common and free protocol analyzer provides deep packet inspection and can be used to diagnose misconfigurations on many levels?": "Wireshark",
 					
-					"What is the standard for transferring log files?": "Syslog",
+					"What protocol is a standard for generating, sending, and managing log messages?": "Syslog",
 					
 					"What term refers to a central management console which receives logs, events, and metrics from throuoghout a network?": {
 						"answers": ["Security Information and Event Management", "SIEM"],
@@ -397,15 +461,15 @@
 					
 					"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring",
 					
-					"What protocol provides a summary of statistics based on the flowws of traffic traversing a network?": "Netflow"
+					"What protocol provides a summary of statistics based on the flows of traffic traversing a network?": "NetFlow"
 				},
 				"Remote Control": {
-					"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"]
-					"What term describes a management interface which must be connected to with different means as the services of that device?": ["Out-of-Band Management", "In-Band"]
+					"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"],
+					"What term describes a management interface which must be connected to with different means as the services of that device?": ["Out-of-Band Management", "Out-of-Band"]
 				}
 			},
-			"Disaster Recoveery": {
-				"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"]
+			"Disaster Recovery": {
+				"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"],
 				"What term refers to the duration of time needed to recover from an outage?": ["Recovery Time Objective", "RTO"],
 				"What term refers to the duration of time during which data was irrevocably lost during an outage?": ["Recovery Point Objective", "RPO"],
 				
@@ -413,7 +477,7 @@
 				"What term refers to the average time between consecutive failures?": ["Mean Time Between Failures", "MTBF"],
 				
 				"What term refers to a disaster recovery site which does not have equipment in place?": ["Cold Site", "Cold"],
-				"What term refers to a disaster recovery site which contains pre-installed hardware and may have mirrored data from backups?": ["Hot Site", "Hot"],
+				"What term refers to a disaster recovery site which contains pre-installed hardware and may have mirrored data from backups?": ["Hot Site", "Hot"]
 			},
 			"VPNs": {
 				"In a VPN, what device accepts authenticated connections from the internet and grants them access to internal devices?": ["VPN Concentrator", "Concentrator"],
@@ -424,6 +488,25 @@
 				
 				"What kind of VPN configuration sends all outbound traffic through the secure tunnel?": ["Full Tunnel", "Full"],
 				"What kind of VPN configuration sends only certain kinds of traffic through the secure tunnel?": ["Split Tunnel", "Split"]
+			},
+			"Power over Ethernet": {
+				"Which PoE standard provides 15.4W of power over a 350mA line?": "Type 1",
+				"Which PoE standard provides 25.5W of power over a 600mA line?": "Type 2",
+				"Which PoE standard provides 51.0W of power over a 600mA line?": "Type 3",
+				"Which PoE standard provides 71.3W of power over a 960mA line?": "Type 4"
+			},
+			"Command Line Utilities": {
+				"What command line utility checks that a host can be routed to?": "ping",
+				"What command line utility determines the route a packet takes to a destination?": ["tracert", "traceroute"]
+			},
+			"Network Device Commands": {
+				"What network device command lists the status of each interface?": "show interface",
+				"What network device command lists the entries in the MAC table?": "show mac-address-table",
+				"What network device command lists the entries in the arp table": "show arp",
+				"What network device command lists the entries in the routing table": "show route",
+				"What network device command shows the VLAN configurations?": "show vlan",
+				"What network device command shows the PoE configuration?": "show power",
+				"What network device command shows the device configuration?": "show config"
 			}
 		}
 	}

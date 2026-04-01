@@ -12,9 +12,10 @@ The user's submission and the answers must all be brought into their canonical f
 
 1. Perform Unicode normalization to NFKC.
 2. If the question is case-insensitive, convert all cased characters to lower case.
-3. Perform all substitutions, beginning with the outermost folders.
+3. Perform all substitutions, beginning with the outermost folders, and in the order of declaration.
+4. Perform Unicode normalization to NFKC again.
 
-Of course, this transformation applies to the raw text of an answer, with any markdown stripped away. This canonization process is used on the user's submission, all `answers`, `hidden-answers`, and `rejected-typo` entries. 
+Of course, this transformation applies to the raw text of an answer, with any markdown stripped away. This canonization process is used on the user's submission, all `answers`, `hidden-answers`, and `typo-blacklist` entries. All values in `substitutions` also undergo normalization, except that they do not undergo steps 3 and 4 for obvious reasons. Text which is inserted via substitution is not searched or passed over again, such that runaway substitution is impossible and substitution is always completed in a single pass.
 
 ### Step 2: Comparison
 

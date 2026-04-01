@@ -13,46 +13,87 @@
 		"substitutions": [["Wi-Fi", "WiFi"]],
 		"groups": {
 			"The OSI Model": {
-				"Layers": {
-					"mode-of-presentation": ["verbatim", "multiple-choice"],
-					"max-choices": 7,
-					"questions": {
-						"Which is layer **1** of the OSI Model?": "Physical",
-						"Which is layer **2** of the OSI Model?": "Data Link",
-						"Which is layer **3** of the OSI Model?": "Network",
-						"Which is layer **4** of the OSI Model?": "Transport",
-						"Which is layer **5** of the OSI Model?": "Session",
-						"Which is layer **6** of the OSI Model?": "Presentation",
-						"Which is layer **7** of the OSI Model?": "Application"
+				"incorrect-answers": ["Physical", "Data Link", "Network", "Transport", "Session", "Presentation", "Application"]
+				"groups": {
+					"Layers": {
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"max-choices": 7,
+						"questions": {
+							"Which is OSI layer **1** of the OSI Model?": "Physical",
+							"Which is OSI layer **2** of the OSI Model?": "Data Link",
+							"Which is OSI layer **3** of the OSI Model?": "Network",
+							"Which is OSI layer **4** of the OSI Model?": "Transport",
+							"Which is OSI layer **5** of the OSI Model?": "Session",
+							"Which is OSI layer **6** of the OSI Model?": "Presentation",
+							"Which is OSI layer **7** of the OSI Model?": "Application"
+						}
+					},
+					"Purposes": {
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"max-choices": 7,
+						"questions": {
+							"Which OSI layer is the medium over which signals are carried?": "Physical",
+							"Which OSI layer is responsible for reliable, direct or nearly-direct communication beween hosts?": "Data Link",
+							"Which OSI layer is responsible for the routing of information through potentially massive networks?": "Network",
+							"Which OSI layer is responsible for the disassembly and reassembly of large quaantities of data?": "Transport",
+							"Which OSI layer is responsible for the set-up and tear-down of state?": "Session",
+							"Which OSI layer is responsible for compression, translation, and encryption?": "Presentation",
+							"Which OSI layer is responsible for providing the interface for network services?": "Application"
+						}
+					},
+					"Protocols": {
+						"Which OSI Layer is IEEE 802.3 Ethernet?": "Data Link",
+						"Which OSI Layer is IEEE 802.11 Wi-Fi?": "Data Link",
+						"Which OSI Layer is ARP?": "Data Link",
+						"Which OSI Layer is Internet Protocol (IP)?": "Network",
+						"Which OSI Layer is ICMP?": "Network",
+						"Which OSI Layer is Transmission Control Protocol (TCP)?": "Transport",
+						"Which OSI Layer is User Datagram Protocol (UDP)?": "Transport",
+						"Which OSI Layer is Transport Layer Security (TLS)?": ["Session", "Presentation"],
+						"Which OSI Layer is Secure Sockets Layer (SSL)?": ["Session", "Presentation"],
+						"Which OSI Layer is HTTP?": "Application",
+						"Which OSI Layer is FTP?": "Application"
+					},
+					"Devices": {
+						"Which OSI Layer is a hub?": "Physical",
+						"Which OSI Layer is a cable?": "Physical",
+						"Which OSI Layer is a switch?": "Data Link",
+						"Which OSI Layer is a network adapter?": "Data Link",
+						"Which OSI Layer is an access point?": "Data Link",
+						"Which OSI Layer is a router?": "Network",
+						"Which OSI Layer is a load balancer?": "Transport",
+						"Which OSI Layer is a next-gen firewall?": "Application"
+					}
+				}
+			},
+			"Layer 1 Specifications": {
+				"IEEE 802.3 Ethernet": {
+					"Suffixes": {
+						"What Ethernet physical layer suffix commonly refers to twisted pair copper?": "T",
+						"What Ethernet physical layer suffix commonly refers to coax or twinax?": "C",
+						
+						"What Ethernet physical layer suffix commonly refers to short wavelength optical fiber?": "S",
+						"What Ethernet physical layer suffix commonly refers to multimode optical fiber?": "S",
+						
+						"What Ethernet physical layer suffix commonly refers to long wavelength optical fiber?": "L",
+						"What Ethernet physical layer suffix commonly refers to extra long wavelength optical fiber?": ["E", "Z"],
+						"What Ethernet physical layer suffix commonly refers to single-mode optical fiber?": ["E", "Z", "L"],
+						
+						"What Ethernet physical layer suffix commonly indicates 8b/10b or 4b/5b block encoding?": "X",
+						"What Ethernet physical layer suffix commonly indicates 64b/66b block encoding?": "R"
 					}
 				},
-				"Protocols": {
-					"Which OSI Layer is IEEE 802.3 Ethernet?": "Data Link",
-					"Which OSI Layer is IEEE 802.11 Wi-Fi?": "Data Link",
-					"Which OSI Layer is Internet Protocol (IP)?": "Network",
-					"Which OSI Layer is Transmission Control Protocol (TCP)?": "Transport",
-					"Which OSI Layer is User Datagram Protocol (UDP)?": "Transport",
-					"Which OSI Layer is Transport Layer Security (TLS)?": ["Session", "Presentation"],
-					"Which OSI Layer is Secure Sockets Layer (SSL)?": ["Session", "Presentation"],
-					"Which OSI Layer is HTTP?": "Application",
-					"Which OSI Layer is FTP?": "Application"
-				},
-				"Devices": {
-					"Which OSI Layer is a cable?": "Physical",
-					"Which OSI Layer is a switch?": "Data Link",
-					"Which OSI Layer is an access point?": "Data Link",
-					"Which OSI Layer is a router?": "Network",
-					"Which OSI Layer is a load balancer?": "Transport",
-					"Which OSI Layer is a next-gen firewall?": "Application"
-				}
+				
 			},
 			"Layer 2 Networking": {
 				"Foundational Concepts": {
 					"What type of address is typically used by layer-2 protocols?": ["MAC Address", "MAC"],
-					"What 
+					"What term refers to a set of devices and cables where collisions can occur?": "Collision Domain",
 					"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
 				},
 				"Ethernet": {
+					"What is the length of a MAC address in octets?": "6",
+					
 					"What layer-2 IEEE protocol facilitates communication between devices connected by a direct link?": {
 						"answers": ["802.3 Ethernet", "802.3", "Ethernet"], "hidden-answers": ["IEEE 802.3 Ethernet", "IEEE 802.3", "IEEE Ethernet"]
 					},
@@ -90,7 +131,7 @@
 			},
 			"Layer 3 Networking": {
 				"Internet Protocol": {
-					"What term refers to the address which always refers to the local host?": ["Loopback Address", "Loopback"]
+					"What term refers to the address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"]
 				},
 				"IPv4": {
 					"What is the length in octets of an IPv4 address?": {
@@ -123,6 +164,9 @@
 					},
 					"CIDR": {
 						"What term refers to a flexible scheme for IP address allocation that replaces classful routing?": ["Classless Inter-Domain Routing", "CIDR"]
+					},
+					"VLSM": {
+						"What term refers to a networking technique of creating subnets with masks of differing length to maximize routing efficiency?": ["Variable Length Subnet Masking", "VLSM"]
 					},
 					"IANA Designated Private IP Ranges": {
 						"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],
@@ -190,17 +234,16 @@
 					},
 					
 					"What device monitors traffic to identify security breaches but does not intervene?": ["Intrusion Detection System", "IDS"],
-					"What device monitors traffic to identify security breaches and intervenes to stop them?": ["Intrusion Prevention System", "IPS"]
-					
-					"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
-						"answers": ["Wireless Access Point", "WAP"],
-						"hidden-answers": ["Access Point", "AP"]
-					},
+					"What device monitors traffic to identify security breaches and intervenes to stop them?": ["Intrusion Prevention System", "IPS"],
 					
 					"What device distributes connections among multiple servers?": "Load Balancer",
 					"What device forwards application traffic between an internal and external network, and may provide content filtering and caching services?": ["Forward Proxy", "Proxy"],
 					
 					"What device provides file-level access to storage drives over a network?": ["Network-Attached Storage", "NAS"],
+					
+					"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
+						"answers": ["Wireless Access Point", "WAP"], "hidden-answers": ["Access Point", "AP"]
+					},
 					"What device provides central management of wireless access points and may provide security monitoring?": "Wireless LAN Controller"
 				},
 				"Tools": {
@@ -225,7 +268,9 @@
 			"Network Functions": {
 				"Concepts": {
 					"What term refers broadly to traffic moving between hosts within a data center?": "East-West",
-					"What term refers broadly to traffic moving in or out of a data center?": "North-South"
+					"What term refers broadly to traffic moving in or out of a data center?": "North-South",
+					
+					"What term refers to a dedicated local network consisting of devices providing data access?": ["Storage Area Network", "SAN"]
 				},
 				"Content Delivery": {
 					"What kind of network uses geographically distributed servers and caching to deliver data with minimal latency?": ["Content Delivery Network", "CDN"]
@@ -242,39 +287,68 @@
 			"Protocols": {
 				"Ports": {
 					"mode-of-presentation": ["verbatim", "multiple-choice"],
-					"max-choicces": 5, "descendants-share-incorrect-answers": true,
+					"max-choices": 5, "descendants-share-incorrect-answers": true,
 					"groups": {
-						"Plain Ports": {
-							"What port number is typically used by HTTP?": "80",
-							"What port number is typically used by SMTP?": "25",
-							"What port number is typically used by POP3?": "110",
-							"What port number is typically used by IMAP?": "143",
-							"What port number is typically used by FTP?": "21",
-							"What port number is typically used by TFTP?": "69",
+						"Core Ports": {
+							"What port number is typically used by FTP?": ["20", "21"],
+							"What port number is typically used by SFTP?": "22",
 							"What port number is typically used by SSH?": "22",
-							"What port number is typically used by a DHCP client?": "68",
-							"What port number is typically used by a DHCP server?": "67",
+							"What port number is typically used by Telnet?": "23",
+							"What port number is typically used by SMTP?": "25",
 							"What port number is typically used by DNS?": "53",
+							"What port number is typically used by a DHCP server?": "67",
+							"What port number is typically used by a DHCP client?": "68",
+							"What port number is typically used by TFTP?": "69",
+							"What port number is typically used by HTTP?": "80",
 							"What port number is typically used by NTP?": "123",
-							"What port number is typically used by LDAP?": "389",
-							"What port number is typically used by RDP?": "3389",
-							"What port number is typically used by SMB?": "445",
 							"What port number is typically used by SNMP?": "161",
 							"What port number is typically used by SNMPTRAP?": "162",
-							"What port number is typically used by Telnet?": "23"
-						},
-						"Secure Ports": {
+							"What port number is typically used by LDAP?": "389",
 							"What port number is typically used by HTTPS?": "443",
-							"What port number is typically used by SFTP?": ["989", "990"],
+							"What port number is typically used by SMB?": "445",
+							"What port number is typically used by Syslog?": "514",
+							"What port number is typically used by SMTPS?": {"answers": "587", "hidden-answers": "465"},
+							"What port number is typically used by LDAPS?": "636",
+							"What port number is typically used by SQL server?": "1433",
+							"What port number is typically used by RDP?": "3389",
+							"What port number is typically used by SIP?": "5060",
+							"What port number is typically used by SIP over TLS?": "5061"
+						},
+						"Additional Ports": {
+							"What port number is typically used by POP3?": "110",
+							"What port number is typically used by IMAP?": "143",
+							
 							"What port number is typically used by DNS over TLS?": "853",
-							"What is a newer, secure port number typically used by SMTP?": ["465", "587"],
-							"What is the newer, secure port number typically used by POP3?": "995",
-							"What is the newer, secure port number typically used by IMAP?": "993",
-							"What is the newer, secure port number typically used by LDAP?": "636"
+							"What port number is typically used by FTPS?": ["989", "990"],
+							
+							"What port number is typically used by IMAP?": "993",
+							"What port number is typically used by POP3?": "995"
 						}
 					}
 				},
 				"Descriptions": {
+					"Units of Transmission": {
+						"What is the official name of a transmission unit in Ethernet?": "Frame",
+						"What is the official name of a transmission unit in IP?": "Datagram",
+						"What is the official name of a transmission unit in TCP?": "Segment",
+						"What is the official name of a transmission unit in UDP?": "Datagram"
+					},
+					"Low-Layer Protocols": {
+						"What protocol reports errors in IP processing and routing, and is useful for some common diagnostics?": ["Internet Control Message Protocol", "ICMP"],
+						"What protocol provides the illusion of local network-layer connectivity to hosts connected across the internet via encapsulation?": ["Generic Routing Encapsulation", "GRE"],
+						"What protocol is commonly used to translate IP addresses to MAC addresses for communication within a subnet?": ["Address Resolution Protocol", "ARP"],
+						"What protocol allows self-assignment of (typically non-routeable) IPv4 addresses unique on the attached LAN?": ["Automatic Private IP Addressing", "APIPA"]
+					},
+					"IPSec": {
+						"What protocol provides layer-3 encryption for confidentiality as well as digital signatures for integrity?": ["Internet Protocol Security", "IPSec"],
+						"What term refers to the setup phase of an IPSec session?": ["Internet Key Exchange", "IKE"],
+						
+						"What IPSec protocol validates the integrity of information received via IPSec using digital signatures?": ["Authenticated Header", "AH"],
+						"What IPSec protocol ensures the confidentiality of information received via IPSec using encryption?": ["Encapsulation Security Payload", "ESP"],
+						
+						"What IPSec mode **does not** encrypt the IP header?": "Transport",
+						"What IPSec mode **does** encrypt the IP header?": "Tunnel"
+					}
 					"DHCP": {
 						"Fundamentals": {
 							"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"]
@@ -390,7 +464,15 @@
 					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
 					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
 					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"]
-				}				
+				},
+				"Cloud Connectivity": {
+					"What term refers to a cloud connectivity option utilizing encrypted connections over the public internet?": ["Cloud VPN", "VPN"],
+					"What term refers to a cloud connectivity option utilizing a dedicated physical line?": ["Direct Connect"]
+				},
+				"Cloud Security": {
+					"What term refers to a firewall-like cloud security service allowing the application of rules to individual VNICs?": ["Network Security Group", "NSG"],
+					"What term refers to a firewall-like cloud security service allowing the application of rules to subnets?": ["Network Security List", "NSL"]
+				}
 			},
 			"Transceivers": {
 				"verbatim block": {
@@ -413,14 +495,30 @@
 				}
 			},
 			"Cable & Connector Types": {
-				"Cables": {
+				"Copper Cables": {
 					"What cable uses a single metal core with dielectric insulator and metal shielding?": ["Coaxial Cable", "Coaxial", "Coax"],
 					"What cable uses a pair of metal cores with a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"]
 				},
 				"Copper Connectors": {
-					"What type of copper cable connection uses two of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
+					"What type of copper cable connection uses two or four of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
 					"What type of copper cable connection uses eight of eight available positions within the plug?": ["Registered Jack type 45", "RJ45"],
-					"What type of copper cable connection is commonly used as the input for a cable modem?": "F-Connector"
+					
+					"What type of copper cable connection is used for DSL and analog phone connections?": ["Registered Jack type 11", "RJ11"],
+					"What type of copper cable connection is used for Ethernet connections?": ["Registered Jack type 45", "RJ45"],
+					
+					"What type of copper cable connection is most commonly found on RG-6 coaxial cable?": "F-Connector",
+					"What type of copper cable connection is commonly used as the input for a cable modem?": "F-Connector",
+					
+					"What type of copper cable connection is found on twinax and coax cable, often carrying WAN links or video signals?": ["Bayonet Neill-Counceelman", "BNC"]
+				},
+				"Fiber Cables": {
+					"substitutions": [["Multi Mode", "Multimode"], ["Multi-Mode", "Multimode"], ["Singlemode", "Single Mode"]],
+					"questions": {
+						"What type of fiber cable has a range of up to around 2km?": "Multimode",
+						"What type of fiber cable has cheaper optics?": "Multimode",
+						"What type of fiber cable has a range of up to as much as 100km?": "Single Mode",
+						"What type of fiber cable has more expensive optics?": "Single Mode",
+					}
 				},
 				"Fiber Conenctors": {
 					"What kind of fiber connector snaps in place and can simply be pulled out, and is recognizeable by its rectangular housing?": ["Subscriber Connector", "SC"],

@@ -83,7 +83,64 @@
 						"What Ethernet physical layer suffix commonly indicates 64b/66b block encoding?": "R"
 					}
 				},
-				
+				"IEEE 802.11 Wi-Fi": {
+					"Generation Names": {
+						"descendants-share-incorrect-answers": true,
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"max-choices": 4,
+						"questions": {
+							"Which version of 802.11 is also known as Wi-Fi 4?": ["802.11n", "n"],
+							"Which version of 802.11 is also known as Wi-Fi 5?": ["802.11ac", "ac"],
+							"Which version of 802.11 is also known as Wi-Fi 6?": ["802.11ax", "ax"],
+							"Which version of 802.11 is also known as Wi-Fi 7?": ["802.11be", "be"]
+						}
+					},
+					"Feature Support": {
+						"descendants-share-incorrect-answers": true,
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"max-choices": 7,
+						"substitutions": [["WiFi", "Wi-Fi"]],
+						"questions": {
+							"Which version(s) of 802.11 Wi-Fi utilize the 2.4GHz band?": {
+								"answers": ["802.11b", "802.11g", "802.11n", "802.11ax", "802.11be"],
+								"hidden-answers": ["b", "g", "n", "ax", "be", "Wi-Fi 4", "Wi-Fi 6", "Wi-Fi 7"]
+							},
+							"Which version(s) of 802.11 Wi-Fi utilize the 5GHz band?": {
+								"answers": ["802.11a", "802.11n", "802.11ac", "802.11ax", "802.11be"],
+								"hidden-answers": ["a", "n", "ac", "ax", "be", "Wi-Fi 4", "Wi-Fi 5", "Wi-Fi 6", "Wi-Fi 7"]
+							},
+							"Which version(s) of 802.11 Wi-Fi utilize the 6GHz band?": {
+								"answers": ["802.11ax", "802.11be"],
+								"hidden-answers": ["ax", "be", "Wi-Fi 6", "Wi-Fi 7"]
+							},
+							
+							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 54Mbps?": {
+								"answers": ["802.11a", "802.11g"],
+								"hidden-answers": ["a", "g"]
+							},
+							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 11Mbps?": {
+								"answers": ["802.11b"],
+								"hidden-answers": ["b"]
+							},
+							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 600Mbps?": {
+								"answers": ["802.11n"],
+								"hidden-answers": ["n", "Wi-Fi 4"]
+							},
+							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 6933Mbps?": {
+								"answers": ["802.11ac"],
+								"hidden-answers": ["ac", "Wi-Fi 5"]
+							},
+							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 9608Mbps?": {
+								"answers": ["802.11ax"],
+								"hidden-answers": ["ax", "Wi-Fi 6"]
+							},
+							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 46120Mbps?": {
+								"answers": ["802.11be"],
+								"hidden-answers": ["be", "Wi-Fi 7"]
+							}
+						}
+					}
+				}
 			},
 			"Layer 2 Networking": {
 				"Foundational Concepts": {
@@ -131,7 +188,8 @@
 			},
 			"Layer 3 Networking": {
 				"Internet Protocol": {
-					"What term refers to the address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"]
+					"What term refers to the address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"],
+					"What term refers to the simultaneous use of both Ipv4 and IPv6?": "Dual Stack"
 				},
 				"IPv4": {
 					"What is the length in octets of an IPv4 address?": {
@@ -200,6 +258,9 @@
 								}
 							}
 						}
+					},
+					"Routing": {
+						
 					}
 				},
 			},
@@ -334,6 +395,9 @@
 						"What is the official name of a transmission unit in UDP?": "Datagram"
 					},
 					"Low-Layer Protocols": {
+						"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
+						"What protocol enables very high speed data transfer between stoarage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"],
+						
 						"What protocol reports errors in IP processing and routing, and is useful for some common diagnostics?": ["Internet Control Message Protocol", "ICMP"],
 						"What protocol provides the illusion of local network-layer connectivity to hosts connected across the internet via encapsulation?": ["Generic Routing Encapsulation", "GRE"],
 						"What protocol is commonly used to translate IP addresses to MAC addresses for communication within a subnet?": ["Address Resolution Protocol", "ARP"],
@@ -471,7 +535,8 @@
 				},
 				"Cloud Security": {
 					"What term refers to a firewall-like cloud security service allowing the application of rules to individual VNICs?": ["Network Security Group", "NSG"],
-					"What term refers to a firewall-like cloud security service allowing the application of rules to subnets?": ["Network Security List", "NSL"]
+					"What term refers to a firewall-like cloud security service allowing the application of rules to subnets?": ["Network Security List", "NSL"],
+					"What network security technology provides VPN-like secure access to cloud infrastructure?": ["Secure Access Service Edge", "SASE"]
 				}
 			},
 			"Transceivers": {
@@ -497,7 +562,10 @@
 			"Cable & Connector Types": {
 				"Copper Cables": {
 					"What cable uses a single metal core with dielectric insulator and metal shielding?": ["Coaxial Cable", "Coaxial", "Coax"],
-					"What cable uses a pair of metal cores with a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"]
+					"What cable uses a pair of metal cores with a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"],
+					
+					"What cable is commonly used for high-speed, very low range connections in data centers over twinax cable?": ["Direct Attach Copper", "DAC"],
+					"What cable provides a low-power, low-latency connection between SFP (or similar) transceiver ports in a data center?": ["Direct Attach Copper", "DAC"],
 				},
 				"Copper Connectors": {
 					"What type of copper cable connection uses two or four of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
@@ -565,6 +633,22 @@
 					"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"],
 					"What term describes a management interface which must be connected to with different means as the services of that device?": ["Out-of-Band Management", "Out-of-Band"]
 				}
+			},
+			"Network Security": {
+				"What term refers to a netwwork security model of requiring authentication fory request in a network?": "Zero Trust",
+				"What network security documentation outlines a plan and conditional steps to take in response to a security event of some kind?": "Playbook",
+				"What type of security technology provides a centralized platform for the administration and automation of incident response?": ["Security Orchestration, Automation, and Response", "SOAR"]
+			},
+			"Modern Networking": {
+				"What technique allows complex networks of devices to be deployed on the cloud according to a configuration file?": ["Infrastructure as Code", "IaC"],
+				"What term refers to the gradual deviation of IT infrastructure from its desired state?": "Configuration Drift",
+				"What technology allows live querying of device configurations such that inventories are always accurate?": "Dynamic Inventories"
+			},
+			"Source Control": {
+				"What technology allows the tracking of changes and the integration of many changes into a master version of a document such as a configuration file?": ["Source Control", "Version Control"],
+				"What term refers to the server containing the authoritative copy of a document along with its change history?": ["Central Repository", "Central Repo"]
+			},
+			"Network Documentation": {
 			},
 			"Disaster Recovery": {
 				"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"],

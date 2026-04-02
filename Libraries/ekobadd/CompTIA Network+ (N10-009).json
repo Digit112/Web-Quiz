@@ -343,6 +343,12 @@
 				"Quality of Service": {
 					"What term refers to configuration options allowing the prioritization of certain kinds of traffic?": ["Quality of Service", "QoS"],
 					"What term refers to a hard limit placed on the length of time that a process of some kind can execute for?": ["Time to Live", "TTL"]
+				},
+				"Communication Types": {
+					"What type of transmission is directed to a single host?": "Unicast",
+					"What type of transmission is directed to many hosts?": "Multicast",
+					"What type of transmission is directed to one of many hosts?": "Anycast",
+					"What type of transmission is directed to every available host?": "Broadcast"
 				}
 			},
 			"Protocols": {
@@ -520,9 +526,11 @@
 				"Cloud Networking Concepts": {
 					"What term refers to the use of cloud features to replace physical networking devices?": ["Network Function Virtualization", "NFV"],
 					"What term refers to a pool of resources created in the cloud?": ["Virtual Private Cloud", "VPC"],
+					"What term refers to an application instance facilitating communications with hosts over the internet?": ["VPC Gateway", "Cloud Gateway"],
 					"What term refers to an application instance connecting VPCs?": "Transit Gateway",
 					"What term refers to an application instance allowing virtual servers to form outbound connections as if through a router?": "VPC NAT Gateway",
-					"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint"
+					"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint",
+					"What term refers to a security configuration which applies to a VPC and acts like a firewall?": "Network Security Group"
 				},
 				"Cloud Service Models": {
 					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],

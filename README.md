@@ -260,6 +260,10 @@ Methods 2 and 3 work very well in conjunction. If there are multiple answers on 
 
 Note that in this case, the question remains a single question and the user's progress is tracked as such. The system will not recognize a situation in which, for example, the user has only mastered one of two or more answers. If it is vital that a user spend as much effort on the individual answers as they would on any other question, the questions should be split into multiple questions with identical question statements but different answers. The user's progress on each question will be tracked separately.
 
+### Don't Abuse Substitutions
+
+Substitutions occur before - and do not participate in - typo forgiveness. Thus, typo forgiveness is significantly less effective or even disabled when the users input is substantially transformed by substitutions.
+
 ### Use Markdown
 
 Markdown is valid in `answers`, `incorrect-answers`, `question`, and `label` strings. This supports bold (\*\*), italics (\*), and code (\`). Use it to emphasize the portion of a question which a user should focus on.

@@ -27,6 +27,17 @@ Folders and Questions may be tagged. Tags may be shown to the user and allow add
 
 The library itself may also be tagged, and these generally should be meaaningful to the receiving system.
 
+### Prerequisites
+
+Prerequisites allow the author to enforce order to the otherwise shuffled questions of a library. A prerequisite can be added to any Folder, Set, or Question, and may refer to any Folder, Set, or Question. This has two effects.
+
+- When a question would otherwise be *windowed*, if at least one of its prerequisites is not windowed, pick one at random to window instead.
+- When a question would otherwise be *asked*, if at least one of its prerequisites has never been asked, pick one at random to ask instead.
+
+A folder or set which acts as a prerequisite is considered satisfied if *all* of its contents are satisfied. A gathered folder or set is considered satisfied if at least one of its members are satisfied.
+
+Prerequisites may be chained and these chains will be respected up to a maximum depth defined by the receiving system.
+
 ### Fragments
 
 A fragment refers to a Folder or QuestionSet which is not defined within the library. The `fragment` keys for the Folder and QuestionSet object allow the user to import a fragment with all its contents into an existing library. By re-creating the structure of the fragment and specifying labels, values in the original fragment can be overwritten.
@@ -57,11 +68,11 @@ A question's sharing group is the smallest Folder or QuestionSet - the furthest 
 
 ### Gathered Folders
 
-Sometimes, you have many questions which are all variants on a common theme and test the same kind of knowledge. Instead of forcing the user to memorize each and every one, you can set that Folder or QuestionSet to be *gathered* by setting `is-gathered` to true. This will ensure that user progress is tracked on the level of the gathered Folder, instead of at the level of individual questions, so that the user is not made to master each and every question.
+Sometimes, you have many questions which are all variants on a common theme and test the same kind of knowledge. Instead of forcing the user to memorize each and every one, you can set that Folder or QuestionSet to be *gathered* by setting `is-gathered` to true. This will ensure that user progress is tracked on the level of the gathered Folder, instead of at the level of individual questions, so that the user is not made to master each and every question. The whole folder will have a total weight comparable to an individual question, and all contents must be selected and windowed in sync. Subfolders are implicitly hidden.
 
-When quizzed, the user will only be asked a single question from any given gathered group.
+When quizzed, the user will only be asked a single question from any gathered group.
 
-If a gathered Folder contains another gathered Folder or QuestionSet, the outer folder has precedence.
+Within a gathered folder's contents, the `is-gathered` and `hidden` keys are always implicitly true and may not be overidden.
 
 ## Enumeration of Objects
 
@@ -97,6 +108,7 @@ A folder has its own params as well as passthru params that only affect the beha
 - `tags` (*string[]*; default \[\]) - A list of tags for this folder. Displayed to the user and case-sensitive. 
 - `contents` (*(QuestionSet | Folder)[]*; required) - The contents of this folder.
 - `is-gathered` (*bool*; default false) - If true, the user's progress will be tracked at the level of this folder and not at the level of the individual questions it contains. Useful for if many questions really are about the same topic, so the user doesn't need to master every single one. The folder will still have weight proportional to the number of questions it contains. To counterract this, use the `importance` field.
+- `prerequisites` (*string[]*; default \[\]) - Prerequisites for this question. Must identify a Question, Folder, or QuestionSet.
 - `incorrect-answers` (*mdstring[]*; default []) - A set of incorrect answers which may appear on all questions contained by this folder, when they are shown in multiple choice.
 - `incorrect-answers-pass-thru` (*bool*; default false) - If false, entries in the `incorrect-answers` field of folders which contain this folder cannot appear on multiple choice question within this folder.
 - `hidden` (*bool*; default false) - If true, this folder will not be shown to the user. Allows you to make folders that serve strictly structural purposes. If a folder is hidden, all of its children will be hidden too.
@@ -126,6 +138,7 @@ These parameters do not affect the behavior of the folder at all, instead being 
 - `incorrect-answer-sources`
 - `importance`
 - `share-answers`
+- `first-time-hint`
 
 ### QuestionSet
 
@@ -140,8 +153,10 @@ The keys are split into categories based on which mode-of-presentation they are 
 - `tags` (*string[]*; default \[\]) - A list of tags for this question. Displayed to the user and case-sensitive. 
 - `disabled` (*bool*; default false) - If true, this question can not be selected.
 - `share-answers` (*bool*; default true) - Whether to share answers with questions in the same sharing group. See `is-sharing-group` on the Folder object definition.
+- `first-time-hint` (*bool*; default true) - Whether the user will be shown the answer to this question the first time they see it. A user's submission has no effect on mastery level if the answer was provided.
 - `importance` (*float*; default 1) - Multiplier for the weight of this question. Allows the author to add many questions in a group without bogging down the user.
-- `mode-of-presentation` (*string[]*; default \["verbatim"\]) - The ways in which this question can be presented. The leftmost option which is not blacklisted by the user is chosen.
+- `prerequisites` (*string[]*; default \[\]) - Prerequisites for this question. Must identify a Question, Folder, or QuestionSet.
+- `modes-of-presentation` (*string[]*; default \["verbatim"\]) - The ways in which this question can be presented. The leftmost option which is not blacklisted by the user is chosen.
 	- `"verbatim"` requires the user to type the answer.
 	- `"multiple-choice"` presents the user with buttons to select. They may also type to select or use arrow keys and enter to select an answer.
 	- `"flash-card"` presents the user with the question text and allows them to click to reveal the answer. They will not be graded.

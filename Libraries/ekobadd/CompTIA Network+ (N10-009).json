@@ -1,7 +1,7 @@
 {
 	"version": 1,
 	"author": "ekobadd",
-	"title": "CompTIA A+ Certification 220-1102 (Core 2)",
+	"title": "CompTIA Network+ Certification N10-009",
 	
 	"adaptation-rate": 0.18,
 	"starting-mastery": 0.5,
@@ -35,10 +35,10 @@
 							"Which OSI layer is the medium over which signals are carried?": "Physical",
 							"Which OSI layer is responsible for reliable, direct or nearly-direct communication beween hosts?": "Data Link",
 							"Which OSI layer is responsible for the routing of information through potentially massive networks?": "Network",
-							"Which OSI layer is responsible for the disassembly and reassembly of large quaantities of data?": "Transport",
+							"Which OSI layer is responsible for the disassembly and reassembly of large quantities of data?": "Transport",
 							"Which OSI layer is responsible for the set-up and tear-down of state?": "Session",
 							"Which OSI layer is responsible for compression, translation, and encryption?": "Presentation",
-							"Which OSI layer is responsible for providing the interface for network services?": "Application"
+							"Which OSI layer is responsible for providing the user interface for network services?": "Application"
 						}
 					},
 					"Protocols": {
@@ -69,18 +69,13 @@
 			"Layer 1 Specifications": {
 				"IEEE 802.3 Ethernet": {
 					"Suffixes": {
-						"What Ethernet physical layer suffix commonly refers to twisted pair copper?": "T",
-						"What Ethernet physical layer suffix commonly refers to coax or twinax?": "C",
+						"What cable type is associated with the **-T** suffixes on Ethernet standards?": ["Twisted-Pair Copper", "Twisted-Pair"],
+						"What cable type is associated with the **-C** suffixes on Ethernet standards?": ["Twinaxial", "Twinax"],
+						"What cable type is associated with the **2**, **5**, or **36** suffixes on Ethernet standards?": ["Coaxial", "Coax"],
 						
-						"What Ethernet physical layer suffix commonly refers to short wavelength optical fiber?": "S",
-						"What Ethernet physical layer suffix commonly refers to multimode optical fiber?": "S",
-						
-						"What Ethernet physical layer suffix commonly refers to long wavelength optical fiber?": "L",
-						"What Ethernet physical layer suffix commonly refers to extra long wavelength optical fiber?": ["E", "Z"],
-						"What Ethernet physical layer suffix commonly refers to single-mode optical fiber?": ["E", "Z", "L"],
-						
-						"What Ethernet physical layer suffix commonly indicates 8b/10b or 4b/5b block encoding?": "X",
-						"What Ethernet physical layer suffix commonly indicates 64b/66b block encoding?": "R"
+						"What cable type is associated with the **-S** suffixes on Ethernet standards?": ["Multimode Fiber", "Multimode"],
+						"What cable type is associated with the **-L** suffixes on Ethernet standards?": ["Single Mode Fiber", "Single Mode"],
+						"What cable type is associated with the **-E** and **-Z** suffixes on Ethernet standards?": ["Single Mode Fiber", "Single Mode"]
 					},
 					"Cable Categories": {
 						"What is the minimum cable category which supports 1000BASE-T?": ["Category 5", "Cat 5", "5"],
@@ -89,6 +84,10 @@
 					}
 				},
 				"IEEE 802.11 Wi-Fi": {
+					"Concepts": {
+						"What term refers to a central frequency which can be used by a single device for transmission at one time?": "Channel",
+						"What technology allows a WAP to automatically direct devices to use the frequencies with less utilization?": "Band Steering"
+					},
 					"Generation Names": {
 						"descendants-share-incorrect-answers": true,
 						"mode-of-presentation": ["multiple-choice", "verbatim"],
@@ -103,8 +102,9 @@
 					"Feature Support": {
 						"descendants-share-incorrect-answers": true,
 						"mode-of-presentation": ["multiple-choice", "verbatim"],
-						"max-choices": 7,
+						"max-choices": 2,
 						"substitutions": [["WiFi", "Wi-Fi"]],
+						"typo-forgiveness-level": "none",
 						"questions": {
 							"Which version(s) of 802.11 Wi-Fi utilize the 2.4GHz band?": {
 								"answers": ["802.11b", "802.11g", "802.11n", "802.11ax", "802.11be"],
@@ -144,6 +144,21 @@
 								"hidden-answers": ["be", "Wi-Fi 7"]
 							}
 						}
+					},
+					"Maximum Link Rates": {
+						"descendants-share-incorrect-answers": true,
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"max-choices": 6,
+						"typo-forgiveness": "none",
+						"questions": {
+							"What is the maximum configurable link rate of 802.11a?": "54Mbps",
+							"What is the maximum configurable link rate of 802.11b?": "11Mbps",
+							"What is the maximum configurable link rate of 802.11g?": "54Mbps",
+							"What is the maximum configurable link rate of 802.11n?": "600Mbps",
+							"What is the maximum configurable link rate of 802.11ac?": ["6933Mbps", "6.9Gbps"],
+							"What is the maximum configurable link rate of 802.11ax?": ["9608Mbps", "9.6Gbps"],
+							"What is the maximum configurable link rate of 802.11be?": ["46120Mbps", "46Gbps"]
+						}
 					}
 				}
 			},
@@ -178,7 +193,8 @@
 					},
 					
 					"What term refers to the VLAN automatically assigned to new devices connected to a switch?": ["Default VLAN", "Default"],
-					"What term refers to the VLAN that is sent without a tag over a trunked cable?": ["Native VLAN", "Native"]
+					"What term refers to the VLAN that is sent without a tag over a trunked cable?": ["Native VLAN", "Native"],
+					"What term refers to a VLAN that is dedicated to sending analog audio?": ["Voice VLAN", "Voice"]
 				},
 				"LAGs": {
 					"What technology allows multiple switch interfaces to act as a single large interface?": ["Link Aggregation", "LAG"],
@@ -193,19 +209,37 @@
 			},
 			"Layer 3 Networking": {
 				"Internet Protocol": {
-					"What term refers to the address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"],
-					"What term refers to the simultaneous use of both Ipv4 and IPv6?": "Dual Stack"
+					"What term refers to the IP address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"],
+					"What term refers to the simultaneous use of both Ipv4 and IPv6?": "Dual Stack",
+					"What technology allows the encapsulation of IPv4 packets within IPv6 packets or vice versa?": "Tunneling",
+					
+					"What technology allows seemless conversion between IPv4 and IPv6 packets so that IPv4-only and IPv6-only devices can communicate?": "NAT64"
 				},
 				"IPv4": {
 					"What is the length in octets of an IPv4 address?": {
 						"answers": "4", "hidden-answers": "four"
 					},
 					
-					"Which standard specified three ranges of private IPv4 addresses not to be distributed by ISPs?": "RFC1918"
+					"What is the address range for IPv4 link-local (APIPA) addresses?": ["169.254.0.0/16", "169.254/16"],
+					
+					"Which standard outlines the details of private IPv4 addressing?": "RFC1918",
+					
+					"In what format are IPv4 addresses typically expressed?": {
+						"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
+						"answers": "Decimal", "incorrect-answers": "Hexadecimal"
+					}
 				},
 				"IPv6": {
 					"What is the length in octets of an IPv6 address?": {
 						"answers": "16", "hidden-answers": "sixteen"
+					},
+					
+					"What is the address range for IPv6 link-local addresses?": "FE80::/10",
+					"What is the address range for IPv6 global unicast addresses?": "2000::/3",
+					
+					"In what format are IPv6 addresses typically expressed?": {
+						"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
+						"answers": "Hexadecimal", "incorrect-answers": "Decimal"
 					},
 					
 					"What IPv6 protocol allows the self-assignment of IP addresses?": ["Stateless Address Autoconfiguration", "SLAAC"],
@@ -223,7 +257,13 @@
 						
 						"What value in the first octet signifies a private Class A address?": "10",
 						"What value in the first octet signifies a private Class B address?": "172",
-						"What value in the first octet signifies a private Class C address?": "192"
+						"What value in the first octet signifies a private Class C address?": "192",
+						
+						"What class of subnetwork constitutes the range of IPv4 multicast addresses?": ["Class D", "D"],
+						"What class of subnetwork begins with an octet from 224 to 239?": ["Class D", "D"],
+						
+						"What class of subnetwork constitutes the reserved address space?": ["Class E", "E"],
+						"What class of subnetwork begins with an octet from 240 to 255?": ["Class E", "E"]
 					},
 					"CIDR": {
 						"What term refers to a flexible scheme for IP address allocation that replaces classful routing?": ["Classless Inter-Domain Routing", "CIDR"]
@@ -401,7 +441,7 @@
 					},
 					"Low-Layer Protocols": {
 						"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
-						"What protocol enables very high speed data transfer between stoarage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"],
+						"What protocol enables very high speed data transfer between storage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"],
 						
 						"What protocol reports errors in IP processing and routing, and is useful for some common diagnostics?": ["Internet Control Message Protocol", "ICMP"],
 						"What protocol provides the illusion of local network-layer connectivity to hosts connected across the internet via encapsulation?": ["Generic Routing Encapsulation", "GRE"],
@@ -543,7 +583,11 @@
 				"Cloud Security": {
 					"What term refers to a firewall-like cloud security service allowing the application of rules to individual VNICs?": ["Network Security Group", "NSG"],
 					"What term refers to a firewall-like cloud security service allowing the application of rules to subnets?": ["Network Security List", "NSL"],
-					"What network security technology provides VPN-like secure access to cloud infrastructure?": ["Secure Access Service Edge", "SASE"]
+					
+					"What network security technology provides VPN-like secure access to cloud infrastructure?": ["Secure Access Service Edge", "SASE"],
+					
+					"What cloud-native security solution focuses strictly on cloud-centric and location-agnostic security services?": ["Security Services Edge", "SSE"],
+					"What cloud-native security solution consolidates security services and WAN capabilities?": ["Secure Access Service Edge", "SASE"]
 				}
 			},
 			"Transceivers": {
@@ -605,6 +649,30 @@
 					"What term refers to an air circulation space in a building, through which cables must have a special rating?": ["Plenum Space", "Plenum"]
 				}
 			},
+			"Routing Technologies": {
+				"What technique involves manually entering routes into a router?": "Static Routing",
+				
+				"What dynamic routing protocol is partially proprietary to Cisco and uniquely simple to configure?": ["Enhanced Interior Gateway Routing Protocol", "EIGRP"],
+				"What dynamic routing protocol is open and available on many manufacturers' devices?": ["Open Shortest Path First", "OSPF"],
+				"What dynamic routing protocol is specialized for external and internet routing?": ["Border Gateway Protocol", "BGP"],
+				
+				"What term refers to a generic measure of the preferability of a route in an IP routing table?": "Metric",
+				"What term refers to a weighting that allows tiebreaking in an IP routing table by lending preference to entries from certain sources?": "Administrative Distance",
+				
+				"What protocol allows redundancy in default gateways by assigning a virtual IP (VIP) to direct traffic to a backup router when necessary?": ["First Hop Redundancy Protocol", "FHRP"],
+				
+				"What term refers to a division of a physical interface with its own configuration and IP address?": "Subinterface",
+				
+				"What technology maps a single private IP address to a public address, allowing the recipient to reply?": ["Network Address Translation", "NAT"]
+				"What technology allows translation between private and public IP addresses, using port numbers to identify connections?": ["Port Address Translation", "PAT", "NAT Overload"]
+			},
+			"Interface Configuration": {
+				"What property of an interface configuration controls the data transfer rate?": "Speed",
+				"What property of an interface configuration controls whether both sides can transmit simultaneously?": "Duplex",
+				
+				"What property of a network measures the maximum allowable packet size?": ["Maximum Transmission Unit", "MTU"],
+				"What term refers to the virtual connection between a VLAN and the router functionality on a multilayer switch?": ["Switch Virtual Interface", "SVI"]
+			},
 			"Network Installation": {
 				"What term refers to an area of the network where you are passively terminating cables?": "Distribution Frame",
 				"What term refers to the primary or central distribution frame in a network?": ["Main Distribution Frame", "MDF"],
@@ -642,18 +710,48 @@
 				}
 			},
 			"Network Security": {
-				"What term refers to a netwwork security model of requiring authentication fory request in a network?": "Zero Trust",
-				"What network security documentation outlines a plan and conditional steps to take in response to a security event of some kind?": "Playbook",
-				"What type of security technology provides a centralized platform for the administration and automation of incident response?": ["Security Orchestration, Automation, and Response", "SOAR"]
+				"Concepts": {
+					"What term refers to a netwwork security model of requiring authentication fory request in a network?": "Zero Trust",
+				},
+				"SOAR": {
+					"What type of security technology provides a centralized platform for the administration and automation of incident response?": ["Security Orchestration, Automation, and Response", "SOAR"]
+				}
 			},
 			"Modern Networking": {
-				"What technique allows complex networks of devices to be deployed on the cloud according to a configuration file?": ["Infrastructure as Code", "IaC"],
-				"What term refers to the gradual deviation of IT infrastructure from its desired state?": "Configuration Drift",
-				"What technology allows live querying of device configurations such that inventories are always accurate?": "Dynamic Inventories"
-			},
-			"Source Control": {
-				"What technology allows the tracking of changes and the integration of many changes into a master version of a document such as a configuration file?": ["Source Control", "Version Control"],
-				"What term refers to the server containing the authoritative copy of a document along with its change history?": ["Central Repository", "Central Repo"]
+				"Infrastructure as Code": {
+					"What technology allows complex networks of devices to be deployed on the cloud according to a configuration file?": ["Infrastructure as Code", "IaC"],
+					
+					"What term refers to the gradual deviation of IT infrastructure from its desired state?": "Configuration Drift",
+					"What technology allows live querying of device configurations such that inventories are always accurate?": "Dynamic Inventories",
+					"What documentation outlines a plan and conditional steps to take in response to an incident of some kind?": "Playbook"
+				},
+				"Source Control": {
+					"What technology allows the tracking of changes and the integration of many changes into a master version of a document such as a configuration file?": ["Source Control", "Version Control"],
+					
+					"What term refers to the server containing the authoritative copy of a version-controlled document?": ["Central Repository", "Central Repo"],
+					"What version control feature allows parallel development via the creation of separate development paths that can be merged back into the main configuration?": "Branching"
+				},
+				"Software Defined Networking": {
+					"What term refers broadly to the process of defining virtual networking devices and their functions in a way that mimics the functions of traditional hardware?": ["Software-Defined Networking", "SDN"],
+					"What term refers to the virtual or automated provisioning of wide-area links that are application-aware?": ["Software-Defined WAN", "SD-WAN"],
+					
+					"In networking, what architectural plane is responsible for frame and packet processing such as trunking and forwarding?": ["Infrastructure Layer", "Data Plane", "Data"],
+					"In networking, what architectural plane is responsible formaintaining routing tables and sessions?": ["Control Layer", "Control Plane", "Control"],
+					"In networking, what architectural plane is responsible for providing administrative controls and access?": ["Application Layer", "Management Plane", "Management"],
+					
+					"What facet of SDN routes communications by inspecting application data?": "Application Aware",
+					"What facet of SDN automatically provisions and configures virtual devices in response to utilization?": "Zero-Touch Provisioning",
+					"What facet of SDN allows communication over arbitrary underlying network infrastructure?": "Transport Agnostic",
+					"What facet of SDN pushes configuration changes from one or a few consoles to many routers or other devices?": "Central Policy Management"
+				},
+				"VXLAN and DCI": {
+					"What term refers to a typically low-latency, high-capacity connection between data centers, sometimes over substantial distances?": ["Data Center Interconnect", "DCI"],
+					"What term refers to solutions which link multiple data centers into a single network?": ["Data Center Interconnect", "DCI"],
+					
+					"What technology allows routing through very large scale networks and between dynamically moving hosts, and is typically used for networks of data centers?": ["Virtual Extensible LAN", "VXLAN"],
+					"What uniquely identifies a VXLAN?": ["VXLAN Network Identifier", "VNI"],
+					"What technology allows VXLAN frames to traverse IP networks?": ["VXLAN Tunneling", "Layer 2 Encapsulation"]
+				}
 			},
 			"Network Documentation": {
 			},
@@ -674,7 +772,7 @@
 					"What troubleshooting technique involves considering the OSI layers from **Application** to **Physical**?": ["Top-to-Bottom", "Top-Down"]
 				},
 				"Switching Errors": {
-					"What kind of error has occurred when a checksum fails validation?": "CRC Error",
+					"What kind of error has occurred when a checksum fails validation?": ["CRC Error", "CRC"],
 					"What kind of error has occurred when an ethernet frame is less than 64 bytes?": "Runts",
 					"What kind of error has occurred when an ethernet frame is greater than 1518 bytes (or the configured maximum)?": "Giants",
 					"What kind of error has occurred when an ethernet frame is ignored, typically due to a full buffer?": "Drop"

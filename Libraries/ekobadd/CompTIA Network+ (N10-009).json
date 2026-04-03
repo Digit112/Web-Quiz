@@ -13,7 +13,7 @@
 		"substitutions": [["Wi-Fi", "WiFi"]],
 		"groups": {
 			"The OSI Model": {
-				"incorrect-answers": ["Physical", "Data Link", "Network", "Transport", "Session", "Presentation", "Application"]
+				"incorrect-answers": ["Physical", "Data Link", "Network", "Transport", "Session", "Presentation", "Application"],
 				"groups": {
 					"Layers": {
 						"mode-of-presentation": ["verbatim", "multiple-choice"],
@@ -81,6 +81,11 @@
 						
 						"What Ethernet physical layer suffix commonly indicates 8b/10b or 4b/5b block encoding?": "X",
 						"What Ethernet physical layer suffix commonly indicates 64b/66b block encoding?": "R"
+					},
+					"Cable Categories": {
+						"What is the minimum cable category which supports 1000BASE-T?": ["Category 5", "Cat 5", "5"],
+						"What is the minimum cable category which supports 10GBASE-T?": ["Category 6", "Cat 6", "6"],
+						"What is the minimum cable category which supports 40GBASE-T?": ["Category 8", "Cat 8", "8"]
 					}
 				},
 				"IEEE 802.11 Wi-Fi": {
@@ -196,7 +201,7 @@
 						"answers": "4", "hidden-answers": "four"
 					},
 					
-					"Which standard specified three ranges of private IPv4 addresses not to be distributed by ISPs?": "RFC1918",
+					"Which standard specified three ranges of private IPv4 addresses not to be distributed by ISPs?": "RFC1918"
 				},
 				"IPv6": {
 					"What is the length in octets of an IPv6 address?": {
@@ -262,7 +267,7 @@
 					"Routing": {
 						
 					}
-				},
+				}
 			},
 			"Network Architecture": {
 				"Three Tier": {
@@ -283,7 +288,7 @@
 					
 					"In what network topology is the network logically segmented into three functional layers?": "Three-Tier",
 					"In what network topology is the network logically segmented into two functional layers?": "Collapsed Core"
-				},
+				}
 			},
 			"Network Devices": {
 				"Hardware": {
@@ -305,7 +310,9 @@
 					"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
 						"answers": ["Wireless Access Point", "WAP"], "hidden-answers": ["Access Point", "AP"]
 					},
-					"What device provides central management of wireless access points and may provide security monitoring?": "Wireless LAN Controller"
+					"What device provides central management of wireless access points and may provide security monitoring?": "Wireless LAN Controller",
+
+					"What kind of device determines whether a twisted-pair cable qualifies as a certain category?": ["Cable Tester", "Cable Certifier"]
 				},
 				"Tools": {
 					"What networking tool allows you to locate a wire by sending a signal through a port?": ["Tone Generator", "Toner Probe"],
@@ -314,16 +321,8 @@
 					"What networking tool allows you to monitor wireless traffic?": {"answers": "Wi-Fi Analyzer", "hidden-answers": "WiFi Analyzer"},
 					"What networking tool allows you to check for breaks in fiber cable?": "Visual Fault Locator"
 				},
-				"Switches": {
-					"Security": {
-						"What common feature of a switch restricts interface access to a fixed-size list of recognized hosts?": "Port Security"
-					},
-					"Common Errors": {
-						"What kind of error has occurred when a checksum fails validation?": "CRC Error",
-						"What kind of error has occurred when an ethernet frame is less than 64 bytes?": "Runts",
-						"What kind of error has occurred when an ethernet frame is greater than 1518 bytes (or the configured maximum)?": "Giants",
-						"What kind of error has occurred when an ethernet frame is ignored, typically due to a full buffer?": "Drop",
-					}
+				"Security": {
+					"What common feature of a switch restricts interface access to a fixed-size list of recognized hosts?": "Port Security"
 				}
 			},
 			"Network Functions": {
@@ -418,7 +417,7 @@
 						
 						"What IPSec mode **does not** encrypt the IP header?": "Transport",
 						"What IPSec mode **does** encrypt the IP header?": "Tunnel"
-					}
+					},
 					"DHCP": {
 						"Fundamentals": {
 							"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"]
@@ -573,7 +572,7 @@
 					"What cable uses a pair of metal cores with a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"],
 					
 					"What cable is commonly used for high-speed, very low range connections in data centers over twinax cable?": ["Direct Attach Copper", "DAC"],
-					"What cable provides a low-power, low-latency connection between SFP (or similar) transceiver ports in a data center?": ["Direct Attach Copper", "DAC"],
+					"What cable provides a low-power, low-latency connection between SFP (or similar) transceiver ports in a data center?": ["Direct Attach Copper", "DAC"]
 				},
 				"Copper Connectors": {
 					"What type of copper cable connection uses two or four of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
@@ -593,7 +592,7 @@
 						"What type of fiber cable has a range of up to around 2km?": "Multimode",
 						"What type of fiber cable has cheaper optics?": "Multimode",
 						"What type of fiber cable has a range of up to as much as 100km?": "Single Mode",
-						"What type of fiber cable has more expensive optics?": "Single Mode",
+						"What type of fiber cable has more expensive optics?": "Single Mode"
 					}
 				},
 				"Fiber Conenctors": {
@@ -657,6 +656,47 @@
 				"What term refers to the server containing the authoritative copy of a document along with its change history?": ["Central Repository", "Central Repo"]
 			},
 			"Network Documentation": {
+			},
+			"Network Troubleshooting": {
+				"CompTIA Troubleshooting Methodology": {
+					"What is step **1** of the CompTIA troubleshooting methodology?": ["Identify the Problem", "Identify"],
+					"What is step **2** of the CompTIA troubleshooting methodology?": ["Establish a Theory", "Theorize"],
+					"What is step **3** of the CompTIA troubleshooting methodology?": ["Test the Theory", "Test"],
+					"What is step **4** of the CompTIA troubleshooting methodology?": ["Establish a Plan", "Plan"],
+					"What is step **5** of the CompTIA troubleshooting methodology?": ["Implement the Solution", "Implement"],
+					"What is step **6** of the CompTIA troubleshooting methodology?": ["Verify Functionality", "Verify"],
+					"What is step **7** of the CompTIA troubleshooting methodology?": ["Document Findings, Actions, and Outcomes", "Document"]
+				},
+				"Troubleshooting Techniques": {
+					"What troubleshooting technique involves splitting the problem into smaller parts that are easier to handle?": "Divide and Conquer",
+
+					"What troubleshooting technique involves considering the OSI layers from **Physical** to **Application**?": ["Bottom-to-Top", "Bottom-up"],
+					"What troubleshooting technique involves considering the OSI layers from **Application** to **Physical**?": ["Top-to-Bottom", "Top-Down"]
+				},
+				"Switching Errors": {
+					"What kind of error has occurred when a checksum fails validation?": "CRC Error",
+					"What kind of error has occurred when an ethernet frame is less than 64 bytes?": "Runts",
+					"What kind of error has occurred when an ethernet frame is greater than 1518 bytes (or the configured maximum)?": "Giants",
+					"What kind of error has occurred when an ethernet frame is ignored, typically due to a full buffer?": "Drop"
+				},
+				"Port Statuses": {
+					"What port status indicates an **automatic** deactivation of an interface?": "Error Disabled",
+					"What port status indicates a **manual** deactivation of an interface?": "Administratively Down",
+					"What port status indicates a disabled port due to an incompatible configuration?": "Suspended",
+
+					"What term refers to a port that is repeatedly coming up and going down?": ["Port Flapping", "Flapping"]
+				},
+				"Cabling Errors": {
+					"Cable Metrics": {
+						"What term refers to a loss of signal intensity as it is sent over a particular distance?": "Attenuation"
+					},
+					"Crosstalk Metrics": {
+						"What term refers to interferance from adjacent wires?": ["Crosstalk", "XT"],
+						"What term refers to crosstalk as measured at the transmitting end?": ["Near End Crosstalk", "NEXT"],
+						"What term refers to crosstalk as measured away from the transmitting end?": ["Fear End Crosstalk", "FEXT"],
+						"What term refers to crosstalk from other nearby cables?": ["Alien Crosstalk", "AXT"]
+					}
+				}
 			},
 			"Disaster Recovery": {
 				"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"],

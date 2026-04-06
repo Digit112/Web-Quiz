@@ -12,60 +12,281 @@
 		"typo-forgiveness-level": "medium",
 		"substitutions": [["Wi-Fi", "WiFi"]],
 		"groups": {
-			"The OSI Model": {
-				"incorrect-answers": ["Physical", "Data Link", "Network", "Transport", "Session", "Presentation", "Application"],
-				"groups": {
-					"Layers": {
-						"mode-of-presentation": ["verbatim", "multiple-choice"],
-						"max-choices": 7,
-						"questions": {
-							"Which is OSI layer **1** of the OSI Model?": "Physical",
-							"Which is OSI layer **2** of the OSI Model?": "Data Link",
-							"Which is OSI layer **3** of the OSI Model?": "Network",
-							"Which is OSI layer **4** of the OSI Model?": "Transport",
-							"Which is OSI layer **5** of the OSI Model?": "Session",
-							"Which is OSI layer **6** of the OSI Model?": "Presentation",
-							"Which is OSI layer **7** of the OSI Model?": "Application"
+			"1.0 Networking Concepts": {
+				"1.1 The OSI Model": {
+					"incorrect-answers": ["Physical", "Data Link", "Network", "Transport", "Session", "Presentation", "Application"],
+					"groups": {
+						"Layers": {
+							"mode-of-presentation": ["verbatim", "multiple-choice"],
+							"max-choices": 7,
+							"questions": {
+								"Which is OSI layer **1** of the OSI Model?": "Physical",
+								"Which is OSI layer **2** of the OSI Model?": "Data Link",
+								"Which is OSI layer **3** of the OSI Model?": "Network",
+								"Which is OSI layer **4** of the OSI Model?": "Transport",
+								"Which is OSI layer **5** of the OSI Model?": "Session",
+								"Which is OSI layer **6** of the OSI Model?": "Presentation",
+								"Which is OSI layer **7** of the OSI Model?": "Application"
+							}
+						},
+						"Purposes": {
+							"mode-of-presentation": ["multiple-choice", "verbatim"],
+							"correct-answer-source": "primary",
+							"max-choices": 7,
+							"questions": {
+								"Which OSI layer is the medium over which signals are carried?": ["Physical", "1"],
+								"Which OSI layer is responsible for reliable, direct or nearly-direct communication beween hosts?": ["Data Link", "2"],
+								"Which OSI layer is responsible for the routing of information through potentially massive networks?": ["Network", "3"],
+								"Which OSI layer is responsible for the disassembly and reassembly of large quantities of data?": ["Transport", "4"],
+								"Which OSI layer is responsible for the set-up and tear-down of state?": ["Session", "5"],
+								"Which OSI layer is responsible for compression, translation, and encryption?": ["Presentation", "6"],
+								"Which OSI layer is responsible for providing the user interface for network services?": ["Application", "7"]
+							}
+						},
+						"Protocols": {
+							"Which OSI Layer is IEEE 802.3 Ethernet?": ["Data Link", "2"],
+							"Which OSI Layer is IEEE 802.11 Wi-Fi?": ["Data Link", "2"],
+							"Which OSI Layer is ARP?": ["Data Link", "2"],
+							"Which OSI Layer is Internet Protocol (IP)?": ["Network", "3"],
+							"Which OSI Layer is ICMP?": ["Network", "3"],
+							"Which OSI Layer is Transmission Control Protocol (TCP)?": ["Transport", "4"],
+							"Which OSI Layer is User Datagram Protocol (UDP)?": ["Transport", "4"],
+							"Which OSI Layer is Transport Layer Security (TLS)?": ["Session", "Presentation", "5", "6"],
+							"Which OSI Layer is Secure Sockets Layer (SSL)?": ["Session", "Presentation", "5", "6"],
+							"Which OSI Layer is HTTP?": ["Application", "7"],
+							"Which OSI Layer is FTP?": ["Application", "7"]
+						},
+						"Devices": {
+							"Which OSI Layer is a hub?": ["Physical", "1"],
+							"Which OSI Layer is a cable?": ["Physical", "1"],
+							"Which OSI Layer is a switch?": ["Data Link", "2"],
+							"Which OSI Layer is a network adapter?": ["Data Link", "2"],
+							"Which OSI Layer is an access point?": ["Data Link", "2"],
+							"Which OSI Layer is a router?": ["Network", "3"],
+							"Which OSI Layer is a load balancer?": ["Transport", "4"],
+							"Which OSI Layer is a next-gen firewall?": ["Application", "7"]
 						}
+					}
+				},
+				"1.2 Network Appliances, Applications, and Functions": {
+					"Physical and Virtual Appliances": {
+						"What device forwards IP packets between networks/subnetworks?": "Router",
+						"What device forwards Ethernet frames to their destination?": "Switch",
+						"What device filters packets by IP address or port number?": "Firewall",
+						"What device filters traffic with advanced features such as a built-in VPN Concentrator and deep packet inspection?": {
+							"answers": ["Next-Generation Firewall", "NGFW"], "hidden-answers": "Next-Gen Firewall"
+						},
+						
+						"What device monitors traffic to identify security breaches but does not intervene?": ["Intrusion Detection System", "IDS"],
+						"What device monitors traffic to identify security breaches and intervenes to stop them?": ["Intrusion Prevention System", "IPS"],
+						
+						"What device distributes connections among multiple servers?": "Load Balancer",
+						"What device forwards application traffic between an internal and external network, and may provide content filtering and caching services?": ["Forward Proxy", "Proxy"],
+						
+						"What device provides file-level access to storage drives over a network?": ["Network-Attached Storage", "NAS"],
+						"What type of independant network provides dedicated block-level storage available?": ["Storage Area Network", "SAN"],
+						
+						"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
+							"answers": ["Wireless Access Point", "WAP"], "hidden-answers": ["Access Point", "AP"]
+						},
+						"What device provides central management of wireless access points and may provide security monitoring?": "Wireless LAN Controller"
 					},
-					"Purposes": {
-						"mode-of-presentation": ["multiple-choice", "verbatim"],
-						"max-choices": 7,
-						"questions": {
-							"Which OSI layer is the medium over which signals are carried?": "Physical",
-							"Which OSI layer is responsible for reliable, direct or nearly-direct communication beween hosts?": "Data Link",
-							"Which OSI layer is responsible for the routing of information through potentially massive networks?": "Network",
-							"Which OSI layer is responsible for the disassembly and reassembly of large quantities of data?": "Transport",
-							"Which OSI layer is responsible for the set-up and tear-down of state?": "Session",
-							"Which OSI layer is responsible for compression, translation, and encryption?": "Presentation",
-							"Which OSI layer is responsible for providing the user interface for network services?": "Application"
-						}
+					"Applications": {
+						"What kind of network uses geographically distributed servers and caching to deliver data with minimal latency?": ["Content Delivery Network", "CDN"]
 					},
+					"Functions": {
+						"What term refers to configuration options allowing the prioritization of certain kinds of traffic?": ["Quality of Service", "QoS"],
+						"What term refers to a hard limit placed on the length of time that a process of some kind can execute for?": ["Time to Live", "TTL"],
+						"What kind of network uses encryption to securely link all communications between two computers over an insecure network such as the internet?": ["Virtual Private Network", "VPN"],
+						"What device serves as the central connection device for a VPN?": ["VPN Concentrator", "Concentrator", "Head-End"]
+					}
+				},
+				"1.3 Cloud Concepts and Connectivity": {
+					"Cloud Networking Concepts": {
+						"What term refers to the use of cloud features to replace physical networking devices?": ["Network Function Virtualization", "NFV"],
+						"What term refers to a pool of resources created in the cloud?": ["Virtual Private Cloud", "VPC"],
+						
+						"What term refers to a firewall-like cloud security service allowing rules to be applied to **individual VNICs**?": ["Network Security Group", "NSG"],
+						"What term refers to a firewall-like cloud security service allowing rules to be applied to **subnets**?": ["Network Security List", "NSL"],
+						
+						"What term refers to an application instance facilitating communications with hosts over the internet?": ["VPC Gateway", "Cloud Gateway"],
+						"What term refers to an application instance allowing virtual servers to form outbound connections as if through a router?": "VPC NAT Gateway",
+						"What term refers to an application instance connecting VPCs?": "Transit Gateway",
+						"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint"
+					},
+					"Connectivity Options": {
+						"What term refers to a cloud connectivity option utilizing encrypted connections over the public internet?": ["Cloud VPN", "VPN"],
+						"What term refers to a cloud connectivity option utilizing a dedicated physical line?": ["Direct Connect"]
+					},
+					"Deployment Models": {
+						"In what cloud deployment model does an individual entity provision resources for internal use?": "Private",
+						"In what cloud deployment model does an entity utilize services provisioned and sold by an external party?": "Public",
+						"In what cloud deployment model does an entity utilize some combination of private and public resources?": "Hybrid",
+						"In what cloud deployment model do multiple entities provision resources for use among themselves?": "Community"
+					},
+					"Cloud Features": {
+						"What feature of cloud services allows the long-term expansion of resources to meet growing business needs?": "Scalability",
+						"What feature of cloud services allows the real-time, cost-effective allocation of resources to meet spikes in load?": "Elasticity",
+						"What feature of cloud services allows multiple entities to share individual application or infrastructure instances?": {"answers": "Multitenancy", "hidden-answers": ["Multiple Tenancy", "Multi-Tenancy"]}
+					},
+					"Service Models": {
+						"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
+						"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
+						"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"]
+					},
+					"Cloud Security": {
+						"What network security technology provides VPN-like secure access to cloud infrastructure?": ["Secure Access Service Edge", "SASE"],
+						
+						"What cloud-native security solution focuses strictly on cloud-centric and location-agnostic security services?": ["Security Services Edge", "SSE"],
+						"What cloud-native security solution consolidates security services and WAN capabilities?": ["Secure Access Service Edge", "SASE"]
+					}
+				},
+				"1.4 Ports, Protocols, Services, and Traffic Types": {
 					"Protocols": {
-						"Which OSI Layer is IEEE 802.3 Ethernet?": "Data Link",
-						"Which OSI Layer is IEEE 802.11 Wi-Fi?": "Data Link",
-						"Which OSI Layer is ARP?": "Data Link",
-						"Which OSI Layer is Internet Protocol (IP)?": "Network",
-						"Which OSI Layer is ICMP?": "Network",
-						"Which OSI Layer is Transmission Control Protocol (TCP)?": "Transport",
-						"Which OSI Layer is User Datagram Protocol (UDP)?": "Transport",
-						"Which OSI Layer is Transport Layer Security (TLS)?": ["Session", "Presentation"],
-						"Which OSI Layer is Secure Sockets Layer (SSL)?": ["Session", "Presentation"],
-						"Which OSI Layer is HTTP?": "Application",
-						"Which OSI Layer is FTP?": "Application"
-					},
-					"Devices": {
-						"Which OSI Layer is a hub?": "Physical",
-						"Which OSI Layer is a cable?": "Physical",
-						"Which OSI Layer is a switch?": "Data Link",
-						"Which OSI Layer is a network adapter?": "Data Link",
-						"Which OSI Layer is an access point?": "Data Link",
-						"Which OSI Layer is a router?": "Network",
-						"Which OSI Layer is a load balancer?": "Transport",
-						"Which OSI Layer is a next-gen firewall?": "Application"
+						"Ports": {
+							"mode-of-presentation": ["verbatim", "multiple-choice"],
+							"max-choices": 5, "descendants-share-incorrect-answers": true,
+							"questions": {
+								"What port number is typically used by FTP?": ["20", "21"],
+								"What port number is typically used by SFTP?": "22",
+								"What port number is typically used by SSH?": "22",
+								"What port number is typically used by Telnet?": "23",
+								"What port number is typically used by SMTP?": "25",
+								"What port number is typically used by DNS?": "53",
+								"What port number is typically used by a DHCP server?": "67",
+								"What port number is typically used by a DHCP client?": "68",
+								"What port number is typically used by TFTP?": "69",
+								"What port number is typically used by HTTP?": "80",
+								"What port number is typically used by NTP?": "123",
+								"What port number is typically used by SNMP?": "161",
+								"What port number is typically used by SNMPTRAP?": "162",
+								"What port number is typically used by LDAP?": "389",
+								"What port number is typically used by HTTPS?": "443",
+								"What port number is typically used by SMB?": "445",
+								"What port number is typically used by Syslog?": "514",
+								"What port number is typically used by SMTPS?": {"answers": "587", "hidden-answers": "465"},
+								"What port number is typically used by LDAPS?": "636",
+								"What port number is typically used by DNS over TLS?": "853",
+								"What port number is typically used by FTPS?": ["989", "990"],
+								"What port number is typically used by SQL server?": "1433",
+								"What port number is typically used by RDP?": "3389",
+								"What port number is typically used by SIP?": "5060",
+								"What port number is typically used by SIP over TLS?": "5061"
+							}
+						},
+						"Units of Transmission": {
+							"What is the official name of a transmission unit in Ethernet?": "Frame",
+							"What is the official name of a transmission unit in IP?": "Datagram",
+							"What is the official name of a transmission unit in TCP?": "Segment",
+							"What is the official name of a transmission unit in UDP?": "Datagram"
+						},
+						"Internet Protocols": {
+							"Networking and Transport": {
+								"What protocol provides general-purpose internetwork routing and logical segmentation, and is almost universally adopted?": ["Internet Protocol", "IP"],
+								"What transport protocol provides unreliable but very low-overhead, stateless communication?": ["User Datagram Protocol", "UDP"],
+								"What transport protocol provides reliable in-order delivery of data, requiring the recipient to acknowledge packets?": ["Transport Control Protocol", "TCP"],
+								"What protocol reports errors in IP processing and routing, and is useful for some common diagnostics?": ["Internet Control Message Protocol", "ICMP"],
+								"What protocol provides the illusion of local network-layer connectivity to hosts connected across the internet via encapsulation?": ["Generic Routing Encapsulation", "GRE"]
+							},
+							"IPSec": {
+								"What protocol provides layer-3 encryption for confidentiality as well as digital signatures for integrity?": ["Internet Protocol Security", "IPSec"],
+								"What term refers to the setup phase of an IPSec session?": ["Internet Key Exchange", "IKE"],
+								"What IPSec protocol validates the integrity of information received via IPSec using digital signatures?": ["Authenticated Header", "AH"],
+								"What IPSec protocol ensures the confidentiality of information received via IPSec using encryption?": ["Encapsulation Security Payload", "ESP"],
+								
+								"What IPSec mode **does not** encrypt the IP header?": "Transport",
+								"What IPSec mode **does** encrypt the IP header?": "Tunnel"
+							}
+						},
+						"Descriptions": {
+							"Low-Layer Protocols": {
+								"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
+								"What protocol enables very high speed data transfer between storage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"],
+								
+								"What protocol is commonly used to translate IP addresses to MAC addresses for communication within a subnet?": ["Address Resolution Protocol", "ARP"],
+								"What protocol allows self-assignment of (typically non-routeable) IPv4 addresses unique on the attached LAN?": ["Automatic Private IP Addressing", "APIPA"]
+							},
+							"DHCP": {
+								"Fundamentals": {
+									"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"]
+								},
+								"DORA": {
+									"What is step **1** in the DHCP process?": "Discover",
+									"What is step **2** in the DHCP process?": "Offer",
+									"What is step **3** in the DHCP process?": "Request",
+									"What is step **4** in the DHCP process?": "Acknowledge"
+								},
+								"Features": {
+									"What technology allows a DHCP request to traverse subnets?": ["DHCP Helper", "DHCP Relay"],
+									"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"]
+								}
+							},
+							"DNS": {
+								"Fundamentals": {
+									"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
+								
+									"What term describes a DNS result coming from the server with the original records?": ["Authoritative Answer", "Authoritative"],
+									"What term describes a DNS result coming from the server with unoriginal, cached records?": ["Non-Authoritative Answer", "Non-Authoritative"],
+									
+									"What term describes the maximum life of a cached DNS record?": ["Time to Live", "TTL"]
+								},
+								"Records": {
+									"substitutions": [[" Record ", ""]],
+									"questions": {
+										"What DNS record type provides zone information and must be present in every DNS zone?": ["Start of Authority", "SOA"],
+										"What DNS record type provides an IPv4 address?": "A",
+										"What DNS record type provides an IPv6 address?": "AAAA",
+										"What DNS record type maps an alternative name onto an existing domain?": ["Canonical Name", "CNAME"],
+										"What DNS record type specifies the name of a mail server?": ["Mail Exchanger", "MX"],
+										"What DNS record type can contain arbitrary notes?": ["Text", "TXT"],
+										"What DNS record type specifies an authoritative server for a DNS zone?": ["Name Server", "NS"],
+										"What DNS record type provides a mapping from IP address onto a domain name?": ["Pointer", "PTR"]
+									}
+								},
+								"TXT Record Usage": {
+									"What technology uses TXT records to administratively restrict the range of IP addresses that can send mail from a domain?": ["Sender Policy Framework", "SPF"],
+									"What technology uses TXT records to publish public keys that can validate digital signatures on emails?": ["Domain Keys Identified Mail", "DKIM"]
+								}
+							},
+							"FTP/SFTP/TFTP": {
+								"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "SFTP", "FTP"],
+								"What protocol is used to transfer small amounts of information with minimal overhead?": ["Trivial File Transfer Protocol", "TFTP"]
+							},
+							"HTTP/HTTPS": {
+								"What protocol is typically used to transfer webpages?": ["HyperText Transfer Protocol", "HTTPS", "HTTP"]
+							},
+							"NTP": {
+								"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
+								"What protocol ensures the integrity of NTP queries?": ["Network Time Security", "NTS"]
+							},
+							"PTP": {
+								"What protocol provides sub-microsecond precision time synchronization using a dedicated hardware device?": ["Precision Time Protocol", "PTP"]
+							},
+							"RDP": {
+								"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
+							},
+							"SMTP": {
+								"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"]
+							},
+							"SNMP": {
+								"What protocol is used to remotely query device metrics?": ["Simple Network Management Protocol", "SNMP"],
+								
+								"In SNMP, what is used to identify a particular metric or managed object within the system?": ["Object Identifier", "OID"],
+								"In SNMP, what term refers to a database of metrics stored on a device?": ["Management Information Base", "MIB"],
+								"In SNMP, what term refers to a configured threshhold which can trigger an alert when exceeded?": ["SNMP Trap", "Trap"],
+								"In SNMP, what software pulls all available information from a remote MIB?": "MIB Walker",
+								"In SNMP, what term refers to a shared password used to access metrics on a device?": "Community String"
+							},
+							"SSH": {
+								"What protocol is used to securely remotely control computers via a command line?": ["Secure Shell", "SSH"]
+							},
+							"Telnet": {
+								"What outdated protocol provides unencrypted communication with a remote computer?": "Telnet"
+							}
+						}
 					}
 				}
-			},
+			}
 			"Layer 1 Specifications": {
 				"IEEE 802.3 Ethernet": {
 					"Suffixes": {
@@ -331,29 +552,6 @@
 				}
 			},
 			"Network Devices": {
-				"Hardware": {
-					"What device forwards IP packets between networks/subnetworks?": "Router",
-					"What device forwards Ethernet frames to their destination?": "Switch",
-					"What device filters packets by IP address or port number?": "Firewall",
-					"What device filters traffic with advanced features such as a built-in VPN Concentrator and deep packet inspection?": {
-						"answers": ["Next-Generation Firewall", "NGFW"], "hidden-answers": "Next-Gen Firewall"
-					},
-					
-					"What device monitors traffic to identify security breaches but does not intervene?": ["Intrusion Detection System", "IDS"],
-					"What device monitors traffic to identify security breaches and intervenes to stop them?": ["Intrusion Prevention System", "IPS"],
-					
-					"What device distributes connections among multiple servers?": "Load Balancer",
-					"What device forwards application traffic between an internal and external network, and may provide content filtering and caching services?": ["Forward Proxy", "Proxy"],
-					
-					"What device provides file-level access to storage drives over a network?": ["Network-Attached Storage", "NAS"],
-					
-					"What term refers to a device that converts 802.11 Wi-Fi signals to 802.3 Ethernet messages?": {
-						"answers": ["Wireless Access Point", "WAP"], "hidden-answers": ["Access Point", "AP"]
-					},
-					"What device provides central management of wireless access points and may provide security monitoring?": "Wireless LAN Controller",
-
-					"What kind of device determines whether a twisted-pair cable qualifies as a certain category?": ["Cable Tester", "Cable Certifier"]
-				},
 				"Tools": {
 					"What networking tool allows you to locate a wire by sending a signal through a port?": ["Tone Generator", "Toner Probe"],
 					"What networking tool validates that a cable's wires have continuity and aren't crossed?": "Cable Tester",
@@ -368,173 +566,13 @@
 			"Network Functions": {
 				"Concepts": {
 					"What term refers broadly to traffic moving between hosts within a data center?": "East-West",
-					"What term refers broadly to traffic moving in or out of a data center?": "North-South",
-					
-					"What term refers to a dedicated local network consisting of devices providing data access?": ["Storage Area Network", "SAN"]
-				},
-				"Content Delivery": {
-					"What kind of network uses geographically distributed servers and caching to deliver data with minimal latency?": ["Content Delivery Network", "CDN"]
-				},
-				"VPNs": {
-					"What kind of network uses encryption to securely link all communications between two computers over an insecure network such as the internet?": ["Virtual Private Network", "VPN"],
-					"What device serves as the central connection device for a VPN?": ["VPN Concentrator", "Concentrator", "Head-End"]
-				},
-				"Quality of Service": {
-					"What term refers to configuration options allowing the prioritization of certain kinds of traffic?": ["Quality of Service", "QoS"],
-					"What term refers to a hard limit placed on the length of time that a process of some kind can execute for?": ["Time to Live", "TTL"]
+					"What term refers broadly to traffic moving in or out of a data center?": "North-South"
 				},
 				"Communication Types": {
 					"What type of transmission is directed to a single host?": "Unicast",
 					"What type of transmission is directed to many hosts?": "Multicast",
 					"What type of transmission is directed to one of many hosts?": "Anycast",
 					"What type of transmission is directed to every available host?": "Broadcast"
-				}
-			},
-			"Protocols": {
-				"Ports": {
-					"mode-of-presentation": ["verbatim", "multiple-choice"],
-					"max-choices": 5, "descendants-share-incorrect-answers": true,
-					"groups": {
-						"Core Ports": {
-							"What port number is typically used by FTP?": ["20", "21"],
-							"What port number is typically used by SFTP?": "22",
-							"What port number is typically used by SSH?": "22",
-							"What port number is typically used by Telnet?": "23",
-							"What port number is typically used by SMTP?": "25",
-							"What port number is typically used by DNS?": "53",
-							"What port number is typically used by a DHCP server?": "67",
-							"What port number is typically used by a DHCP client?": "68",
-							"What port number is typically used by TFTP?": "69",
-							"What port number is typically used by HTTP?": "80",
-							"What port number is typically used by NTP?": "123",
-							"What port number is typically used by SNMP?": "161",
-							"What port number is typically used by SNMPTRAP?": "162",
-							"What port number is typically used by LDAP?": "389",
-							"What port number is typically used by HTTPS?": "443",
-							"What port number is typically used by SMB?": "445",
-							"What port number is typically used by Syslog?": "514",
-							"What port number is typically used by SMTPS?": {"answers": "587", "hidden-answers": "465"},
-							"What port number is typically used by LDAPS?": "636",
-							"What port number is typically used by SQL server?": "1433",
-							"What port number is typically used by RDP?": "3389",
-							"What port number is typically used by SIP?": "5060",
-							"What port number is typically used by SIP over TLS?": "5061"
-						},
-						"Additional Ports": {
-							"What port number is typically used by POP3?": "110",
-							"What port number is typically used by IMAP?": "143",
-							
-							"What port number is typically used by DNS over TLS?": "853",
-							"What port number is typically used by FTPS?": ["989", "990"],
-							
-							"What port number is typically used by IMAP?": "993",
-							"What port number is typically used by POP3?": "995"
-						}
-					}
-				},
-				"Descriptions": {
-					"Units of Transmission": {
-						"What is the official name of a transmission unit in Ethernet?": "Frame",
-						"What is the official name of a transmission unit in IP?": "Datagram",
-						"What is the official name of a transmission unit in TCP?": "Segment",
-						"What is the official name of a transmission unit in UDP?": "Datagram"
-					},
-					"Low-Layer Protocols": {
-						"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
-						"What protocol enables very high speed data transfer between storage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"],
-						
-						"What protocol reports errors in IP processing and routing, and is useful for some common diagnostics?": ["Internet Control Message Protocol", "ICMP"],
-						"What protocol provides the illusion of local network-layer connectivity to hosts connected across the internet via encapsulation?": ["Generic Routing Encapsulation", "GRE"],
-						"What protocol is commonly used to translate IP addresses to MAC addresses for communication within a subnet?": ["Address Resolution Protocol", "ARP"],
-						"What protocol allows self-assignment of (typically non-routeable) IPv4 addresses unique on the attached LAN?": ["Automatic Private IP Addressing", "APIPA"]
-					},
-					"IPSec": {
-						"What protocol provides layer-3 encryption for confidentiality as well as digital signatures for integrity?": ["Internet Protocol Security", "IPSec"],
-						"What term refers to the setup phase of an IPSec session?": ["Internet Key Exchange", "IKE"],
-						
-						"What IPSec protocol validates the integrity of information received via IPSec using digital signatures?": ["Authenticated Header", "AH"],
-						"What IPSec protocol ensures the confidentiality of information received via IPSec using encryption?": ["Encapsulation Security Payload", "ESP"],
-						
-						"What IPSec mode **does not** encrypt the IP header?": "Transport",
-						"What IPSec mode **does** encrypt the IP header?": "Tunnel"
-					},
-					"DHCP": {
-						"Fundamentals": {
-							"What protocol dynamically assigns IP addresses to the hosts on a network?": ["Dynamic Host Configuration Protocol", "DHCP"]
-						},
-						"DORA": {
-							"What is step **1** in the DHCP process?": "Discover",
-							"What is step **2** in the DHCP process?": "Offer",
-							"What is step **3** in the DHCP process?": "Request",
-							"What is step **4** in the DHCP process?": "Acknowledge"
-						},
-						"Features": {
-							"What technology allows a DHCP request to traverse subnets?": ["DHCP Helper", "DHCP Relay"],
-							"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"]
-						}
-					},
-					"DNS": {
-						"Fundamentals": {
-							"What protocol allows the translation of domain names into IP addresses?": ["Domain Name Service", "DNS"],
-						
-							"What term describes a DNS result coming from the server with the original records?": ["Authoritative Answer", "Authoritative"],
-							"What term describes a DNS result coming from the server with unoriginal, cached records?": ["Non-Authoritative Answer", "Non-Authoritative"],
-							
-							"What term describes the maximum life of a cached DNS record?": ["Time to Live", "TTL"]
-						},
-						"Records": {
-							"substitutions": [[" Record ", ""]],
-							"questions": {
-								"What DNS record type provides zone information and must be present in every DNS zone?": ["Start of Authority", "SOA"],
-								"What DNS record type provides an IPv4 address?": "A",
-								"What DNS record type provides an IPv6 address?": "AAAA",
-								"What DNS record type maps an alternative name onto an existing domain?": ["Canonical Name", "CNAME"],
-								"What DNS record type specifies the name of a mail server?": ["Mail Exchanger", "MX"],
-								"What DNS record type can contain arbitrary notes?": ["Text", "TXT"],
-								"What DNS record type specifies an authoritative server for a DNS zone?": ["Name Server", "NS"],
-								"What DNS record type provides a mapping from IP address onto a domain name?": ["Pointer", "PTR"]
-							}
-						},
-						"TXT Record Usage": {
-							"What technology uses TXT records to administratively restrict the range of IP addresses that can send mail from a domain?": ["Sender Policy Framework", "SPF"],
-							"What technology uses TXT records to publish public keys that can validate digital signatures on emails?": ["Domain Keys Identified Mail", "DKIM"]
-						}
-					},
-					"FTP/SFTP/TFTP": {
-						"What protocol is used to retrieve directory listings and transfer files?": ["File Transfer Protocol", "SFTP", "FTP"],
-						"What protocol is used to transfer small amounts of information with minimal overhead?": ["Trivial File Transfer Protocol", "TFTP"]
-					},
-					"HTTP/HTTPS": {
-						"What protocol is typically used to transfer webpages?": ["HyperText Transfer Protocol", "HTTPS", "HTTP"]
-					},
-					"NTP": {
-						"What protocol is used to sychronize time between networked devices?": ["Network Time Protocol", "NTP"],
-						"What protocol ensures the integrity of NTP queries?": ["Network Time Security", "NTS"]
-					},
-					"PTP": {
-						"What protocol provides sub-microsecond precision time synchronization using a dedicated hardware device?": ["Precision Time Protocol", "PTP"]
-					},
-					"RDP": {
-						"What protocol allows a user to remotely view and control another host's desktop?": ["Remote Desktop Protocol", "RDP"]
-					},
-					"SMTP": {
-						"What protocol is used to transmit emails to a mail server?": ["Simple Mail Transfer Protocol", "SMTP"]
-					},
-					"SNMP": {
-						"What protocol is used to remotely query device metrics?": ["Simple Network Management Protocol", "SNMP"],
-						
-						"In SNMP, what is used to identify a particular metric or managed object within the system?": ["Object Identifier", "OID"],
-						"In SNMP, what term refers to a database of metrics stored on a device?": ["Management Information Base", "MIB"],
-						"In SNMP, what term refers to a configured threshhold which can trigger an alert when exceeded?": ["SNMP Trap", "Trap"],
-						"In SNMP, what software pulls all available information from a remote MIB?": "MIB Walker",
-						"In SNMP, what term refers to a shared password used to access metrics on a device?": "Community String"
-					},
-					"SSH": {
-						"What protocol is used to securely remotely control computers via a command line?": ["Secure Shell", "SSH"]
-					},
-					"Telnet": {
-						"What outdated protocol provides unencrypted communication with a remote computer?": "Telnet"
-					}
 				}
 			},
 			"Wireless Networking": {
@@ -559,35 +597,6 @@
 					"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
 					"What variant of WPA uses a Pre-shared key (PSK)?": "Personal",
 					"What variant of WPA uses RADIUS for authentication?": "Enterprise"
-				}
-			},
-			"Cloud Networking": {
-				"Cloud Networking Concepts": {
-					"What term refers to the use of cloud features to replace physical networking devices?": ["Network Function Virtualization", "NFV"],
-					"What term refers to a pool of resources created in the cloud?": ["Virtual Private Cloud", "VPC"],
-					"What term refers to an application instance facilitating communications with hosts over the internet?": ["VPC Gateway", "Cloud Gateway"],
-					"What term refers to an application instance connecting VPCs?": "Transit Gateway",
-					"What term refers to an application instance allowing virtual servers to form outbound connections as if through a router?": "VPC NAT Gateway",
-					"What term refers to an application instance allowing direct connection between cloud providers?": "VPC Endpoint",
-					"What term refers to a security configuration which applies to a VPC and acts like a firewall?": "Network Security Group"
-				},
-				"Cloud Service Models": {
-					"What cloud service model provisions application services?": ["Software as a Service", "SaaS"],
-					"What cloud service model provisions application and database services to be utilized by an application?": ["Platform as a Service", "PaaS"],
-					"What cloud service model provisions IT resources such as servers and load balancers?": ["Infrastructure as a Service", "IaaS"]
-				},
-				"Cloud Connectivity": {
-					"What term refers to a cloud connectivity option utilizing encrypted connections over the public internet?": ["Cloud VPN", "VPN"],
-					"What term refers to a cloud connectivity option utilizing a dedicated physical line?": ["Direct Connect"]
-				},
-				"Cloud Security": {
-					"What term refers to a firewall-like cloud security service allowing the application of rules to individual VNICs?": ["Network Security Group", "NSG"],
-					"What term refers to a firewall-like cloud security service allowing the application of rules to subnets?": ["Network Security List", "NSL"],
-					
-					"What network security technology provides VPN-like secure access to cloud infrastructure?": ["Secure Access Service Edge", "SASE"],
-					
-					"What cloud-native security solution focuses strictly on cloud-centric and location-agnostic security services?": ["Security Services Edge", "SSE"],
-					"What cloud-native security solution consolidates security services and WAN capabilities?": ["Secure Access Service Edge", "SASE"]
 				}
 			},
 			"Transceivers": {
@@ -752,8 +761,6 @@
 					"What uniquely identifies a VXLAN?": ["VXLAN Network Identifier", "VNI"],
 					"What technology allows VXLAN frames to traverse IP networks?": ["VXLAN Tunneling", "Layer 2 Encapsulation"]
 				}
-			},
-			"Network Documentation": {
 			},
 			"Network Troubleshooting": {
 				"CompTIA Troubleshooting Methodology": {

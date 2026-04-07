@@ -181,8 +181,11 @@
 							"What is the official name of a transmission unit in UDP?": "Datagram"
 						},
 						"Internet Protocols": {
-							"Networking and Transport": {
+							"Internet Protocol": {
 								"What protocol provides general-purpose internetwork routing and logical segmentation, and is almost universally adopted?": ["Internet Protocol", "IP"],
+								"What term refers to the IP address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"],
+							},
+							"Networking and Transport": {
 								"What transport protocol provides unreliable but very low-overhead, stateless communication?": ["User Datagram Protocol", "UDP"],
 								"What transport protocol provides reliable in-order delivery of data, requiring the recipient to acknowledge packets?": ["Transport Control Protocol", "TCP"],
 								"What protocol reports errors in IP processing and routing, and is useful for some common diagnostics?": ["Internet Control Message Protocol", "ICMP"],
@@ -194,17 +197,22 @@
 								"What IPSec protocol validates the integrity of information received via IPSec using digital signatures?": ["Authenticated Header", "AH"],
 								"What IPSec protocol ensures the confidentiality of information received via IPSec using encryption?": ["Encapsulation Security Payload", "ESP"],
 								
-								"What IPSec mode **does not** encrypt the IP header?": "Transport",
+								"What IPSec mode **does not encrypt** the IP header?": "Transport",
 								"What IPSec mode **does** encrypt the IP header?": "Tunnel"
 							}
 						},
+						"Traffic Types": {
+							"What type of transmission is directed to a single host?": "Unicast",
+							"What type of transmission is directed to many hosts?": "Multicast",
+							"What type of transmission is directed to one of many hosts?": "Anycast",
+							"What type of transmission is directed to every available host?": "Broadcast"
+						},
 						"Descriptions": {
-							"Low-Layer Protocols": {
-								"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
-								"What protocol enables very high speed data transfer between storage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"],
-								
-								"What protocol is commonly used to translate IP addresses to MAC addresses for communication within a subnet?": ["Address Resolution Protocol", "ARP"],
-								"What protocol allows self-assignment of (typically non-routeable) IPv4 addresses unique on the attached LAN?": ["Automatic Private IP Addressing", "APIPA"]
+							"ARP": {
+								"What protocol is commonly used to translate IP addresses to MAC addresses for communication within a subnet?": ["Address Resolution Protocol", "ARP"]
+							},
+							"APIPA": {
+								"What protocol allows self-assignment of link-local IPv4 addresses?": ["Automatic Private IP Addressing", "APIPA"]
 							},
 							"DHCP": {
 								"Fundamentals": {
@@ -284,125 +292,334 @@
 								"What outdated protocol provides unencrypted communication with a remote computer?": "Telnet"
 							}
 						}
-					}
-				}
-			}
-			"Layer 1 Specifications": {
-				"IEEE 802.3 Ethernet": {
-					"Suffixes": {
-						"What cable type is associated with the **-T** suffixes on Ethernet standards?": ["Twisted-Pair Copper", "Twisted-Pair"],
-						"What cable type is associated with the **-C** suffixes on Ethernet standards?": ["Twinaxial", "Twinax"],
-						"What cable type is associated with the **2**, **5**, or **36** suffixes on Ethernet standards?": ["Coaxial", "Coax"],
-						
-						"What cable type is associated with the **-S** suffixes on Ethernet standards?": ["Multimode Fiber", "Multimode"],
-						"What cable type is associated with the **-L** suffixes on Ethernet standards?": ["Single Mode Fiber", "Single Mode"],
-						"What cable type is associated with the **-E** and **-Z** suffixes on Ethernet standards?": ["Single Mode Fiber", "Single Mode"]
 					},
-					"Cable Categories": {
-						"What is the minimum cable category which supports 1000BASE-T?": ["Category 5", "Cat 5", "5"],
-						"What is the minimum cable category which supports 10GBASE-T?": ["Category 6", "Cat 6", "6"],
-						"What is the minimum cable category which supports 40GBASE-T?": ["Category 8", "Cat 8", "8"]
-					}
 				},
-				"IEEE 802.11 Wi-Fi": {
-					"Concepts": {
-						"What term refers to a central frequency which can be used by a single device for transmission at one time?": "Channel",
-						"What technology allows a WAP to automatically direct devices to use the frequencies with less utilization?": "Band Steering"
-					},
-					"Generation Names": {
-						"descendants-share-incorrect-answers": true,
-						"mode-of-presentation": ["multiple-choice", "verbatim"],
-						"max-choices": 4,
-						"questions": {
-							"Which version of 802.11 is also known as Wi-Fi 4?": ["802.11n", "n"],
-							"Which version of 802.11 is also known as Wi-Fi 5?": ["802.11ac", "ac"],
-							"Which version of 802.11 is also known as Wi-Fi 6?": ["802.11ax", "ax"],
-							"Which version of 802.11 is also known as Wi-Fi 7?": ["802.11be", "be"]
-						}
-					},
-					"Feature Support": {
-						"descendants-share-incorrect-answers": true,
-						"mode-of-presentation": ["multiple-choice", "verbatim"],
-						"max-choices": 2,
-						"substitutions": [["WiFi", "Wi-Fi"]],
-						"typo-forgiveness-level": "none",
-						"questions": {
-							"Which version(s) of 802.11 Wi-Fi utilize the 2.4GHz band?": {
-								"answers": ["802.11b", "802.11g", "802.11n", "802.11ax", "802.11be"],
-								"hidden-answers": ["b", "g", "n", "ax", "be", "Wi-Fi 4", "Wi-Fi 6", "Wi-Fi 7"]
+				"1.5 Transmission Media and Transceivers": {
+					"Wireless": {
+						"IEEE 802.11 Wi-Fi": {
+							"Concepts": {
+								"What layer-2 IEEE protocol facilitates communication between devices connected wirelessly?": {
+									"answers": ["802.11 Wi-Fi", "802.11", "Wi-Fi"],
+									"hidden-answers": ["IEEE 802.11 Wi-Fi", "IEEE 802.11", "IEEE Wi-Fi", "802.11 WiFi", "WiFi", "IEEE 802.11 WiFi", "IEEE WiFi"]
+								},
+								
+								"What term refers to a central frequency which can be used by a single device for transmission at one time?": "Channel",
+								"What technology allows a WAP to automatically direct devices to use the frequencies with less utilization?": "Band Steering",
+								
+								"What IEEE standard addresses interference issues in the 5GHz band and was originally implemented in response to European regulations?": {
+									"typo-forgiveness-level": "none",
+									"answers": ["IEEE 802.11h-2003", "802.1h"], "hidden-answers": ["802.11h-2003", "IEEE 802.11h"]
+								}
 							},
-							"Which version(s) of 802.11 Wi-Fi utilize the 5GHz band?": {
-								"answers": ["802.11a", "802.11n", "802.11ac", "802.11ax", "802.11be"],
-								"hidden-answers": ["a", "n", "ac", "ax", "be", "Wi-Fi 4", "Wi-Fi 5", "Wi-Fi 6", "Wi-Fi 7"]
+							"Generation Names": {
+								"descendants-share-incorrect-answers": true,
+								"mode-of-presentation": ["multiple-choice", "verbatim"],
+								"max-choices": 4,
+								"questions": {
+									"Which version of 802.11 is also known as Wi-Fi 4?": ["802.11n", "n"],
+									"Which version of 802.11 is also known as Wi-Fi 5?": ["802.11ac", "ac"],
+									"Which version of 802.11 is also known as Wi-Fi 6?": ["802.11ax", "ax"],
+									"Which version of 802.11 is also known as Wi-Fi 7?": ["802.11be", "be"]
+								}
 							},
-							"Which version(s) of 802.11 Wi-Fi utilize the 6GHz band?": {
-								"answers": ["802.11ax", "802.11be"],
-								"hidden-answers": ["ax", "be", "Wi-Fi 6", "Wi-Fi 7"]
+							"Band Usage": {
+								"descendants-share-incorrect-answers": true,
+								"mode-of-presentation": ["multiple-choice", "verbatim"],
+								"max-choices": 2,
+								"substitutions": [["WiFi", "Wi-Fi"]],
+								"typo-forgiveness-level": "none",
+								"questions": {
+									"Which version(s) of 802.11 Wi-Fi utilize the 2.4GHz band?": {
+										"answers": ["802.11b", "802.11g", "802.11n", "802.11ax", "802.11be"],
+										"hidden-answers": ["b", "g", "n", "ax", "be", "Wi-Fi 4", "Wi-Fi 6", "Wi-Fi 7"]
+									},
+									"Which version(s) of 802.11 Wi-Fi utilize the 5GHz band?": {
+										"answers": ["802.11a", "802.11n", "802.11ac", "802.11ax", "802.11be"],
+										"hidden-answers": ["a", "n", "ac", "ax", "be", "Wi-Fi 4", "Wi-Fi 5", "Wi-Fi 6", "Wi-Fi 7"]
+									},
+									"Which version(s) of 802.11 Wi-Fi utilize the 6GHz band?": {
+										"answers": ["802.11ax", "802.11be"],
+										"hidden-answers": ["ax", "be", "Wi-Fi 6", "Wi-Fi 7"]
+									}
+								}
 							},
-							
-							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 54Mbps?": {
-								"answers": ["802.11a", "802.11g"],
-								"hidden-answers": ["a", "g"]
-							},
-							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 11Mbps?": {
-								"answers": ["802.11b"],
-								"hidden-answers": ["b"]
-							},
-							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 600Mbps?": {
-								"answers": ["802.11n"],
-								"hidden-answers": ["n", "Wi-Fi 4"]
-							},
-							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 6933Mbps?": {
-								"answers": ["802.11ac"],
-								"hidden-answers": ["ac", "Wi-Fi 5"]
-							},
-							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 9608Mbps?": {
-								"answers": ["802.11ax"],
-								"hidden-answers": ["ax", "Wi-Fi 6"]
-							},
-							"Which version(s) of 802.11 Wi-Fi has a theoretical maximum speed of 46120Mbps?": {
-								"answers": ["802.11be"],
-								"hidden-answers": ["be", "Wi-Fi 7"]
+							"Maximum Link Rates": {
+								"descendants-share-incorrect-answers": true,
+								"mode-of-presentation": ["multiple-choice", "verbatim"],
+								"max-choices": 6,
+								"typo-forgiveness-level": "none",
+								"questions": {
+									"What is the maximum configurable link rate of 802.11a?": "54Mbps",
+									"What is the maximum configurable link rate of 802.11b?": "11Mbps",
+									"What is the maximum configurable link rate of 802.11g?": "54Mbps",
+									"What is the maximum configurable link rate of 802.11n?": "600Mbps",
+									"What is the maximum configurable link rate of 802.11ac?": ["6933Mbps", "6.9Gbps"],
+									"What is the maximum configurable link rate of 802.11ax?": ["9608Mbps", "9.6Gbps"],
+									"What is the maximum configurable link rate of 802.11be?": ["46120Mbps", "46Gbps"]
+								}
 							}
 						}
 					},
-					"Maximum Link Rates": {
-						"descendants-share-incorrect-answers": true,
-						"mode-of-presentation": ["multiple-choice", "verbatim"],
-						"max-choices": 6,
-						"typo-forgiveness": "none",
-						"questions": {
-							"What is the maximum configurable link rate of 802.11a?": "54Mbps",
-							"What is the maximum configurable link rate of 802.11b?": "11Mbps",
-							"What is the maximum configurable link rate of 802.11g?": "54Mbps",
-							"What is the maximum configurable link rate of 802.11n?": "600Mbps",
-							"What is the maximum configurable link rate of 802.11ac?": ["6933Mbps", "6.9Gbps"],
-							"What is the maximum configurable link rate of 802.11ax?": ["9608Mbps", "9.6Gbps"],
-							"What is the maximum configurable link rate of 802.11be?": ["46120Mbps", "46Gbps"]
+					"Wired": {
+						"IEEE 802.3 Ethernet": {
+							"Concepts": {
+								"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
+								
+								"What term refers to a set of devices and cables where collisions can occur?": "Collision Domain",
+								"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
+								
+								"What type of address is typically used by layer-2 protocols?": ["MAC Address", "MAC"],
+								"What is the length of a MAC address in octets?": "6",
+								
+								"What is the minimum size of an Ethernet frame in octets?": "64"
+								"What technique allows Ethernet frames to be larger than defined in the original specification?": "Jumbo Frames"
+							},
+							"Suffixes": {
+								"What cable type is mosst associated with the **-T** suffixes on Ethernet standards?": ["Twisted-Pair Copper", "Twisted-Pair"],
+								"What cable type is mosst associated with the **-C** suffixes on Ethernet standards?": ["Twinaxial", "Twinax"],
+								"What cable type is mosst associated with the **2**, **5**, or **36** suffixes on Ethernet standards?": ["Coaxial", "Coax"],
+								
+								"What cable type is mosst associated with the **-S** suffixes on Ethernet standards?": ["Multimode Fiber", "Multimode"],
+								"What cable type is mosst associated with the **-L** suffixes on Ethernet standards?": ["Single Mode Fiber", "Single Mode"],
+								"What cable type is mosst associated with the **-E** and **-Z** suffixes on Ethernet standards?": ["Single Mode Fiber", "Single Mode"]
+							},
+							"Cable Categories for Ethernet Standards": {
+								"What is the minimum cable category which supports 1000BASE-T?": ["Category 5", "Cat 5", "5"],
+								"What is the minimum cable category which supports 10GBASE-T?": ["Category 6", "Cat 6", "6"],
+								"What is the minimum cable category which supports 40GBASE-T?": ["Category 8", "Cat 8", "8"]
+							}
+						},
+						"Fibre Channel": {
+							"What protocol enables very high speed data transfer between storage devices or networks of storage devices and hosts?": ["Fibre Channel", "FC"]
+						},
+						"Cable & Connector Types": {
+							"Copper Cables": {
+								"What cable uses a single metal core with dielectric insulator and metal braid shielding?": ["Coaxial Cable", "Coaxial", "Coax"],
+								"What cable uses a pair of metal cores and has a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"],
+								
+								"What cable is commonly used for high-speed, very low range connections in data centers over twinax cable?": ["Direct Attach Copper", "DAC"],
+								"What cable provides a low-power, low-latency connection between SFP (or similar) transceiver ports in a data center?": ["Direct Attach Copper", "DAC"]
+							},
+							"Copper Connectors": {
+								"What type of copper cable connection uses two or four of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
+								"What type of copper cable connection uses eight of eight available positions within the plug?": ["Registered Jack type 45", "RJ45"],
+								
+								"What type of copper cable connection is used for DSL and analog phone connections?": ["Registered Jack type 11", "RJ11"],
+								"What type of copper cable connection is used for Ethernet connections?": ["Registered Jack type 45", "RJ45"],
+								
+								"What type of copper cable connection is most commonly found on RG-6 coaxial cable?": ["F-Connector", "F-Type"],
+								"What type of copper cable connection is commonly used as the input for a cable modem?": ["F-Connector", "F-Type"],
+								
+								"What type of copper cable connection is found on twinax and coax cable, often carrying WAN links or video signals?": ["Bayonet Neill-Counceelman", "BNC"]
+							},
+							"Fiber Cables": {
+								"substitutions": [["Multi Mode", "Multimode"], ["Multi-Mode", "Multimode"], ["Singlemode", "Single Mode"]],
+								"questions": {
+									"What type of fiber cable has a range of up to around 2km?": "Multimode",
+									"What type of fiber cable has cheaper optics?": "Multimode",
+									"What type of fiber cable has a range of up to as much as 100km?": "Single Mode",
+									"What type of fiber cable has more expensive optics?": "Single Mode"
+								}
+							},
+							"Fiber Conenctors": {
+								"What kind of fiber connector snaps in place and can simply be pulled out, and is recognizeable by its rectangular housing?": ["Subscriber Connector", "SC"],
+								"What kind of fiber connector snaps in place with a clip that must be pushed down to release the plug?": ["Local Connector", "LC"],
+								"What kind of fiber connector uses a bayonet connector requiring a slight twist to lock in?": ["Straight Tip", "ST"],
+								"What kind of fiber connector contains 12 fiber lines?": ["Multi-fiber Push On", "MPO"]
+							},
+							"Plenum": {
+								"What term refers to an air circulation space in a building, through which cables must have a special rating?": ["Plenum Space", "Plenum"],
+								"What cable has a jacket made of FEP or low-smoke PVC so as to burn without producing toxic fumes?": ["Plenum-Rated Cable", "Plenum Cable", "Plenum"]
+							}
+						},
+						"Transceivers": {
+							"verbatim block": {
+								"hidden": true,
+								"questions": {
+									"What small, slottable IT device is used in a data center to convert to and from a common transmission format and occasionally to multiplex signals?": ["Transceiver Module", "Transceiver"]
+								}
+							},
+							"multiple-choice block": {
+								"hidden": true,
+								"mode-of-presentation": ["verbatim", "multiple-choice"],
+								"max-choices": 4,
+								"incorrect-answers": ["SFP", "SFP+", "QSFP", "QSFP+"],
+								"questions": {
+									"What type of transceiver commonly provides **1Gbps** throughput?": ["Small Form-factor Pluggable", "SFP"],
+									"What type of transceiver commonly provides **10Gbps** throughput?": ["Enhanced Small Form-factor Pluggable", "SFP+"],
+									"What type of transceiver commonly provides **4Gbps** throughput?": ["Quad Small Form-factor Pluggable", "QSFP"],
+									"What type of transceiver commonly provides **40Gbps** throughput?": ["Enhanced Quad Small Form-factor Pluggable", "QSFP+"]
+								}
+							}
+						},
+					}
+				},
+				"1.6 Network Topologies, Architecturs, and Types": {
+					"Three Tier": {
+						"Which tier of the three-tier network model refers to the center of the network?": "Core",
+						"Which tier of the three-tier network model refers to the devices between the center and the edge of the network?": "Distribution",
+						"Which tier of the three-tier network model refers to the edge of the network?": "Access",
+						
+						"Which tier of the three-tier network model contains servers and databases?": "Core",
+						"Which tier of the three-tier network model contains routers and switches?": "Distribution",
+						"Which tier of the three-tier network model contains workstations and printers?": "Access"
+					},
+					"Network Topologies": {
+						"In what network topology are all devices connected to a central networking device?": ["Hub and Spoke", "Star"],
+						"In what network topology are there many routes between any given pair of devices?": "Mesh",
+						"In what network topology are multiple topologies joined together?": "Hybrid",
+						"In what network topology is the purpose of the network generally to directly connect a pair of hosts?": "Point-to-Point",
+						"In what network topology are there two sets of switches where every switch in one set is connected to every switch in the other set?": "Spine and Leaf",
+						
+						"In what network topology is the network logically segmented into three functional layers?": "Three-Tier",
+						"In what network topology is the network logically segmented into two functional layers?": "Collapsed Core"
+					},
+					"Traffic Flows": {
+						"What term refers broadly to traffic moving between hosts within a data center?": "East-West",
+						"What term refers broadly to traffic moving in or out of a data center?": "North-South"
+					}
+				},
+				"1.7 IPv4 Addressing": {
+					"IPv4": {
+						"What is the length in octets of an IPv4 address?": {
+							"answers": "4", "hidden-answers": "four"
+						},
+						
+						"What is the address range for IPv4 link-local (APIPA) addresses?": ["169.254.0.0/16", "169.254/16"],
+						
+						"Which standard outlines the details of private IPv4 addressing?": "RFC1918",
+						
+						"In what format are IPv4 addresses typically expressed?": {
+							"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
+							"answers": "Decimal", "incorrect-answers": "Hexadecimal"
+						}
+					},
+					"Subnetting": {
+						"Classful Subnetting": {
+							"What class of subnetwork has subnet mask 255.0.0.0?": ["Class A", "A"],
+							"What class of subnetwork has subnet mask 255.255.0.0?": ["Class B", "B"],
+							"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"],
+							
+							"What value in the first octet signifies a private Class A address?": "10",
+							"What value in the first octet signifies a private Class B address?": "172",
+							"What value in the first octet signifies a private Class C address?": "192",
+							
+							"What class of subnetwork constitutes the range of IPv4 multicast addresses?": ["Class D", "D"],
+							"What class of subnetwork begins with an octet from 224 to 239?": ["Class D", "D"],
+							
+							"What class of subnetwork constitutes the reserved address space?": ["Class E", "E"],
+							"What class of subnetwork begins with an octet from 240 to 255?": ["Class E", "E"]
+						},
+						"CIDR": {
+							"What term refers to a flexible scheme for IP address allocation that replaces classful routing?": ["Classless Inter-Domain Routing", "CIDR"]
+						},
+						"VLSM": {
+							"What term refers to a networking technique of creating subnets with masks of differing length to maximize routing efficiency?": ["Variable Length Subnet Masking", "VLSM"]
+						},
+						"IANA Designated Private IP Ranges": {
+							"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],
+							"What CIDR block is an IANA-designated IP range corresponding to 16 contiguous class B network spaces?": ["172.16.0.0/12", "172.16/12"],
+							"What CIDR block is an IANA-designated IP range corresponding to 256 contiguous class C network spaces?": ["192.168.0.0/16", "192.168/16"]
+						},
+						"Reserved Subnet IP Addresses": {
+							"Names": {
+								"What is the name for the first IP address in a subnet?": ["Network Address", "Network"],
+								"What is the name for the last IP address in a subnet?": ["Broadcast Address", "Broadcast"]
+							},
+							"Examples": {
+								"typo-forgiveness-level": "none",
+								"importance": 0.3,
+								"groups": {
+									"network addresses": {
+										"is-gathered": true,
+										"questions": {
+											"What is the **network address** of the 10/8 block?": "10.0.0.0",
+											"What is the **network address** of the 172.16/12 block?": "172.16.0.0",
+											"What is the **network address** of the 192.168/16 block?": "192.168.0.0"
+										}
+									},
+									"broadcast addresses": {
+										"is-gathered": true,
+										"questions": {
+											"What is the **broadcast address** of the 10/8 block?": "10.255.255.255",
+											"What is the **broadcast address** of the 172.16/12 block?": "172.31.255.255",
+											"What is the **broadcast address** of the 192.168/16 block?": "192.168.255.255"
+										}
+									}
+								}
+							}
 						}
 					}
+				},
+				"1.8 Evolving Use Cases for Modern Network Environments": {
+					"Software Defined Networking": {
+						"What term refers broadly to the process of defining virtual networking devices and their functions in a way that mimics the functions of traditional hardware?": ["Software-Defined Networking", "SDN"],
+						"What term refers to the virtual or automated provisioning of wide-area links that are application-aware?": ["Software-Defined WAN", "SD-WAN"],
+						
+						"In networking, what architectural plane is responsible for frame and packet processing such as trunking and forwarding?": ["Infrastructure Layer", "Data Plane", "Data"],
+						"In networking, what architectural plane is responsible for maintaining routing tables and sessions?": ["Control Layer", "Control Plane", "Control"],
+						"In networking, what architectural plane is responsible for providing administrative controls and access?": ["Application Layer", "Management Plane", "Management"],
+						
+						"What facet of SDN routes communications by inspecting application data?": "Application Aware",
+						"What facet of SDN automatically provisions and configures virtual devices in response to utilization?": "Zero-Touch Provisioning",
+						"What facet of SDN allows communication over arbitrary underlying network infrastructure?": "Transport Agnostic",
+						"What facet of SDN pushes configuration changes from one or a few consoles to many routers or other devices?": "Central Policy Management"
+					},
+					"VXLAN and DCI": {
+						"What term refers to a typically low-latency, high-capacity connection between data centers, sometimes over substantial distances?": ["Data Center Interconnect", "DCI"],
+						"What term refers to solutions which link multiple data centers into a single network?": ["Data Center Interconnect", "DCI"],
+						
+						"What technology allows routing through very large scale networks and between dynamically moving hosts, and is typically used for networks of data centers?": ["Virtual Extensible LAN", "VXLAN"],
+						"What technology allows VXLAN frames to traverse IP networks?": ["VXLAN Tunneling", "Layer 2 Encapsulation"]
+					},
+					"Zero-Trust Architecture": {
+						"What term refers to a netwwork security model of requiring authentication fory request in a network?": ["Zero Trust Architecture", "Zero Trust", "ZTA"],
+						"What cybersecurity principle states that an entity should not have access to resources beyond the scope of their duties?": ["Principle of Least Privilege", "Least Privilege"]
+					}
+					"Infrastructure as Code": {
+						"What technology allows complex networks of devices to be deployed on the cloud according to a configuration file?": ["Infrastructure as Code", "IaC"],
+						
+						"What documentation outlines a plan and conditional steps to take in response to an incident of some kind?": "Playbook",
+						"What term refers to the gradual deviation of IT infrastructure from its desired state?": "Configuration Drift",
+						"What technology allows live querying of device configurations such that inventories are always accurate?": "Dynamic Inventories"
+					},
+					"Source Control": {
+						"What technology allows the tracking of changes and the integration of many changes into a master version of a document such as a configuration file?": ["Source Control", "Version Control"],
+						
+						"What term refers to the server containing the authoritative copy of a version-controlled document?": ["Central Repository", "Central Repo"],
+						"What control refers to a situation where changes made to separate branches of a source-controlled document cannot be automatically merged?": ["Merge Conflict", "Conflict"],
+						"What version control feature allows parallel development via the creation of separate development paths that can be merged back into the main configuration?": "Branching"
+					},
+					"IPv6 Compatibility": {
+						"What term refers to the simultaneous use of both Ipv4 and IPv6?": "Dual Stack",
+						"What technology allows the encapsulation of IPv4 packets within IPv6 packets or vice versa?": "Tunneling",
+						"What technology allows seemless conversion between IPv4 and IPv6 packets so that IPv4-only and IPv6-only devices can communicate?": "NAT64"
+					},
 				}
 			},
-			"Layer 2 Networking": {
-				"Foundational Concepts": {
-					"What type of address is typically used by layer-2 protocols?": ["MAC Address", "MAC"],
-					"What term refers to a set of devices and cables where collisions can occur?": "Collision Domain",
-					"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
-				},
-				"Ethernet": {
-					"What is the length of a MAC address in octets?": "6",
-					
-					"What layer-2 IEEE protocol facilitates communication between devices connected by a direct link?": {
-						"answers": ["802.3 Ethernet", "802.3", "Ethernet"], "hidden-answers": ["IEEE 802.3 Ethernet", "IEEE 802.3", "IEEE Ethernet"]
+			"2.0 Network Implementation": {
+				"IPv6": {
+					"What is the length in octets of an IPv6 address?": {
+						"answers": "16", "hidden-answers": "sixteen"
 					},
-					"What technique allows Ethernet frames to be larger than defined in the original specification?": "Jumbo Frames"
-				},
-				"Wi-Fi": {
-					"What layer-2 IEEE protocol facilitates communication between devices connected wirelessly?": {
-						"answers": ["802.11 Wi-Fi", "802.11", "Wi-Fi"],
-						"hidden-answers": ["IEEE 802.11 Wi-Fi", "IEEE 802.11", "IEEE Wi-Fi", "802.11 WiFi", "WiFi", "IEEE 802.11 WiFi", "IEEE WiFi"]
-					}
-				},
+					
+					"What is the address range for IPv6 link-local addresses?": "FE80::/10",
+					"What is the address range for IPv6 global unicast addresses?": "2000::/3",
+					
+					"In what format are IPv6 addresses typically expressed?": {
+						"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
+						"answers": "Hexadecimal", "incorrect-answers": "Decimal"
+					},
+					
+					"What IPv6 protocol allows the self-assignment of IP addresses?": ["Stateless Address Autoconfiguration", "SLAAC"],
+					"What IPv6 protocol prevents the accidental assignment of an in-use address?": ["Duplicate Address Detection", "DAD"],
+					
+					"What IPv6 protocol allows a device to discover adjacent devices such as a router?": ["Neighbor Discovery Protocol", "NDP"],
+					"In IPv6, what term refers to a multicast used to discover routers?": ["Router Solicitation", "RS"],
+					"In IPv6, what term refers to a message sent by a router so that it can be discovered?": ["Router Advertisement", "RA"]
+				}
+			}, 
+			"Layer 2 Networking": {
 				"VLANs": {
 					"What technology allows the logical segmentation of broadcast domains?": {
 						"answers": ["Virtual LAN", "VLAN"], "hidden-answers": ["Virtual Local Area Network", "Virtual LANs", "VLANs"]
@@ -428,129 +645,6 @@
 					}
 				}
 			},
-			"Layer 3 Networking": {
-				"Internet Protocol": {
-					"What term refers to the IP address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"],
-					"What term refers to the simultaneous use of both Ipv4 and IPv6?": "Dual Stack",
-					"What technology allows the encapsulation of IPv4 packets within IPv6 packets or vice versa?": "Tunneling",
-					
-					"What technology allows seemless conversion between IPv4 and IPv6 packets so that IPv4-only and IPv6-only devices can communicate?": "NAT64"
-				},
-				"IPv4": {
-					"What is the length in octets of an IPv4 address?": {
-						"answers": "4", "hidden-answers": "four"
-					},
-					
-					"What is the address range for IPv4 link-local (APIPA) addresses?": ["169.254.0.0/16", "169.254/16"],
-					
-					"Which standard outlines the details of private IPv4 addressing?": "RFC1918",
-					
-					"In what format are IPv4 addresses typically expressed?": {
-						"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
-						"answers": "Decimal", "incorrect-answers": "Hexadecimal"
-					}
-				},
-				"IPv6": {
-					"What is the length in octets of an IPv6 address?": {
-						"answers": "16", "hidden-answers": "sixteen"
-					},
-					
-					"What is the address range for IPv6 link-local addresses?": "FE80::/10",
-					"What is the address range for IPv6 global unicast addresses?": "2000::/3",
-					
-					"In what format are IPv6 addresses typically expressed?": {
-						"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
-						"answers": "Hexadecimal", "incorrect-answers": "Decimal"
-					},
-					
-					"What IPv6 protocol allows the self-assignment of IP addresses?": ["Stateless Address Autoconfiguration", "SLAAC"],
-					"What IPv6 protocol prevents the accidental assignment of an in-use address?": ["Duplicate Address Detection", "DAD"],
-					
-					"What IPv6 protocol allows a device to discover adjacent devices such as a router?": ["Neighbor Discovery Protocol", "NDP"],
-					"In IPv6, what term refers to a multicast used to discover routers?": ["Router Solicitation", "RS"],
-					"In IPv6, what term refers to a message sent by a router so that it can be discovered?": ["Router Advertisement", "RA"]
-				},
-				"Subnetting": {
-					"Classful Subnetting": {
-						"What class of subnetwork has subnet mask 255.0.0.0?": ["Class A", "A"],
-						"What class of subnetwork has subnet mask 255.255.0.0?": ["Class B", "B"],
-						"What class of subnetwork has subnet mask 255.255.255.0?": ["Class C", "C"],
-						
-						"What value in the first octet signifies a private Class A address?": "10",
-						"What value in the first octet signifies a private Class B address?": "172",
-						"What value in the first octet signifies a private Class C address?": "192",
-						
-						"What class of subnetwork constitutes the range of IPv4 multicast addresses?": ["Class D", "D"],
-						"What class of subnetwork begins with an octet from 224 to 239?": ["Class D", "D"],
-						
-						"What class of subnetwork constitutes the reserved address space?": ["Class E", "E"],
-						"What class of subnetwork begins with an octet from 240 to 255?": ["Class E", "E"]
-					},
-					"CIDR": {
-						"What term refers to a flexible scheme for IP address allocation that replaces classful routing?": ["Classless Inter-Domain Routing", "CIDR"]
-					},
-					"VLSM": {
-						"What term refers to a networking technique of creating subnets with masks of differing length to maximize routing efficiency?": ["Variable Length Subnet Masking", "VLSM"]
-					},
-					"IANA Designated Private IP Ranges": {
-						"What CIDR block is an IANA-designated IP range corresponding to a single class A network space?": ["10.0.0.0/8", "10/8"],
-						"What CIDR block is an IANA-designated IP range corresponding to 16 contiguous class B network spaces?": ["172.16.0.0/12", "172.16/12"],
-						"What CIDR block is an IANA-designated IP range corresponding to 256 contiguous class C network spaces?": ["192.168.0.0/16", "192.168/16"]
-					},
-					"Reserved Subnet IP Addresses": {
-						"Names": {
-							"What is the name for the first IP address in a subnet?": ["Network Address", "Network"],
-							"What is the name for the last IP address in a subnet?": ["Broadcast Address", "Broadcast"]
-						},
-						"Examples": {
-							"typo-forgiveness-level": "none",
-							"importance": 0.3,
-							"groups": {
-								"network addresses": {
-									"is-gathered": true,
-									"questions": {
-										"What is the **network address** of the 10/8 block?": "10.0.0.0",
-										"What is the **network address** of the 172.16/12 block?": "172.16.0.0",
-										"What is the **network address** of the 192.168/16 block?": "192.168.0.0"
-									}
-								},
-								"broadcast addresses": {
-									"is-gathered": true,
-									"questions": {
-										"What is the **broadcast address** of the 10/8 block?": "10.255.255.255",
-										"What is the **broadcast address** of the 172.16/12 block?": "172.31.255.255",
-										"What is the **broadcast address** of the 192.168/16 block?": "192.168.255.255"
-									}
-								}
-							}
-						}
-					},
-					"Routing": {
-						
-					}
-				}
-			},
-			"Network Architecture": {
-				"Three Tier": {
-					"Which tier of the three-tier network model refers to the center of the network?": "Core",
-					"Which tier of the three-tier network model refers to the devices between the center and the edge of the network?": "Distribution",
-					"Which tier of the three-tier network model refers to the edge of the network?": "Access",
-					
-					"Which tier of the three-tier network model contains servers and databases?": "Core",
-					"Which tier of the three-tier network model contains routers and switches?": "Distribution",
-					"Which tier of the three-tier network model contains workstations and printers?": "Access"
-				},
-				"Network Topologies": {
-					"In what network topology are all devices connected to a central networking device?": ["Hub and Spoke", "Star"],
-					"In what network topology are there many routes between any given pair of devices?": "Mesh",
-					"In what network topology are multiple topologies joined together?": "Hybrid",
-					"In what network topology is the purpose of the network generally to directly connect a pair of hosts?": "Point-to-Point",
-					"In what network topology are there two sets of switches where every switch in one set is connected to every switch in the other set?": "Spine and Leaf",
-					
-					"In what network topology is the network logically segmented into three functional layers?": "Three-Tier",
-					"In what network topology is the network logically segmented into two functional layers?": "Collapsed Core"
-				}
-			},
 			"Network Devices": {
 				"Tools": {
 					"What networking tool allows you to locate a wire by sending a signal through a port?": ["Tone Generator", "Toner Probe"],
@@ -563,25 +657,13 @@
 					"What common feature of a switch restricts interface access to a fixed-size list of recognized hosts?": "Port Security"
 				}
 			},
-			"Network Functions": {
-				"Concepts": {
-					"What term refers broadly to traffic moving between hosts within a data center?": "East-West",
-					"What term refers broadly to traffic moving in or out of a data center?": "North-South"
-				},
-				"Communication Types": {
-					"What type of transmission is directed to a single host?": "Unicast",
-					"What type of transmission is directed to many hosts?": "Multicast",
-					"What type of transmission is directed to one of many hosts?": "Anycast",
-					"What type of transmission is directed to every available host?": "Broadcast"
-				}
-			},
 			"Wireless Networking": {
 				"Fundamental Concepts": {
 					"What term refers to a direct, wireless connection between devices without a mediator?": "Ad-Hoc",
 					"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal"
 				},
 				"Wi-Fi Identifiers": {
-					"typo-forgiveness": "none",
+					"typo-forgiveness-level": "none",
 					"questions": {
 						"What term refers to the name of a wireless **network**?": ["Service Set Identifier", "SSID"],
 						"What term refers to the name of a wireless **device**?": ["Basic Service Set Identifier", "BSSID"],
@@ -597,65 +679,6 @@
 					"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
 					"What variant of WPA uses a Pre-shared key (PSK)?": "Personal",
 					"What variant of WPA uses RADIUS for authentication?": "Enterprise"
-				}
-			},
-			"Transceivers": {
-				"verbatim block": {
-					"hidden": true,
-					"questions": {
-						"What small, slottable IT device is used in a data center to convert to and from a common transmission format and occasionally to multiplex signals?": ["Transceiver Module", "Transceiver"]
-					}
-				},
-				"multiple-choice block": {
-					"hidden": true,
-					"mode-of-presentation": ["verbatim", "multiple-choice"],
-					"max-choices": 4,
-					"incorrect-answers": ["SFP", "SFP+", "QSFP", "QSFP+"],
-					"questions": {
-						"What type of transceiver commonly provides **1Gbps** throughput?": ["Small Form-factor Pluggable", "SFP"],
-						"What type of transceiver commonly provides **10Gbps** throughput?": ["Enhanced Small Form-factor Pluggable", "SFP+"],
-						"What type of transceiver commonly provides **4Gbps** throughput?": ["Quad Small Form-factor Pluggable", "QSFP"],
-						"What type of transceiver commonly provides **40Gbps** throughput?": ["Enhanced Quad Small Form-factor Pluggable", "QSFP+"]
-					}
-				}
-			},
-			"Cable & Connector Types": {
-				"Copper Cables": {
-					"What cable uses a single metal core with dielectric insulator and metal shielding?": ["Coaxial Cable", "Coaxial", "Coax"],
-					"What cable uses a pair of metal cores with a short range of only a few meters?": ["Twinaxial Cable", "Twinaxial", "Twinax"],
-					
-					"What cable is commonly used for high-speed, very low range connections in data centers over twinax cable?": ["Direct Attach Copper", "DAC"],
-					"What cable provides a low-power, low-latency connection between SFP (or similar) transceiver ports in a data center?": ["Direct Attach Copper", "DAC"]
-				},
-				"Copper Connectors": {
-					"What type of copper cable connection uses two or four of six available positions within the plug?": ["Registered Jack type 11", "RJ11"],
-					"What type of copper cable connection uses eight of eight available positions within the plug?": ["Registered Jack type 45", "RJ45"],
-					
-					"What type of copper cable connection is used for DSL and analog phone connections?": ["Registered Jack type 11", "RJ11"],
-					"What type of copper cable connection is used for Ethernet connections?": ["Registered Jack type 45", "RJ45"],
-					
-					"What type of copper cable connection is most commonly found on RG-6 coaxial cable?": "F-Connector",
-					"What type of copper cable connection is commonly used as the input for a cable modem?": "F-Connector",
-					
-					"What type of copper cable connection is found on twinax and coax cable, often carrying WAN links or video signals?": ["Bayonet Neill-Counceelman", "BNC"]
-				},
-				"Fiber Cables": {
-					"substitutions": [["Multi Mode", "Multimode"], ["Multi-Mode", "Multimode"], ["Singlemode", "Single Mode"]],
-					"questions": {
-						"What type of fiber cable has a range of up to around 2km?": "Multimode",
-						"What type of fiber cable has cheaper optics?": "Multimode",
-						"What type of fiber cable has a range of up to as much as 100km?": "Single Mode",
-						"What type of fiber cable has more expensive optics?": "Single Mode"
-					}
-				},
-				"Fiber Conenctors": {
-					"What kind of fiber connector snaps in place and can simply be pulled out, and is recognizeable by its rectangular housing?": ["Subscriber Connector", "SC"],
-					"What kind of fiber connector snaps in place with a clip that must be pushed down to release the plug?": ["Local Connector", "Lucent Connector", "LC"],
-					"What kind of fiber connector uses a bayonet connector requiring a slight twist to lock in?": ["Straight Tip", "ST"],
-					"What kind of fiber connector contains 12 fiber lines?": ["Multi-fiber Push On", "MPO"]
-				},
-				"Plenum Space": {
-					"What term refers to an air circulation space in a building, through which cables must have a special rating?": ["Plenum Space", "Plenum"]
 				}
 			},
 			"Routing Technologies": {
@@ -719,47 +742,8 @@
 				}
 			},
 			"Network Security": {
-				"Concepts": {
-					"What term refers to a netwwork security model of requiring authentication fory request in a network?": "Zero Trust",
-				},
 				"SOAR": {
 					"What type of security technology provides a centralized platform for the administration and automation of incident response?": ["Security Orchestration, Automation, and Response", "SOAR"]
-				}
-			},
-			"Modern Networking": {
-				"Infrastructure as Code": {
-					"What technology allows complex networks of devices to be deployed on the cloud according to a configuration file?": ["Infrastructure as Code", "IaC"],
-					
-					"What term refers to the gradual deviation of IT infrastructure from its desired state?": "Configuration Drift",
-					"What technology allows live querying of device configurations such that inventories are always accurate?": "Dynamic Inventories",
-					"What documentation outlines a plan and conditional steps to take in response to an incident of some kind?": "Playbook"
-				},
-				"Source Control": {
-					"What technology allows the tracking of changes and the integration of many changes into a master version of a document such as a configuration file?": ["Source Control", "Version Control"],
-					
-					"What term refers to the server containing the authoritative copy of a version-controlled document?": ["Central Repository", "Central Repo"],
-					"What version control feature allows parallel development via the creation of separate development paths that can be merged back into the main configuration?": "Branching"
-				},
-				"Software Defined Networking": {
-					"What term refers broadly to the process of defining virtual networking devices and their functions in a way that mimics the functions of traditional hardware?": ["Software-Defined Networking", "SDN"],
-					"What term refers to the virtual or automated provisioning of wide-area links that are application-aware?": ["Software-Defined WAN", "SD-WAN"],
-					
-					"In networking, what architectural plane is responsible for frame and packet processing such as trunking and forwarding?": ["Infrastructure Layer", "Data Plane", "Data"],
-					"In networking, what architectural plane is responsible formaintaining routing tables and sessions?": ["Control Layer", "Control Plane", "Control"],
-					"In networking, what architectural plane is responsible for providing administrative controls and access?": ["Application Layer", "Management Plane", "Management"],
-					
-					"What facet of SDN routes communications by inspecting application data?": "Application Aware",
-					"What facet of SDN automatically provisions and configures virtual devices in response to utilization?": "Zero-Touch Provisioning",
-					"What facet of SDN allows communication over arbitrary underlying network infrastructure?": "Transport Agnostic",
-					"What facet of SDN pushes configuration changes from one or a few consoles to many routers or other devices?": "Central Policy Management"
-				},
-				"VXLAN and DCI": {
-					"What term refers to a typically low-latency, high-capacity connection between data centers, sometimes over substantial distances?": ["Data Center Interconnect", "DCI"],
-					"What term refers to solutions which link multiple data centers into a single network?": ["Data Center Interconnect", "DCI"],
-					
-					"What technology allows routing through very large scale networks and between dynamically moving hosts, and is typically used for networks of data centers?": ["Virtual Extensible LAN", "VXLAN"],
-					"What uniquely identifies a VXLAN?": ["VXLAN Network Identifier", "VNI"],
-					"What technology allows VXLAN frames to traverse IP networks?": ["VXLAN Tunneling", "Layer 2 Encapsulation"]
 				}
 			},
 			"Network Troubleshooting": {

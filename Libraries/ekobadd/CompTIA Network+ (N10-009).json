@@ -226,7 +226,11 @@
 								},
 								"Features": {
 									"What technology allows a DHCP request to traverse subnets?": ["DHCP Helper", "DHCP Relay"],
-									"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"]
+									"What term refers to additional values which a DHCP server can be configured to send alongside the official information?": ["DHCP Options", "Options"],
+									
+									"What term refers to the length of time that a machine can hold on to an IP address assigned via DHCP?": {
+										"answers": ["DHCP Lease Duration", "Lease"], "hidden-answers": ["Lease Duration", "DHCP Lease"]
+									}
 								}
 							},
 							"DNS": {
@@ -372,7 +376,6 @@
 								"What is the length of a MAC address in octets?": "6",
 								
 								"What is the minimum size of an Ethernet frame in octets?": "64"
-								"What technique allows Ethernet frames to be larger than defined in the original specification?": "Jumbo Frames"
 							},
 							"Suffixes": {
 								"What cable type is mosst associated with the **-T** suffixes on Ethernet standards?": ["Twisted-Pair Copper", "Twisted-Pair"],
@@ -470,6 +473,7 @@
 						"In what network topology are multiple topologies joined together?": "Hybrid",
 						"In what network topology is the purpose of the network generally to directly connect a pair of hosts?": "Point-to-Point",
 						"In what network topology are there two sets of switches where every switch in one set is connected to every switch in the other set?": "Spine and Leaf",
+						"What term refers to a direct, wireless connection between devices without a mediator?": "Ad-Hoc",
 						
 						"In what network topology is the network logically segmented into three functional layers?": "Three-Tier",
 						"In what network topology is the network logically segmented into two functional layers?": "Collapsed Core"
@@ -598,53 +602,214 @@
 				}
 			},
 			"2.0 Network Implementation": {
-				"IPv6": {
-					"What is the length in octets of an IPv6 address?": {
-						"answers": "16", "hidden-answers": "sixteen"
-					},
+				"2.1 Routing Technologies": {
+					"What technique involves manually entering routes into a router?": "Static Routing",
 					
-					"What is the address range for IPv6 link-local addresses?": "FE80::/10",
-					"What is the address range for IPv6 global unicast addresses?": "2000::/3",
+					"What dynamic routing protocol is specialized for external and internet routing?": ["Border Gateway Protocol", "BGP"],
+					"What dynamic routing protocol is partially proprietary to Cisco and uniquely simple to configure?": ["Enhanced Interior Gateway Routing Protocol", "EIGRP"],
+					"What dynamic routing protocol is open and available on many manufacturers' devices?": ["Open Shortest Path First", "OSPF"],
 					
-					"In what format are IPv6 addresses typically expressed?": {
-						"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
-						"answers": "Hexadecimal", "incorrect-answers": "Decimal"
-					},
+					"What term refers to a generic measure of the preferability of a route in an IP routing table?": "Metric",
+					"What term refers to a weighting that allows tiebreaking in an IP routing table by lending preference to entries from certain sources?": "Administrative Distance",
 					
-					"What IPv6 protocol allows the self-assignment of IP addresses?": ["Stateless Address Autoconfiguration", "SLAAC"],
-					"What IPv6 protocol prevents the accidental assignment of an in-use address?": ["Duplicate Address Detection", "DAD"],
+					"What technology maps a single private IP address to a public address, allowing the recipient to reply?": ["Network Address Translation", "NAT"],
+					"What technology allows translation between private and public IP addresses, using port numbers to identify connections?": ["Port Address Translation", "PAT", "NAT Overload"],
 					
-					"What IPv6 protocol allows a device to discover adjacent devices such as a router?": ["Neighbor Discovery Protocol", "NDP"],
-					"In IPv6, what term refers to a multicast used to discover routers?": ["Router Solicitation", "RS"],
-					"In IPv6, what term refers to a message sent by a router so that it can be discovered?": ["Router Advertisement", "RA"]
-				}
-			}, 
-			"Layer 2 Networking": {
-				"VLANs": {
-					"What technology allows the logical segmentation of broadcast domains?": {
-						"answers": ["Virtual LAN", "VLAN"], "hidden-answers": ["Virtual Local Area Network", "Virtual LANs", "VLANs"]
-					},
-					
-					"What technology allows traffic from multiple VLANs to use a single cable?": ["VLAN Trunking", "Trunking"],
-					"What IEEE standard defines VLAN trunking?": {
-						"answers": ["IEEE 802.1Q", "802.1Q"], "hidden-answers": [".1Q", "dot1Q"]
-					},
-					
-					"What term refers to the VLAN automatically assigned to new devices connected to a switch?": ["Default VLAN", "Default"],
-					"What term refers to the VLAN that is sent without a tag over a trunked cable?": ["Native VLAN", "Native"],
-					"What term refers to a VLAN that is dedicated to sending analog audio?": ["Voice VLAN", "Voice"]
+					"What protocol allows redundancy in default gateways by assigning a virtual IP (VIP) to direct traffic to a backup router when necessary?": ["First Hop Redundancy Protocol", "FHRP"],
+					"What term refers to an abstracted IP address that is not tied to a physical NIC, but rather dynamically assigned, sometimes to multiple devices?": ["Cirtual IP Address", "Virtual IP", "VIP"],
+					"What term refers to a division of a physical interface with its own configuration and IP address?": "Subinterface"
 				},
-				"LAGs": {
-					"What technology allows multiple switch interfaces to act as a single large interface?": ["Link Aggregation", "LAG"],
-					"What protocol allows the automatic configuration of LAG interfaces?": ["Link Aggregation Control Protocol", "LACP"]
+				"2.2 Switching Technologies": {
+					"VLANs": {
+						"What technology allows the logical segmentation of broadcast domains?": {
+							"answers": ["Virtual LAN", "VLAN"], "hidden-answers": ["Virtual Local Area Network", "Virtual LANs", "VLANs"]
+						},
+						
+						"What technology allows traffic from multiple VLANs to use a single cable?": ["VLAN Trunking", "Trunking"],
+						"What term refers to a value inserted into an ethernet frame before transmission over a trunked interface?": "Tag",
+						"What IEEE standard defines VLAN trunking?": {
+							"answers": ["IEEE 802.1Q", "802.1Q"], "hidden-answers": [".1Q", "dot1Q"]
+						},
+						
+						"What term refers to the VLAN automatically assigned to new devices connected to a switch?": ["Default VLAN", "Default"],
+						"What term refers to the VLAN that is sent without a tag over a trunked cable?": ["Native VLAN", "Native"],
+						"What term refers to a VLAN that is dedicated to sending analog audio?": ["Voice VLAN", "Voice"]
+					},
+					"Interface Configuration": {
+						"What property of an interface configuration controls the data transfer rate?": "Speed",
+						"What property of an interface configuration controls whether both sides can transmit simultaneously?": "Duplex",
+						"What technique allows Ethernet frames to be larger than defined in the original specification?": "Jumbo Frames",
+						
+						"What property of a network measures the maximum allowable packet size?": ["Maximum Transmission Unit", "MTU"],
+						"What term refers to the virtual connection between a VLAN and the router functionality on a multilayer switch?": ["Switch Virtual Interface", "SVI"]
+					},
+					"Link Aggregation": {
+						"What technology allows multiple switch interfaces to act as a single large interface?": ["Link Aggregation", "LAG"],
+						"What protocol allows the automatic configuration of LAG interfaces?": ["Link Aggregation Control Protocol", "LACP"]
+					},
+					"Spanning Tree Protocol": {
+						"What IEEE protocol actively prevents layer-2 loops from occurring on a network?": ["Spanning Tree Protocol", "STP"],
+						"In Spanning Tree Protocol, what kind of switch has no root port?": {
+							"answers": ["Root Bridge", "Root"], "hidden-answers": "Root Switch"
+						}
+					}
 				},
-				"Spanning Tree Protocol": {
-					"What IEEE protocol actively prevents layer-2 loops from occurring on a network?": ["Spanning Tree Protocol", "STP"],
-					"In Spanning Tree Protocol, what kind of switch has no root port?": {
-						"answers": ["Root Bridge", "Root"], "hidden-answers": "Root Switch"
+				"2.3 Wireless Devices and Technologies": {
+					"Channels": {},
+					"Frequency Options": {"comment": "Included in Section 1.5 802.11 questions."},
+					"Wi-Fi Network Identifiers": {
+						"typo-forgiveness-level": "none",
+						"questions": {
+							"What term refers to the name of a wireless **network**?": ["Service Set Identifier", "SSID"],
+							"What term refers to the name of a wireless **device**?": ["Basic Service Set Identifier", "BSSID"],
+							"What term refers to a name shared by many access points?": ["Extended Service Set Identifier", "ESSID"]
+						}
+					},
+					"Network Types": {"comment": "Included in Section 1.6 network topology questions."},
+					"Encryption & Authentication": {
+						"What Wi-Fi security protocol was found to have vulnerabilities and is no longer used?": ["Wired-Equivalent Privacy", "WEP"],
+						"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
+						"What version of WPA introduced Secure Authentication of Equals (SAE) as a replacement for the Pre-Shared Key (PSK) personal authentication method?": {
+							"answers": ["WPA3", "3"], "hidden-answers": ["WPA 3", "WPA-3", "three"]
+						},
+						"What variant of WPA uses a Pre-shared key (PSK) or Secure Authentication of Equals (SAE)?": ["WPA-Personal", "Personal"],
+						"What variant of WPA uses RADIUS for authentication?": ["WPA-Enterprise", "Enterprise"]
+					}
+					"Guest Networks": {
+						"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal"
+					},
+					"Antennas": {
+						"What kind of antenna transmit isn all directions?": ["Omnidirectional Antenna", "Omnidirectional"],
+						"What kind of antenna transmits in a particular direction?": ["Directed Antenna", "Directed"]
+					},
+					"Autonomous & Lightweight APs": {
+						"What term refers to an access point requiring minimal, if any configuration before use, often also providing switching functionality and a management interface?": ["Autonomous Access Point", "Autonomous AP"],
+						"What term refers to an access point requiring an external wireless LAN controller for configuration, typically providing no additional functionality of its own?": ["Lightweight Access Point", "Lightweight AP"]
+					}
+				},
+				"2.4 Factors of Physical Installations": {
+					"Network Installation": {
+						"What term refers to an area of the network where you are passively terminating cables?": "Distribution Frame",
+						"What term refers to the primary or central distribution frame in a network?": ["Main Distribution Frame", "MDF"],
+						"What term refers to a secondary distribution frame in a network?": ["Intermediate Distribution Frame", "IDF"],
+						
+						"What unit of measurement is commonly used to communicate vertical space in a rack?": {
+							"answers": ["Rack Unit", "Unit"], "hidden-answer": ["Rack Units", "Units"]
+						}
+					},
+					"Power": {
+						"What device allows equipment to continue working during blackouts or power irregularity by supplenting or replacing the power source?": ["Uninterruptible Power Supply", "UPS"],
+						"What kind of UPS kicks in after a blackout or power irregularity?": ["Offline", "Standby"],
+						"What kind of UPS is always supplying its power from batteries while recharging them when power is available?": ["On-line", "Double-Conversion"],
+						
+						"What device provides multiple power outlets, often allowing remote management and monitoring of power?": ["Power Distribution Unit", "PDU"]
+					},
+					"Environmental Factors": {
+						"mode-of-presentation": ["multiple-choice"],
+						"questions": {
+							"What is the recommended humidity range for a datacenter?": {
+								"answers": "40% to 60%",
+								"incorrect-answwers": [
+									"20% to 40%", "30% to 50%", "50% to 70%", "60% to 80%",
+									"30% to 40%", "40% to 50%", "50% to 60%", "60% to 70%"
+								]
+							},
+							
+							"What is the recommended temperature range for a datacenter?": {
+								"answers": "64F to 81F",
+								"incorrect-answwers": [
+									"51F to 74F", "64F to 71F", "71F to 84F", "74F to 91F", 
+									"50F to 70F", "60F to 90F", "70F to 80F"
+								]
+							},
+							
+							"What fire suppression system is typically not preferred for use in a data center?": {
+								"answers": "Sprinklers",
+								"incorrect-answers": ["Clean Agent", "Inert Gas", "Water Mist"]
+							}
+						}
 					}
 				}
 			},
+			"3.0 Network Operations": {
+				"3.1 Organizational Processes and Procedures": {
+					"Documentation": {
+						"What term refers to solutions for managing IP address allocation and documentation?": ["IP Address Management", "IPAM"],
+						"What term refers to a contract outlining uptime, reliability, performance, and other requirements imposed on an IT service provider?": ["Service Level Agreement", "SLA"],
+						
+						"What document shows wireless power and congestion readings superimposed onto a map?": {
+							"answers": ["Wireless Survey", "Wireless Heat Map", "Heat Map"],
+							"hidden-answers": ["Wi-Fi Heat Map", "WiFi Heat Map"]
+						}
+					}
+				},
+				"3.2 Network Monitoring Technologies": {
+					"Monitoring Devices and Software": {
+						"What software allows the detailed inspection of captured packets?": ["Protocol Analyzer", "Packet Analyzer"]
+						"What common and free protocol analyzer provides deep packet inspection and can be used to diagnose misconfigurations on many levels?": "Wireshark",
+						
+						"What term refers to a central management console which receives logs, events, and metrics from throuoghout a network?": {
+							"answers": ["Security Information and Event Management", "SIEM"],
+							"hidden-answers": ["Security Information and Event Management Console", "SIEM Console"]
+						},
+						"What protocol is a standard for generating, sending, and managing log messages?": "Syslog",
+						
+						"What protocol provides a summary of statistics based on the flows of traffic traversing a network?": "NetFlow"
+						"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring",
+					},
+					"Remote Control": {
+						"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"],
+						"What term describes a management interface which must be connected to with different means as the services of that device?": ["Out-of-Band Management", "Out-of-Band"]
+					}
+				},
+				"3.3 Disaster Recovery": {
+					"Concepts": {
+						"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"]
+					},
+					"DR Metrics": {
+						"What term refers to the duration of time during which data was irrevocably lost during an outage?": ["Recovery Point Objective", "RPO"],
+						"What term refers to the duration of time needed to recover from an outage?": ["Recovery Time Objective", "RTO"],
+						
+						"What term refers to the average time taken to resolve a failure or similar issue?": ["Mean Time to Repair", "MTTR"],
+						"What term refers to the average time between consecutive failures?": ["Mean Time Between Failures", "MTBF"]
+					},
+					"DR Sites": {
+						"What term refers to a disaster recovery site which does not have equipment in place?": ["Cold Site", "Cold"],
+						"What term refers to a disaster recovery site which has some pre-installed systems, but would still require substantial configuration in the event of a disaster?": ["Warm Site", "Warm"],
+						"What term refers to a disaster recovery site which contains pre-installed hardware and may have live mirrored data from backups for extremely fast recovery?": ["Hot Site", "Hot"]
+					},
+					"High-Availability Approaches": {
+						"What refers to an arrangement of redundant hardware where all hardware is online prior to any malfunction or disaster?": "Active-Active",
+						"What refers to an arrangement of redundant hardware where redundant hardware is inactive until it is needed?": "Active-Passive",
+					}
+					"Testing": {
+						"What disaster-recovery preparedness session focuses on discussion of hypothetical scenarios, and serves to identify misconceptions and disagreements ahead of time?": ["Tabletop Exercise", "TTX"],
+						"What disaster-recovery preparedness session involves taking the steps that it would take to recover from a real disaster, and ensuring that proper recovery is actually achieved?": "Validation Tests"
+					}
+				},
+				"3.4 IPv4 and IPv6 Neetwork Services": {
+					"IPv6": {
+						"What is the length in octets of an IPv6 address?": {
+							"answers": "16", "hidden-answers": "sixteen"
+						},
+						
+						"What is the address range for IPv6 link-local addresses?": "FE80::/10",
+						"What is the address range for IPv6 global unicast addresses?": "2000::/3",
+						
+						"In what format are IPv6 addresses typically expressed?": {
+							"mode-of-presentation": ["multiple-choice"], "max-choices": 2,
+							"answers": "Hexadecimal", "incorrect-answers": "Decimal"
+						},
+						
+						"What IPv6 protocol allows the self-assignment of IP addresses?": ["Stateless Address Autoconfiguration", "SLAAC"],
+						"What IPv6 protocol prevents the accidental assignment of an in-use address?": ["Duplicate Address Detection", "DAD"],
+						
+						"What IPv6 protocol allows a device to discover adjacent devices such as a router?": ["Neighbor Discovery Protocol", "NDP"],
+						"In IPv6, what term refers to a multicast used to discover routers?": ["Router Solicitation", "RS"],
+						"In IPv6, what term refers to a message sent by a router so that it can be discovered?": ["Router Advertisement", "RA"]
+					}
+				}
+			}, 
 			"Network Devices": {
 				"Tools": {
 					"What networking tool allows you to locate a wire by sending a signal through a port?": ["Tone Generator", "Toner Probe"],
@@ -655,90 +820,6 @@
 				},
 				"Security": {
 					"What common feature of a switch restricts interface access to a fixed-size list of recognized hosts?": "Port Security"
-				}
-			},
-			"Wireless Networking": {
-				"Fundamental Concepts": {
-					"What term refers to a direct, wireless connection between devices without a mediator?": "Ad-Hoc",
-					"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal"
-				},
-				"Wi-Fi Identifiers": {
-					"typo-forgiveness-level": "none",
-					"questions": {
-						"What term refers to the name of a wireless **network**?": ["Service Set Identifier", "SSID"],
-						"What term refers to the name of a wireless **device**?": ["Basic Service Set Identifier", "BSSID"],
-						"What term refers to a name shared by many access points?": ["Extended Service Set Identifier", "ESSID"]
-					}
-				},
-				"Antennas": {
-					"What kind of antenna transmit isn all directions?": ["Omnidirectional Antenna", "Omnidirectional"],
-					"What kind of antenna transmits in a particular direction?": ["Directed Antenna", "Directed"]
-				},
-				"Security Protocols": {
-					"What Wi-Fi security protocol was found to have vulnerabilities and is no longer used?": ["Wired-Equivalent Privacy", "WEP"],
-					"What Wi-Fi security protocol was rapidly created as a successor to WEP?": ["Wireless Protected Access", "WPA"],
-					"What variant of WPA uses a Pre-shared key (PSK)?": "Personal",
-					"What variant of WPA uses RADIUS for authentication?": "Enterprise"
-				}
-			},
-			"Routing Technologies": {
-				"What technique involves manually entering routes into a router?": "Static Routing",
-				
-				"What dynamic routing protocol is partially proprietary to Cisco and uniquely simple to configure?": ["Enhanced Interior Gateway Routing Protocol", "EIGRP"],
-				"What dynamic routing protocol is open and available on many manufacturers' devices?": ["Open Shortest Path First", "OSPF"],
-				"What dynamic routing protocol is specialized for external and internet routing?": ["Border Gateway Protocol", "BGP"],
-				
-				"What term refers to a generic measure of the preferability of a route in an IP routing table?": "Metric",
-				"What term refers to a weighting that allows tiebreaking in an IP routing table by lending preference to entries from certain sources?": "Administrative Distance",
-				
-				"What protocol allows redundancy in default gateways by assigning a virtual IP (VIP) to direct traffic to a backup router when necessary?": ["First Hop Redundancy Protocol", "FHRP"],
-				
-				"What term refers to a division of a physical interface with its own configuration and IP address?": "Subinterface",
-				
-				"What technology maps a single private IP address to a public address, allowing the recipient to reply?": ["Network Address Translation", "NAT"]
-				"What technology allows translation between private and public IP addresses, using port numbers to identify connections?": ["Port Address Translation", "PAT", "NAT Overload"]
-			},
-			"Interface Configuration": {
-				"What property of an interface configuration controls the data transfer rate?": "Speed",
-				"What property of an interface configuration controls whether both sides can transmit simultaneously?": "Duplex",
-				
-				"What property of a network measures the maximum allowable packet size?": ["Maximum Transmission Unit", "MTU"],
-				"What term refers to the virtual connection between a VLAN and the router functionality on a multilayer switch?": ["Switch Virtual Interface", "SVI"]
-			},
-			"Network Installation": {
-				"What term refers to an area of the network where you are passively terminating cables?": "Distribution Frame",
-				"What term refers to the primary or central distribution frame in a network?": ["Main Distribution Frame", "MDF"],
-				"What term refers to a secondary distribution frame in a network?": ["Intermediate Distribution Frame", "IDF"],
-				"What unit of measurement is commonly used to communicate vertical space in a rack?": {
-					"answers": ["Rack Unit", "Unit"], "hidden-answer": ["Rack Units", "Units"]
-				}
-			},
-			"Power": {
-				"What device allows equipment to continue working during blackouts or power irregularity by supplenting or replacing the power source?": ["Uninterruptible Power Supply", "UPS"],
-				"What kind of UPS kicks in after a blackout or power irregularity?": ["Offline", "Standby"],
-				"What kind of UPS is always supplying its power from batteries while recharging them when power is available?": ["On-line", "Double-Conversion"],
-				
-				"What device provides multiple power outlets, often allowing remote management and monitoring of power?": ["Power Distribution Unit", "PDU"]
-			},
-			"Network Monitoring": {
-				"Monitoring Devices and Software": {
-					"What software allows the detailed inspection of captured packets?": "Protocol Analyzer",
-					"What common and free protocol analyzer provides deep packet inspection and can be used to diagnose misconfigurations on many levels?": "Wireshark",
-					
-					"What protocol is a standard for generating, sending, and managing log messages?": "Syslog",
-					
-					"What term refers to a central management console which receives logs, events, and metrics from throuoghout a network?": {
-						"answers": ["Security Information and Event Management", "SIEM"],
-						"hidden-answers": ["Security Information and Event Management Console", "SIEM Console"]
-					},
-					
-					"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring",
-					
-					"What protocol provides a summary of statistics based on the flows of traffic traversing a network?": "NetFlow"
-				},
-				"Remote Control": {
-					"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"],
-					"What term describes a management interface which must be connected to with different means as the services of that device?": ["Out-of-Band Management", "Out-of-Band"]
 				}
 			},
 			"Network Security": {
@@ -786,17 +867,6 @@
 						"What term refers to crosstalk from other nearby cables?": ["Alien Crosstalk", "AXT"]
 					}
 				}
-			},
-			"Disaster Recovery": {
-				"What term refers to a document outlying a plan to respond and restore service after a disaster?": ["Disaster Recovery Plan", "DRP"],
-				"What term refers to the duration of time needed to recover from an outage?": ["Recovery Time Objective", "RTO"],
-				"What term refers to the duration of time during which data was irrevocably lost during an outage?": ["Recovery Point Objective", "RPO"],
-				
-				"What term refers to the average time taken to resolve a failure or similar issue?": ["Mean Time to Repair", "MTTR"],
-				"What term refers to the average time between consecutive failures?": ["Mean Time Between Failures", "MTBF"],
-				
-				"What term refers to a disaster recovery site which does not have equipment in place?": ["Cold Site", "Cold"],
-				"What term refers to a disaster recovery site which contains pre-installed hardware and may have mirrored data from backups?": ["Hot Site", "Hot"]
 			},
 			"VPNs": {
 				"In a VPN, what device accepts authenticated connections from the internet and grants them access to internal devices?": ["VPN Concentrator", "Concentrator"],

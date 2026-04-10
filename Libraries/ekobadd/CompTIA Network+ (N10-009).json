@@ -315,6 +315,33 @@
 									"answers": ["IEEE 802.11h-2003", "802.1h"], "hidden-answers": ["802.11h-2003", "IEEE 802.11h"]
 								}
 							},
+							"Wireless Configuration": {
+								"verbatim block": {
+									"hidden": true,
+									"questions": {
+										"What IEEE 802.11 standard was introduced to address spectrum and power management issues in wireless networks?": {
+											"answers": "802.11h", "typo-forgiveness-level": "none"
+										},
+
+										"What term refers to a network of devices connected to a single access point and all devices within its range?": ["Basic Service Set", "BSS"],
+										"What term refers to a network of BSSs with many access points?": ["Extended Service Set", "ESS"],
+
+										"What standard was designed to simplify the process of connecting devices to a secure wireless network?": ["Wi-Fi Protected Setup", "WPS"]
+									}
+								},
+								"frequencies block": {
+									"hidden": true,
+									"mode-of-presentation": ["multiple-choice", "verbatim"],
+									"incorrect-answers": ["2.4GHz", "5GHz", "6GHz"],
+									"max-choices": 3,
+									"questions": {
+										"Which frequency offers the best range?": "2.4GHz",
+										"Which frequency offers the best solid object penetration?": "2.4GHz",
+										"Which frequency is the most congested?": "2.4GHz",
+										"Which frequency offers the best speed?": "6GHz"
+									}
+								}
+							},
 							"Generation Names": {
 								"descendants-share-incorrect-answers": true,
 								"mode-of-presentation": ["multiple-choice", "verbatim"],
@@ -367,7 +394,9 @@
 					"Wired": {
 						"IEEE 802.3 Ethernet": {
 							"Concepts": {
-								"What protocol enables communication between hosts within a single LAN on a typical IP network?": "Ethernet",
+								"What layer-2 IEEE protocol facilitates communication between devices within a LAN or connected by a direct link?": {
+									"answers": ["802.3 Ethernet", "802.3", "Ethernet"], "hidden-answers": ["IEEE 802.3 Ethernet", "IEEE 802.3", "IEEE Ethernet"]
+								},
 								
 								"What term refers to a set of devices and cables where collisions can occur?": "Collision Domain",
 								"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
@@ -674,7 +703,7 @@
 						},
 						"What variant of WPA uses a Pre-shared key (PSK) or Secure Authentication of Equals (SAE)?": ["WPA-Personal", "Personal"],
 						"What variant of WPA uses RADIUS for authentication?": ["WPA-Enterprise", "Enterprise"]
-					}
+					},
 					"Guest Networks": {
 						"What term refers to a page displayed to unregistered wireless devices, typically prompting them to accept some terms or authenticate?": "Captive Portal"
 					},
@@ -695,7 +724,10 @@
 						
 						"What unit of measurement is commonly used to communicate vertical space in a rack?": {
 							"answers": ["Rack Unit", "Unit"], "hidden-answer": ["Rack Units", "Units"]
-						}
+						},
+
+						"In what configuration is air drawn into the switch through the **port side** and expelled through the **power supply side**?": "Port-Side Intake",
+						"In what configuration is air drawn into the switch through the **power supply side** and expelled through the **port side**?": "Port-Side Exhaust"
 					},
 					"Power": {
 						"What device allows equipment to continue working during blackouts or power irregularity by supplenting or replacing the power source?": ["Uninterruptible Power Supply", "UPS"],
@@ -733,6 +765,10 @@
 			},
 			"3.0 Network Operations": {
 				"3.1 Organizational Processes and Procedures": {
+					"Network Documentation": {
+						"What type of network documentation shows all the components of a network in such a way that you could physicially trace the lines in the diagram?": "Physical Network Diagram",
+						"What type of network documentation shows the components of a network in a highly abstracted manner such as showing the interconnection of different buildings?": "Logical Network Diagram",
+					},
 					"Documentation": {
 						"What term refers to solutions for managing IP address allocation and documentation?": ["IP Address Management", "IPAM"],
 						"What term refers to a contract outlining uptime, reliability, performance, and other requirements imposed on an IT service provider?": ["Service Level Agreement", "SLA"],
@@ -741,11 +777,22 @@
 							"answers": ["Wireless Survey", "Wireless Heat Map", "Heat Map"],
 							"hidden-answers": ["Wi-Fi Heat Map", "WiFi Heat Map"]
 						}
+					},
+					"Regulatory Compliance": {
+						"What European Union law governs the handling of the personal data of EU citizens?": ["General Data Protection Regulation", "GDPR"],
+						"What global data security standard regulates the handling of payment cardholder data?": ["Payment Card Industry Data Security Standard", "PCI DSS"]
+					},
+					"Asset Management": {
+						"What term refers to solutions used to plan, track and manage the IP address space used by devices in a TCP/IP network?": ["IP Address Management", "IPAM"],
+						"What term refers to the process of disposing of an IT asset?": "Decommisioning",
+
+						"What designation indicates that a product is no longer available from a manufacturer, but it may still receive security patches, updates, and warranty repair?": ["End of Life", "EOL"],
+						"What designation indicates that a product is no longer available from a manufacturer and no longer receiving security patches, updates, or warranty repair?": ["End of Service", "EOS"]
 					}
 				},
 				"3.2 Network Monitoring Technologies": {
 					"Monitoring Devices and Software": {
-						"What software allows the detailed inspection of captured packets?": ["Protocol Analyzer", "Packet Analyzer"]
+						"What software allows the detailed inspection of captured packets?": ["Protocol Analyzer", "Packet Analyzer"],
 						"What common and free protocol analyzer provides deep packet inspection and can be used to diagnose misconfigurations on many levels?": "Wireshark",
 						
 						"What term refers to a central management console which receives logs, events, and metrics from throuoghout a network?": {
@@ -754,7 +801,7 @@
 						},
 						"What protocol is a standard for generating, sending, and managing log messages?": "Syslog",
 						
-						"What protocol provides a summary of statistics based on the flows of traffic traversing a network?": "NetFlow"
+						"What protocol provides a summary of statistics based on the flows of traffic traversing a network?": "NetFlow",
 						"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring",
 					},
 					"Remote Control": {
@@ -781,7 +828,7 @@
 					"High-Availability Approaches": {
 						"What refers to an arrangement of redundant hardware where all hardware is online prior to any malfunction or disaster?": "Active-Active",
 						"What refers to an arrangement of redundant hardware where redundant hardware is inactive until it is needed?": "Active-Passive",
-					}
+					},
 					"Testing": {
 						"What disaster-recovery preparedness session focuses on discussion of hypothetical scenarios, and serves to identify misconceptions and disagreements ahead of time?": ["Tabletop Exercise", "TTX"],
 						"What disaster-recovery preparedness session involves taking the steps that it would take to recover from a real disaster, and ensuring that proper recovery is actually achieved?": "Validation Tests"
@@ -823,9 +870,18 @@
 				}
 			},
 			"Network Security": {
+				"Concepts": {
+					"What term refers to a network security model of requiring authentication for any request in a network?": "Zero Trust"
+				},
 				"SOAR": {
 					"What type of security technology provides a centralized platform for the administration and automation of incident response?": ["Security Orchestration, Automation, and Response", "SOAR"]
 				}
+			},
+			"Industrial Networks": {
+				"What term refers to solutions that provide real-time control over industrial equipment and data gathering?": ["Industrial Control Systems", "ICS"],
+				"What term refers to solutions that provide holistic monitoring and management of industrial equipment?": ["Supervisory Control and Data Acquisition", "SCADA"],
+				"What term refers to a technology that encompasses all hardware and software systems used for monitoring and controlling industrial operations?": ["Operational Technology", "OT"],
+				"What term refers to a class of IoT dvices with industrial applications?": ["Industrial IoT", "IIoT"]
 			},
 			"Network Troubleshooting": {
 				"CompTIA Troubleshooting Methodology": {
@@ -879,10 +935,13 @@
 				"What kind of VPN configuration sends only certain kinds of traffic through the secure tunnel?": ["Split Tunnel", "Split"]
 			},
 			"Power over Ethernet": {
-				"Which PoE standard provides 15.4W of power over a 350mA line?": "Type 1",
-				"Which PoE standard provides 25.5W of power over a 600mA line?": "Type 2",
-				"Which PoE standard provides 51.0W of power over a 600mA line?": "Type 3",
-				"Which PoE standard provides 71.3W of power over a 960mA line?": "Type 4"
+				"typo-forgiveness-level": "none",
+				"questions": {
+					"Which PoE standard provides 15.4W of power over a 350mA line?": "Type 1",
+					"Which PoE standard provides 25.5W of power over a 600mA line?": "Type 2",
+					"Which PoE standard provides 51.0W of power over a 600mA line?": "Type 3",
+					"Which PoE standard provides 71.3W of power over a 960mA line?": "Type 4"
+				}
 			},
 			"Command Line Utilities": {
 				"What command line utility checks that a host can be routed to?": "ping",

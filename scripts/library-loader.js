@@ -424,8 +424,7 @@ function generate_next_question(did_pass = false) {
 	// In quiz mode, question activation is used to retrieve questions.
 	// This is because it has the property of getting each question in-turn, which is what we want.
 	// Note that if quizzing is enabled after answering some questions, all previously activated questions will be deactivated.
-	// If it is disabled mid-quiz, all quizzed questions since the last quiz cycle will suddenly be getting asked over and over again. This is a bit strange, but
-	// it is really the ideal interpretation of how to handle a player swapping modes mid-test in this way.
+	// If it is disabled mid-quiz, all quizzed questions since the last quiz cycle will suddenly be getting asked over and over again.
 	if (am_quiz) {
 		active_question = my_library.activate_question(am_ordered, am_adaptive)
 		

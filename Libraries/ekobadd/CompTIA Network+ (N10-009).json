@@ -183,7 +183,7 @@
 						"Internet Protocols": {
 							"Internet Protocol": {
 								"What protocol provides general-purpose internetwork routing and logical segmentation, and is almost universally adopted?": ["Internet Protocol", "IP"],
-								"What term refers to the IP address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"],
+								"What term refers to the IP address which always refers to the local machine?": ["Loopback Address", "Loopback", "Localhost"]
 							},
 							"Networking and Transport": {
 								"What transport protocol provides unreliable but very low-overhead, stateless communication?": ["User Datagram Protocol", "UDP"],
@@ -296,7 +296,7 @@
 								"What outdated protocol provides unencrypted communication with a remote computer?": "Telnet"
 							}
 						}
-					},
+					}
 				},
 				"1.5 Transmission Media and Transceivers": {
 					"Wireless": {
@@ -399,7 +399,7 @@
 								},
 								
 								"What term refers to a set of devices and cables where collisions can occur?": "Collision Domain",
-								"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain"
+								"What term describes a set of devices which are mutually reachable by layer-2 broadcast?": "Broadcast Domain",
 								
 								"What type of address is typically used by layer-2 protocols?": ["MAC Address", "MAC"],
 								"What is the length of a MAC address in octets?": "6",
@@ -483,7 +483,7 @@
 									"What type of transceiver commonly provides **40Gbps** throughput?": ["Enhanced Quad Small Form-factor Pluggable", "QSFP+"]
 								}
 							}
-						},
+						}
 					}
 				},
 				"1.6 Network Topologies, Architecturs, and Types": {
@@ -608,7 +608,7 @@
 					"Zero-Trust Architecture": {
 						"What term refers to a netwwork security model of requiring authentication fory request in a network?": ["Zero Trust Architecture", "Zero Trust", "ZTA"],
 						"What cybersecurity principle states that an entity should not have access to resources beyond the scope of their duties?": ["Principle of Least Privilege", "Least Privilege"]
-					}
+					},
 					"Infrastructure as Code": {
 						"What technology allows complex networks of devices to be deployed on the cloud according to a configuration file?": ["Infrastructure as Code", "IaC"],
 						
@@ -627,7 +627,7 @@
 						"What term refers to the simultaneous use of both Ipv4 and IPv6?": "Dual Stack",
 						"What technology allows the encapsulation of IPv4 packets within IPv6 packets or vice versa?": "Tunneling",
 						"What technology allows seemless conversion between IPv4 and IPv6 packets so that IPv4-only and IPv6-only devices can communicate?": "NAT64"
-					},
+					}
 				}
 			},
 			"2.0 Network Implementation": {
@@ -767,7 +767,7 @@
 				"3.1 Organizational Processes and Procedures": {
 					"Network Documentation": {
 						"What type of network documentation shows all the components of a network in such a way that you could physicially trace the lines in the diagram?": "Physical Network Diagram",
-						"What type of network documentation shows the components of a network in a highly abstracted manner such as showing the interconnection of different buildings?": "Logical Network Diagram",
+						"What type of network documentation shows the components of a network in a highly abstracted manner such as showing the interconnection of different buildings?": "Logical Network Diagram"
 					},
 					"Documentation": {
 						"What term refers to solutions for managing IP address allocation and documentation?": ["IP Address Management", "IPAM"],
@@ -802,7 +802,7 @@
 						"What protocol is a standard for generating, sending, and managing log messages?": "Syslog",
 						
 						"What protocol provides a summary of statistics based on the flows of traffic traversing a network?": "NetFlow",
-						"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring",
+						"What technique duplicates traffic out of one port into another, typically to a network tap, IDS, or IPS?": "Port Mirroring"
 					},
 					"Remote Control": {
 						"What term describes a management interface which can be connected to with the same means as the services of that device?": ["In-Band Management", "In-Band"],
@@ -827,14 +827,14 @@
 					},
 					"High-Availability Approaches": {
 						"What refers to an arrangement of redundant hardware where all hardware is online prior to any malfunction or disaster?": "Active-Active",
-						"What refers to an arrangement of redundant hardware where redundant hardware is inactive until it is needed?": "Active-Passive",
+						"What refers to an arrangement of redundant hardware where redundant hardware is inactive until it is needed?": "Active-Passive"
 					},
 					"Testing": {
 						"What disaster-recovery preparedness session focuses on discussion of hypothetical scenarios, and serves to identify misconceptions and disagreements ahead of time?": ["Tabletop Exercise", "TTX"],
 						"What disaster-recovery preparedness session involves taking the steps that it would take to recover from a real disaster, and ensuring that proper recovery is actually achieved?": "Validation Tests"
 					}
 				},
-				"3.4 IPv4 and IPv6 Neetwork Services": {
+				"3.4 IPv4 and IPv6 Network Services": {
 					"IPv6": {
 						"What is the length in octets of an IPv6 address?": {
 							"answers": "16", "hidden-answers": "sixteen"

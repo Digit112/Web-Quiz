@@ -200,6 +200,68 @@
 				"チャ": "ja", "チュ": "ju", "チョ": "jo"
 			}
 		},
+		"Romaji to English": {
+			"mode-of-presentation": ["verbatim", "multiple-choice"],
+			"descendants-share-incorrect-answers": true,
+			"groups": {
+				"Nouns": {
+					"Numbers": {
+						"descendants-share-incorrect-answers": true,
+						"correct-answer-source": "primary",
+						"groups": {
+							"0 - 9": {
+								"rei": ["0", "zero"],
+								"zero": ["0", "zero"],
+								"ichi": ["1", "one"],
+								"ni": ["2", "two"],
+								"san": ["3", "three"],
+								"yon": ["4", "four"],
+								"shi": ["4", "four"],
+								"yo": ["4", "four"],
+								"go": ["5", "five"],
+								"roku": ["6", "six"],
+								"nana": ["7", "seven"],
+								"shichi": ["7", "seven"],
+								"hachi": ["8", "eight"],
+								"kyuu": ["9", "nine"],
+								"ku": ["9", "nine"]
+							},
+							"10, 100, 1000, 10000": {
+								"juu": ["10", "ten"],
+								"hyaku": ["100", "one hundred"],
+								"sen": ["1000", "one thousand"],
+								"sanman": ["10000", "ten thousand"]
+							}
+						}
+					}
+				},
+				"Polite Words & Phrases": {
+					"mode-of-presentation": ["multiple-choice"],
+					"descendants-share-incorrect-answers": true,
+					"correct-answer-source": "primary",
+					"questions": {
+						"ohayoo": "Good morning",
+						"ohayoo gozaimasu": "Good morning (polite)",
+						"konnichiwa": "Good afternoon",
+						"konbanwa": "Good evening",
+						"sayoonara": "Good-bye",
+						"oyasumi (nasai)": "Good night",
+						"arigatoo": "Thank you",
+						"arigatoo gozaimasu": "Thank you (polite)",
+						"sumimasen": ["Excuse me", "I'm sorry"],
+						"iie": "No",
+						"itte kimasu": "I'll go and come back",
+						"itterasshai": "Please go and come back",
+						"tadaima": "I'm home",
+						"okaeri (nasai)": "Welcome home",
+						"itadakimasu": "Thank you for the meal (before eating)",
+						"gochisoosama": "Thank you for the meal (after eating)",
+						"hajimemashite": "How do you do?",
+						"yoroshiku onegai shimasu": "Nice to meet you"
+					}
+				}
+			}
+		},
 		"Nouns (Kana)": {
 			"Numbers": {
 				"descendants-share-incorrect-answers": true,
@@ -282,7 +344,6 @@
 						"English to Kana": {
 							"mode-of-presentation": ["multiple-choice"],
 							"descendants-share-incorrect-answers": true,
-							"incorrect
 							"questions": {
 								"10": "じゅう",
 								"100": "ひゃく",

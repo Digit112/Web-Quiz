@@ -1,0 +1,23 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "CompTIA A+ Certification 220-1201 (Core 1)",
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"Domain 1: Mobile Devices": {
+		},
+		"Domain 2: Networking": {
+		},
+		"Domain 3: Hardware": {
+		},
+		"Domain 4: Virtualization and Cloud Computing": {
+		},
+		"Domain 5: Hardware and Network Troubleshooting": {
+		}
+	}
+}

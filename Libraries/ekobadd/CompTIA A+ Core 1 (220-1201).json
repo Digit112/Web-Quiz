@@ -10,6 +10,45 @@
 	
 	"question-root": {
 		"Domain 1: Mobile Devices": {
+			"Monitor Mobile Device Hardware and use Appropriate Replacement Techniques": {
+				"Physical Privacy and Security": {
+					"What form of authentication is sometimes implemented using a built-in fingerprint scanner or facial recognition-capable camera in a laptop?": ["Biometric", "Something you Are"],
+					"What wireless technology uses magnetic induction to read passive tags from a very short range?": ["Near Field Scanner", "Near Field Communication", "NFC"]
+				}
+			},
+			"Accessories and Connectivity Options for Mobile Devices": {
+				"Wireless Connectivity": {
+					"What wireless communication technology has substantial range and is used for LANs?": {"answers": "Wi-Fi", "hidden-answers": "WiFi"},
+					"What wireless communication technology has a short range and is used for PANs?": "BlueTooth",
+					"What wireless communication technology has a very short range of only a couple inches, and is commonly used for financial transations?": ["Near Field Communication", "NFC"],
+					
+					"What wireless technology allows a mobile phone to act as a router for other devices to connect to the internet?": ["Tethering", "Hotspot"]
+				},
+				"Universal Serial Bus": {
+					"Which USB Variant has a flat, rectangular shape and is the most common, especially for peripherals like mice and keyboards": ["Type A", "A"],
+					"Which USB variant has a distinctive blocky shape and is mostly outdated but is still used for certain scanner or printer connections?": ["Type B", "B"],
+					"Which USB Variant has a symmetric design and is especially common as a charging port on modern mobile devices and some laptops?": ["Type C", "C"]
+					"Which USB variant has a smaller but thick profile, and is now mostly obsolete?": {"answers": "Mini-USB", "hidden-answers": ["MiniUSB", "Mini USB"]},
+					"Which USB variant has a very small but non-reversible profile, and was often used as a charging port for older Android phones and Kindles?": {"answers": "Micro-USB", "hidden-answers": ["MicroUSB", "Micro USB"]},
+				},
+				"Other Wired Connectors": {
+					"Which proprietary Apple connector is reversible and was commonly used as a charger on Apple devices?": "Lightning"
+				},
+				"Mobile Accessories": {
+					"What mobile device accessory acts as a pen to allow drawing and writing on a device?": "Stylus",
+					
+					"What connector is commonly used to transmit analog audio and is used to connect headsets and microphones?": ["Tip-Ring-Ring-Sleeve", "TRRS", "3.5mm jack"],
+					
+					"What mobile device accessory acts as a single station from which a device may be connected to many peripherals?": ["Docking Station", "Dock"],
+					"What mobile device accessory acts to provide many additional ports to a device through a single connection?": "Port Replicator"
+				},
+				"Other Peripherals": {
+					"What input peripheral provides drawing functionality to a device that doesn't otherwise have it?": "Drawing Pad"
+				}
+			},
+			"Basic Mobile Device Network Connectivity and Application Support": {
+				
+			}
 		},
 		"Domain 2: Networking": {
 		},

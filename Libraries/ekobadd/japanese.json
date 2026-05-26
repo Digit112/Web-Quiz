@@ -103,7 +103,6 @@
 				"ぢゃ": "ja", "ぢゅ": "ju", "ぢょ": "jo"
 			}
 		},
-		
 		"Katakana": {
 			"Basic Katakana": {
 				"a, i, u, e, o": {
@@ -258,6 +257,63 @@
 						"gochisoosama": "Thank you for the meal (after eating)",
 						"hajimemashite": "How do you do?",
 						"yoroshiku onegai shimasu": "Nice to meet you"
+					}
+				}
+			}
+		},
+		"English to Romaji": {
+			"mode-of-presentation": ["verbatim", "multiple-choice"],
+			"descendants-share-incorrect-answers": true,
+			"groups": {
+				"Nouns": {
+					"Numbers": {
+						"descendants-share-incorrect-answers": true,
+						"groups": {
+							"0 - 9": {
+								"zero": ["rei", "zero"],
+								"one": "ichi",
+								"two": "ni",
+								"three": "san",
+								"four": ["yon", "shi", "yo"],
+								"five": "go",
+								"six": "roku",
+								"seven": ["nana", "shichi"],
+								"eight": "hachi",
+								"nine": ["kyuu", "ku"]
+							},
+							"10, 100, 1000, 10000": {
+								"ten": "juu",
+								"one hundred": "hyaku",
+								"one thousand": "sen",
+								"ten thousand": "sanman"
+							}
+						}
+					}
+				},
+				"Polite Words & Phrases": {
+					"mode-of-presentation": ["multiple-choice"],
+					"descendants-share-incorrect-answers": true,
+					"correct-answer-source": "primary",
+					"questions": {
+						"Good morning": {"answers": ["ohayoo gozaimasu", "ohayoo"], "hidden-answers": ["ohayo gozaimasu", "ohayo"]},
+						"Good afternoon": "konnichiwa",
+						"Good evening": "konbanwa",
+						"Good-bye": {"answers": "sayoonara", "hidden-answers": "sayonara"},
+						"Good night": ["oyasumi nasai", "oyasumi"],
+						"Thank you": {"answers": ["arigatoo gozaimasu", "arigatoo"], "hidden-answers": ["arigatou gozaimasu", "arigatou"]},
+						"I'm sorry": "sumimasen",
+						"No": "iie",
+						"I'll go and come back": "itte kimasu",
+						"Please go and come back": "itterasshai",
+						"I'm home": "tadaima",
+						"Welcome home": ["okaeri nasai", "okaeri"],
+						"Thank you for the meal (before eating)": "itadakimasu",
+						"Thank you for the meal (after eating)": {
+							"answers": ["gochisoosama deshita", "gochisoosama"],
+							"hidden-answers": ["gochisousama deshita", "gochisousama", "gochisoosamadeshita", "gochisousamadeshita"]
+						},
+						"How do you do?": "hajimemashite",
+						"Nice to meet you": "yoroshiku onegai shimasu"
 					}
 				}
 			}

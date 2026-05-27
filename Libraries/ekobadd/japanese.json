@@ -204,6 +204,13 @@
 			"descendants-share-incorrect-answers": true,
 			"groups": {
 				"Nouns": {
+					"Common Items": {
+						"denwa": ["telephone", "phone"]
+					},
+					"Abstract": {
+						"bangoo": "Number",
+						"namae": "Name"
+					},
 					"Numbers": {
 						"descendants-share-incorrect-answers": true,
 						"correct-answer-source": "primary",
@@ -232,7 +239,56 @@
 								"sanman": ["10000", "ten thousand"]
 							}
 						}
+					},
+					"Family": {
+						"okaasan": "Mother",
+						"otoosan": "Father",
+						"oneesan": ["Older Sister", "Big Sister"],
+						"oniisan": ["Older Brother", "Big Brother"],
+						"imooto": ["Younger Sister", "Little Sister"],
+						"otooto": ["Younger Brother", "Littler Brother"]
+					},
+					"School": {
+						"daigaku": ["College", "University"],
+						"daigakusee": ["College student", "University student"],
+						"daigakuinsee": "Graduate Student",
+						"kookoo": "High School",
+						"kookoosee": "High School Student",
+						"sensee": ["Teacher", "Professor", "Master"],
+						"senkoo": ["College Major", "Major"]
+					},
+					"Occupations": {
+						"kaishain": "Office worker",
+						"kangoshi": "Nurse",
+						"isha": "Doctor",
+						"bengoshi": "Lawyer",
+						"shufu": "Housewife"
+					},
+					"Interpersonal": {
+						"watashi": "I",
+						"tomodachi": "friend"
+					},
+					"Countries": {
+						"nihon": "Japan",
+						"igirisu": "Britain",
+						"kankoku": "Korea",
+						"chuugoku": "China",
+						"indo": "India",
+						"firipin": ["The Philippines", "Philippines"]
 					}
+				},
+				"Time": {
+					"ima": "now",
+					"gozen": ["A.M.", "AM"],
+					"gogo": ["P.M.", "PM"],
+					"...ji": {"answers": ["...o'clock",	"o'clock"], "hidden-answers": ["...oclock", "oclock"]},
+					"...han": "half past..."
+				},
+				"Other Suffixes": {
+					"...go": "...language",
+					"...jin": "...people",
+					"...ban": "number...",
+					"...sai": "...years old"
 				},
 				"Polite Words & Phrases": {
 					"mode-of-presentation": ["multiple-choice"],

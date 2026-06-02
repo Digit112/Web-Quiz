@@ -205,7 +205,34 @@
 			"groups": {
 				"Nouns": {
 					"Common Items": {
-						"denwa": ["telephone", "phone"]
+						"denwa": ["Telephone", "Phone"]
+						"kasa": "Umbrella",
+						"kaban": "Bag",
+						"kutsu": "Shoes",
+						"saifu": "Wallet",
+						"jinzu": "Jeans",
+						"jitensha": ["Bicycle", "Bike"],
+						"shinbun": "Newspaper",
+						"sumaho": ["Smartphone", "Mobile Phone"],
+						"tiishatsu": {"answers": "T-Shirt", "hidden-answers": ["TShirt", "T Shirt"]},
+						"tokee": ["Timepiece", "Watch", "Clock"]
+						"nooto": "Notebook",
+						"pen": "Pen",
+						"booshi": ["Hat", "Cap"],
+						"hon": "Book"
+					},
+					"Food": {
+						"sakana": "Fish",
+						"ton": "Pork",
+						"niku": "Meat",
+						"yasai": "Vegetable"
+					},
+					"Places": {
+						"ginkoo": "Bank",
+						"konbini": "Convenience Store",
+						"toire": ["Toilet", "Restroom", "Bathroom"],
+						"toshokan": "Library",
+						"yuubinkyoku": "Post Office"
 					},
 					"Abstract": {
 						"bangoo": "Number",
@@ -246,11 +273,11 @@
 						"oneesan": ["Older Sister", "Big Sister"],
 						"oniisan": ["Older Brother", "Big Brother"],
 						"imooto": ["Younger Sister", "Little Sister"],
-						"otooto": ["Younger Brother", "Littler Brother"]
+						"otooto": ["Younger Brother", "Little Brother"]
 					},
 					"School": {
 						"daigaku": ["College", "University"],
-						"daigakusee": ["College student", "University student"],
+						"daigakusee": ["College Student", "University Student"],
 						"daigakuinsee": "Graduate Student",
 						"kookoo": "High School",
 						"kookoosee": "High School Student",
@@ -278,17 +305,17 @@
 					}
 				},
 				"Time": {
-					"ima": "now",
+					"ima": "Now",
 					"gozen": ["A.M.", "AM"],
 					"gogo": ["P.M.", "PM"],
 					"...ji": {"answers": ["...o'clock",	"o'clock"], "hidden-answers": ["...oclock", "oclock"]},
-					"...han": "half past..."
+					"...han": "Half Past..."
 				},
 				"Other Suffixes": {
-					"...go": "...language",
-					"...jin": "...people",
-					"...ban": "number...",
-					"...sai": "...years old"
+					"...go": "...Language",
+					"...jin": "...People",
+					"...ban": "Number...",
+					"...sai": "...Years Old"
 				},
 				"Polite Words & Phrases": {
 					"mode-of-presentation": ["multiple-choice"],
@@ -322,6 +349,40 @@
 			"descendants-share-incorrect-answers": true,
 			"groups": {
 				"Nouns": {
+					"Common Items": {
+						["Telephone", "Phone"]: "denwa",
+						"Umbrella": "kasa",
+						"Bag": "kaban",
+						"Shoes": "kutsu",
+						"Wallet": "saifu",
+						"Jeans": "jinzu",
+						"Bicycle": "jitensha",
+						"Newspaper": "shinbun",
+						"Smartphone": "sumaho",
+						"T-Shirt": "tiishatsu",
+						"Clock": "tokee"
+						"Notebook": "nooto",
+						"Pen": "pen",
+						"Hat": "booshi",
+						"Book": "hon"
+					},
+					"Food": {
+						"Fish": "sakana",
+						"Pork": "ton",
+						"Meat": "niku",
+						"Vegetable": "yasai"
+					},
+					"Places": {
+						"Bank": "ginkoo",
+						"Convenience Store": "konbini",
+						"Bathroom": "toire",
+						"Library": "toshokan",
+						"Post Office": "yuubinkyoku"
+					},
+					"Abstract": {
+						"Number": "bangoo",
+						"Name": "namae"
+					},
 					"Numbers": {
 						"descendants-share-incorrect-answers": true,
 						"groups": {
@@ -344,7 +405,56 @@
 								"ten thousand": "sanman"
 							}
 						}
+					},
+					"Family": {
+						"Mother": "okaasan",
+						"Father": "otoosan",
+						"Older Sister": "oneesan",
+						"Older Brother": "oniisan",
+						"Younger Sister": "imooto",
+						"Younger Brother": "otooto"
+					},
+					"School": {
+						"College": "daigaku",
+						"College Student": "daigakusee",
+						"Graduate Student": "daigakuinsee",
+						"High School": "kookoo",
+						"High School Student": "kookoosee",
+						"Teacher": "sensee",
+						"College Major": "senkoo"
+					},
+					"Occupations": {
+						"Office worker": "kaishain",
+						"Nurse": "kangoshi",
+						"Doctor": "isha",
+						"Lawyer": "bengoshi",
+						"Housewife": "shufu"
+					},
+					"Interpersonal": {
+						"I": "watashi",
+						"friend": "tomodachi"
+					},
+					"Countries": {
+						"Japan": "nihon",
+						"Britain": "igirisu",
+						"Korea": "kankoku",
+						"China": "chuugoku",
+						"India": "indo",
+						"The Philippines": "firipin"
 					}
+				},
+				"Time": {
+					"Now": "ima",
+					"A.M.": "gozen",
+					"P.M.": "gogo",
+					"...o'clock": "...ji",
+					"Half Past...": "...han"
+				},
+				"Other Suffixes": {
+					"...Language": "...go",
+					"...People": "...jin",
+					"Number...": "...ban",
+					"...Years Old": "...sai"
 				},
 				"Polite Words & Phrases": {
 					"mode-of-presentation": ["multiple-choice"],
@@ -571,30 +681,6 @@
 					"Thank you for the meal (after eating)": "ごちそうさま(でした)",
 					"How do you do?": "はじめまして",
 					"Nice to meet you": "よろしく おねがいします"
-				}
-			},
-			"English to Romaji": {
-				"descendants-share-incorrect-answers": true,
-				"mode-of-presentation": ["multiple-choice"],
-				"questions": {
-					"Good Morning (Formal)": "ohayoo gozaimasu",
-					"Good Morning (Informal)": "ohayoo",
-					"Good Afternoon": "konnichiwa",
-					"Good Evening": "konbanwa",
-					"Good-bye": "sayoonara",
-					"Good Night": "oyasumi (nasai)",
-					"Thank you (Formal)": "arigatoo gozaimasu",
-					"Thank You (Informal)": "arigatoo",
-					"Sorry": "sumimasen",
-					"No": "iie",
-					"I'll go and come back": "itte kimasu",
-					"Please go and come back": "itterasshai",
-					"I'm home": "tadaima",
-					"Welcome Home": "okaeri (nasai)",
-					"Thank you for the meal (before eating)": "itadakimasu",
-					"Thank you for the meal (after eating)": "gochisoosama (deshita)",
-					"How do you do?": "hajimemashite",
-					"Nice to meet you": "yoroshiku onegai shimasu"
 				}
 			}
 		}

@@ -419,6 +419,17 @@ Same as above but with an array of length one. Additional answers can be added t
 
 Unless generators or properties must be assigned to Questions and QuestionGroups, implicit mode is 
 
+## Handy RegEx
+
+Use the following to swap the answer and question of a question object:
+
+Replace: `(".*?"): ({\s*"answers":\s*)?((\[.*?\])|(".*?"))(.*})?(,?)`
+With: `$4$5: $1$7`
+
+Works for questions in implicit or embedded-explicit form, but not fully explicit.
+
+Groups $4 and $5 capture the "answer" field as an array or a string, respectively. $1 Captures the question and $7 grabs the comma at the end of the line if it exists. If answers are an array, the whole array will become the question, resulting in invalid JSON. You have to go back and fix these instances by picking a canonical question.
+
 ## Wishlist
 
 ### Must-Have

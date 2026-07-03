@@ -1,4 +1,6 @@
 __pycache__/*
 *.db
 
+*.kate-swp
+
 gunicorn.conf.py

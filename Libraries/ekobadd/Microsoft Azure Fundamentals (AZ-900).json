@@ -1,0 +1,379 @@
+{
+	"version": 1,
+	"author": "ekobadd",
+	"title": "CompTIA A+ Certification 220-1201 (Core 1)",
+	
+	"adaptation-rate": 0.15,
+	"starting-mastery": 0.5,
+	"adaptive-weight-bias": 12,
+	"ideal-overall-difficulty": 0.27,
+	
+	"question-root": {
+		"Path 1: Cloud Concepts": {
+			"Definition": {
+				"What term refers to the delivery of computing services over the internet?": "Cloud Computing"
+			}
+			"Expenditure": {
+				"modes-of-presentation": ["verbatim", "multiple-choice"],
+				"descendants-share-incorrect-answers": true,
+				"questions": {
+					"What kind of expenditure represents **up-front** costs?": ["Capital Expenditure", "Capital", "CapEx"],
+					"What kind of expenditure represents **ongoing** costs?": ["Operational Expenditure", "Operational", "OpEx"]
+				}
+			},
+			"Shared Responsibility & Cloud Service Models": {
+				"modes-of-presentation": ["verbatim", "multiple-choice"],
+				"descendants-share-incorrect-answers": true,
+				"groups": {
+					"IaaS, PaaS, and SaaS": {
+						"In what cloud service model does the cloud provider maintain the hardware, network connectivity to the internet, and physical security, but nothing else?": ["Infrastructure as a Service", "IaaS"],
+						"In what cloud service model does the cloud provider maintain a partially-managed environment for application deployment?": ["Platform as a Service", "PaaS"],
+						"In what cloud service model does the cloud provider maintain a complete, deployed application?": ["Software as a Service", "SaaS"],
+						"What cloud service model offers the greatest flexibility for the client?": ["Infrastructure as a Service", "IaaS"],
+						"What cloud service model offers a middle ground of flexibility for the client?": ["Platform as a Service", "PaaS"],
+						"What cloud service model offers the least flexibility for the client?": ["Software as a Service", "SaaS"]
+					},
+					"Responsibility": {
+						"In what cloud service model is the client fully responsible for the operating system maintainence?": ["Infrastructure as a Service", "IaaS"],
+						"In what cloud service model is the client fully responsible for identity and access control?": ["Infrastructure as a Service", "IaaS"],
+						"In what cloud service model is the client fully responsible for applications being hosted?": ["Infrastructure as a Service", "IaaS"],
+						"In what cloud service model is the provider fully responsible for applications being hosted?": ["Software as a Service", "SaaS"],
+						"In what cloud service model is the provider fully responsible for the network controls?": ["Software as a Service", "SaaS"],
+						
+						"In what cloud service model is the provider partially responsible for applications being hosted?": ["Platform as a Service", "PaaS"]
+					}
+				}
+			},
+			"Cloud Deployment Models": {
+				"In what cloud deployment model does an entity utilize infrastructure that it also maintains?": ["Private Cloud", "Private"],
+				"In what cloud deployment model does an entity utilize infrastructure hosted by a third party, typically for sale?": ["Publiic Cloud", "Public"],
+				"In what cloud deployment model does an entity utilize interconnected infrastructure with some hosted by itself and some hosted by a 3rd party?": ["Hybrid Cloud", "Hybrid"],
+				"In what cloud deployment model does an entity utilize interconnected infrastructure hosted by multiple 3rd parties?": "Multicloud"
+			},
+			"Consumption-Based Model": {
+				"What term refers to a cloud payment model where you pay for the IT resources you use, and nothing more?": {"answers": ["Pay-as-you-go", "Consumption-based"], "hidden-answers": ["Pay as you go", "Consumption based"]}
+			}
+		},
+		"Path 2: Azure Architecture and Services": {
+			"Physical Infrastructure": {
+				"Geographical Regions": {
+					"What term refers to a geographical area representing data residency and compliance boundaries?": "Geography",
+					"What term refers to a geographical area containing datacenters interconnected with low latency?": "Region",
+					"What term refers to a geographical area containing datacenters serving as an isolation boundary?": ["Availability Zone", "AZ"]
+					
+					"A region is the largest subdivision of what?": ["A Geography", "Geography"],
+					"An AZ is the largest subdivision of what?": ["A Region", "Region"],
+					
+					"How many datacenters are contained in an AZ at minimum?": ["Three", "3"]
+				},
+				"Services Supporting Availability Zones": {
+					"What term refers to a service that is pinned to a single availability zone?": ["Zonal Service", "Zonal"],
+					"What term refers to a service that is replicated across all availability zones in a region?": ["Zone-Redundant Service", "Zone-Redundant"],
+					"What term refers to a service that is globally available and has no relationship to availability zones?": ["Non-Regional Service", "Non-Regional"]
+				},
+				"Region Pairs": {
+					"What term refers to two affiliated Azure regions within a geography that are bound in order to provide geographically diverse data replication?": {"answers": "Region Pair", "hidden-answers": "Region Pairs"}
+				},
+				"Sovereign Regions": {
+					"typo-forgiveness-level": "high",
+					"What term refers to an instance of Azure that is isolated from the main instance?": {"answers": "Sovereign Region", "hidden-answers": "Sovereign Regions"}
+				}
+			},
+			"Management Infrastructure": {
+				"What Azure management utility represents a grouping of resources?": {"answers": "Resource Group", "hidden-answers": "Resource Groups"},
+				"What Azure management utility represents a unit of management, billing, and scale?": {"answers": "Subscription", "hidden-answers": "Subscriptions"},
+				"What Azure management utility represents a group of resources for which a single invoice is generated?": {"answers": "Subscription", "hidden-answers": "Subscriptions"},
+				"What Azure management utility represents a collection of subscriptions?": {"answers": "Management Group", "hidden-answers": "Management Groups"},
+				
+				"What is the largest subdivision of a management group?": "Subscription",
+				"What is the largest subdivision of a subscription?": "Resource Group",
+				"What is the largest subdivision of a resource group?": "Resource",
+				
+				"How many levels deep can management groups be nested, excluding the root group?": ["Six", "6"],
+				
+				"How many resource groups can a resource belong to?": {
+					"mode-of-presentation": "multiple-choice",
+					"answers": "Exactly One",
+					"incorrect-answers": ["One or More", "Zero or More", "Zero or One"]
+				},
+				
+				"True or False: Resource groups can be nested.": {
+					"mode-of-presentation": "multiple-choice",
+					"answers": "False",
+					"incorrect-answers": "True"
+				}
+			},
+			"Azure Compute Services": {
+				"Azure Virtual Machines": {
+					"Fundamentals": {
+						"What Azure service allows you to run virtualized servers in Azure as IaaS?": {
+							"answers": ["Azure Vitrual Machines", "VMs"],
+							"hidden-answers": ["Azure VMs", "Virtual Machines"]
+						},
+						
+						"What Azure VM service lets you create and manage groups of identical, load-balanced VMs?": {
+							"answers": ["Virtual Machine Scale Sets", "Scale Sets"],
+							"hidden-answers": ["Azure Virtual Machine Scale Sets", "Azure VM Scale Sets", "VM Scale Sets"]
+						},
+						
+						"What Azure VM service lets you groups VMs to ensure they do not share common points of power or network failure?": {
+							"answers": ["Virtual Machine Availability Sets", "Availability Sets"],
+							"hidden-answers": ["Azure Virtual Machine Availability Sets", "Azure VM Availability Sets", "VM Availability Sets"]
+						}
+					},
+					"VM Families": {
+						"Which Azure VM Family is optimized for burstable loads?": ["B-series", "B"],
+						"Which Azure VM family is optimized for general-purpose use?": ["D-Series", "D"],
+						"Which Azure VM family is optimized for high memory transaction rates?": ["E-Series", "E"],
+						"Which Azure VM family is optimized for high CPU usage?": ["F-Series", "F"],
+						"Which Azure VM family is optimized for large memory footprints?": ["M-Series", "M"],
+						"Which Azure VM family is optimized for high-throughput storage?": ["L-Series", "L"],
+						"Which Azure VM family is optimized for parallel computation using GPUs?": ["N-Series", "N"],
+					}
+				},
+				"Azure Virtual Desktop": {
+					"What Azure service lets users securely access Windows desktops and apps from many device types and locations?": ["Azure Virtual Desktop", "Virtual Desktop"]
+				},
+				"Azure Containers": {
+					"Offerings": {
+						"descendants-share-incorrect-answers": true,
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"questions": {
+							"What Azure service allows deploying individual containers without managing any VMs and letting Azure handle the container instancing?": [
+								"Azure Container Instances", "Container Instances"
+							],
+							
+							"What Azure service allows the consolidated management of an automatically-scaled fleet of container instances for modern microservices?": {
+								"answers": ["Azure Container Apps", "Container Apps"],
+								"hidden-answers": ["Azure Container Applications", "Container Applications"]
+							},
+							
+							"What Azure service allows full container fleet orchestration and management for enterprise applications and multi-cluster deployments?": {
+								"answers": ["Azure Kubernetes Service", "Kubernetes"],
+								"hidden-answers": ["Azure Kubernetes", "Kubernetes Service", "Azure Kubernetes Services", "Kubernetes Services"]
+							}
+						}
+					},
+					"Options & Billing": {
+						"mode-of-presentation": "multiple-choice",
+						"incorrect-answers": ["True", "False"],
+						"max-choices": 2,
+						"questions": {
+							"True or False: Azure Container Instances offers automatic load balancing and scaling?": "False"
+							"True or False: Azure Container Apps offers automatic load balancing and scaling?": "True",
+							"True or False: Azure Kubernetes Service offers automatic load balancing and scaling?": "True",
+							
+							"True or False: Azure Container Instances bills based on CPU usage and memory allocation?": "True",
+							"True or False: Azure Container Apps bills based on CPU usage and memory allocation?": "True",
+							"True or False: Azure Kubernetes Service bills based on CPU usage and memory allocation?": "False",
+							"True or False: Azure Kubernetes Service bills based on the underlying VMs in the cluster?": "True"
+						}
+					}
+				},
+				"Azure Functions": {
+					"What Azure service is an event-driven, serverless compute option that doesn’t require maintaining VMs or containers?": ["Azure Functions", "Functions"],
+					
+					"What term refers to an Azure Functions configuration where the function runs as if for the first time, every time?": "Stateless",
+					"What term refers to an Azure Functions configuration where the function is able to reference contextual information from other calls?": ["Durable", "Stateful"]
+				},
+				"Azure AI & ML": {
+					"What Azure service provides prebuilt capabilities for common AI scenarios such as language, speech, and vision?": ["Azure AI Services", "AI Services"],
+					"What Azure service allows building, training, and managing custom ML models?": ["Azure Machine Learning", "Azure ML", "Machine Learning"]
+				}
+				"Azure IoT & Edge": {
+					"What Azure service helps connect, monitor, and manage devices, and is good for solutions centering on interconnected devices and telemetry?": ["Azure IoT Services", "IoT Services"]
+				},
+				"Azure App Service": {
+					"What Azure service lets you build and host web apps, background jobs, and RESTful APIs without managing infrastructure?": ["Azure App Service", "App Service"]
+				}
+			},
+			"Azure Networking Services": {
+				"Azure Virtual Networking": {
+					"What Azure service allows Azure resources to communicate with each other, with users on the internet, and with your on-premises client computers?": {
+						"answers": ["Azure Virtual Networking", "Virtual Networking"],
+						"hidden-answers": ["Azure Virtual Networks", "Virtual Networks"]
+					},
+					
+					"What Azure resource contains multiple security rules for filtering traffic between resources in Azure virtual networks?": "Network Security Groups",
+					"What Azure resource is basically a specialized VM for providing security service, such as a firewall, in Azure virtual networks?": "Network Virtual Appliances",
+					
+					"What allows you to directly link together Azure virtual networks, potentially in different regions, such that information routes between them over the Microsoft backbone?": "Virtual Network Peering"
+				},
+				"Azure Virtual Private Networks": {
+					"Connectivity Models": {
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"incorrect-answers": ["Point-to-Site", "Site-to-Site", "Network-to-Network"],
+						"max-choices": 3,
+						"questions": {
+							"What Azure VPN connectivity model allows connecting a remote device to an Azure VNet?": {
+								"answers": "Point-to-Site", "hidden-answers": "Point to Site"
+							},
+							"What Azure VPN connectivity model allows connecting a remote device to an Azure VNet?": {
+								"answers": "Site-to-Site", "hidden-answers": "Site to Site"
+							},
+							"What Azure VPN connectivity model allows connecting an Azure VNet to an Azure VNet?": {
+								"answers": "Network-to-Network", "hidden-answers": "Network-to-Network"
+							}
+						}
+					},
+					"Routing": {
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"incorrect-answers": ["Policy-Based", "Route-Based"],
+						"max-choices": 2,
+						"questions": {
+							"Which Azure VPN routing type is only really workable for very small networks or where there is only a single tunnel?": "Policy-Based",
+							"Which Azure VPN routing type determines the VPN tunnel to send a packet through based on pre-defined, static ACLs?": "Policy-Based",
+							
+							"Which Azure VPN routing type is recommended for almost all modern networks?": "Route-Based",
+							"Which Azure VPN routing type determines the VPN tunnel to send a packet through based on IP routing?": "Route-Based"
+						}
+					},
+					"Redundancy": {
+						"mode-of-presentation": ["multiple-choice", "verbatim"],
+						"incorrect-answers": ["Active/Standby", "Active/Active"],
+						"max-choices": 2,
+						"questions": {
+							"What is the default redundancy configuration for an Azure VPN?": "Active/Standby",
+							
+							"In what Azure VPN redundancy configuration does failover occur from the failing gateway to an inactive gateway, which must come online?": "Active/Standby",
+							"In what Azure VPN redundancy configuration does failover take up to 90 seconds?": "Active/Standby",
+							
+							"In what Azure VPN redundancy configuration does failover occur from the failing gateway to an already active gateway which can assume responsibility immediately?": "Active/Active",
+							"In what Azure VPN redundancy configuration is BGP utilized to facilitate failover?": "Active/Active",
+							"In what Azure VPN redundancy configuration does failover occur immediately?": "Active/Active"
+						}
+					}
+				},
+				"Azure ExpressRoute": {
+					"What Azure service lets you extend your on-premises networks into the Microsoft cloud over a private connection?": ["Azure ExpressRoute", "ExpressRoute"],
+					"What Azure service lets you exchange data across your on-premises sites by connecting your ExpressRoute circuits?": ["ExpressRoute Global Reach", "Global Reach"]
+				},
+				"Azure DNS": {
+					"What Azure service provides name resolution and centralized domain management by using Microsoft Azure infrastructure?": {
+						"answers": ["Azure DNS", "DNS"],
+						"hidden-answers": ["Azure Domain Name Resolution", "Domain Name Resolution"]
+					},
+					
+					"True or False: Microsoft is a domain registrar.": {
+						"mode-of-presentation": "multiple-choice",
+						"max-choices": 2,
+						"answers": "False"
+					}
+				}
+			},
+			"Azure Storage Services": {
+				"Fundamentals": {
+					"What term refers to a unique namespace for Azure storage data?": ["Azure Storage Account", "Storage Account"],
+				},
+				"Redundancy Options": {
+					"Definitions": {
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"max-choices": 6,
+						"incorrect-answers": ["LRS", "ZRS", "GRS", "GZRS", "RA-GRS", "RA-GZRS"],
+						"questions": {
+							"Which storage redundancy option replicates each object three times within a single datacenter?": ["Locally Redundant Storage", "LRS"],
+							"Which storage redundancy option replicates each object three times in three different datacenter?": ["Zone-Redundant Storage", "ZRS"],
+							"Which storage redundancy option replicates each object three times in one datacenter and three more times in a distant datacenter?": ["Geo-redundant Storage", "GRS"],
+							"Which storage redundancy option replicates each object three times in three datacenters and three more times in a distant datacenter?": ["Geo-zone-redundant Storage", "GZRS"],
+							"Which storage redundancy option uses **LRS** locally as well as in another region while allowing read access to the distant copy?": ["Read-access Geo-redundant Storage", "RA-GRS"],
+							"Which storage redundancy option uses **ZRS** locally and LRS in another region while allowing read access to the distant copy?": ["Geo-zone-redundant Storage", "GZRS"]
+						}
+					},
+					"True-False": {
+						"mode-of-presentation": "multiple-choice",
+						"max-choices": 2,
+						"incorrect-answers": ["true", "false"],
+						"questions": {
+							"True or False: GRS uses **LRS** locally and **LRS** distantly.": "True",
+							"True or False: GRS uses **ZRS** locally and **LRS** distantly.": "False",
+							
+							"True or False: GZRS uses **ZRS** locally and **LRS** distantly.": "True",
+							"True or False: GZRS uses **LRS** locally and **ZRS** distantly.": "False",
+							"True or False: GZRS uses **ZRS** locally and **ZRS** distantly.": "False",
+							
+							"True or False: Azure SLAs specify an RPO of 15 minutes for geo-redundant objects.": {"answers": "False", "explanation": "GRS failover RPO is usually 15 minutes, but the Azure SLAs do not specify this, so it is not guaranteed."}
+						}
+					},
+					"Durability": {
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"max-choices": 4,
+						"incorrect-answers": ["10", "11", "12", "13", "14", "15", "16", "17"],
+						"questions": {
+							"How many nines of durability does LRS provide over a year?": {"answers": "11", "hidden-answers": "Eleven"},
+							"How many nines of durability does ZRS provide over a year?": {"answers": "12", "hidden-answers": "Twelve"},
+							"How many nines of durability does GRS provide over a year?": {"answers": "16", "hidden-answers": "Sixteen"},
+							"How many nines of durability does GZRS provide over a year?": {"answers": "16", "hidden-answers": "Sixteen"}
+						}
+					}
+				},
+				"Migration Options": {
+					"What Azure migration option offers a unified platformn for real-time migration over the internet?": ["Azure Migrate", "Migrate"],
+					"What Azure migration option offers a physical drive which can be shipped to you in order to bulk migrate large quantities of data, such as an entire datacenter?": ["Azure  Data Box", "Data Box"]
+				},
+				"File Movement Options": {
+					"What Azure file movement option is a command line utility for copying blobs or files to or from your storage account?": "AzCopy",
+					"What Azure file movement option is a standalone application that provides a GUI for blob and files management?": ["Azure Storage Explorer", "Storage Explorer"],
+					"What Azure file movement option lets you centralize file shares in Azure Files and bidirectionally sync them with an on-premises server?": ["Azure File Sync", "File Sync"]
+				},
+				"Azure Blobs": {
+					"What Azure storage service offers a massively scaleable object store for text and binary data?": ["Azure Blobs", "Blobs"],
+					
+					"Which Azure Blobs storage tier is optimized for frequently accessed items?": "Hot",
+					"Which Azure Blobs storage tier is optimized for infrequently accessed items, and has a minimum storage time of 30 days?": "Cool",
+					"Which Azure Blobs storage tier is optimized for infrequently accessed items, and has a minimum storage time of 90 days?": "Cold",
+					"Which Azure Blobs storage tier is optimized for rarely accessed items, and has a minimum storage time of 180 days?": "Archive"
+				},
+				"Azure Files": {
+					"What Azure storage service offers managed file shares for on-premises and cloud deployments?": ["Azure Files", "Files"],
+				},
+				"Azure Queues": {
+					"What Azure storage service offers a messaging store for reliable asynchronous communication?": ["Azure Queues", "Queues"],
+					
+					"What is the maximum size of a message in Azure Queues?": {
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"max-choices": 4,
+						"incorrect-answers": ["16kB", "32kB", "128kB"],
+						"answers": "64kB",
+						"hidden-answers": ["64 kilobytes", "64 kibibytes", "64k", "65536B", "65536 bytes", "65536"]
+					}
+				},
+				"Azure Disks": {
+					"What Azure storage service offers block-level storage volumes for VMs?": ["Azure Disks", "Disks"],
+				},
+				"Azure Tables": {
+					"What Azure storage service offers managed NoSQL databases?": ["Azure Tables", "Tables"],
+				}
+			},
+			"Azure Identity, Access, and Security": {
+				"Entra ID": {
+					"What is Microsoft's cloud-based identity and access management service?": ["Microsoft Entra ID", "Entra ID", "Entra"],
+					
+					"What utility synchronizes user identities between on-premises AD and Microsoft Entra ID?": ["Microsoft Entra Connect", "Entra Connect"],
+					"What service provides cloud-based domain services such as group policy, LDAP and Kerberos authentication without required a virtual domain controller to be deployed?": ["Microsoft Entra Domain Services", "Entra Domain Services"]
+				},
+				"Authentication Methods": {
+					"What Entra authentication method only utilizes \"something you know\" and is considered less secure?": ["Password Only", "Password"],
+					"What Entra authentication method utilizes \"something you know\" and \"something you have\", which is very common and secure?": ["Multifactor Authentication", "MFA"],
+					"What Entra authentication method utilizes \"something you have\" and \"something you are/know\", and is very secure for logins from trusted devices?": "Passwordless"
+				},
+				"Single Sign-On": {
+					"What service lets a user sign in once and access multple trusted applications?": ["Single Sign-On", "SSO"]
+				},
+				"Azure External Identities": {
+					"How will external users appear in your tenant when granting them access via B2B Collaboration?": ["Guest Users", "Guests"],
+				},
+				"Conditional Access": {
+					"What Azure service lets you allow or deny access to resources based on identity signals?": ["Azure Conditional Access", "Conditional Access"]
+				},
+				"Encryption and Key Management": {
+					"At Rest vs. In transit": {
+						"mode-of-presentation": ["verbatim", "multiple-choice"],
+						"
+						"What kind of encryption protects data when it is stored, such as in databases, disks, and storage accounts?": ["Encryption at Rest", "At Rest"],
+						"What kind of encryption protects data while it moves between services, applications, and users?": ["Encryption in Transit", "In Transit"]
+					}
+				}
+			}
+		}
+	}
+}

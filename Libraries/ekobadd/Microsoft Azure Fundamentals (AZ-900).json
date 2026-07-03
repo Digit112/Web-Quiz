@@ -368,10 +368,109 @@
 				"Encryption and Key Management": {
 					"At Rest vs. In transit": {
 						"mode-of-presentation": ["verbatim", "multiple-choice"],
-						"
-						"What kind of encryption protects data when it is stored, such as in databases, disks, and storage accounts?": ["Encryption at Rest", "At Rest"],
-						"What kind of encryption protects data while it moves between services, applications, and users?": ["Encryption in Transit", "In Transit"]
+						"questions": {
+							"What kind of encryption protects data when it is stored, such as in databases, disks, and storage accounts?": ["Encryption at Rest", "At Rest"],
+							"What kind of encryption protects data while it moves between services, applications, and users?": ["Encryption in Transit", "In Transit"]
+						}
 					}
+				},
+				"Azure Key Vault": {
+					"What Azure service allows you to securely store and control access to keys, certificates, and other secrets?": ["Azure Key Vault", "Key Vault"]
+				},
+				"Microsoft Defender for Cloud": {
+					"What Azure service is a security posture management and threat protection service for cloud, on-premises, hybrid, and multicloud resources?": ["Microsoft Defender for Cloud", "Defender for Cloud"]
+				}
+			}
+		},
+		"Path 3: Cost Management": {
+			"Azure Pricing Options": {
+				"What Azure pricing option allows you to commit to specified computing resources for a discount?": ["Azure Reservations", "Reservations"],
+
+				"What Azure pricing option allows Azure to select options with the best available price to run your compute services as usage occurs for a discount?": {
+					"answers": ["Azure Savings Plan for Compute", "Savings Plan"],
+					"hidden-answers": ["Azure Savings Plan", "Savings Plan for Compute"]
+				},
+
+				"What Azure pricing option allows you to use underutilized Azure resources for hue discounts on interruptable and performance-insensitive jobs?": {
+					"answers": ["Azure Spot Virtual Machines", "Spot Pricing"],
+					"hidden-answers": ["Spot Virtual Machines", "Azure Spot VMs", "Spot VMs", "Azure Spot Pricing"]
+				},
+			},
+			"The Pricing Calculator": {
+				"What online tool provides estimates for the costs of provisioned resources in Azure?": {
+					"answers": "Pricing Calculator",
+					"hidden-answers": "The Pricing Calculator"
+				}
+			},
+			"Microsoft Cost Management Tool": {
+				"What Microsoft service is a set of tools that helps organizations analyze, monitor, and manage Azure costs?": ["Microsoft Cost Management", "Cost Management"],
+
+				"What kind of cost alert notifies you when spending reaches or exceeds a predefined threshhold?": ["Budget Alert", "Budget"],
+				"What kind of cost alert notifies you when your Azure Prepayment is consumed?": ["Credit Alert", "Credit"],
+				"What kind of cost alert notifies you when department spending reaches a fixed threshhold of its quota?": {
+					"answers": ["Department Spending Quota Alert", "Department Spending"],
+					"hidden-answers": ["Department Spending Quota", "Department Spending Alert"]
+				}
+			},
+			"Resource Tags": {
+				"Fundamentals": {
+					"What Azure utility enhances resource organization by allowing you to associate key-value pairs with ressources and other scopes?": ["Resource Tags", "Tags"]
+				},
+				"Other": {
+					"mode-of-presentation": ["multiple-choice", "verbatim"],
+					"max-choices": 2,
+					"incorrect-answers": ["True", "False"],
+					"questions": {
+						"True or False: Azure Policy can be used to enforce tagging requirements.": "True",
+						"True or False: Azure Tags can only be applied to individual resources.": "False"
+					}
+				}
+			},
+			"Microsoft Purview": {
+				"What Microsoft family is a family of data governance, risk, and compliance solutions that helps you get a single, unified view into your data?": ["Microsoft Purview", "Purview"]
+			},
+			"Azure Policy": {
+				"Fundamentals": {
+					"What Azure service enables you to create, assign, and manage policies that control or audit your resources?": ["Azure Policy", "Policy"],
+					"What term refers to a group of related policies in Azure Policy": "Initiative"
+				},
+				"Other": {
+					"mode-of-presentation": ["multiple-choice", "verbatim"],
+					"max-choices": 2,
+					"incorrect-answers": ["True", "False"],
+					"questions": {
+						"True or False: Azure Policy can be set for resources, groups, subscriptions, and management groups.": "True"
+					}
+				}
+			},
+			"Resource Locks": {
+				"What Azure utility prevents resources from being acidentally modified or deleted?": ["Resource Locks", "Locks"],
+
+				"What type of resource lock prevents accidental resource deletion but doesn't prevent resource modification?": ["Delete Lock", "Delete"],
+				"What type of resource lock prevents accidental resource modification and deletion?": {
+					"answers": ["ReadOnly Lock", "ReadOnly"],
+					"hidden-answers": ["Read Only Lock", "Read-Only Lock", "Read Only", "Read-Only"]
+				}
+			},
+			"The Microsoft Service Trust Portal": {
+				"What Microsoft portal provides access to various content, tools, and other resources about Microsoft security, privacy, and compliance practices?": {
+					"answers": ["The Microsoft Service Trust Portal", "The Service Trust Portal"],
+					"hidden-answers": ["Microsoft Service Trust Portal", "Service Trust Portal", "Microsoft Service Trust", "Service Trust"]
+				}
+			},
+			"Managing and Deploying Azure Resources": {
+				"Tools for Interacting with Azure": {
+					"Which Azure Management tool provides a web-based graphical interface for interacting with Azure?": ["Azure Portal", "Azure"],
+					"Which Azure Management tool provides a web-based command line for interacting with Azure?": ["Azure Cloud Shell", "Cloud Shell"],
+					"Which Azure Management tool provides a command line API for Cmdlet-based interaction with Azure?": ["Azure PowerShell", "PowerShell"],
+					"Which Azure Management tool provides a command line API for interaction with Azure using Bash?": ["Azure CLI", "CLI"],
+					"Which Azure Management tool provides AI-powered assistance in natural language?": ["Copilot in Azure", "Copilot"]
+				},
+				"Azure Arc": {
+					"What Azure service works with Azure Resource Manager to extend your Azure compliance and monitoring to hybrid and multicloud configurations?": ["Azure Arc", "Arc"]
+				},
+				"Azure Resource Manager & ARM Templates": {
+					"What Azure service is the deployment and management service through which all interactions with Azure are authenticated and authorized?": ["Azure Resource Manager", "Resource Manager"]
 				}
 			}
 		}

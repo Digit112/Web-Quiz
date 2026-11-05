@@ -12,7 +12,7 @@
 		"Path 1: Cloud Concepts": {
 			"Definition": {
 				"What term refers to the delivery of computing services over the internet?": "Cloud Computing"
-			}
+			},
 			"Expenditure": {
 				"modes-of-presentation": ["verbatim", "multiple-choice"],
 				"descendants-share-incorrect-answers": true,
@@ -59,7 +59,7 @@
 				"Geographical Regions": {
 					"What term refers to a geographical area representing data residency and compliance boundaries?": "Geography",
 					"What term refers to a geographical area containing datacenters interconnected with low latency?": "Region",
-					"What term refers to a geographical area containing datacenters serving as an isolation boundary?": ["Availability Zone", "AZ"]
+					"What term refers to a geographical area containing datacenters serving as an isolation boundary?": ["Availability Zone", "AZ"],
 					
 					"A region is the largest subdivision of what?": ["A Geography", "Geography"],
 					"An AZ is the largest subdivision of what?": ["A Region", "Region"],
@@ -80,13 +80,13 @@
 				}
 			},
 			"Management Infrastructure": {
-				"What Azure management utility represents a grouping of resources?": {"answers": "Resource Group", "hidden-answers": "Resource Groups"},
+				"What Azure management utility represents a grouping of resources?": {"answers": ["Resource Group", "Group"], "hidden-answers": ["Resource Groups", "Groups"]},
 				"What Azure management utility represents a unit of management, billing, and scale?": {"answers": "Subscription", "hidden-answers": "Subscriptions"},
 				"What Azure management utility represents a group of resources for which a single invoice is generated?": {"answers": "Subscription", "hidden-answers": "Subscriptions"},
 				"What Azure management utility represents a collection of subscriptions?": {"answers": "Management Group", "hidden-answers": "Management Groups"},
 				
 				"What is the largest subdivision of a management group?": "Subscription",
-				"What is the largest subdivision of a subscription?": "Resource Group",
+				"What is the largest subdivision of a subscription?": {"answers": ["Resource Group", "Group"], "hidden-answers": ["Resource Groups", "Groups"]},
 				"What is the largest subdivision of a resource group?": "Resource",
 				
 				"How many levels deep can management groups be nested, excluding the root group?": ["Six", "6"],
@@ -128,7 +128,7 @@
 						"Which Azure VM family is optimized for high CPU usage?": ["F-Series", "F"],
 						"Which Azure VM family is optimized for large memory footprints?": ["M-Series", "M"],
 						"Which Azure VM family is optimized for high-throughput storage?": ["L-Series", "L"],
-						"Which Azure VM family is optimized for parallel computation using GPUs?": ["N-Series", "N"],
+						"Which Azure VM family is optimized for parallel computation using GPUs?": ["N-Series", "N"]
 					}
 				},
 				"Azure Virtual Desktop": {
@@ -159,7 +159,7 @@
 						"incorrect-answers": ["True", "False"],
 						"max-choices": 2,
 						"questions": {
-							"True or False: Azure Container Instances offers automatic load balancing and scaling?": "False"
+							"True or False: Azure Container Instances offers automatic load balancing and scaling?": "False",
 							"True or False: Azure Container Apps offers automatic load balancing and scaling?": "True",
 							"True or False: Azure Kubernetes Service offers automatic load balancing and scaling?": "True",
 							
@@ -179,7 +179,7 @@
 				"Azure AI & ML": {
 					"What Azure service provides prebuilt capabilities for common AI scenarios such as language, speech, and vision?": ["Azure AI Services", "AI Services"],
 					"What Azure service allows building, training, and managing custom ML models?": ["Azure Machine Learning", "Azure ML", "Machine Learning"]
-				}
+				},
 				"Azure IoT & Edge": {
 					"What Azure service helps connect, monitor, and manage devices, and is good for solutions centering on interconnected devices and telemetry?": ["Azure IoT Services", "IoT Services"]
 				},
@@ -208,7 +208,7 @@
 							"What Azure VPN connectivity model allows connecting a remote device to an Azure VNet?": {
 								"answers": "Point-to-Site", "hidden-answers": "Point to Site"
 							},
-							"What Azure VPN connectivity model allows connecting a remote device to an Azure VNet?": {
+							"What Azure VPN connectivity model allows connecting a remote network to an Azure VNet?": {
 								"answers": "Site-to-Site", "hidden-answers": "Site to Site"
 							},
 							"What Azure VPN connectivity model allows connecting an Azure VNet to an Azure VNet?": {
@@ -263,7 +263,7 @@
 			},
 			"Azure Storage Services": {
 				"Fundamentals": {
-					"What term refers to a unique namespace for Azure storage data?": ["Azure Storage Account", "Storage Account"],
+					"What term refers to a unique namespace for Azure storage data?": ["Azure Storage Account", "Storage Account"]
 				},
 				"Redundancy Options": {
 					"Definitions": {
@@ -276,7 +276,7 @@
 							"Which storage redundancy option replicates each object three times in one datacenter and three more times in a distant datacenter?": ["Geo-redundant Storage", "GRS"],
 							"Which storage redundancy option replicates each object three times in three datacenters and three more times in a distant datacenter?": ["Geo-zone-redundant Storage", "GZRS"],
 							"Which storage redundancy option uses **LRS** locally as well as in another region while allowing read access to the distant copy?": ["Read-access Geo-redundant Storage", "RA-GRS"],
-							"Which storage redundancy option uses **ZRS** locally and LRS in another region while allowing read access to the distant copy?": ["Geo-zone-redundant Storage", "GZRS"]
+							"Which storage redundancy option uses **ZRS** locally and LRS in another region while allowing read access to the distant copy?": ["Read-Access Geo-zone-redundant Storage", "RA-GZRS"]
 						}
 					},
 					"True-False": {
@@ -325,6 +325,13 @@
 				},
 				"Azure Files": {
 					"What Azure storage service offers managed file shares for on-premises and cloud deployments?": ["Azure Files", "Files"],
+					
+					"Which protocol is supported for accessing Azure Files virutal shares?": {
+						"mode-of-presentation": "multiple-choice",
+						"max-choices": 2,
+						"answers": ["NFS", "SMB"],
+						"incorrect-answers": ["HTTP", "HTTPS", "FTP", "SSH"]
+					}
 				},
 				"Azure Queues": {
 					"What Azure storage service offers a messaging store for reliable asynchronous communication?": ["Azure Queues", "Queues"],
@@ -338,10 +345,10 @@
 					}
 				},
 				"Azure Disks": {
-					"What Azure storage service offers block-level storage volumes for VMs?": ["Azure Disks", "Disks"],
+					"What Azure storage service offers block-level storage volumes for VMs?": ["Azure Disks", "Disks"]
 				},
 				"Azure Tables": {
-					"What Azure storage service offers managed NoSQL databases?": ["Azure Tables", "Tables"],
+					"What Azure storage service offers managed NoSQL databases?": ["Azure Tables", "Tables"]
 				}
 			},
 			"Azure Identity, Access, and Security": {
@@ -360,7 +367,7 @@
 					"What service lets a user sign in once and access multple trusted applications?": ["Single Sign-On", "SSO"]
 				},
 				"Azure External Identities": {
-					"How will external users appear in your tenant when granting them access via B2B Collaboration?": ["Guest Users", "Guests"],
+					"How will external users appear in your tenant when granting them access via B2B Collaboration?": ["Guest Users", "Guests"]
 				},
 				"Conditional Access": {
 					"What Azure service lets you allow or deny access to resources based on identity signals?": ["Azure Conditional Access", "Conditional Access"]
@@ -394,7 +401,7 @@
 				"What Azure pricing option allows you to use underutilized Azure resources for hue discounts on interruptable and performance-insensitive jobs?": {
 					"answers": ["Azure Spot Virtual Machines", "Spot Pricing"],
 					"hidden-answers": ["Spot Virtual Machines", "Azure Spot VMs", "Spot VMs", "Azure Spot Pricing"]
-				},
+				}
 			},
 			"The Pricing Calculator": {
 				"What online tool provides estimates for the costs of provisioned resources in Azure?": {
@@ -460,7 +467,7 @@
 			},
 			"Managing and Deploying Azure Resources": {
 				"Tools for Interacting with Azure": {
-					"Which Azure Management tool provides a web-based graphical interface for interacting with Azure?": ["Azure Portal", "Azure"],
+					"Which Azure Management tool provides a web-based graphical interface for interacting with Azure?": ["Azure Portal", "Portal"],
 					"Which Azure Management tool provides a web-based command line for interacting with Azure?": ["Azure Cloud Shell", "Cloud Shell"],
 					"Which Azure Management tool provides a command line API for Cmdlet-based interaction with Azure?": ["Azure PowerShell", "PowerShell"],
 					"Which Azure Management tool provides a command line API for interaction with Azure using Bash?": ["Azure CLI", "CLI"],

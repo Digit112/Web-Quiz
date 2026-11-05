@@ -27,9 +27,9 @@
 				"Universal Serial Bus": {
 					"Which USB Variant has a flat, rectangular shape and is the most common, especially for peripherals like mice and keyboards": ["Type A", "A"],
 					"Which USB variant has a distinctive blocky shape and is mostly outdated but is still used for certain scanner or printer connections?": ["Type B", "B"],
-					"Which USB Variant has a symmetric design and is especially common as a charging port on modern mobile devices and some laptops?": ["Type C", "C"]
+					"Which USB Variant has a symmetric design and is especially common as a charging port on modern mobile devices and some laptops?": ["Type C", "C"],
 					"Which USB variant has a smaller but thick profile, and is now mostly obsolete?": {"answers": "Mini-USB", "hidden-answers": ["MiniUSB", "Mini USB"]},
-					"Which USB variant has a very small but non-reversible profile, and was often used as a charging port for older Android phones and Kindles?": {"answers": "Micro-USB", "hidden-answers": ["MicroUSB", "Micro USB"]},
+					"Which USB variant has a very small but non-reversible profile, and was often used as a charging port for older Android phones and Kindles?": {"answers": "Micro-USB", "hidden-answers": ["MicroUSB", "Micro USB"]}
 				},
 				"Other Wired Connectors": {
 					"Which proprietary Apple connector is reversible and was commonly used as a charger on Apple devices?": "Lightning"

@@ -13,7 +13,7 @@
 			"Display Technology": {
 				"Backlight & Inverter": {
 					"What component of a mobile device powers the backlight?": "Inverter",
-					"What convnerts a laptop's DC power to AC?": "Inverter",
+					"What converts a laptop's DC power to AC?": "Inverter",
 					"What LCD display technology has the best viewing angle?": "IPS",
 					"Between LED and LCD, which display technology requires a backlight?": "LCD",
 					"What kind of backlight requies an inverter?": "CCFL"
@@ -474,7 +474,7 @@
 				"What does 'RFID' (The wireless technology) stand for?": {"answers": "Radio-Frequency Identification", "hidden-answers": "Radio Frequency Identification"},
 				"What does 'NFC' (The wireless technology) stand for?": {"answers": "Near-Field Communication", "hidden-answers": "Near Field Communication"},
 				"What does 'MIMO' (the 802.11 technology) stand for?": {"answers": "Multiple-Input Multiple-Output", "hidden-answers": "Multiple Input Multiple Output"},
-				"What does 'MU-MIMO' (the 802.11 technology) stand for?": {"answers": "Multiuser MIMO", "hidden-answers": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output"]}
+				"What does 'MU-MIMO' (the 802.11 technology) stand for?": {"answers": "Multiuser MIMO", "hidden-answers": ["Multi-User MIMO", "Multiuser Multiple Input Multiple Output", "Multi-User Multiple-Input Multiple-Output", "Multiple User MIMO", "Multiple User Multiple Input Multiple Output"]}
 			},
 			"Other": {
 				"What does 'ECC' (the memory correcting technology) stand for?": {"answers": "Error Correction Code", "hidden-answers": ["Error Correcting Code", "Error Correction Codes", "Error Correcting Codes"]},

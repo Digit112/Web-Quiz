@@ -301,7 +301,15 @@
 			},
 			"Motherboard Concepts": {
 				"Power": {
-					"What voltages are delivered by an ATX power connector?": {"answers": "3.3V, 5V, 12V, and -12V", "hidden-answers": ["3.3V 5V 12V and -12V", "3.3V, 5V, 12V, -12V", "3.3V 5V 12V -12V"]},
+					"What voltages are delivered by an ATX power connector?": {
+						"mode-of-presentation": ["multiple-choice"],
+						"answers": "3.3V, 5V, 12V, and -12V",
+						"hidden-answers": ["3.3V 5V 12V and -12V", "3.3V, 5V, 12V, -12V", "3.3V 5V 12V -12V", "3.3V, 5V, 8V, 12V, and -12V"],
+						"incorrect-answers": [
+							"3V, 5V, 12V, and -12V", "3.3V, 5.5V, 12V, and -12V", "3.3V, 5V, -5V, and 12V", "3.3V, 5V, 8V, 12V, and -12V",
+							"3V, 5V, -5V, and 12V", "3V, 5V, 8V, 12V, and -12V", "3.3V, 5V, 8V, and -12V"
+						]
+					},
 					"How many pins does the ATX12V version 2 power connector have?": "24"
 				},
 				"Expansion Slots": {
@@ -313,12 +321,18 @@
 			"CPU Concepts": {
 				"Bus Speed & Clock Speed": {
 					"hidden": true,
-					"presentation": "multiple-choice",
+					"mode-of-presentation": ["multiple-choice"],
 					"max-choices": 2,
-					"descendants-give-incorrect-answers": true,
+					"descendants-share-incorrect-answers": true,
 					"questions": {
-						"What does 'bus speed' refer to?": "The Motherboard's base clock speed.",
-						"What does 'clock speed' refer to?": "The CPU's base clock speed."
+						"What does 'bus speed' refer to?": {
+							"answers": "The Motherboard's base clock speed.",
+							"hidden-answers": "The Motherboard's base clock speed"
+						},
+						"What does 'clock speed' refer to?": {
+							"answers": "The CPU's base clock speed.",
+							"hidden-answer": "The CPU's base clock speed"
+						}
 					}
 				}
 			},
@@ -351,9 +365,9 @@
 					"What is Step 6 of the CompTIA six-step Troubleshooting process?": {"answers": "Document", "hidden-answers": "Documentation"}
 				},
 				"Important Considerations": {
-					"During which step of the CompTIA six-step Troubleshooting process should you perform any necessary backups?": {"answers": ["Step 1: Identify", "1"],  "hidden-answers": ["one", "Identify", "Identification"]},
-					"During which step of the CompTIA six-step Troubleshooting process should you consult applicable vendor documentation?": {"answers": ["Step 4: Plan", "4"],  "hidden-answers": ["four", "Plan", "Planning"]},
-					"During which step of the CompTIA six-step Troubleshooting process should you implement applicable preventative measures?": {"answers": ["Step 5: Verify", "5"],  "hidden-answers": ["five", "Verify", "Verification"]}
+					"During which step of the CompTIA six-step Troubleshooting process should you perform any necessary backups?": {"answers": ["Step 1: Identify", "1"],  "hidden-answers": ["one", "Identify", "Identification", "Step 1", "Step one"]},
+					"During which step of the CompTIA six-step Troubleshooting process should you consult applicable vendor documentation?": {"answers": ["Step 4: Plan", "4"],  "hidden-answers": ["four", "Plan", "Planning", "Step 4", "Step four"]},
+					"During which step of the CompTIA six-step Troubleshooting process should you implement applicable preventative measures?": {"answers": ["Step 5: Verify", "5"],  "hidden-answers": ["five", "Verify", "Verification", "Step 5", "Step five"]}
 				}
 			}
 		},
